@@ -33,7 +33,7 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                   	<tr>
-                    	<th>글 번호</th>
+                    	<th class="col-1">글 번호</th>
                         <th>제 목</th>
                         <th>글쓴이</th>
                         <th>날짜</th>

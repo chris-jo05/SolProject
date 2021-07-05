@@ -48,7 +48,7 @@
 		<div
 			class="preloader flex-column justify-content-center align-items-center">
 			<img class="animation__shake"
-				src="/resources/dist/img/AdminLTELogo.png" alt="AdminLTELogo"
+				src="/resources/dist/img/SolcompanyLogo.png" alt="AdminLTELogo"
 				height="60" width="60">
 		</div>
 
@@ -62,7 +62,6 @@
 				
 			</ul>
 			<ul class="navbar-nav ml-auto">
-			
 				<!-- 상단 알람 -->
 				<li class="nav-item dropdown"><a class="nav-link"
 					data-toggle="dropdown" href="#"> <i class="far fa-bell"></i> <span
@@ -82,7 +81,13 @@
 						</a>
 						<div class="dropdown-divider"></div>
 						<a href="#" class="dropdown-item dropdown-footer"> 모든 알림 보기</a>
-					</div></li>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link" href="/logout" role="button">
+						<i class="fas fa-sign-out-alt">로그 아웃</i>
+					</a>
+				</li>
 			</ul>
 
 			

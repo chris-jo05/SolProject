@@ -54,37 +54,10 @@
                     <b>성 별</b> <a class="float-right">남 / 여</a>
                   </li>
                 </ul>
-
-	                <strong><i class="fas fa-book mr-1"></i> Education</strong>
-	
-	                <p class="text-muted">
-	                  B.S. in Computer Science from the University of Tennessee at Knoxville
-	                </p>
-	
-	                <hr>
-	
-	                <strong><i class="fas fa-map-marker-alt mr-1"></i>주 소</strong>
-	
-	                <p class="text-muted">서울 특별시 종로구 sol빌딩 3층 인사팀</p>
-	
-	                <hr>
-	
-	                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-	
-	                <p class="text-muted">
-	                  <span class="tag tag-danger">UI Design</span>
-	                  <span class="tag tag-success">Coding</span>
-	                  <span class="tag tag-info">Javascript</span>
-	                  <span class="tag tag-warning">PHP</span>
-	                  <span class="tag tag-primary">Node.js</span>
-	                </p>
-	
-	                <hr>
-	
-	                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-	
-	                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-               
+				<div class="btn-group-center text-center">
+                        <button type="button" class="btn btn-info" onclick="location.href='/work/workTable'">근무  관리</button>
+                        <button type="button" class="btn btn-success" onclick="location.href=''">급여 명세서</button>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>

@@ -10,12 +10,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>근태 관리</h1>
+            <h1>근무 관리</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/main/home">Home</a></li>
-              <li class="breadcrumb-item active">근태 관리</li>
+              <li class="breadcrumb-item active"><a href="/self/profile">프로필</a></li>
+              <li class="breadcrumb-item active">근무 관리</li>
             </ol>
           </div>
         </div>
@@ -30,10 +31,10 @@
             <div class="card">
               
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="example2" class="table table-bordered table-hover text-center">
                   <thead>
                   	<tr>
-                    	<th>사원 번호</th>
+                    	<th class="col-1">사원 번호</th>
                         <th>사원 명</th>
                         <th>직 급</th>
                         <th>출근 시간</th>

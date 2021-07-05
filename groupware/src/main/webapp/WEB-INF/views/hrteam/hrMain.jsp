@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 
@@ -43,7 +43,7 @@
               <!-- ./card-header -->
               <div class="card-body">
                 <table class="table table-bordered table-hover">
-                  <thead>
+                  <thead class="text-center">
                     <tr>
                       <th>사원 번호</th>
                       <th>사원 이름</th>
@@ -54,7 +54,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr data-widget="expandable-table" aria-expanded="false">
+                  <c:forEach var="vo" items="${list}">
+                    <tr class="text-center" data-widget="expandable-table" aria-expanded="false">
                       <td>175</td>
                       <td>Mike Doe</td>
                       <td>인사팀</td>
@@ -90,13 +91,14 @@
 		               	 </ul>                     
                  	 	 </td>
                 	    </tr>
+                	   </c:forEach>
                     <tr data-widget="expandable-table" aria-expanded="false">
                       <td>134</td>
                       <td>Jim Doe</td>
                       <td>관리팀</td>
                       <td>주임</td>
                       <td>2020/10/10</td>
-                      <td></td>
+                      <td> - </td>
                     </tr>
                     <tr class="expandable-body">
                       <td colspan="6">
