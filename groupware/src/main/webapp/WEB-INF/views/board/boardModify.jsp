@@ -6,16 +6,18 @@
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>공지 사항</h1>
           </div>
+         
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/main/home">Home</a></li>
-              <li class="breadcrumb-item active">${vo.bno} 게시글</li>
+              <li class="breadcrumb-item active">${vo.bno} 공지글</li>
             </ol>
           </div>
         </div>
@@ -29,39 +31,43 @@
           <!-- /.col -->
         <div class="col-md-9">
           <div class="card card-primary card-outline">
+  <!--          <form action="" method="post" role="form"> -->
             <div class="card-header">
               <h3 class="card-title">작성일</h3>
-              
+               <input class="form-control" name=""
+                     readonly="readonly" value="">
 
             </div>
               
                <div class="card-header">
-              <h3 class="card-title">제  목</h3>
-         </div>
+              <h3 class="card-title">부  서</h3>
+                <input class="form-control" name=""
+                     readonly="readonly" value="">
               
+            
+            </div>
               <div class="card-header">
               <h1 class="card-title">작 성 자</h1>
-          </div>
-          
+                <input class="form-control" name=""
+                     readonly="readonly" value="">
+              
+            
+            </div>
              <div class="card-header">
-              <h1 class="card-title">부 서</h1>
+                <label>제 목</label> <input class="form-control" name="title">
             
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
               
               
+              
               <!-- /.mailbox-controls -->
               <div class="mailbox-read-message">
-            
-                <p>Keffiyeh blog actually fashion axe vegan, irony biodiesel. Cold-pressed hoodie chillwave put a bird
-                  on it aesthetic, bitters brunch meggings vegan iPhone. Dreamcatcher vegan scenester mlkshk. Ethical
-                  master cleanse Bushwick, occupy Thundercats banjo cliche ennui farm-to-table mlkshk fanny pack
-                  gluten-free. Marfa butcher vegan quinoa, bicycle rights disrupt tofu scenester chillwave 3 wolf moon
-                  asymmetrical taxidermy pour-over. Quinoa tote bag fashion axe, Godard disrupt migas church-key tofu
-                  blog locavore. Thundercats cronut polaroid Neutra tousled, meh food truck selfies narwhal American
-                  Apparel.</p>
+            <textarea class="form-control" rows="3" name="content">1. 공지사항
 
+            </textarea>
+                
               </div>
               <!-- /.mailbox-read-message -->
             </div>
@@ -93,25 +99,29 @@
                   <button type="button" class="btn btn-default btn-sm" data-container="body" title="Forward">
                     <i class="fas fa-share">다음 글</i>
                   </button>
+
                 </div>
               </div>
             </div>
             <!-- /.card-footer -->
-           <!-- 리스트부분 --> 
+            
+             </form>
+              <div class="card-footer">
+                <div class="float-right">
+                     <button type="submit" class="btn btn-primary"></i>수정</button>
+                   <button type="reset" class="btn btn-danger">취소</button>
+                </div>
+              </div>
           </div>
           <!-- /.card -->
-            <div class="card-footer">
-                     <button type="submit" class="btn btn-primary">수정 하기</button>
-                     <button type="submit" class="btn btn-success ">삭제</button>
-               </div>
         </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
+ 
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<script src="/resources/js/read.js"></script>
 <%@include file="../includes/footer.jsp" %>
