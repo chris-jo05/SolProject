@@ -11,13 +11,25 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/board/*")
 public class BoardController {
 
-	@GetMapping("/boardMain")
-	public void main() {
-		log.info("공지 사항 페이지로 이동합니다.");
-	}
-	
-	@GetMapping("/boardRead")
-	public void read() {
-		log.info("몇 번의 게시물 페이지로 이동");
-	}
+   @GetMapping("/boardMain")
+   public void main() {
+      log.info("                    絹  爛求 .");
+   }
+   
+   @GetMapping("/boardRead")
+   public void read() {
+      log.info("         督첫            絹 ");
+   }
+   
+   
+   @GetMapping("/boardWriter")
+   public void writer() {
+      log.info("          蒡            絹 ");
+   }
+   
+   
+   @GetMapping("/boardModify")
+   public void moidfy() {
+      log.info("                        絹 ");
+   }
 }
