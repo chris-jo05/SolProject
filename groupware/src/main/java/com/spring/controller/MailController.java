@@ -14,28 +14,28 @@ public class MailController {
 	
 	@GetMapping("/mailMain")
 	public void Main() {
-		log.info("¸ŞÀÏ ¸ŞÀÎ ÆäÀÌÁö·Î ÀÌµ¿" );
+		log.info("ë©”ì¼í•¨ í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤." );
 		
 	}
 	
 	@GetMapping("/sendMail")
 	public void sendBox() {
-		log.info("º¸³½ ¸ŞÀÏÇÔÀ¸·Î ÀÌµ¿");
+		log.info("ë©”ì¼ ë³´ë‚´ê¸° í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤.");
 	}
 	
 	@GetMapping("/mailWrite")
 	public void write() {
-		log.info("¸ŞÀÏ ÀÛ¼º ÆäÀÌÁö·Î ÀÌµ¿" );
+		log.info("ë©”ì¼ ì“°ê¸° í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤." );
 		
 	}
 	
 	@GetMapping("/trashBean")
 	public void trash() {
-		log.info("ÈŞÁöÅëÀ¸·Î ÀÌµ¿");
+		log.info("íœ´ì§€ë™ í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤.");
 	}
 	
 	@GetMapping("/readMail")
 	public void read() {
-		log.info("¸ŞÀÏ ÀĞ±â ÆäÀÌÁö·Î ÀÌµ¿");
+		log.info("ë©”ì½ ì½ê¸° í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤.");
 	}
 }

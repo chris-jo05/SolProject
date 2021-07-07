@@ -14,6 +14,6 @@ public class CalController {
 	
 	@GetMapping("/calendar")
 	public void main() {
-		log.info("ÀÏÁ¤ ÆäÀÌÁö·Î ÀÌµ¿");
+		log.info("ì¼ì • í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤.");
 	}
 }

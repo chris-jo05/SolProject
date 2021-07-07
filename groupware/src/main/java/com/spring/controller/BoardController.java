@@ -13,11 +13,11 @@ public class BoardController {
 
 	@GetMapping("/boardMain")
 	public void main() {
-		log.info("°øÁö »çÇ× ÆäÀÌÁö·Î ÀÌµ¿ÇÕ´Ï´Ù.");
+		log.info("ê³µì§€ì‚¬í•­ í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤.");
 	}
 	
 	@GetMapping("/boardRead")
 	public void read() {
-		log.info("¸î ¹øÀÇ °Ô½Ã¹° ÆäÀÌÁö·Î ÀÌµ¿");
+		log.info("ë²ˆì˜ ê³µì§€ì‚¬í•­ì„ ì½ìŠµë‹ˆë‹¤");
 	}
 }
