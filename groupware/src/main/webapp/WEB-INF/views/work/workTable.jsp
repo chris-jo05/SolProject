@@ -44,9 +44,9 @@
                   </thead>
                   <tbody>
                   <tr>
-                  	<td>1</td>
-                  	<td>김과장</td>
-                  	<td>과장</td>
+                  	<td>${login.eno}</td>
+                  	<td>${login.ename}</td>
+                  	<td>${login.position}</td>
                   	<td>09:00</td>
                   	<td> - </td>
                   	<td> - </td>

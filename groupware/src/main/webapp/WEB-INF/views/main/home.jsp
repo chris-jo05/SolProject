@@ -25,7 +25,7 @@
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">
-										<i class="ion ion-clipboard mr-1"></i> 공지 사항
+										<i class="ion ion-clipboard mr-1"></i> 공지 사항 ${login.ename}
 									</h3>
 									<!-- 공지사항 페이지 나누기 -->
 									<div class="card-tools">

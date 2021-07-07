@@ -33,9 +33,9 @@
 		<!-- /.login-logo -->
 		<div class="card">
 			<div class="card-body login-card-body">
-				<form action="/main/home" method="get">
+				<form action="/login" method="post">
 					<div class="input-group mb-3">
-						<input type="ID" class="form-control" placeholder="ID">
+						<input type=text name="id" class="form-control" placeholder="ID">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
@@ -44,7 +44,7 @@
 					</div>
 
 					<div class="input-group mb-3">
-						<input type="password" class="form-control" placeholder="Password">
+						<input type="password" name="password" class="form-control" placeholder="Password">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-lock"></span>
@@ -80,5 +80,14 @@
 
 	<!-- AdminLTE App -->
 	<script src="../../resources/dist/js/adminlte.min.js"></script>
+<script>
+$(function(){
+	let error = '${error}';
+	
+	if(error){
+		alert(error);
+	}
+})
+</script>
 </body>
 </html>

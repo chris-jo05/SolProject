@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,7 +111,7 @@
 							class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a href="/self/profile" class="d-block">사장님</a>
+						<a href="/self/profile" class="d-block">${login.ename} 님</a>
 						<p></p>
 						<form action="">
 							<div class="btn-group">

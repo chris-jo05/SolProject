@@ -51,7 +51,7 @@
                   <tr>
                   <td style="cursor:pointer;color:blue;" onClick="location.href='paystubForm'">2021-07</td>
                   <td>개발1팀</td>
-                  <td>팀장</td>
+                  <td>${login.position}</td>
                   <td>943202-00-098784</td>
                   <td>국민은행</td>
                   </tr>

@@ -30,28 +30,28 @@
                        alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">사원 이름</h3>
+                <h3 class="profile-username text-center">${login.ename}</h3>
 
                 <p class="text-muted text-center">담당 업무</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>소 속</b> <a class="float-right">인사팀</a>
+                    <b>소 속</b> <a class="float-right">${login.dname}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>직 위</b> <a class="float-right">대리</a>
+                    <b>직 위</b> <a class="float-right">${login.position}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>이 메 일</b> <a class="float-right">auto@solcompany.com</a>
+                    <b>이 메 일</b> <a class="float-right">${login.id}@solcompany.com</a>
                   </li>
                   <li class="list-group-item">
-                    <b>휴 대 폰</b> <a class="float-right">010 - 1234 -1234</a>
+                    <b>휴 대 폰</b> <a class="float-right">${login.mobile}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>생 일</b> <a class="float-right">07 / 01</a>
+                    <b>생 일</b> <a class="float-right">${login.birthday}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>성 별</b> <a class="float-right">남 / 여</a>
+                    <b>성 별</b> <a class="float-right">${login.gender}</a>
                   </li>
                 </ul>
 				<div class="btn-group-center text-center">
