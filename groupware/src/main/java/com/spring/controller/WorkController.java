@@ -14,6 +14,6 @@ public class WorkController {
 	
 	@GetMapping("/workTable")
 	public void work() {
-		log.info("±ÙÅÂ ÆäÀÌÁö·Î ÀÌµ¿ÇÕ´Ï´Ù");
+		log.info("ê·¼ë¬´ ê´€ë¦¬ í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤.");
 	}
 }

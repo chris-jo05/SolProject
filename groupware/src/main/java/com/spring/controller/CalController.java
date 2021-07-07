@@ -13,6 +13,7 @@ public class CalController {
 
 	@GetMapping("/calendar")
 	public void main() {
-		log.info("calender 페이지 요청");
+		
+		log.info("일정 페이지로 이동합니다.");
 	}
 }

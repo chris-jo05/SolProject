@@ -14,16 +14,16 @@ public class HRController {
 	
 	@GetMapping("/hrMain")
 	public void main() {
-		log.info("ÀÎ»ç °ü¸® ÆäÀÌÁö·Î ÀÌµ¿");
+		log.info("ì¸ì‚¬ ê´€ë¦¬ í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤.");
 	}
 	
 	@GetMapping("/hrNewMember")
 	public void newMember() {
-		log.info("»ç¿ø Ãß°¡ ÆäÀÌÁö·Î ÀÌµ¿");
+		log.info("ì‚¬ì› ì¶”ê°€ í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤.");
 	}
 	
 	@GetMapping("/hrUpdateMember")
 	public void updateMember() {
-		log.info("»ç¿ø ¼öÁ¤ ÆäÀÌÁö·Î ÀÌµ¿");
+		log.info("ì‚¬ì› ìˆ˜ì • í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤.");
 	}
 }
