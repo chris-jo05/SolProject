@@ -11,9 +11,8 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/calendar/*")
 public class CalController {
 
-	
 	@GetMapping("/calendar")
 	public void main() {
-		log.info("ÀÏÁ¤ ÆäÀÌÁö·Î ÀÌµ¿");
+		log.info("calender í˜ì´ì§€ ìš”ì²­");
 	}
 }
