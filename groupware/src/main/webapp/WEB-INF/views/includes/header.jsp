@@ -144,7 +144,7 @@
 								</li>
 							
 								<li class="nav-item">
-									<a href="./index3.html"class="nav-link">
+									<a href="/approval/appMain"class="nav-link">
 										<i class="nav-icon fas fa-file"></i>
 											<p> 전자 결제</p>
 									</a>
