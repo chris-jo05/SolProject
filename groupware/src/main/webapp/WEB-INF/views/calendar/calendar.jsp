@@ -290,6 +290,7 @@
               
             } */
       ],
+      
       editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!
       drop      : function(info) {
@@ -346,6 +347,7 @@
       $('#new-event').val('')
     }) */
     
+    // 모달 영역 값 가져오기
 	var modalTitle = modal.find("input[name='title']");
 	var modalContent = modal.find("input[name='content']");
 	var modalStart = modal.find("input[name='start']");
@@ -353,6 +355,54 @@
 	var modalEnd = modal.find("input[name='end']");
 	var modalEndTime = modal.find("input[name='endTime']");
 	var modalRep = modal.find("input[name='rep']");
+	
+	$.getJSON({
+			url:"/calendar/rest_list",
+			success:function(data) {
+				console.log(data[0]);
+				
+				$.each(data, function(idx, element) {
+					console.log(element.title);
+					console.log(element.startDate);
+					console.log(typeof(element.endDate));
+					
+					view(element);
+				})
+			}
+		});
+	
+	function view(element){
+		
+		console.log("ddd");
+		
+		/* calendar.addEvent({
+			 title : String(element.memo), // 이벤트 제목
+			start : String(element.startDate), //달력 날짜에 매핑
+			end : String(element.endDate) 			
+		}); */
+		
+		/* var startDate = String(element.startDate);
+		var endDate = (element.endDate);
+		 */
+		var s_date = new Date(element.startDate);
+		var s_year = s_date.getFullYear();
+		var s_month = s_date.getMonth();
+	    var s_day= s_date.getDate();
+
+	    var e_date = new Date(element.endDate);
+		var e_year = e_date.getFullYear();
+		var e_month = e_date.getMonth();
+	    var e_day= e_date.getDate();
+	    
+	 	calendar.addEvent({
+			title : element.title, // 이벤트 제목
+			start : new Date(s_year,s_month,s_day, 0, 30), //달력 날짜에 매핑
+			end : new Date(e_year,e_month,e_day, 14, 30)
+		}); 
+	}
+	
+	
+	
 	
     $("#submit").click(function () {
     	//input안에 들어있는 value 제거
@@ -375,6 +425,8 @@
 			start : modalStart.val(), //달력 날짜에 매핑
 			end : endPlusOne
 		});
+		
+		modal.modal("hide");
 	})
 	
   })
