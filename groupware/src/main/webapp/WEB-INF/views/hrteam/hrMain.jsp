@@ -66,12 +66,12 @@
                   <tbody>
                   <c:forEach var="vo" items="${list}">
                     <tr class="text-center" data-widget="expandable-table" aria-expanded="false">
-                      <td>175</td>
-                      <td>Mike Doe</td>
-                      <td>인사팀</td>
-                      <td>과장</td>
-                      <td>2015/05/30</td>
-                      <td>2021/07/03</td>
+                      <td>${vo.eno}</td>
+                      <td>${vo.ename}</td>
+                      <td>${vo.dname}</td>
+                      <td>${vo.position}</td>
+                      <td>${vo.hireDate}</td>
+                      <td>${vo.leaveDate}</td>
                     </tr>
                        <tr class="expandable-body">
                          <td colspan="6">

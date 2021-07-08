@@ -21,7 +21,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/mailbox/sendMail" class="nav-link">
+                  <a href="/mailbox/sendMailBox" class="nav-link">
                     <i class="far fa-envelope"></i> 보낸 메일함
                   </a>
                 </li>

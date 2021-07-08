@@ -41,38 +41,38 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <form action="" mehtod="post">
-                <div class="form-group">
-                  <input class="form-control" placeholder="To:" name="e_id">
-                </div>
-
-                <div class="form-group">
-                  <input class="form-control" placeholder="Subject:" name="m_title">
-                </div>
-                <div class="form-group">
-                    <textarea id="compose-textarea" class="form-control" style="height: 300px" name="m_content">
-                      
-                    </textarea>
-                </div>
-                <div class="form-group">
-                  <div class="btn btn-default btn-file">
-                    <i class="fas fa-paperclip"></i> 파일 첨부
-                    <input type="file" name="attachment">
-                  </div>
-                  <p class="help-block">Max. 32MB</p>
-                </div>
-				</form>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                <div class="float-right">
-                  	<button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> 보내기</button>
-	                <button type="reset" class="btn btn-danger"><i class="fas fa-times"></i> 취소하기</button>
-                </div>
-              </div>
+              <form action="" method="post">
+	                <div class="form-group">
+	                  <input class="form-control" placeholder="${read.m_id}" name="e_id" readonly="readonly" value="${read.m_id}">
+	                </div>
+	                <div class="form-group">
+	                  <input class="form-control" placeholder="제목" name="m_title">
+	                </div>
+	                <div class="form-group">
+	                    <textarea id="compose-textarea" class="form-control" style="height: 300px" name="m_content">
+	                      
+	                    </textarea>
+	                </div>
+	                <!-- <div class="form-group">
+	                  <div class="btn btn-default btn-file">
+	                    <i class="fas fa-paperclip"></i> 파일 첨부
+	                    <input type="file" name="attachment">
+	                  </div>
+	                  <p class="help-block">Max. 32MB</p>
+	                </div> -->
+	              </div>
+	              <!-- /.card-body -->
+	              <div class="card-footer">
+	                <div class="float-right">
+	                  	<button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> 보내기</button>
+		                <button type="reset" class="btn btn-danger"><i class="fas fa-times"></i> 취소하기</button>
+	                </div>
+	              </div>
+	              <input type="hidden" name="m_writer" value="${login.ename}" />	<!-- 메일 보낸 사람담기 -->
+	              <input type="hidden" name="m_id" value="${login.id}" /> 		<!-- 메일 보낸 사람 아이디 담기 -->
+	              <input type="hidden" name="eno" value="${login.eno}" />
+              </form>
               <!-- /.card-footer -->
-              <input type="hidden" name="m_writer" value="${login.ename}" />	<!-- 메일 보낸 사람담기 -->
-	          <input type="hidden" name="m_id" value="${login.id}" /> 		<!-- 메일 보낸 사람 아이디 담기 -->
             </div>
             <!-- /.card -->
           </div>

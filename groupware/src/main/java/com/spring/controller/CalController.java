@@ -11,7 +11,6 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/calendar/*")
 public class CalController {
 
-	
 	@GetMapping("/calendar")
 	public void main() {
 		log.info("일정 페이지로 이동합니다.");

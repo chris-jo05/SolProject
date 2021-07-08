@@ -25,7 +25,7 @@
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">
-										<i class="ion ion-clipboard mr-1"></i> 공지 사항 ${login.ename}
+										<i class="ion ion-clipboard mr-1"></i> 공지 사항
 									</h3>
 									<!-- 공지사항 페이지 나누기 -->
 									<div class="card-tools">
@@ -433,6 +433,10 @@
 			<!-- /.content -->
 		</div>
 		<!-- /.content-wrapper -->
+<!-- 값을 넘겨줄때 pk값 놓기 -->
+<form action="mailMain" method="get" id="actionForm">
+	<input type="hidden" name="eno" value="${login.eno}" />
+</form>
 </body>
 </html>
 <%@include file="../includes/footer.jsp" %>
