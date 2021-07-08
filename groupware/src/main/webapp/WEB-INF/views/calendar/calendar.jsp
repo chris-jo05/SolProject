@@ -28,14 +28,14 @@
       <div class="container-fluid">
         <div class="row">
         
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <div class="sticky-top mb-3">
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">Draggable Events</h4>
                 </div>
                 <div class="card-body">
-                  <!-- the events -->
+                  the events
                   <div id="external-events">
                     <div class="external-event bg-success">점심 약속</div>
                     <div class="external-event bg-warning">연차</div>
@@ -50,9 +50,9 @@
                     </div>
                   </div>
                 </div>
-                <!-- /.card-body -->
+                /.card-body
               </div>
-              <!-- /.card -->
+              /.card
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">Create Event</h3>
@@ -67,27 +67,28 @@
                       <li><a class="text-muted" href="#"><i class="fas fa-square"></i></a></li>
                     </ul>
                   </div>
-                  <!-- /btn-group -->
+                  /btn-group
                   <div class="input-group">
                     <input id="new-event" type="text" class="form-control" placeholder="Event Title">
 
                     <div class="input-group-append">
                       <button id="add-new-event" type="button" class="btn btn-primary">Add</button>
                     </div>
-                    <!-- /btn-group -->
+                    /btn-group
                   </div>
-                  <!-- /input-group -->
+                  /input-group
                 </div>
               </div>
             </div>
           </div>
-          <!-- /.col -->
+          /.col -->
         
-          <div class="col-md-9">
-            <div class="card card-primary">
-              <div class="card-body">
+          <div class="col-md-12">
+            <div class="card card-primary ">
+              <div class="card-body" >
                 <!-- THE CALENDAR -->
                 <div id="calendar"></div>
+                <button id="submit" type="button" class="btn btn-primary" >일정 작성</button>
               </div>
               <!-- /.card-body -->
             </div>
@@ -101,6 +102,59 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+ 
+ <!-- 일정 작성 폼 -->
+<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title">일정 작성</h5>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+        	<div class="form-group">
+        		<label for="">일정 이름</label>
+        		<input type="text" name="title" class="form-control" value=""/>
+        	</div>
+        	<div class="form-group">
+        		<label for="">일정 내용</label>
+        		<input type="text" name="content" class="form-control" value=""/>
+        	</div>
+        	<div class="form-group">
+        		<label for="">일정 시작일</label>
+        		<input type="text" name="start" class="form-control" value=""/>
+        	</div>
+        	<div class="form-group">
+        		<label for="">일정 시작시간</label>
+        		<input type="text" name="startTime" class="form-control" value=""/>
+        	</div>
+        	<div class="form-group">
+        		<label for="">일정 종료일</label>
+        		<input type="text" name="end" class="form-control" value=""/>
+        	</div>
+        	<div class="form-group">
+        		<label for="">일정 종료시간</label>
+        		<input type="text" name="endTime" class="form-control" value=""/>
+        	</div>
+        	<div class="form-group">
+        		<label for="">일정 담당자</label>
+        		<input type="text" name="rep" class="form-control" value=""/>
+        	</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      	 <button type="button" class="btn btn-success" id="modalRegisterBtn">등록</button>
+      	 <!-- <button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
+      	 <button type="button" class="btn btn-danger" id="modalRemoveBtn">삭제</button> -->
+        <button type="button" class="btn btn-primary" data-dismiss="modal">종료</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
 <!-- Bootstrap -->
 <script src="/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- jQuery UI -->
@@ -109,6 +163,7 @@
  <!-- fullCalendar 2.2.5 -->
 <script src="/resources/plugins/moment/moment.min.js"></script>
 <script src="/resources/plugins/fullcalendar/main.js"></script>
+
  <script>
   $(function () {
 
@@ -119,7 +174,7 @@
 
         // create an Event Object (https://fullcalendar.io/docs/event-object)
         // it doesn't need to have a start or end
-        var eventObject = {
+       /*  var eventObject = {
           title: $.trim($(this).text()) // use the element's text as the event title
         }
 
@@ -131,7 +186,7 @@
           zIndex        : 1070,
           revert        : true, // will cause the event to go back to its
           revertDuration: 0  //  original position after the drag
-        })
+        }) */
 
       })
     }
@@ -147,16 +202,16 @@
         y    = date.getFullYear()
 
     var Calendar = FullCalendar.Calendar;
-    var Draggable = FullCalendar.Draggable;
+   /*  var Draggable = FullCalendar.Draggable; */
 
-    var containerEl = document.getElementById('external-events');
-    var checkbox = document.getElementById('drop-remove');
+    /* var containerEl = document.getElementById('external-events');
+    var checkbox = document.getElementById('drop-remove'); */
     var calendarEl = document.getElementById('calendar');
 
     // initialize the external events
     // -----------------------------------------------------------------
 
-    new Draggable(containerEl, {
+    /* new Draggable(containerEl, {
       itemSelector: '.external-event',
       eventData: function(eventEl) {
         return {
@@ -166,18 +221,18 @@
           textColor: window.getComputedStyle( eventEl ,null).getPropertyValue('color'),
         };
       }
-    });
+    }); */
 
     var calendar = new Calendar(calendarEl, {
       headerToolbar: {
-        left  : 'prev,next today',
+        left  : 'prevYear,prev,next,nextYear today',
         center: 'title',
         right : 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       themeSystem: 'bootstrap',
       //Random default events
       events: [
-        {
+        /* {
           title          : 'All Day Event',
           start          : new Date(y, m, 1),
           backgroundColor: '#f56954', //red
@@ -206,14 +261,7 @@
           backgroundColor: '#00c0ef', //Info (aqua)
           borderColor    : '#00c0ef' //Info (aqua)
         },
-        {
-          title          : 'Birthday Party',
-          start          : new Date(y, m, d + 1, 19, 0),
-          end            : new Date(y, m, d + 1, 22, 30),
-          allDay         : false,
-          backgroundColor: '#00a65a', //Success (green)
-          borderColor    : '#00a65a' //Success (green)
-        },
+        
         {
           title          : 'Click for Google',
           start          : new Date(y, m, 28),
@@ -221,24 +269,45 @@
           url            : 'https://www.google.com/',
           backgroundColor: '#3c8dbc', //Primary (light-blue)
           borderColor    : '#3c8dbc' //Primary (light-blue)
-        }
+        },
+        {
+            title          : 'Click for Google',
+            start          : new Date(y, m, 26),
+            end            : new Date(y, m, 27),
+            url            : 'https://www.google.com/',
+            backgroundColor: '#3c8dbc', //Primary (light-blue)
+            borderColor    : '#3c8dbc' //Primary (light-blue)
+          } */
+    	  {
+              title          : 'Birthday Party',
+              start          : new Date(y, m, d + 1, 8, 0),
+              end            : new Date(y, m, d + 1, 22, 30),
+              allDay         : false,
+              backgroundColor: '#00a65a', //Success (green)
+              borderColor    : '#00a65a', //Success (green)
+              
+            }
       ],
       editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!
       drop      : function(info) {
         // is the "remove after drop" checkbox checked?
-        if (checkbox.checked) {
+        /* if (checkbox.checked) {
           // if so, remove the element from the "Draggable Events" list
           info.draggedEl.parentNode.removeChild(info.draggedEl);
-        }
-      }
-    });
+        } */
+      },
+      eventClickEx: function(jsEvent,ev,view,cellDate){
+		    alert(cellDate);
+	  }
+      
+    }); // var calender end
 
     calendar.render();
     // $('#calendar').fullCalendar()
 
     /* ADDING EVENTS */
-    var currColor = '#3c8dbc' //Red by default
+   /*  var currColor = '#3c8dbc' //Red by default
     // Color chooser button
     $('#color-chooser > li > a').click(function (e) {
       e.preventDefault()
@@ -273,7 +342,33 @@
 
       // Remove event from text input
       $('#new-event').val('')
-    })
+    }) */
+    
+    let modal = $(".modal");
+	
+	var modalTitle = modal.find("input[name='title']");
+	var modalContent = modal.find("input[name='content']");
+	var modalStart = modal.find("input[name='start']");
+	var modalStartTime = modal.find("input[name='startTime']");
+	var modalEnd = modal.find("input[name='end']");
+	var modalEndTime = modal.find("input[name='endTime']");
+	var modalRep = modal.find("input[name='rep']");
+	
+    $("#submit").click(function () {
+    	
+    	modal.modal("show");
+	})
+	
+	$("#modalRegisterBtn").click(function () {
+		calendar.addEvent({
+			title : modalTitle.val(), // 이벤트 제목
+			start : modalStart.val(), //달력 날짜에 매핑
+			end : modalEnd.val()
+		});
+	})
+	
   })
-</script>   
+  
+ 
+</script>
 <%@include file="../includes/footer.jsp" %>
