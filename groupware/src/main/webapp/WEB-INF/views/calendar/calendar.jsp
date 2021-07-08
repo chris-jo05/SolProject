@@ -165,6 +165,8 @@
 <script src="/resources/plugins/fullcalendar/main.js"></script>
 
  <script>
+  let modal = $(".modal");
+ 
   $(function () {
 
     /* initialize the external events
@@ -278,7 +280,7 @@
             backgroundColor: '#3c8dbc', //Primary (light-blue)
             borderColor    : '#3c8dbc' //Primary (light-blue)
           } */
-    	  {
+    	  /* {
               title          : 'Birthday Party',
               start          : new Date(y, m, d + 1, 8, 0),
               end            : new Date(y, m, d + 1, 22, 30),
@@ -286,7 +288,7 @@
               backgroundColor: '#00a65a', //Success (green)
               borderColor    : '#00a65a', //Success (green)
               
-            }
+            } */
       ],
       editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!
@@ -297,8 +299,8 @@
           info.draggedEl.parentNode.removeChild(info.draggedEl);
         } */
       },
-      eventClickEx: function(jsEvent,ev,view,cellDate){
-		    alert(cellDate);
+      eventClick: function(event,jsEvent,view,cellDate){
+		    modal.modal("show");
 	  }
       
     }); // var calender end
@@ -344,8 +346,6 @@
       $('#new-event').val('')
     }) */
     
-    let modal = $(".modal");
-	
 	var modalTitle = modal.find("input[name='title']");
 	var modalContent = modal.find("input[name='content']");
 	var modalStart = modal.find("input[name='start']");
@@ -355,15 +355,25 @@
 	var modalRep = modal.find("input[name='rep']");
 	
     $("#submit").click(function () {
+    	//input안에 들어있는 value 제거
+    	modal.find("input").val("");
     	
     	modal.modal("show");
 	})
 	
 	$("#modalRegisterBtn").click(function () {
+		
+		// end에 하루를 더 하기위한 작업
+		var end = modalEnd.val();
+		var endspl = end.split("-");
+		var day_int = (endspl[2] * 1) + 1;
+		var endPlusOne = [endspl[0],'-',endspl[1],'-',(day_int > 9 ? '':'0') + day_int].join('');
+		//console.log(endPlusOne);
+		
 		calendar.addEvent({
 			title : modalTitle.val(), // 이벤트 제목
 			start : modalStart.val(), //달력 날짜에 매핑
-			end : modalEnd.val()
+			end : endPlusOne
 		});
 	})
 	
