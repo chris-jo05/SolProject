@@ -394,10 +394,18 @@
 		var e_month = e_date.getMonth();
 	    var e_day= e_date.getDate();
 	    
+	    var s_time = element.cal_startTime.split(":");
+	    var s_hour = s_time[0] * 1;
+	    var s_minute = s_time[1] * 1;
+	    
+	    var e_time = element.cal_endTime.split(":");
+	    var e_hour = e_time[0] * 1;
+	    var e_minute = e_time[1] * 1;
+	    
 	 	calendar.addEvent({
 			title : element.title, // 이벤트 제목
-			start : new Date(s_year,s_month,s_day, 0, 30), //달력 날짜에 매핑
-			end : new Date(e_year,e_month,e_day, 14, 30)
+			start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
+			end : new Date(e_year,e_month,e_day, e_hour, e_minute)
 		}); 
 	}
 	
