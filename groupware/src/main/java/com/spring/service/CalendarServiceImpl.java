@@ -18,5 +18,14 @@ public class CalendarServiceImpl implements CalendarService {
 	public List<CalendarVO> getList() {
 		return mapper.list();
 	}
-
+	
+	@Override
+	public CalendarVO get(int cno) {
+		return mapper.get(cno);
+	}
+	
+	@Override
+	public List<String> getRepName(String title) {
+		return mapper.getRepName(title);
+	}
 }
