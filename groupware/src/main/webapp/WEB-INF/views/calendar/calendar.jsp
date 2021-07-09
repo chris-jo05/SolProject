@@ -143,6 +143,10 @@
         		<label for="">일정 담당자</label>
         		<input type="text" name="rep" class="form-control" value=""/>
         	</div>
+        	<div class="form-group">
+        		<label for="">비고</label>
+        		<input type="text" name="memo" class="form-control" value=""/>
+        	</div>
         </div>
       </div>
       <div class="modal-footer">
@@ -167,6 +171,16 @@
  <script>
   let modal = $(".modal");
  
+  //모달 영역 값 가져오기
+  var modalTitle = modal.find("input[name='title']");
+  var modalContent = modal.find("input[name='content']");
+  var modalStart = modal.find("input[name='start']");
+  var modalStartTime = modal.find("input[name='startTime']");
+  var modalEnd = modal.find("input[name='end']");
+  var modalEndTime = modal.find("input[name='endTime']");
+  var modalRep = modal.find("input[name='rep']");
+  var modalMemo = modal.find("input[name='memo']");
+  
   $(function () {
 
     /* initialize the external events
@@ -301,7 +315,11 @@
         } */
       },
       eventClick: function(event,jsEvent,view,cellDate){
-		    modal.modal("show");
+    	  console.log(event.event._def.publicId);
+    	  
+    	  var cno = event.event._def.publicId;
+    	  
+    	  getOne(cno);
 	  }
       
     }); // var calender end
@@ -347,30 +365,26 @@
       $('#new-event').val('')
     }) */
     
-    // 모달 영역 값 가져오기
-	var modalTitle = modal.find("input[name='title']");
-	var modalContent = modal.find("input[name='content']");
-	var modalStart = modal.find("input[name='start']");
-	var modalStartTime = modal.find("input[name='startTime']");
-	var modalEnd = modal.find("input[name='end']");
-	var modalEndTime = modal.find("input[name='endTime']");
-	var modalRep = modal.find("input[name='rep']");
+    
 	
 	$.getJSON({
 			url:"/calendar/rest_list",
+			type:"get",
 			success:function(data) {
 				console.log(data[0]);
 				
 				$.each(data, function(idx, element) {
 					console.log(element.title);
 					console.log(element.startDate);
-					console.log(typeof(element.endDate));
+					console.log(element.endDate);
+					console.log(element.cno);
 					
 					view(element);
 				})
 			}
 		});
 	
+    // 일정 전체 뿌려주기
 	function view(element){
 		
 		console.log("ddd");
@@ -403,14 +417,62 @@
 	    var e_minute = e_time[1] * 1;
 	    
 	 	calendar.addEvent({
+	 		id : element.cno,
 			title : element.title, // 이벤트 제목
 			start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
 			end : new Date(e_year,e_month,e_day, e_hour, e_minute)
 		}); 
 	}
 	
+    // 일정 하나 정보 얻기
+	function getOne(cno) {
+		$.getJSON({
+  		  url:"/calendar/rest_get/" + cno,
+  		  type:"post",
+  		  success:function(data) {
+			console.log(data);
+			
+			getRepName(data.title, function(data) {
+				console.log(data);
+				var repNames = data.substring(0, data.lastIndexOf(','));
+				modalRep.val(repNames);
+			});
+			
+			modalTitle.val(data.title);
+			modalContent.val(data.content);
+			modalStart.val(data.startDate);
+			modalStartTime.val(data.cal_startTime);
+			modalEnd.val(data.endDate);
+			modalEndTime.val(data.cal_endTime);
+			
+			modalMemo.val(data.memo);
+			
+			modal.modal("show");
+		  }
+  	  })
+    } 
 	
-	
+    // 일정 담당자 이름 가져오기
+    function getRepName(title, callback) {
+    	var repNames = "";
+    	
+    	$.getJSON({
+    		url:"/calendar/rest_ename/" + title,
+    		type:"POST",
+    		success:function(data) {
+    			console.log("enter getRepName");
+    			console.log(data);
+    			
+    			$.each(data, function(idx, element) {
+    				repNames += element + ", ";
+    			})
+    			
+    			if(callback) {
+    				callback(repNames);
+    			}
+    		}
+    	})
+    }
 	
     $("#submit").click(function () {
     	//input안에 들어있는 value 제거
