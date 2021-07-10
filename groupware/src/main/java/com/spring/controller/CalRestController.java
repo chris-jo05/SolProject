@@ -8,10 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.domain.CalendarRepEmpVO;
 import com.spring.domain.CalendarVO;
+import com.spring.domain.MemberVo;
 import com.spring.service.CalendarService;
 
 import lombok.extern.log4j.Log4j2;
@@ -38,10 +41,25 @@ public class CalRestController {
 		return new ResponseEntity<CalendarVO>(service.get(cno), HttpStatus.OK);
 	}
 	
+	@PostMapping("/rest_new")
+	public ResponseEntity<Integer> insert(@RequestBody CalendarVO vo) {
+		log.info("일정 삽입 " + vo);
+		
+		return service.insert(vo) ? new ResponseEntity<Integer>((vo.getCno()+1),HttpStatus.OK) :
+			new ResponseEntity<Integer>((vo.getCno()+1),HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
 	@PostMapping("/rest_ename/{title}")
-	public ResponseEntity<List<String>> getRepName(@PathVariable("title") String title) {
+	public ResponseEntity<List<CalendarRepEmpVO>> getRepName(@PathVariable("title") String title) {
 		log.info("일정 담당자 이름 가져오기" + title);
 		
-		return new ResponseEntity<List<String>>(service.getRepName(title),HttpStatus.OK);
+		return new ResponseEntity<List<CalendarRepEmpVO>>(service.getRepName(title),HttpStatus.OK);
+	}
+	
+	@PostMapping("/rest_no/{ename}/{dname}")
+	public ResponseEntity<CalendarRepEmpVO> getRepNo(CalendarRepEmpVO vo) {
+		log.info("일정 담당자 사원번호, 부서번호 가져오기 " + vo.getEname() + ", " + vo.getDname());
+		
+		return new ResponseEntity<CalendarRepEmpVO>(service.getRepNo(vo),HttpStatus.OK);
 	}
 }

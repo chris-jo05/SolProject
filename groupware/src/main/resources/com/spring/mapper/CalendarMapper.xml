@@ -12,10 +12,26 @@
 		select * from calendar where cno = #{cno}
 	</select>
 	
-	<!-- 일정 담당자 이름 가져오기 -->
-	<select id="getRepName" resultType="java.lang.String">
-		select e.ename 
-		from calendar, emp e
-		where calendar.eno = e.eno and title=#{title}
+	<!-- 일정 담당자 이름, 부서명 가져오기 -->
+	<select id="getRepName" resultType="com.spring.domain.CalendarRepEmpVO">
+		select e.eno, d.dno, e.ename, d.dname
+		from calendar, emp e, dept d
+		where calendar.eno = e.eno and d.dno = e.dno and title=#{title}
+	</select>
+	
+	<!-- 일정 삽입 -->
+	<insert id="insert">
+		<selectKey keyProperty="cno" order="BEFORE" resultType="int">
+			select CALENDAR_SEQ.nextval from dual
+		</selectKey>
+		insert into calendar(eno, dno, title, content, startdate, enddate, cal_starttime, cal_endtime, memo)
+		values(#{eno}, #{dno}, #{title}, #{content},#{startDate},#{endDate}, #{cal_startTime},#{cal_endTime},#{memo})
+	</insert>
+	
+	<!-- 일정 담당자의 이름과 부서명으로 사원번호, 부서번호 가져오기 -->
+	<select id="getRepNo" resultType="com.spring.domain.CalendarRepEmpVO">
+		select d.dno, e.eno
+		from emp e, dept d
+		where e.dno = d.dno and e.ename = #{ename} and d.dname = #{dname}
 	</select>
 </mapper>

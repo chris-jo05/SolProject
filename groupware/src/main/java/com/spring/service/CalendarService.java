@@ -2,10 +2,14 @@ package com.spring.service;
 
 import java.util.List;
 
+import com.spring.domain.CalendarRepEmpVO;
 import com.spring.domain.CalendarVO;
+import com.spring.domain.MemberVo;
 
 public interface CalendarService {
 	public List<CalendarVO> getList();
 	public CalendarVO get(int cno);
-	public List<String> getRepName(String title);
+	public boolean insert(CalendarVO vo);
+	public List<CalendarRepEmpVO> getRepName(String title);
+	public CalendarRepEmpVO getRepNo(CalendarRepEmpVO vo);
 }

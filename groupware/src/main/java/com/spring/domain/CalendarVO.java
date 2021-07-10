@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Setter
 @Getter
@@ -21,5 +20,6 @@ public class CalendarVO {
 	private String endDate;
 	private String cal_startTime;
     private String cal_endTime;
+    private String rep;
     private String memo;
 }
