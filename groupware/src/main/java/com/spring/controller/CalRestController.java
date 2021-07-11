@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,5 +62,13 @@ public class CalRestController {
 		log.info("일정 담당자 사원번호, 부서번호 가져오기 " + vo.getEname() + ", " + vo.getDname());
 		
 		return new ResponseEntity<CalendarRepEmpVO>(service.getRepNo(vo),HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/rest_delete/{cno}")
+	public ResponseEntity<String> remove(@PathVariable("cno") int cno) {
+		log.info("댓글 삭제" + cno);
+		
+		return service.delete(cno) ? new ResponseEntity<String>("success",HttpStatus.OK) :
+			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

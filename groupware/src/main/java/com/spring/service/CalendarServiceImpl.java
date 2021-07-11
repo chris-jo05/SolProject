@@ -32,6 +32,11 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 	
 	@Override
+	public boolean delete(int cno) {
+		return mapper.delete(cno) > 0 ? true : false;
+	}
+	
+	@Override
 	public List<CalendarRepEmpVO> getRepName(String title) {
 		return mapper.getRepName(title);
 	}
