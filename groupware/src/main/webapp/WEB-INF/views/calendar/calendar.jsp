@@ -508,68 +508,72 @@
 	
 	$("#modalRegisterBtn").click(function () {
 		// 담당자를 받아서 eno, bno 가져오기
-		var rep = modalRep.val();
-		var ename = rep.substring(0,rep.lastIndexOf('('));
-		var dname = rep.substring(rep.lastIndexOf('(') + 1,rep.lastIndexOf(')'));
-		console.log(rep.substring(0,rep.lastIndexOf('(')));
-		console.log(rep.substring(rep.lastIndexOf('(') + 1,rep.lastIndexOf(')')));
-	    
-	    getRepNo(ename, dname, function(data) {
-	    	// 날짜 쪼개서 Date 객체 만들기
-			var mStart = modalStart.val();
-			var mStartTime = modalStartTime.val();
-			var mEnd = modalEnd.val();
-			var mEndTime = modalEndTime.val();
-			
-			var s_date = new Date(mStart);
-			var s_year = s_date.getFullYear();
-			var s_month = s_date.getMonth();
-		    var s_day= s_date.getDate();
+		var reps = modalRep.val();
+		var repSplit = reps.split(" ");
+		console.log(repSplit.length);
+		
+		for(var i = 0; i < repSplit.length; i++) {
+			var rep = repSplit[i];
+			var ename = rep.substring(0,rep.lastIndexOf('('));
+			var dname = rep.substring(rep.lastIndexOf('(') + 1,rep.lastIndexOf(')'));
+			console.log(rep.substring(0,rep.lastIndexOf('(')));
+			console.log(rep.substring(rep.lastIndexOf('(') + 1,rep.lastIndexOf(')')));
+		    
+		    getRepNo(ename, dname, function(data) {
+		    	// 날짜 쪼개서 Date 객체 만들기
+				var mStart = modalStart.val();
+				var mStartTime = modalStartTime.val();
+				var mEnd = modalEnd.val();
+				var mEndTime = modalEndTime.val();
+				
+				var s_date = new Date(mStart);
+				var s_year = s_date.getFullYear();
+				var s_month = s_date.getMonth();
+			    var s_day= s_date.getDate();
 
-		    var e_date = new Date(mEnd);
-			var e_year = e_date.getFullYear();
-			var e_month = e_date.getMonth();
-		    var e_day= e_date.getDate();
-		    
-		    var s_time = mStartTime.split(":");
-		    var s_hour = s_time[0] * 1;
-		    var s_minute = s_time[1] * 1;
-		    
-		    var e_time = mEndTime.split(":");
-		    var e_hour = e_time[0] * 1;
-		    var e_minute = e_time[1] * 1;
-		    
-			var cal = {
-				eno:data.eno,
-				dno:data.dno,
-				title:modalTitle.val(),
-				content:modalContent.val(),
-				startDate:modalStart.val(),
-				endDate:modalEnd.val(),
-				cal_startTime:modalStartTime.val(),
-				cal_endTime:modalEndTime.val(),
-				rep:modalRep.val(),
-				memo:modalMemo.val()
-			};
-			console.log(data.eno + "번")
-			console.log(cal);
-			
-			$.ajax({
-				url:'/calendar/rest_new/',
-				type:'post',
-				contentType:'application/json',
-				data:JSON.stringify(cal),
-				success:function(result) {
-					calendar.addEvent({
-						id : result,
-						title : modalTitle.val(), // 이벤트 제목
-						start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
-						end : new Date(e_year,e_month,e_day, e_hour, e_minute)
-					});
-				}
-			})
-		});
-	    
+			    var e_date = new Date(mEnd);
+				var e_year = e_date.getFullYear();
+				var e_month = e_date.getMonth();
+			    var e_day= e_date.getDate();
+			    
+			    var s_time = mStartTime.split(":");
+			    var s_hour = s_time[0] * 1;
+			    var s_minute = s_time[1] * 1;
+			    
+			    var e_time = mEndTime.split(":");
+			    var e_hour = e_time[0] * 1;
+			    var e_minute = e_time[1] * 1;
+			    
+				var cal = {
+					eno:data.eno,
+					dno:data.dno,
+					title:modalTitle.val(),
+					content:modalContent.val(),
+					startDate:modalStart.val(),
+					endDate:modalEnd.val(),
+					cal_startTime:modalStartTime.val(),
+					cal_endTime:modalEndTime.val(),
+					rep:modalRep.val(),
+					memo:modalMemo.val()
+				};
+				
+				$.ajax({
+					url:'/calendar/rest_new/',
+					type:'post',
+					contentType:'application/json',
+					data:JSON.stringify(cal),
+					success:function(result) {
+						console.log("ajax result 값 : "+result);
+						calendar.addEvent({
+							id : result,
+							title : modalTitle.val(), // 이벤트 제목
+							start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
+							end : new Date(e_year,e_month,e_day, e_hour, e_minute)
+						});
+					}
+				})
+			});
+		}
 	    
 		
 		modal.modal("hide");

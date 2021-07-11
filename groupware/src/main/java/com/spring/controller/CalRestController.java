@@ -46,8 +46,8 @@ public class CalRestController {
 	public ResponseEntity<Integer> insert(@RequestBody CalendarVO vo) {
 		log.info("일정 삽입 " + vo);
 		
-		return service.insert(vo) ? new ResponseEntity<Integer>((vo.getCno()+1),HttpStatus.OK) :
-			new ResponseEntity<Integer>((vo.getCno()+1),HttpStatus.INTERNAL_SERVER_ERROR);
+		return service.insert(vo) ? new ResponseEntity<Integer>(vo.getCno(),HttpStatus.OK) :
+			new ResponseEntity<Integer>(vo.getCno(),HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@PostMapping("/rest_ename/{title}")
