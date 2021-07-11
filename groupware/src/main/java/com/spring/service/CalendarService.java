@@ -10,6 +10,7 @@ public interface CalendarService {
 	public List<CalendarVO> getList();
 	public CalendarVO get(int cno);
 	public boolean insert(CalendarVO vo);
+	public boolean delete(int cno);
 	public List<CalendarRepEmpVO> getRepName(String title);
 	public CalendarRepEmpVO getRepNo(CalendarRepEmpVO vo);
 }

@@ -151,13 +151,16 @@
       </div>
       <div class="modal-footer">
       	 <button type="button" class="btn btn-success" id="modalRegisterBtn">등록</button>
-      	 <!-- <button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
-      	 <button type="button" class="btn btn-danger" id="modalRemoveBtn">삭제</button> -->
-        <button type="button" class="btn btn-primary" data-dismiss="modal">종료</button>
+      	 <button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
+      	 <button type="button" class="btn btn-danger" id="modalRemoveBtn">삭제</button>
+         <button type="button" class="btn btn-primary" id='modalCloseBtn' data-dismiss="modal">종료</button>
       </div>
+      <!-- 클릭된 일정의 cno 저장하는 곳 -->
+	  <input type="hidden" name="selectedCno" value=""/>
     </div>
   </div>
 </div> 
+
 
 <!-- Bootstrap -->
 <script src="/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -180,6 +183,14 @@
   var modalEndTime = modal.find("input[name='endTime']");
   var modalRep = modal.find("input[name='rep']");
   var modalMemo = modal.find("input[name='memo']");
+  
+  //모달 영역 안에 있는 버튼 가져오기
+  var modalModifyBtn = $("#modalModifyBtn");
+  var modalRegisterBtn = $("#modalRegisterBtn");
+  var modalRemoveBtn = $("#modalRemoveBtn");
+  
+  // 모달 영역 안에 있는 선택된 일정 cno 가져오기
+  var modalSelectedCno = modal.find("input[name='selectedCno']");
   
   $(function () {
 
@@ -319,6 +330,9 @@
     	  
     	  var cno = event.event._def.publicId;
     	  
+    	  modalSelectedCno.val(cno);
+    	  console.log(modalSelectedCno.val());
+    	  
     	  getOne(cno);
 	  }
       
@@ -447,6 +461,12 @@
 			
 			modalMemo.val(data.memo);
 			
+			// 수정, 삭제 버튼만 보이기
+			modalRegisterBtn.hide();
+			
+			modalModifyBtn.show();
+			modalRemoveBtn.show();
+			
 			modal.modal("show");
 		  }
   	  })
@@ -475,9 +495,13 @@
     	})
     }
 	
+    // 일정 작성 버튼 클릭
     $("#submit").click(function () {
     	//input안에 들어있는 value 제거
     	modal.find("input").val("");
+    	
+    	modal.find("button[id!='modalCloseBtn']").hide();
+		modalRegisterBtn.show();
     	
     	modal.modal("show");
 	})
@@ -565,6 +589,22 @@
     	})
     }
 	
+	$("#modalRemoveBtn").click(function(){
+		var cno = modalSelectedCno.val();
+		console.log('remove clicked ' + cno);
+		
+		$.ajax({
+    		url:"/calendar/rest_delete/" + cno,
+    		type:"DELETE",
+    		success:function(data) {
+    			console.log("success");
+    			
+    			modal.modal("hide");
+    			
+    			calendar.getEventById(cno).remove();
+    		}
+    	})
+	})
   })
   
  

@@ -28,6 +28,10 @@
 		values(#{eno}, #{dno}, #{title}, #{content},#{startDate},#{endDate}, #{cal_startTime},#{cal_endTime},#{memo})
 	</insert>
 	
+	<delete id="delete">
+		delete from calendar where cno = #{cno}
+	</delete>
+	
 	<!-- 일정 담당자의 이름과 부서명으로 사원번호, 부서번호 가져오기 -->
 	<select id="getRepNo" resultType="com.spring.domain.CalendarRepEmpVO">
 		select d.dno, e.eno
