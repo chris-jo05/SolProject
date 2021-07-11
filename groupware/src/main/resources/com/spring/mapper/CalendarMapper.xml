@@ -21,11 +21,11 @@
 	
 	<!-- 일정 삽입 -->
 	<insert id="insert">
-		<selectKey keyProperty="cno" order="BEFORE" resultType="int">
-			select CALENDAR_SEQ.nextval from dual
-		</selectKey>
 		insert into calendar(eno, dno, title, content, startdate, enddate, cal_starttime, cal_endtime, memo)
 		values(#{eno}, #{dno}, #{title}, #{content},#{startDate},#{endDate}, #{cal_startTime},#{cal_endTime},#{memo})
+		<selectKey keyProperty="cno" order="AFTER" resultType="int">
+			select CALENDAR_SEQ.currval from dual
+		</selectKey>
 	</insert>
 	
 	<delete id="delete">
