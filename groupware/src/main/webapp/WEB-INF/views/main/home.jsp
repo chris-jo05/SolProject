@@ -392,17 +392,17 @@
 									<div class="card-tools">
 										<!-- button with a dropdown -->
 										<div class="btn-group">
-											<button type="button"
+											<!-- <button type="button"
 												class="btn btn-success btn-sm dropdown-toggle"
 												data-toggle="dropdown" data-offset="-52">
 												<i class="fas fa-bars"></i>
-											</button>
-											<div class="dropdown-menu" role="menu">
+											</button> -->
+											<!-- <div class="dropdown-menu" role="menu">
 												<a href="#" class="dropdown-item">일정 추가</a> <a
 													href="#" class="dropdown-item">일정 지우기</a>
 												<div class="dropdown-divider"></div>
 												<a href="#" class="dropdown-item">달력 보기</a>
-											</div>
+											</div> -->
 										</div>
 										<button type="button" class="btn btn-success btn-sm"
 											data-card-widget="collapse">
@@ -418,7 +418,21 @@
 								<!-- /.card-header -->
 								<div class="card-body pt-0">
 									<!--The calendar -->
-									<div id="calendar" style="width: 100%"></div>
+									<div id="calendar" style="width: 100%; background-color: white">
+										<table class="table table-hover text-nowrap" id="calendarTable">
+					            	      <thead style="color: black">
+					          	 	       	<tr>
+					           		         	<th>일정 이름</th>
+					           		            <th>일정 시간</th>
+					        	            </tr>									
+					    	              </thead>
+					    	              <tbody style="color: black">
+					    	              <tr>
+					    	             	<!-- 일정 불러오는 부분 -->
+						                  </tr>
+										  </tbody>
+					                	</table>
+									</div>
 								</div>
 								<!-- /.card-body -->
 							</div>
@@ -435,4 +449,38 @@
 		<!-- /.content-wrapper -->
 </body>
 </html>
+<script>
+let calendarTable = $("#calendar #calendarTable");
+
+$(function() {
+	// 로그인한 사원의 일정 캘린더에 보여주기
+	console.log("${login.eno}");
+	$.getJSON({
+			url:"/calendar/rest_list/" + ${login.eno},
+			type:"get",
+			success:function(data) {
+				console.log(data);
+				
+				
+				$.each(data, function(idx, element) {
+					console.log(element.title);
+					console.log(element.startDate);
+					console.log(element.endDate);
+					console.log(element.cno);
+					
+					var str = "<tr>";
+					
+					var title = element.title;
+					var time = element.startDate + " " + element.cal_startTime + " ~ " + element.endDate + " " + element.cal_endTime;
+					
+					str += "<td>" + title + "</td>";
+					str += "<td>" + time + "</td>";
+					str += "</tr>";
+					
+					calendarTable.append(str);
+				})
+			}
+		});
+})
+</script>
 <%@include file="../includes/footer.jsp" %>
