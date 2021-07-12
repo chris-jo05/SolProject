@@ -124,6 +124,10 @@
         		<input type="text" name="content" class="form-control" value=""/>
         	</div>
         	<div class="form-group">
+        		<label for="">일정 그룹 이름</label>
+        		<input type="text" name="groupId" class="form-control" value=""/>
+        	</div>
+        	<div class="form-group">
         		<label for="">일정 시작일</label>
         		<input type="text" name="start" class="form-control" value=""/>
         	</div>
@@ -157,6 +161,9 @@
       </div>
       <!-- 클릭된 일정의 cno 저장하는 곳 -->
 	  <input type="hidden" name="selectedCno" value=""/>
+	  
+	  <!-- 클릭된 일정의 cno 저장하는 곳 -->
+	  <input type="hidden" name="selectedGroup" value=""/>
     </div>
   </div>
 </div> 
@@ -177,6 +184,7 @@
   //모달 영역 값 가져오기
   var modalTitle = modal.find("input[name='title']");
   var modalContent = modal.find("input[name='content']");
+  var modalGroupId = modal.find("input[name='groupId']");
   var modalStart = modal.find("input[name='start']");
   var modalStartTime = modal.find("input[name='startTime']");
   var modalEnd = modal.find("input[name='end']");
@@ -191,6 +199,9 @@
   
   // 모달 영역 안에 있는 선택된 일정 cno 가져오기
   var modalSelectedCno = modal.find("input[name='selectedCno']");
+  
+//모달 영역 안에 있는 선택된 일정 그룹 이름 가져오기
+  var modalSelectedGroup = modal.find("input[name='selectedGroup']");
   
   $(function () {
 
@@ -326,12 +337,14 @@
         } */
       },
       eventClick: function(event,jsEvent,view,cellDate){
-    	  console.log(event.event._def.publicId);
+    	  console.log(event.event._def);
     	  
     	  var cno = event.event._def.publicId;
+    	  var groupId = event.event._def.groupId;
     	  
     	  modalSelectedCno.val(cno);
-    	  console.log(modalSelectedCno.val());
+    	  modalSelectedGroup.val(groupId);
+    	  console.log(modalSelectedGroup.val());
     	  
     	  getOne(cno);
 	  }
@@ -382,7 +395,7 @@
     
 	// 로그인한 사원의 일정 캘린더에 보여주기
 	$.getJSON({
-			url:"/calendar/rest_list",
+			url:"/calendar/rest_list/" + ${login.eno},
 			type:"get",
 			success:function(data) {
 				console.log(data[0]);
@@ -398,7 +411,38 @@
 			}
 		});
 	
-    // 일정 전체 뿌려주기
+    // 일정 작성 버튼 클릭
+    $("#submit").click(function () {
+    	//input안에 들어있는 value 제거
+    	modal.find("input").val("");
+    	
+    	modal.find("button[id!='modalCloseBtn']").hide();
+		modalRegisterBtn.show();
+    	
+    	modal.modal("show");
+	})
+	
+	$("#modalRegisterBtn").click(function () {
+		insert();
+	})
+	
+	$("#modalRemoveBtn").click(function(){
+		var groupId = modalSelectedGroup.val();
+		console.log('remove clicked ' + groupId);
+		
+		removeGroup(groupId);
+	})
+	
+	$("#modalModifyBtn").click(function() {
+		var groupId = modalSelectedGroup.val();
+		console.log('remove clicked ' + groupId);
+		
+		removeGroup(groupId);
+		
+		insert();
+	})
+	
+	 // 일정 전체 뿌려주기
 	function view(element){
 		
 		console.log("ddd");
@@ -432,7 +476,8 @@
 	    
 	 	calendar.addEvent({
 	 		id : element.cno,
-			title : element.title, // 이벤트 제목
+	 		groupId : element.groupId,
+			title : String(element.title), // 이벤트 제목
 			start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
 			end : new Date(e_year,e_month,e_day, e_hour, e_minute)
 		}); 
@@ -454,6 +499,7 @@
 			
 			modalTitle.val(data.title);
 			modalContent.val(data.content);
+			modalGroupId.val(data.groupId);
 			modalStart.val(data.startDate);
 			modalStartTime.val(data.cal_startTime);
 			modalEnd.val(data.endDate);
@@ -471,8 +517,8 @@
 		  }
   	  })
     } 
-	
-    // 일정 담당자 이름, 부서명 가져오기
+    
+	 // 일정 담당자 이름, 부서명 가져오기
     function getRepName(title, callback) {
     	var repNames = "";
     	console.log(title);
@@ -494,25 +540,14 @@
     		}
     	})
     }
-	
-    // 일정 작성 버튼 클릭
-    $("#submit").click(function () {
-    	//input안에 들어있는 value 제거
-    	modal.find("input").val("");
-    	
-    	modal.find("button[id!='modalCloseBtn']").hide();
-		modalRegisterBtn.show();
-    	
-    	modal.modal("show");
-	})
-	
-	$("#modalRegisterBtn").click(function () {
-		// 담당자를 받아서 eno, bno 가져오기
+	 
+	function insert(repSplit) {
+    	// 담당자를 받아서 eno, bno 가져오기
 		var reps = modalRep.val();
 		var repSplit = reps.split(" ");
 		console.log(repSplit.length);
 		
-		for(var i = 0; i < repSplit.length; i++) {
+    	for(var i = 0; i < repSplit.length; i++) {
 			var rep = repSplit[i];
 			var ename = rep.substring(0,rep.lastIndexOf('('));
 			var dname = rep.substring(rep.lastIndexOf('(') + 1,rep.lastIndexOf(')'));
@@ -549,6 +584,7 @@
 					dno:data.dno,
 					title:modalTitle.val(),
 					content:modalContent.val(),
+					groupId:modalGroupId.val(),
 					startDate:modalStart.val(),
 					endDate:modalEnd.val(),
 					cal_startTime:modalStartTime.val(),
@@ -564,12 +600,17 @@
 					data:JSON.stringify(cal),
 					success:function(result) {
 						console.log("ajax result 값 : "+result);
-						calendar.addEvent({
-							id : result,
-							title : modalTitle.val(), // 이벤트 제목
-							start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
-							end : new Date(e_year,e_month,e_day, e_hour, e_minute)
-						});
+						console.log("groupId 값 : "+ modalGroupId.val());
+						console.log(${login.eno});
+						if(${login.eno} == data.eno) {
+							calendar.addEvent({
+								id : result,
+								groupId : modalGroupId.val(),
+								title : String(modalTitle.val()), // 이벤트 제목
+								start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
+								end : new Date(e_year,e_month,e_day, e_hour, e_minute)
+							});
+						}
 					}
 				})
 			});
@@ -577,7 +618,7 @@
 	    
 		
 		modal.modal("hide");
-	})
+    }
 	
 	// 일정 담당자 이름, 부서명으로 사원번호, 부서번호 가져오기
     function getRepNo(ename, dname, callback) {
@@ -593,22 +634,29 @@
     	})
     }
 	
-	$("#modalRemoveBtn").click(function(){
-		var cno = modalSelectedCno.val();
-		console.log('remove clicked ' + cno);
-		
+	function removeGroup(groupId) {
 		$.ajax({
-    		url:"/calendar/rest_delete/" + cno,
+    		url:"/calendar/rest_delete/" + groupId,
     		type:"DELETE",
     		success:function(data) {
     			console.log("success");
     			
     			modal.modal("hide");
     			
-    			calendar.getEventById(cno).remove();
+    			var events = calendar.getEvents();
+    			console.log(events);
+    			
+    			
+    			for(var i = 0; i < events.length; i++) {
+    				if(events[i]._def.groupId === groupId) {
+    					events[i].remove();
+    				}
+    			}
+    			//calendar.getEventById(cno).remove();
     		}
     	})
-	})
+	}
+	
   })
   
  
