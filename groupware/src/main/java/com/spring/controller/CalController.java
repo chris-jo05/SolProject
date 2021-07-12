@@ -25,10 +25,5 @@ public class CalController {
 	@GetMapping("/calendar")
 	public void main(int eno, Model model) {
 		log.info("calender 페이지 요청");
-		
-//		List<CalendarVO> list = service.getList(eno);
-//		
-//		model.addAttribute("list", list);
-
 	}
 }
