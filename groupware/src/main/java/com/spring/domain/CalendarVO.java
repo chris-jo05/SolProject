@@ -16,6 +16,7 @@ public class CalendarVO {
 	private int dno;
 	private String title;
 	private String content;
+	private String groupId;
 	private String startDate;
 	private String endDate;
 	private String cal_startTime;

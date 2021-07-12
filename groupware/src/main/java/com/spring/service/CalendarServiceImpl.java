@@ -17,8 +17,8 @@ public class CalendarServiceImpl implements CalendarService {
 	private CalendarMapper mapper;
 	
 	@Override
-	public List<CalendarVO> getList() {
-		return mapper.list();
+	public List<CalendarVO> getList(int eno) {
+		return mapper.list(eno);
 	}
 	
 	@Override
@@ -32,13 +32,13 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 	
 	@Override
-	public boolean delete(int cno) {
-		return mapper.delete(cno) > 0 ? true : false;
+	public boolean delete(String groupId) {
+		return mapper.delete(groupId) > 0 ? true : false;
 	}
 	
 	@Override
-	public List<CalendarRepEmpVO> getRepName(String title) {
-		return mapper.getRepName(title);
+	public List<CalendarRepEmpVO> getRepName(String groupId) {
+		return mapper.getRepName(groupId);
 	}
 	
 	@Override

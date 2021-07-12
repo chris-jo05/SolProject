@@ -9,10 +9,10 @@ import com.spring.domain.CalendarVO;
 import com.spring.domain.MemberVo;
 
 public interface CalendarMapper {
-	public List<CalendarVO> list();
+	public List<CalendarVO> list(int eno);
 	public CalendarVO get(int cno);
 	public int insert(CalendarVO vo);
-	public int delete(int cno);
-	public List<CalendarRepEmpVO> getRepName(String title);
+	public int delete(String groupId);
+	public List<CalendarRepEmpVO> getRepName(String groupId);
 	public CalendarRepEmpVO getRepNo(CalendarRepEmpVO vo);
 }

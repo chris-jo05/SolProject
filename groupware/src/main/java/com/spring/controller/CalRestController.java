@@ -28,11 +28,11 @@ public class CalRestController {
 	@Autowired
 	public CalendarService service;
 	
-	@GetMapping("/rest_list")
-	public ResponseEntity<List<CalendarVO>> ListGet() {
+	@GetMapping("/rest_list/{eno}" )
+	public ResponseEntity<List<CalendarVO>> ListGet(@PathVariable("eno") int eno) {
 		log.info("일정 정보 가져오기");
 		
-		return new ResponseEntity<List<CalendarVO>>(service.getList(),HttpStatus.OK);
+		return new ResponseEntity<List<CalendarVO>>(service.getList(eno),HttpStatus.OK);
 	}
 	
 	@PostMapping("/rest_get/{cno}")
@@ -50,11 +50,11 @@ public class CalRestController {
 			new ResponseEntity<Integer>(vo.getCno(),HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@PostMapping("/rest_ename/{title}")
-	public ResponseEntity<List<CalendarRepEmpVO>> getRepName(@PathVariable("title") String title) {
-		log.info("일정 담당자 이름 가져오기" + title);
+	@PostMapping("/rest_group/{groupId}")
+	public ResponseEntity<List<CalendarRepEmpVO>> getRepName(@PathVariable("groupId") String groupId) {
+		log.info("일정 담당자 이름 가져오기" + groupId);
 		
-		return new ResponseEntity<List<CalendarRepEmpVO>>(service.getRepName(title),HttpStatus.OK);
+		return new ResponseEntity<List<CalendarRepEmpVO>>(service.getRepName(groupId),HttpStatus.OK);
 	}
 	
 	@PostMapping("/rest_no/{ename}/{dname}")
@@ -63,12 +63,12 @@ public class CalRestController {
 		
 		return new ResponseEntity<CalendarRepEmpVO>(service.getRepNo(vo),HttpStatus.OK);
 	}
-	
-	@DeleteMapping("/rest_delete/{cno}")
-	public ResponseEntity<String> remove(@PathVariable("cno") int cno) {
-		log.info("댓글 삭제" + cno);
+
+	@DeleteMapping("/rest_delete/{groupId}")
+	public ResponseEntity<String> remove(@PathVariable("groupId") String groupId) {
+		log.info("댓글 삭제" + groupId);
 		
-		return service.delete(cno) ? new ResponseEntity<String>("success",HttpStatus.OK) :
+		return service.delete(groupId) ? new ResponseEntity<String>("success",HttpStatus.OK) :
 			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

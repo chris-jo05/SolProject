@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.domain.CalendarVO;
@@ -22,12 +23,7 @@ public class CalController {
 	private CalendarService service;
 	
 	@GetMapping("/calendar")
-	public void main(Model model) {
+	public void main(int eno, Model model) {
 		log.info("calender 페이지 요청");
-		
-		List<CalendarVO> list = service.getList();
-		
-		model.addAttribute("list", list);
-
 	}
 }
