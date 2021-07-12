@@ -26,28 +26,29 @@
         <div class="row">
           <!-- /.col -->
           <div class="col-md-9">
+          <form action="" method="post" role="form">
             <div class="card card-primary card-outline">
             
               <!-- /.card-header -->
               <div class="card-body">
                <div class="form-group">
                      <label for="exampleInputBorderWidth2">제 목</label>
-                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="제목을 입력해 주세요.">
+                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="b_title" placeholder="제목을 입력해 주세요.">
                    </div>
                  <div class="form-group">
                      <label for="exampleInputBorderWidth2">작성자</label>
-                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="작성자를 입력해 주세요.">
+                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="b_writer" placeholder="작성자를 입력해 주세요.">
                    </div>
                 <div class="form-group">
                      <div class="form-group">
                      <label for="exampleInputBorderWidth2">부서</label>
-                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="부서를 입력해 주세요.">
+                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="dname" placeholder="부서를 입력해 주세요.">
                    </div>
                    </div>
                        
                <div class="form-group">
                   <label>Content</label>
-                  <textarea class="form-control" rows="3" name="content"></textarea>
+                  <textarea class="form-control" rows="3" name="b_contents"></textarea>
             </div>
                 <div class="form-group">
                   <div class="btn btn-default btn-file">
@@ -67,6 +68,7 @@
               </div>
               <!-- /.card-footer -->
             </div>
+            </form>
             <!-- /.card -->
           </div>
           <!-- /.col -->
@@ -85,12 +87,5 @@
 <!-- 사이드바 등장관련 js -->
 <script src="../../dist/js/adminlte.min.js"></script>
 
-<!-- Page specific script -->
-<script>
-  $(function () {
-    //Add text editor
-    $('#compose-textarea').summernote()
-  })
-</script>
 
 <%@include file="../includes/footer.jsp" %>

@@ -29,6 +29,15 @@
    <section class="content">
       <div class="container-fluid">
          <div class="row">
+        	 <div class="col-md-3">
+                  <a href="/board/boardWriter"
+                     class="btn btn-primary btn-block mb-3">공지 작성</a>
+                     <select name="" id="amount">
+                    	 <option value="10">10</option>
+                    	 <option value="20">20</option>
+                   	 	 <option value="30">30</option>
+                     </select>
+             </div>
             <div class="col-12">
                <div class="card">
 
@@ -40,33 +49,25 @@
                               <th>제 목</th>
                               <th>작성자</th>
                               <th>부서</th>
-                              <th>날짜</th>
+                              <th>등록날짜</th>
                               <th>수정날짜</th>
                               <th>조회</th>
                            </tr>
                         </thead>
                         <tbody>
-                           <tr>
-                              <td>1</td>
-                              <td><a href="/board/boardRead">인사말</a></td>
-                              <td>박일수</td>
-                              <td>인사팀</td>
-                              <td>2021/07/01</td>
-                              <td>2021/07/02</td>
-                              <td>0</td>
-                           </tr>
                            <!-- 게시판 리스트 반복문 -->
                            <c:forEach var="vo" items="${list}">
                               <tr>
                                  <td>${vo.bno}</td>
-                                 <td><a href="${vo.bno}" class="move">${vo.title}</a></td>
-                                 <td>${vo.dept}</td>
-                                 <td>${vo.writer}</td>
+                                 <td><a href="${vo.bno}" class="move">${vo.b_title}</a></td>
+                                 <td>${vo.b_writer}</td>
+                                  <td>${vo.dno}</td>
                                  <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-                                       value="${vo.regdate}" /></td>
+                                       value="${vo.b_date}" /></td>
                                  <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-                                       value="${vo.updatedate}" /></td>
-                                 <td>${vo.replycnt}</td>
+                                       value="${vo.b_updatedate}" /></td>
+                                 <td>${vo.hit}</td>
+                                       
                               </tr>
                            </c:forEach>
                         </tbody>
@@ -74,70 +75,49 @@
                   </div>
                   <!-- /.card-body -->
 
-                  <!-- 페이지 담당 -->
-                  <div class="card-footer clearfix">
-                     <div class="card-tools">
-                        <ul class="pagination pagination-sm float-right">
-                           <!-- 이전페이지 -->
-                           <c:if test="${pageVo.prev}">
-                              <li class="page-item"><a href="${pageVo.startPage-1}"
-                                 class="page-link">&laquo;</a></li>
-                           </c:if>
-                           <!-- 페이지 (1,2,3,...) -->
-                           <c:forEach var="idx" begin="${pageVo.startPage}"
-                              end="${pageVo.endPage}">
-                              <li class="page-item ${pageVo.cri.pageNum==idx?'active':''}">
-                                 <a href="${idx}" class="page-link">${idx}</a>
-                              </li>
-
-                              <li class="page-item"><a href="#" class="page-link">3</a></li>
-                           </c:forEach>
-                           <!-- 다음 페이지 -->
-                           <c:if test="${pageVo.next}">
-                              <li class="page-item"><a href="${pageVo.endPage+1}"
-                                 class="page-link">&raquo;</a></li>
-                           </c:if>
-                        </ul>
-                     </div>
-                     <div class="col-md-3">
-                        <a href="/board/boardWriter"
-                           class="btn btn-primary btn-block mb-3">공지 작성</a>
-                     </div>
-                     <form action="" id="searchForm">
-                        <select name="type" id="" class="form-control">
-                           <option value="">-----------</option>
-                           <option value="T"
-                              <c:out value="${pageVO.cri.type=='T'?'selected':''}"/>>제목</option>
-                           <option value="C"
-                              <c:out value="${pageVO.cri.type=='C'?'selected':''}"/>>부서</option>
-                           <option value="W"
-                              <c:out value="${pageVO.cri.type=='W'?'selected':''}"/>>작성자</option>
-                           <option value="TC"
-                              <c:out value="${pageVO.cri.type=='TC'?'selected':''}"/>>제목
-                              or 부서</option>
-                           <option value="TCW"
-                              <c:out value="${pageVO.cri.type=='TCW'?'selected':''}"/>>제목
-                              or 부서 or 작성자</option>
-                        </select> <input type="text" name="keyword" value="${pageVO.cri.keyword}" />
-                        <!-- 검색시에도 페이지당 게시물 수와 현재 페이지에 대한 정보가 따라가야 함 -->
-                        <input type="hidden" name="pageNum"
-                           value="${pageVO.cri.pageNum}" /> <input type="hidden"
-                           name="amount" value="${pageVO.cri.amount}" />
-                        <button type="button" class="btn btn-default">검색</button>
-                     </form>
-                  </div>
-                  <!-- 페이지 끝 -->
                </div>
+                  <!-- 페이지 담당 -->
+                     <div class="text-center">
+                            <ul class="pagination">
+                            	<c:if test="${pageVO.prev}">
+                            		<li class="paginate_button previous"><a href="${pageVO.startPage-1}">이전</a></li>
+                 				</c:if>          		
+                            		
+                            	<c:forEach var="idx" begin="${pageVO.startPage}" end="${pageVO.endPage}">
+                            		<li class="paginate_button ${pageVO.cri.pageNum==idx?'active':''}">
+                            			<a href="${idx}">${idx}</a>
+                            		</li>
+                            	</c:forEach>
+                            	<!-- 다음 페이지 -->
+                            	<c:if test="${pageVO.next}">
+                            		<li class="paginate_button next"><a href="${pageVO.endPage+1}">다음</a></li>
+                            	</c:if> 
+                            		
+                            </ul>
+                       </div>
+                     
+                  </div> 
+                  <!-- 페이지 끝 -->
+                     
                <!-- /.card -->
             </div>
             <!-- /.col -->
          </div>
+         </section>
          <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
-   </section>
-   <!-- /.content -->
-</div>
+      
+<!-- 페이지 나누기 추가 -->            
+<form action="boardMain" method="get" id="actionForm">	
+<%-- <input type="hidden" name="type" value="${pageVO.cri.type}" /> --%>
+<%-- <input type="hidden" name="keyword" value="${pageVO.cri.keyword}" /> --%>
+<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" />
+<input type="hidden" name="amount" value="${pageVO.cri.amount}" />	
+</form>        
+<!-- /.container-fluid -->
+
+<!-- /.content -->
+
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -165,22 +145,37 @@
 
 <!-- Page specific script -->
 <script>
-   $(function() {
-      $("#example1").DataTable({
-         "responsive" : true,
-         "lengthChange" : false,
-         "autoWidth" : false,
-         "buttons" : [ "copy", "csv", "excel", "pdf", "print", "colvis" ]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      $('#example2').DataTable({
-         "paging" : true,
-         "lengthChange" : false,
-         "searching" : false,
-         "ordering" : true,
-         "info" : true,
-         "autoWidth" : false,
-         "responsive" : true,
-      });
-   });
+var actionForm = $("#actionForm");
+$(".move").click(function(e){
+	e.preventDefault(); //타이틀 a 속성 막기
+	
+	//actionForm에 bno 값을 추가하여 actionForm 보내기		
+	actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr('href')+"'>");
+	actionForm.attr('action','boardRead');
+	actionForm.submit();		
+})
+$(".paginate_button a").click(function(e){
+		e.preventDefault();  //a 속성 중지
+		
+		//actionForm의 안의 pageNum의 값을 사용자가 선택한 번호로 변경
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		
+		//actionForm 보내기
+		actionForm.submit();
+	})
+	
+//게시물 수 변경
+$("#amount").change(function(){
+		//사용자가 선택한 게시물 수 가져오기
+		let amount = $(this).val();
+		
+		//actionForm의 안의 amount의 값을 사용자가 선택한 번호로 변경
+		actionForm.find("input[name='amount']").val(amount);
+		
+		//actionForm 보내기
+		actionForm.submit();
+	})
 </script>
+
+
 <%@include file="../includes/footer.jsp"%>

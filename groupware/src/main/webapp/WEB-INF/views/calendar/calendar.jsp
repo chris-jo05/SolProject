@@ -124,6 +124,10 @@
         		<input type="text" name="content" class="form-control" value=""/>
         	</div>
         	<div class="form-group">
+        		<label for="">일정 그룹 이름</label>
+        		<input type="text" name="groupId" class="form-control" value=""/>
+        	</div>
+        	<div class="form-group">
         		<label for="">일정 시작일</label>
         		<input type="text" name="start" class="form-control" value=""/>
         	</div>
@@ -143,17 +147,27 @@
         		<label for="">일정 담당자</label>
         		<input type="text" name="rep" class="form-control" value=""/>
         	</div>
+        	<div class="form-group">
+        		<label for="">비고</label>
+        		<input type="text" name="memo" class="form-control" value=""/>
+        	</div>
         </div>
       </div>
       <div class="modal-footer">
       	 <button type="button" class="btn btn-success" id="modalRegisterBtn">등록</button>
-      	 <!-- <button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
-      	 <button type="button" class="btn btn-danger" id="modalRemoveBtn">삭제</button> -->
-        <button type="button" class="btn btn-primary" data-dismiss="modal">종료</button>
+      	 <button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
+      	 <button type="button" class="btn btn-danger" id="modalRemoveBtn">삭제</button>
+         <button type="button" class="btn btn-primary" id='modalCloseBtn' data-dismiss="modal">종료</button>
       </div>
+      <!-- 클릭된 일정의 cno 저장하는 곳 -->
+	  <input type="hidden" name="selectedCno" value=""/>
+	  
+	  <!-- 클릭된 일정의 cno 저장하는 곳 -->
+	  <input type="hidden" name="selectedGroup" value=""/>
     </div>
   </div>
 </div> 
+
 
 <!-- Bootstrap -->
 <script src="/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -167,6 +181,28 @@
  <script>
   let modal = $(".modal");
  
+  //모달 영역 값 가져오기
+  var modalTitle = modal.find("input[name='title']");
+  var modalContent = modal.find("input[name='content']");
+  var modalGroupId = modal.find("input[name='groupId']");
+  var modalStart = modal.find("input[name='start']");
+  var modalStartTime = modal.find("input[name='startTime']");
+  var modalEnd = modal.find("input[name='end']");
+  var modalEndTime = modal.find("input[name='endTime']");
+  var modalRep = modal.find("input[name='rep']");
+  var modalMemo = modal.find("input[name='memo']");
+  
+  //모달 영역 안에 있는 버튼 가져오기
+  var modalModifyBtn = $("#modalModifyBtn");
+  var modalRegisterBtn = $("#modalRegisterBtn");
+  var modalRemoveBtn = $("#modalRemoveBtn");
+  
+  // 모달 영역 안에 있는 선택된 일정 cno 가져오기
+  var modalSelectedCno = modal.find("input[name='selectedCno']");
+  
+//모달 영역 안에 있는 선택된 일정 그룹 이름 가져오기
+  var modalSelectedGroup = modal.find("input[name='selectedGroup']");
+  
   $(function () {
 
     /* initialize the external events
@@ -290,6 +326,7 @@
               
             } */
       ],
+      
       editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!
       drop      : function(info) {
@@ -300,7 +337,16 @@
         } */
       },
       eventClick: function(event,jsEvent,view,cellDate){
-		    modal.modal("show");
+    	  console.log(event.event._def);
+    	  
+    	  var cno = event.event._def.publicId;
+    	  var groupId = event.event._def.groupId;
+    	  
+    	  modalSelectedCno.val(cno);
+    	  modalSelectedGroup.val(groupId);
+    	  console.log(modalSelectedGroup.val());
+    	  
+    	  getOne(cno);
 	  }
       
     }); // var calender end
@@ -346,36 +392,270 @@
       $('#new-event').val('')
     }) */
     
-	var modalTitle = modal.find("input[name='title']");
-	var modalContent = modal.find("input[name='content']");
-	var modalStart = modal.find("input[name='start']");
-	var modalStartTime = modal.find("input[name='startTime']");
-	var modalEnd = modal.find("input[name='end']");
-	var modalEndTime = modal.find("input[name='endTime']");
-	var modalRep = modal.find("input[name='rep']");
+    
+	// 로그인한 사원의 일정 캘린더에 보여주기
+	$.getJSON({
+			url:"/calendar/rest_list/" + ${login.eno},
+			type:"get",
+			success:function(data) {
+				console.log(data[0]);
+				
+				$.each(data, function(idx, element) {
+					console.log(element.title);
+					console.log(element.startDate);
+					console.log(element.endDate);
+					console.log(element.cno);
+					
+					view(element);
+				})
+			}
+		});
 	
+    // 일정 작성 버튼 클릭
     $("#submit").click(function () {
     	//input안에 들어있는 value 제거
     	modal.find("input").val("");
+    	
+    	modal.find("button[id!='modalCloseBtn']").hide();
+		modalRegisterBtn.show();
     	
     	modal.modal("show");
 	})
 	
 	$("#modalRegisterBtn").click(function () {
-		
-		// end에 하루를 더 하기위한 작업
-		var end = modalEnd.val();
-		var endspl = end.split("-");
-		var day_int = (endspl[2] * 1) + 1;
-		var endPlusOne = [endspl[0],'-',endspl[1],'-',(day_int > 9 ? '':'0') + day_int].join('');
-		//console.log(endPlusOne);
-		
-		calendar.addEvent({
-			title : modalTitle.val(), // 이벤트 제목
-			start : modalStart.val(), //달력 날짜에 매핑
-			end : endPlusOne
-		});
+		insert();
 	})
+	
+	$("#modalRemoveBtn").click(function(){
+		var groupId = modalSelectedGroup.val();
+		console.log('remove clicked ' + groupId);
+		
+		removeGroup(groupId);
+	})
+	
+	$("#modalModifyBtn").click(function() {
+		var groupId = modalSelectedGroup.val();
+		console.log('remove clicked ' + groupId);
+		
+		removeGroup(groupId);
+		
+		insert();
+	})
+	
+	 // 일정 전체 뿌려주기
+	function view(element){
+		
+		console.log("ddd");
+		
+		/* calendar.addEvent({
+			 title : String(element.memo), // 이벤트 제목
+			start : String(element.startDate), //달력 날짜에 매핑
+			end : String(element.endDate) 			
+		}); */
+		
+		/* var startDate = String(element.startDate);
+		var endDate = (element.endDate);
+		 */
+		var s_date = new Date(element.startDate);
+		var s_year = s_date.getFullYear();
+		var s_month = s_date.getMonth();
+	    var s_day= s_date.getDate();
+
+	    var e_date = new Date(element.endDate);
+		var e_year = e_date.getFullYear();
+		var e_month = e_date.getMonth();
+	    var e_day= e_date.getDate();
+	    
+	    var s_time = element.cal_startTime.split(":");
+	    var s_hour = s_time[0] * 1;
+	    var s_minute = s_time[1] * 1;
+	    
+	    var e_time = element.cal_endTime.split(":");
+	    var e_hour = e_time[0] * 1;
+	    var e_minute = e_time[1] * 1;
+	    
+	 	calendar.addEvent({
+	 		id : element.cno,
+	 		groupId : element.groupId,
+			title : String(element.title), // 이벤트 제목
+			start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
+			end : new Date(e_year,e_month,e_day, e_hour, e_minute)
+		}); 
+	}
+	
+    // 일정 하나 정보 얻기
+	function getOne(cno) {
+		$.getJSON({
+  		  url:"/calendar/rest_get/" + cno,
+  		  type:"post",
+  		  success:function(data) {
+			console.log(data);
+			
+			getRepName(data.groupId, function(data) {
+				
+				var repNames = data.substring(0, data.lastIndexOf(','));
+				modalRep.val(repNames);
+			});
+			
+			modalTitle.val(data.title);
+			modalContent.val(data.content);
+			modalGroupId.val(data.groupId);
+			modalStart.val(data.startDate);
+			modalStartTime.val(data.cal_startTime);
+			modalEnd.val(data.endDate);
+			modalEndTime.val(data.cal_endTime);
+			
+			modalMemo.val(data.memo);
+			
+			// 수정, 삭제 버튼만 보이기
+			modalRegisterBtn.hide();
+			
+			modalModifyBtn.show();
+			modalRemoveBtn.show();
+			
+			modal.modal("show");
+		  }
+  	  })
+    } 
+    
+	 // 일정 담당자 이름, 부서명 가져오기
+    function getRepName(groupId, callback) {
+    	var repNames = "";
+    	console.log(groupId);
+    	$.ajax({
+    		url:"/calendar/rest_group/" + String(groupId),
+    		type:"POST",
+    		success:function(data) {
+    			console.log(data);
+    			console.log("enter getRepName");
+    			
+    			
+    			$.each(data, function(idx, element) {
+    				repNames += element.ename + "("+ element.dname + "), ";
+    			})
+    			
+    			if(callback) {
+    				callback(repNames);
+    			}
+    		}
+    	})
+    }
+	 
+	function insert() {
+    	// 담당자를 받아서 eno, bno 가져오기
+		var reps = modalRep.val();
+		var repSplit = reps.split(" ");
+		console.log(repSplit.length);
+		
+    	for(var i = 0; i < repSplit.length; i++) {
+			var rep = repSplit[i];
+			var ename = rep.substring(0,rep.lastIndexOf('('));
+			var dname = rep.substring(rep.lastIndexOf('(') + 1,rep.lastIndexOf(')'));
+			console.log(rep.substring(0,rep.lastIndexOf('(')));
+			console.log(rep.substring(rep.lastIndexOf('(') + 1,rep.lastIndexOf(')')));
+		    
+		    getRepNo(ename, dname, function(data) {
+		    	// 날짜 쪼개서 Date 객체 만들기
+				var mStart = modalStart.val();
+				var mStartTime = modalStartTime.val();
+				var mEnd = modalEnd.val();
+				var mEndTime = modalEndTime.val();
+				
+				var s_date = new Date(mStart);
+				var s_year = s_date.getFullYear();
+				var s_month = s_date.getMonth();
+			    var s_day= s_date.getDate();
+
+			    var e_date = new Date(mEnd);
+				var e_year = e_date.getFullYear();
+				var e_month = e_date.getMonth();
+			    var e_day= e_date.getDate();
+			    
+			    var s_time = mStartTime.split(":");
+			    var s_hour = s_time[0] * 1;
+			    var s_minute = s_time[1] * 1;
+			    
+			    var e_time = mEndTime.split(":");
+			    var e_hour = e_time[0] * 1;
+			    var e_minute = e_time[1] * 1;
+			    
+				var cal = {
+					eno:data.eno,
+					dno:data.dno,
+					title:modalTitle.val(),
+					content:modalContent.val(),
+					groupId:modalGroupId.val(),
+					startDate:modalStart.val(),
+					endDate:modalEnd.val(),
+					cal_startTime:modalStartTime.val(),
+					cal_endTime:modalEndTime.val(),
+					rep:modalRep.val(),
+					memo:modalMemo.val()
+				};
+				
+				$.ajax({
+					url:'/calendar/rest_new/',
+					type:'post',
+					contentType:'application/json',
+					data:JSON.stringify(cal),
+					success:function(result) {
+						console.log("ajax result 값 : "+result);
+						console.log("groupId 값 : "+ modalGroupId.val());
+						console.log(${login.eno});
+						if(${login.eno} == data.eno) {
+							calendar.addEvent({
+								id : result,
+								groupId : modalGroupId.val(),
+								title : String(modalTitle.val()), // 이벤트 제목
+								start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
+								end : new Date(e_year,e_month,e_day, e_hour, e_minute)
+							});
+						}
+					}
+				})
+			});
+		}
+	    
+		
+		modal.modal("hide");
+    }
+	
+	// 일정 담당자 이름, 부서명으로 사원번호, 부서번호 가져오기
+    function getRepNo(ename, dname, callback) {
+    	$.ajax({
+    		url:"/calendar/rest_no/" + String(ename) + "/" + String(dname),
+    		type:"POST",
+    		success:function(data) {
+    			
+    			if(callback) {
+    				callback(data);
+    			}
+    		}
+    	})
+    }
+	
+	function removeGroup(groupId) {
+		$.ajax({
+    		url:"/calendar/rest_delete/" + groupId,
+    		type:"DELETE",
+    		success:function(data) {
+    			console.log("success");
+    			
+    			modal.modal("hide");
+    			
+    			var events = calendar.getEvents();
+    			console.log(events);
+    			
+    			
+    			for(var i = 0; i < events.length; i++) {
+    				if(events[i]._def.groupId === groupId) {
+    					events[i].remove();
+    				}
+    			}
+    			//calendar.getEventById(cno).remove();
+    		}
+    	})
+	}
 	
   })
   

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
 <!-- Content Wrapper. Contains page content -->
@@ -17,7 +18,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/main/home">Home</a></li>
-              <li class="breadcrumb-item active">${vo.bno} 공지글</li>
+              <li class="breadcrumb-item active">${vo.bno}번 공지글</li>
             </ol>
           </div>
         </div>
@@ -33,28 +34,30 @@
           <div class="card card-primary card-outline">
   <!--          <form action="" method="post" role="form"> -->
             <div class="card-header">
-              <h3 class="card-title">작성일</h3>
-               <input class="form-control" name=""
-                     readonly="readonly" value="">
+              <h3 class="card-title">작성일
+               <fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.b_date}"/>
+              </h3>
+               <input class="form-control" name="b_date"
+                     readonly="readonly">
 
             </div>
               
                <div class="card-header">
               <h3 class="card-title">부  서</h3>
-                <input class="form-control" name=""
-                     readonly="readonly" value="">
+                <input class="form-control" name="dno"
+                     readonly="readonly" value="${vo.dno}">
               
             
             </div>
               <div class="card-header">
               <h1 class="card-title">작 성 자</h1>
-                <input class="form-control" name=""
-                     readonly="readonly" value="">
+                <input class="form-control" name="b_writer"
+                     readonly="readonly" value="${vo.b_writer}">
               
             
             </div>
              <div class="card-header">
-                <label>제 목</label> <input class="form-control" name="title">
+                <label>제 목</label> <input class="form-control" name="b_title" value="${vo.b_title}">
             
             </div>
             <!-- /.card-header -->
@@ -64,9 +67,8 @@
               
               <!-- /.mailbox-controls -->
               <div class="mailbox-read-message">
-            <textarea class="form-control" rows="3" name="content">1. 공지사항
-
-            </textarea>
+            <textarea class="form-control" rows="3" name="b_content">${vo.b_contents}
+			</textarea>
                 
               </div>
               <!-- /.mailbox-read-message -->
@@ -89,17 +91,11 @@
               
               <div class="mailbox-controls with-border text-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm" data-container="body" title="Reply">
-                    <i class="fas fa-reply">이전 글</i>
-                  </button>
-            
+                 
                   <button type="button" class="btn btn-default btn-sm" data-container="body" title="list">
                     <i class="fas fa-list"><a href="/board/boardMain">목 록</a></i>
                      </button>
-                  <button type="button" class="btn btn-default btn-sm" data-container="body" title="Forward">
-                    <i class="fas fa-share">다음 글</i>
-                  </button>
-
+                  
                 </div>
               </div>
             </div>
@@ -108,7 +104,7 @@
              </form>
               <div class="card-footer">
                 <div class="float-right">
-                     <button type="submit" class="btn btn-primary"></i>수정</button>
+                     <button type="submit" class="btn btn-primary">수정</button>
                    <button type="reset" class="btn btn-danger">취소</button>
                 </div>
               </div>
