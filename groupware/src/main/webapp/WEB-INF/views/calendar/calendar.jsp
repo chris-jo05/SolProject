@@ -491,7 +491,7 @@
   		  success:function(data) {
 			console.log(data);
 			
-			getRepName(data.title, function(data) {
+			getRepName(data.groupId, function(data) {
 				
 				var repNames = data.substring(0, data.lastIndexOf(','));
 				modalRep.val(repNames);
@@ -519,11 +519,11 @@
     } 
     
 	 // 일정 담당자 이름, 부서명 가져오기
-    function getRepName(title, callback) {
+    function getRepName(groupId, callback) {
     	var repNames = "";
-    	console.log(title);
+    	console.log(groupId);
     	$.ajax({
-    		url:"/calendar/rest_ename/" + String(title),
+    		url:"/calendar/rest_group/" + String(groupId),
     		type:"POST",
     		success:function(data) {
     			console.log(data);
@@ -541,7 +541,7 @@
     	})
     }
 	 
-	function insert(repSplit) {
+	function insert() {
     	// 담당자를 받아서 eno, bno 가져오기
 		var reps = modalRep.val();
 		var repSplit = reps.split(" ");

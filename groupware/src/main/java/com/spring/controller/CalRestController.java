@@ -50,11 +50,11 @@ public class CalRestController {
 			new ResponseEntity<Integer>(vo.getCno(),HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@PostMapping("/rest_ename/{title}")
-	public ResponseEntity<List<CalendarRepEmpVO>> getRepName(@PathVariable("title") String title) {
-		log.info("일정 담당자 이름 가져오기" + title);
+	@PostMapping("/rest_group/{groupId}")
+	public ResponseEntity<List<CalendarRepEmpVO>> getRepName(@PathVariable("groupId") String groupId) {
+		log.info("일정 담당자 이름 가져오기" + groupId);
 		
-		return new ResponseEntity<List<CalendarRepEmpVO>>(service.getRepName(title),HttpStatus.OK);
+		return new ResponseEntity<List<CalendarRepEmpVO>>(service.getRepName(groupId),HttpStatus.OK);
 	}
 	
 	@PostMapping("/rest_no/{ename}/{dname}")

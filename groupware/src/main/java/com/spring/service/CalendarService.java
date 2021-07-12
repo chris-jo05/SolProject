@@ -11,6 +11,6 @@ public interface CalendarService {
 	public CalendarVO get(int cno);
 	public boolean insert(CalendarVO vo);
 	public boolean delete(String groupId);
-	public List<CalendarRepEmpVO> getRepName(String title);
+	public List<CalendarRepEmpVO> getRepName(String groupId);
 	public CalendarRepEmpVO getRepNo(CalendarRepEmpVO vo);
 }

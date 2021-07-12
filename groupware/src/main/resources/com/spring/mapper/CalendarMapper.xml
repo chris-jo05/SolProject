@@ -16,7 +16,7 @@
 	<select id="getRepName" resultType="com.spring.domain.CalendarRepEmpVO">
 		select e.eno, d.dno, e.ename, d.dname
 		from calendar, emp e, dept d
-		where calendar.eno = e.eno and d.dno = e.dno and title=#{title}
+		where calendar.eno = e.eno and d.dno = e.dno and groupId=#{groupId}
 	</select>
 	
 	<!-- 일정 삽입 -->

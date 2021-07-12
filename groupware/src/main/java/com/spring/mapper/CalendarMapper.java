@@ -13,6 +13,6 @@ public interface CalendarMapper {
 	public CalendarVO get(int cno);
 	public int insert(CalendarVO vo);
 	public int delete(String groupId);
-	public List<CalendarRepEmpVO> getRepName(String title);
+	public List<CalendarRepEmpVO> getRepName(String groupId);
 	public CalendarRepEmpVO getRepNo(CalendarRepEmpVO vo);
 }

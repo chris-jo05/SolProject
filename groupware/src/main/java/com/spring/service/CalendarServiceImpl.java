@@ -37,8 +37,8 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 	
 	@Override
-	public List<CalendarRepEmpVO> getRepName(String title) {
-		return mapper.getRepName(title);
+	public List<CalendarRepEmpVO> getRepName(String groupId) {
+		return mapper.getRepName(groupId);
 	}
 	
 	@Override
