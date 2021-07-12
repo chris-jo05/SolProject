@@ -104,7 +104,7 @@
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">기안자</label>
 											<div class="col">
-												<input type="email" class="form-control" id="colFormLabel" placeholder="" disabled>
+												<input type="email" class="form-control" id="colFormLabel" placeholder="" value="${login.ename}" disabled>
 											</div>
 										</div>
 									</div>
