@@ -168,9 +168,9 @@
 							
 								
 								<li class="nav-item">
-									<a href="/calendar/calendar" class="nav-link">
+									<a href="#" onclick=" location.href= '/calendar/calendar?eno='+ '${login.eno}'" class="nav-link">
 										<i class="nav-icon far fa-calendar-alt"></i>
-											<p>일정 <span class="badge badge-info right">2</span>
+											<p>일정 <span class="badge badge-info right">${login.eno}</span>
 											</p>
 									</a>
 								</li>
