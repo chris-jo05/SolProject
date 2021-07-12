@@ -36,76 +36,109 @@
                 <h3 class="card-title">사원 추가 하기</h3>
               </div>
               <!-- /.card-header -->
-              <form action="" method="">
+              <form action="" method="post" >
 	              <div class="card-body">
 	                <h4>사원 정보</h4>
 	                <br/>
 	                <div class="form-group">
-	                  <label for="exampleInputBorderWidth2">사원 이름</label>
-	                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="이름을 작성해 주세요.">
+	                  <label for="ename">사원 이름</label>
+	                  <input 
+	                  type="text" 
+	                  name="ename"
+	                  id="ename" 
+	                  class="form-control form-control-border border-width-2" 
+	                  placeholder="이름을 작성해 주세요.">
 	                </div>
 	                
 	                <div class="form-group">
-	                  <label for="exampleSelectBorder">부서 명</label>
-	                  <select class="custom-select form-control-border" id="exampleSelectBorder">
-	                    <option>인사팀</option>
-	                    <option>관리팀</option>
-	                    <option>영업팀</option>
+	                  <label for="exampleSelectBorder">부서명</label>
+	                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="dname">
+	                    <option value="인사팀">인사팀</option>
+	                    <option value="관리팀">관리팀</option>
+	                    <option value="영업팀">영업팀</option>
 	                  </select>
 	                </div>
 	                 
 	                <div class="form-group">
 	                  <label for="exampleSelectBorderWidth2">직 급</label>
-	                  <select class="custom-select form-control-border border-width-2" id="exampleSelectBorderWidth2">
-	                    <option>사원</option>
-	                    <option>주임</option>
-	                    <option>대리</option>
-	                    <option>과장</option>
-	                    <option>부장</option>
+	                  <select class="custom-select form-control-border border-width-2" id="exampleSelectBorderWidth2" name="position">
+	                    <option value="사원">사원</option>
+	                    <option value="주임">주임</option>
+	                    <option value="대리">대리</option>
+	                    <option value="과장">과장</option>
+	                    <option value="부장">부장</option>
 	                  </select>
 	                </div>
 	                <div class="form-group">
 	                  <label for="exampleInputBorderWidth2">생년 월일</label>
-	                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="사원의 생일을 작성해 주세요.(ex:19970815)">
+	                  <input 
+	                  type="text" 
+	                  class="form-control form-control-border border-width-2" 
+	                  id="exampleInputBorderWidth2" 
+	                  placeholder="사원의 생일을 작성해 주세요.(ex:19970815)"
+	                  name="birthday">
 	                </div>
 	                <div class="form-group">
 	                  <label for="exampleInputBorderWidth2">전화 번호</label>
-	                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="휴대폰 번호를 입력해 주세요.(010-1234-1234)">
+	                  <input 
+	                  type="text" 
+	                  class="form-control form-control-border border-width-2" 
+	                  id="exampleInputBorderWidth2" 
+	                  placeholder="휴대폰 번호를 입력해 주세요.(010-1234-1234)"
+	                  name="mobile">
 	                </div>
 	                <div class="form-group">
 	                  <label for="exampleInputBorderWidth2">이메일</label>
-	                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="이메일 주소를 입력해 주세요.">
+	                  <input 
+	                  type="text" 
+	                  class="form-control form-control-border border-width-2" 
+	                  id="exampleInputBorderWidth2" 
+	                  placeholder="이메일 주소를 입력해 주세요."
+	                  name="id">
 	                </div>
 	                <div class="form-group">
 	                  <label for="exampleInputBorderWidth2">비밀 번호</label>
-	                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="사용하실 비밀번호를 입력해 주세요.">
+	                  <input 
+	                  type="password" 
+	                  class="form-control form-control-border border-width-2" 
+	                  id="exampleInputBorderWidth2" 
+	                  placeholder="사용하실 비밀번호를 입력해 주세요."
+	                  name="password">
 	                </div>
 	                <div class="form-group">
 	                  <label for="exampleInputBorderWidth2">주소</label>
-	                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="주소를 입력해주세요.">
+	                  <input 
+	                  type="text" 
+	                  class="form-control form-control-border border-width-2" 
+	                  id="exampleInputBorderWidth2" 
+	                  placeholder="주소를 입력해주세요."
+	                  name="address">
 	                </div>
 	                <div class="form-group">
 	                  <label>입사일</label>
-	                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-	                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
-	                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-	                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+	                    <div>
+	                        <input type="date" 
+	                        class="date"
+	                        name="hireDate"/>
 	                        </div>
 	                    </div>
-	                </div>
-	                <div class="form-group">
+	                
+	                 <!-- <div class="form-group">
 	                  <label>퇴사일</label>
 	                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-	                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+	                        <input type="text" 
+	                        class="form-control datetimepicker-input" 
+	                        data-target="#reservationdate"
+	                        name="leaveDate"/>
 	                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
 	                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-	                        </div>
+	                        </div> 
 	                    </div>
-	                </div>
+	                </div>  -->
 	                
 	                <div class="form-group">
 	                  <label for="exampleSelectBorderWidth2">은 행</label>
-	                  <select class="custom-select form-control-border col-md-3" id="exampleSelectBorderWidth2">
+	                  <select class="custom-select form-control-border col-md-3" id="exampleSelectBorderWidth2" name="acou_name">
 	                  	  <option>카카오 은행</option>
 	                      <option>국민 은행</option>
 	                      <option>신한 은행</option>
@@ -115,16 +148,16 @@
 	                </div>
 	                <div class="form-group">
 	                  <label for="exampleInputBorderWidth2">계좌번호</label>
-	                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="계좌번호를 입력해주세요.(78945-12-45646789)">
+	                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="계좌번호를 입력해주세요.(78945-12-45646789)" name="account">
 	                </div>
 	                <div class="form-group">
-	                	<label for="exampleInputBorderWidth2">성 별</label>
+	                	<label for="exampleInputBorderWidth2" name="gender">성 별</label>
 	                	<div>
 	                  <label class="btn btn-primary">
-	                    <input type="radio" name="gender" id="option_b2" autocomplete="off"> 남 자
+	                    <input type="radio" name="gender" id="option_b2"  value="남자"> 남 자
 	                  </label>
 	                  <label class="btn btn-danger">
-	                    <input type="radio" name="gender" id="option_b3"> 여 자
+	                    <input type="radio" name="gender" id="option_b3" value="여자"> 여 자
 	                  </label>
 	                	</div>
 	                </div>

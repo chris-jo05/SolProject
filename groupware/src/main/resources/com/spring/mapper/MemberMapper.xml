@@ -7,8 +7,13 @@
 		select * from emp e, dept d where e.dno = d.dno and id=#{id} and password=#{password}
 	</select>
 	
+	<insert id="insert">
+	insert into emp(ename, position, dno, birthday, address, mobile, hiredate, acou_name, acount, id, password, gender)
+	values(#{ename},#{position},(select dno from dept where dname=#{dname}),#{birthday},#{address},#{mobile},to_date(#{hireDate}),#{acou_name},#{account},#{id},#{password},#{gender})
+	</insert>
 	
-	
-	
+	<select id="list" resultType="com.spring.domain.MemberVo">
+	select * from emp where eno>0 order by eno desc, hiredate desc
+	</select>
 	
 </mapper>
