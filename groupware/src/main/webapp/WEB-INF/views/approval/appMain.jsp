@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="../includes/header.jsp"%>
 
 <!-- DataTables -->
@@ -59,45 +60,17 @@
 							</thead>
 
 							<tbody>
-								<tr>
-									<td>2021-07-001</td>
-									<td>기안서</td>
-									<td>신규 개발 기안서</td>
-									<td>21/07/03 09:48</td>
-									<td>개발 1팀</td>
-									<td>박진우</td>
-									<td>결재완료</td>
-								</tr>
-
-								<tr>
-									<td>2021-07-002</td>
-									<td>보고서</td>
-									<td>신규 개발 보고서</td>
-									<td>21/07/04 11:27</td>
-									<td>개발 1팀</td>
-									<td>박진우</td>
-									<td>진행중</td>
-								</tr>
-
-								<tr>
-									<td>2021-07-003</td>
-									<td>사직서</td>
-									<td>사직서 (21.07.05 개발 1팀 박진우)</td>
-									<td>21/07/05 09:48</td>
-									<td>개발 1팀</td>
-									<td>박진우</td>
-									<td>반려</td>
-								</tr>
-
-								<tr>
-									<td>2021-07-004</td>
-									<td>휴가신청서</td>
-									<td>휴가신청서 (21.07.05 개발 1팀 박진우)</td>
-									<td>21/07/05 10:14</td>
-									<td>개발 1팀</td>
-									<td>박진우</td>
-									<td>상신</td>
-								</tr>
+								<c:forEach var="vo" items="${approvalList}">
+									<tr>
+										<td>${vo.docNo}</td>
+										<td>${vo.docClass}</td>
+										<td>${vo.docTitle}</td>
+										<td>${vo.docDate}</td>
+										<td>${vo.dno}</td>
+										<td>${vo.eno}</td>
+										<td></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
