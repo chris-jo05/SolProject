@@ -11,14 +11,32 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
-	<context:component-scan base-package="com.spring.service"/>
-	<mybatis-spring:scan base-package="com.spring.mapper"/>
+	<!-- 서비스 설정 -->
+	<context:component-scan base-package="com.spring" >
+		<!-- <context:include-filter type="annotation" expression="com.spring.board.service"/>
+		<context:include-filter type="annotation" expression="com.spring.mail.service"/>
+		<context:include-filter type="annotation" expression="com.spring.calendar.service"/>
+		<context:include-filter type="annotation" expression="com.spring.member.service"/>
+		<context:include-filter type="annotation" expression="com.spring.approval.service"/> -->
+	</context:component-scan>
+	
+	<!-- mapper 설정 -->
+	<mybatis-spring:scan base-package="com.spring.approval.mapper" />
+	<mybatis-spring:scan base-package="com.spring.board.mapper"/>
+	<mybatis-spring:scan base-package="com.spring.calendar.mapper"/>
+	<mybatis-spring:scan base-package="com.spring.mail.mapper"/>
+	<mybatis-spring:scan base-package="com.spring.member.mapper"/>
 	
 	<!-- Connection Pool 설정 -->
 	<bean id="ds" class="oracle.ucp.jdbc.PoolDataSourceImpl">
+<<<<<<< HEAD
 		<property name="connectionFactoryClassName" value="oracle.jdbc.pool.OracleDataSource"/>
 		
 		<property name="URL" value="jdbc:oracle:thin:@sol_medium?TNS_ADMIN=C:/sqldriver/Wallet_Sol"/>
+=======
+		<property name="connectionFactoryClassName" value="oracle.jdbc.pool.OracleDataSource"/>		
+		<property name="URL" value="jdbc:oracle:thin:@sol_medium?TNS_ADMIN=c:/sqldriver/Wallet_Sol"/>
+>>>>>>> branch 'master' of https://github.com/chris-jo05/SolProject.git
 		<property name="user" value="admin"/>
 		<property name="password" value="1q2w3e$R!@#$"/>
 		<property name="maxPoolSize" value="20" />
@@ -28,6 +46,7 @@
 	<!-- Mybatis 설정 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds"/>
+		<property name="mapperLocations" value="classpath:/com/spring/**/mapper/*.xml"/>
 	</bean>
 	
 	<!-- 트랜잭션 -->
