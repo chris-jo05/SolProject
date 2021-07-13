@@ -86,7 +86,4 @@ public class CalRestController {
 		return new ResponseEntity<List<String>>(service.emp_list(dname), HttpStatus.OK);
 	}
 	
-	
-	
-	
 }
