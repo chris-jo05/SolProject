@@ -486,19 +486,28 @@
 	
 	// 일정 삭제 버튼
 	$("#modalRemoveBtn").click(function(){
-		var groupId = modalSelectedGroup.val();
-		console.log('remove clicked ' + groupId);
-		
-		removeGroup(groupId);
-	})
-	
-	$("#modalModifyEnterBtn").click(function() {
-		modalSelectRep.show();
-		modalModifyEnterBtn.hide();
-		modalModifyBtn.show();
+		if(modalEmpAuth.val() !== "${login.ename}") {
+			alert("권한자가 아닙니다.");
+		} else {
+			var groupId = modalSelectedGroup.val();
+			console.log('remove clicked ' + groupId);
+			
+			removeGroup(groupId);
+		}
 	})
 	
 	// 일정 수정 버튼
+	$("#modalModifyEnterBtn").click(function() {
+		if (modalEmpAuth.val() !== "${login.ename}") {
+			alert("권한자가 아닙니다.");
+		} else {
+			modalSelectRep.show();
+			modalModifyEnterBtn.hide();
+			modalModifyBtn.show();
+		}
+	})
+	
+	// 일정 수정 확인 버튼
 	$("#modalModifyBtn").click(function() {
 		var groupId = modalSelectedGroup.val();
 		console.log('remove clicked ' + groupId);
