@@ -70,7 +70,7 @@
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">문서번호</label>
 											<div class="col">
-												<input type="email" class="form-control" id="colFormLabel" placeholder="기본채번" disabled>
+												<input type="text" class="form-control" id="colFormLabel" placeholder="기본채번" disabled>
 											</div>
 										</div>
 									</div>
@@ -79,9 +79,7 @@
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">기안일자</label>
 											<div class="col">
-												<div class="input-group date" id="datetimepicker5" data-target-input="nearest">
-													<input type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5" />
-												</div>
+												<input name="docDate" type="text" class="form-control datetimepicker-input" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker" />
 											</div>
 										</div>
 									</div>
@@ -90,7 +88,7 @@
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">기안부서</label>
 											<div class="col">
-												<input type="email" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled>
+												<input name="dno" type="text" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled>
 											</div>
 										</div>
 									</div>
@@ -99,7 +97,7 @@
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">기안자</label>
 											<div class="col">
-												<input type="email" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled>
+												<input name="eno" type="text" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled>
 											</div>
 										</div>
 									</div>
@@ -110,13 +108,12 @@
 										<tbody>
 											<tr style="height: 0">
 												<td class="text-center align-middle" rowspan="2" style="width: 10%;">
-													<b>결<br>제
-													</b>
+													<b>결<br>제</b>
 												</td>
-												<td>대리</td>
-												<td>과장</td>
-												<td>차장</td>
-												<td>부장</td>
+												<td style="width: 22.5%;"></td>
+												<td style="width: 22.5%;"></td>
+												<td style="width: 22.5%;"></td>
+												<td style="width: 22.5%;"></td>
 											</tr>
 
 											<tr>
@@ -128,13 +125,12 @@
 
 											<tr style="height: 0">
 												<td class="text-center align-middle" rowspan="2" style="width: 10%;">
-													<b>합<br>의
-													</b>
+													<b>합<br>의</b>
 												</td>
-												<td>대리</td>
-												<td>과장</td>
-												<td>차장</td>
-												<td>부장</td>
+												<td style="width: 22.5%;"></td>
+												<td style="width: 22.5%;"></td>
+												<td style="width: 22.5%;"></td>
+												<td style="width: 22.5%;"></td>
 											</tr>
 
 											<tr>
@@ -152,13 +148,7 @@
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">수신 및 참조</label>
 											<div class="col">
-												<select class="select2" multiple="multiple" data-placeholder="부서 선택" style="width: 100%;">
-													<option>부서 1</option>
-													<option>부서 2</option>
-													<option>부서 3</option>
-													<option>부서 4</option>
-													<option>부서 5</option>
-												</select>
+												<input name="" type="text" class="form-control" id="colFormLabel" placeholder="부서선택">
 											</div>
 										</div>
 									</div>
@@ -167,7 +157,7 @@
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">제목</label>
 											<div class="col">
-												<input type="" class="form-control" id="appSubtitle" placeholder="제목 입력">
+												<input name="docTitle" type="text" class="form-control" id="appSubtitle" placeholder="제목 입력">
 											</div>
 										</div>
 									</div>
@@ -176,7 +166,7 @@
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">내용</label>
 											<div class="col">
-												<textarea id="summernote"><br><br><br><br><br><br><br><br><br><br></textarea>
+												<textarea name="docContent" id="summernote"><br><br><br><br><br><br><br><br><br><br></textarea>
 											</div>
 										</div>
 									</div>
@@ -229,13 +219,10 @@
 		// Summernote
 		$('#summernote').summernote()
 
-		//Date and time picker
-		$('#datetimepicker5').datetimepicker({
-			locale : 'ko'
+		// Date and Time picker
+		$('#datetimepicker').datetimepicker({
+			format : 'YYYY.MM.DD'
 		});
-
-		// Date range picker
-		$('#reservation').daterangepicker()
 
 		// Initialize Select2 Elements
 		$('.select2').select2()
