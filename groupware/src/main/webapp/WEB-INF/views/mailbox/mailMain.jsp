@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@include file="../includes/header.jsp" %>
 
 	<!-- Content Wrapper. Contains page content -->
@@ -51,13 +52,14 @@
               <!-- /.card-tools -->
             </div>
             <!-- /.card-header -->
+            <form action="" method="post">
             <div class="card-body p-0">
               <div class="mailbox-controls">
                 <!-- Check all button -->
                 <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
                 </button>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm">
+                  <button type="button" class="btn btn-default btn-sm delete-mail" >
                     <i class="far fa-trash-alt"></i>
                   </button>
                 </div>
@@ -86,16 +88,16 @@
     	             <tr>
         	            <td>
             	         <div class="icheck-primary">
-                	        <input type="checkbox" value="" id="check2">
-                    	    <label for="check2"></label>
+                	        <input type="checkbox" value="${vo.m_no}" id="check${vo.m_no}" name="forDelete">
+                    	    <label for="check${vo.m_no}"></label>
                  	     </div>
                	     	</td>
               	      	<td class="mailbox-star"><a href="#"><i class="fas fa-star-o text-warning"></i></a></td>
-              	      	<td class="mailbox-name"><a href="/mailbox/readMail?m_no=${vo.m_no}">
+              	      	<td class="mailbox-name"><a href="/mailbox/mailWriteAgain" value="${vo.m_id}">
               	      				${vo.m_id} (${vo.m_writer})</a></td>
-              	    	<td class="mailbox-subject"> ${vo.m_title}</td>
+              	    	<td class="mailbox-subject"><a href="/mailbox/readMail?m_no=${vo.m_no}"> ${vo.m_title}</a></td>
                	    	<td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
-               	     	<td class="mailbox-date">${vo.m_sendDate}</td>
+               	     	<td class="mailbox-date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.m_sendDate}"/></td>
 	                  </tr>
                   </c:forEach>
                   
@@ -107,6 +109,7 @@
               <!-- /.mail-box-messages -->
             </div>
             <!-- /.card-body -->
+            </form>
             <div class="card-footer p-0">
               <div class="mailbox-controls">
                 <!-- Check all button -->
@@ -114,15 +117,10 @@
                   <i class="far fa-square"></i>
                 </button>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm">
+                  <button type="button" class="btn btn-default btn-sm delete-mail">
                     <i class="far fa-trash-alt"></i>
                   </button>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-reply"></i>
-                  </button>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-share"></i>
-                  </button>
+                  
                 </div>
                 <!-- /.btn-group -->
                 <button type="button" class="btn btn-default btn-sm">
@@ -152,10 +150,37 @@
     </section>
     <!-- /.content -->
   </div>
+  
   <!-- /.content-wrapper -->
-
+<form action="" id="operForm" method="post" >
+	
+</form>
 <script>
+
   $(function () {
+	
+	var checkBoxArr = new Array();
+		
+	var operForm = $("#operForm");
+	
+	  
+	$(".delete-mail").click(function(e){
+		e.preventDefault();
+		
+		var str="";
+		
+	    $('input[name="forDelete"]:checked').each(function (idx) {
+   		    
+	    	str+="<input type='hidden' name='mNoList["+idx+"].m_no' value='"+$(this).val()+"'>";
+   		});	  
+		
+		
+	    operForm.append(str);
+		operForm.attr('action','/mailbox/removeMailList');
+		
+		operForm.submit();
+	})
+	
     //Enable check and uncheck all functionality
     $('.checkbox-toggle').click(function () {
       var clicks = $(this).data('clicks')

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mail.mapper.MailBeanMapper">
+	
+	<!-- 메일함 휴지통에 대한 SQL -->
+	
+	<!-- 휴지통에 넣기 -->
+	<insert id="beanInMail">
+		insert into e_mail_bean select * from e_mail where m_no=#{m_no}
+	</insert>
+	
+	<update id="insertInBean" parameterType="java.util.List">
+		insert into e_mail_bean 
+		<foreach collection="mNoList" item="item" separator="union all" open="" close="">
+			(select * from e_mail where m_no=#{item.m_no})
+		</foreach>
+	</update>
+	
+	<!-- 휴지통에 있는 메일 리스트 가져오기 -->
+	<select id="beanListMail" resultType="com.spring.mail.domain.MailBoardVo">
+		select * from e_mail_bean where e_id=#{e_id} order by m_senddate desc, m_no desc
+	</select>
+
+	<!-- 메일 하나 읽기 -->
+	<select id="beanReadMail" resultType="com.spring.mail.domain.MailBoardVo">
+		select * from e_mail_bean where m_no=#{m_no}
+	</select>
+	
+	
+</mapper>

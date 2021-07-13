@@ -41,7 +41,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <form action="" mehtod="post">
+              <form action="" method="post">
                 <div class="form-group">
                   <input class="form-control" placeholder="To:" name="e_id">
                 </div>
@@ -54,25 +54,26 @@
                       
                     </textarea>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <div class="btn btn-default btn-file">
                     <i class="fas fa-paperclip"></i> 파일 첨부
                     <input type="file" name="attachment">
                   </div>
                   <p class="help-block">Max. 32MB</p>
-                </div>
-				</form>
+                </div> -->
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
                 <div class="float-right">
-                  	<button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> 보내기</button>
-	                <button type="reset" class="btn btn-danger"><i class="fas fa-times"></i> 취소하기</button>
-                </div>
+	               <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> 보내기</button>
+		           <button type="reset" class="btn btn-danger" onclick="location.href='/mailbox/mailMain'"><i class="fas fa-times"></i>취소하기</button>
+	            </div>
               </div>
               <!-- /.card-footer -->
               <input type="hidden" name="m_writer" value="${login.ename}" />	<!-- 메일 보낸 사람담기 -->
 	          <input type="hidden" name="m_id" value="${login.id}" /> 		<!-- 메일 보낸 사람 아이디 담기 -->
+	          <input type="hidden" name="eno" value="${login.eno}" />
+			</form>
             </div>
             <!-- /.card -->
           </div>
@@ -85,8 +86,6 @@
   </div>
   <!-- /.content-wrapper -->
 	
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- 사이드바 등장관련 js -->
