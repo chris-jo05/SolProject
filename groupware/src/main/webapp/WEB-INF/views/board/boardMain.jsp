@@ -80,17 +80,17 @@
                      <div class="text-center">
                             <ul class="pagination">
                             	<c:if test="${pageVO.prev}">
-                            		<li class="paginate_button previous"><a href="${pageVO.startPage-1}">이전</a></li>
+                            		<li class="paginate_button previous"><a class="page-link"  href="${pageVO.startPage-1}">이전</a></li>
                  				</c:if>          		
                             		
                             	<c:forEach var="idx" begin="${pageVO.startPage}" end="${pageVO.endPage}">
                             		<li class="paginate_button ${pageVO.cri.pageNum==idx?'active':''}">
-                            			<a href="${idx}">${idx}</a>
+                            			<a class="page-link" href="${idx}">${idx}</a>
                             		</li>
                             	</c:forEach>
                             	<!-- 다음 페이지 -->
                             	<c:if test="${pageVO.next}">
-                            		<li class="paginate_button next"><a href="${pageVO.endPage+1}">다음</a></li>
+                            		<li class="paginate_button next"><a class="page-link" href="${pageVO.endPage+1}">다음</a></li>
                             	</c:if> 
                             		
                             </ul>

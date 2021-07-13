@@ -45,6 +45,19 @@ public class BoardController {
 		model.addAttribute("vo", vo); // /board/read or /board/modify
 	}
 	
+	@PostMapping("/boardModify")
+	public String modifyPost(BoardVO vo,Criteria cri,RedirectAttributes rttr) {
+		
+		log.info("수정요청~~~");
+		
+		service.update(vo);
+		rttr.addFlashAttribute("result","성공");
+		
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		
+		return "redirect:boardMain";
+	}
 	
 
 	@GetMapping("/boardWriter")

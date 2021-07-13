@@ -31,20 +31,20 @@
         <div class="row">
           <!-- /.col -->
         <div class="col-md-9">
+ 			<form action="" method="post" role="form"> 
           <div class="card card-primary card-outline">
-  <!--          <form action="" method="post" role="form"> -->
             <div class="card-header">
-              <h3 class="card-title">작성일
-               <fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.b_date}"/>
-              </h3>
-               <input class="form-control" name="b_date"
-                     readonly="readonly">
-
+              <h3 class="card-title">작성일</h3>
+              <input type="date" class="form-control" 
+                     readonly="readonly" value="<fmt:formatDate pattern='yyyy-MM-dd'  value='${vo.b_date}'/>" >
+              
+             
+				
             </div>
               
                <div class="card-header">
               <h3 class="card-title">부  서</h3>
-                <input class="form-control" name="dno"
+                <input class="form-control" 
                      readonly="readonly" value="${vo.dno}">
               
             
@@ -101,14 +101,14 @@
             </div>
             <!-- /.card-footer -->
             
-             </form>
               <div class="card-footer">
                 <div class="float-right">
-                     <button type="submit" class="btn btn-primary">수정</button>
+                     <button type="submit" class="btn btn-primary" data-oper='modify'>수정</button>
                    <button type="reset" class="btn btn-danger">취소</button>
                 </div>
               </div>
           </div>
+             </form>
           <!-- /.card -->
         </div>
         <!-- /.col -->
@@ -119,5 +119,13 @@
  
     <!-- /.content -->
   </div>
+  <form action="boardModfy" method="post" id="operForm">
+<%--    <input type="hidden" name="type" value="${cri.type}" />
+   <input type="hidden" name="keyword" value="${cri.keyword}" />
+   <input type="hidden" name="pageNum" value="${cri.pageNum}" />
+   <input type="hidden" name="amount" value="${cri.amount}" />    --%>
+<input type="hidden" name="bno"  value="${vo.bno}"/>
+</form> 
   <!-- /.content-wrapper -->
+
 <%@include file="../includes/footer.jsp" %>

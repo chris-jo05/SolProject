@@ -32,15 +32,17 @@
 		select * from board where
 		bno=#{bno}
 	</select>
+	
 	<!-- 공지글 삭제하기 -->
 	<delete id="delete">
 		delete from board where bno=#{bno}
 	</delete>
+	
 	<!-- 공지글 수정하기 -->
 	<update id="update">
 		update board
 		set
-		b_title=#{title},b_content=#{b_content},b_updatedate=sysdate
+		b_title=#{b_title},b_content=#{b_content},b_updatedate=sysdate
 		where
 		bno=#{bno}
 	</update>
