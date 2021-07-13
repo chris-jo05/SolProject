@@ -128,24 +128,52 @@
         		<input type="text" name="groupId" class="form-control" value=""/>
         	</div>
         	<div class="form-group">
-        		<label for="">일정 시작일</label>
+        		<label for="">일정 시작일 [YYYY-MM-DD] </label>
         		<input type="text" name="start" class="form-control" value=""/>
         	</div>
         	<div class="form-group">
-        		<label for="">일정 시작시간</label>
+        		<label for="">일정 시작시간 [HH:mm:SS]</label>
         		<input type="text" name="startTime" class="form-control" value=""/>
         	</div>
         	<div class="form-group">
-        		<label for="">일정 종료일</label>
+        		<label for="">일정 종료일 [YYYY-MM-DD]</label>
         		<input type="text" name="end" class="form-control" value=""/>
         	</div>
         	<div class="form-group">
-        		<label for="">일정 종료시간</label>
+        		<label for="">일정 종료시간 [HH:mm:SS]</label>
         		<input type="text" name="endTime" class="form-control" value=""/>
         	</div>
         	<div class="form-group">
         		<label for="">일정 담당자</label>
-        		<input type="text" name="rep" class="form-control" value=""/>
+        		<div class="" style="">
+        			<div class="col-lg-5" style="float: left;margin-bottom: 10px; margin-left: 6px">
+	        			<select name="dept" id="dept" class="form-control" >
+		                	<option value="empty">----------</option>
+		             	</select>
+	        		</div>
+	        		<div class="col-lg-5" style="float: left; margin-right: 6px">
+	        			<select name="emp" id="emp" class="form-control" >
+		                	
+		             	</select>
+	        		</div>
+	        		<button name="rep-btn" type="button" class="btn btn-primary" style="float: left">확인</button>
+        		</div>
+        		 <input type="textarea" name="rep" class="form-control" value=""/>
+        	</div>
+        	<div class="form-group">
+        		<label for="">일정 권한자</label>
+        		<div class="" style="">
+        			<div class="col-lg-6" style="float: left;margin-bottom: 10px;">
+	        			<select name="dept_auth" id="dept_auth" class="form-control" >
+		                	<option value="empty">----------</option>
+		             	</select>
+	        		</div>
+	        		<div class="col-lg-6" style="float: left; margin-bottom: 10px;">
+	        			<select name="emp_auth" id="emp_auth" class="form-control" >
+		                	
+		             	</select>
+	        		</div>
+        		</div>
         	</div>
         	<div class="form-group">
         		<label for="">비고</label>
@@ -191,6 +219,8 @@
   var modalEndTime = modal.find("input[name='endTime']");
   var modalRep = modal.find("input[name='rep']");
   var modalMemo = modal.find("input[name='memo']");
+  var modalDeptAuth = modal.find("select[name=dept_auth]");
+  var modalEmpAuth = modal.find("select[name=emp_auth]");
   
   //모달 영역 안에 있는 버튼 가져오기
   var modalModifyBtn = $("#modalModifyBtn");
@@ -409,23 +439,44 @@
 					view(element);
 				})
 			}
-		});
+	});
+    
+    // 일정 담당, 권한 부분의 dept 옵션 넣어주기
+    $.getJSON({
+    	url:"/calendar/rest_dept",
+    	type:"POST",
+    	success:function(data) {
+    		var options = "";
+    		
+    		$.each(data, function(idx, element) {
+    			console.log(idx);
+				options += "<option value=" + element + ">" + element + "</option>";
+			})
+			
+			$("select[name='dept']").append(options);
+		    
+			$("select[name='dept_auth']").append(options);
+    	}
+    })
 	
     // 일정 작성 버튼 클릭
     $("#submit").click(function () {
     	//input안에 들어있는 value 제거
     	modal.find("input").val("");
     	
-    	modal.find("button[id!='modalCloseBtn']").hide();
+    	modalModifyBtn.hide();
+		modalRemoveBtn.hide();
 		modalRegisterBtn.show();
     	
     	modal.modal("show");
 	})
 	
+	// 일정 등록 버튼
 	$("#modalRegisterBtn").click(function () {
 		insert();
 	})
 	
+	// 일정 삭제 버튼
 	$("#modalRemoveBtn").click(function(){
 		var groupId = modalSelectedGroup.val();
 		console.log('remove clicked ' + groupId);
@@ -433,6 +484,7 @@
 		removeGroup(groupId);
 	})
 	
+	// 일정 수정 버튼
 	$("#modalModifyBtn").click(function() {
 		var groupId = modalSelectedGroup.val();
 		console.log('remove clicked ' + groupId);
@@ -442,7 +494,56 @@
 		insert();
 	})
 	
-	 // 일정 전체 뿌려주기
+	// 일정 담당자 선택 부분
+	// 일정 담당 부분의 부서 셀렉트 변경 시
+	$("select[name='dept']").change(function() {
+		$("select[name='emp'] option").remove();
+		
+		var dname = $("select[name='dept']").val();
+		
+		getEmps(dname, function(data) {
+			var options = "<option value='모두'>모두</option>";
+			
+			$.each(data, function(idx, element) {
+				options += "<option value=" + element + ">" + element + "</option>";
+			})
+			
+			$("select[name='emp']").append(options);
+		})
+		
+    });
+    
+    // 일정 권한 부분의 부서 셀렉트 변경 시
+	$("select[name='dept_auth']").change(function() {
+		$("select[name='emp_auth'] option").remove();
+		
+		var dname = $("select[name='dept_auth']").val();
+		
+		getEmps(dname, function(data) {
+			var options = "";
+			
+			$.each(data, function(idx, element) {
+				options += "<option value=" + element + ">" + element + "</option>";
+			})
+			
+			$("select[name='emp_auth']").append(options);
+		})
+    });
+    
+	// 일정 담당 확인 버튼 클릭 시
+	$("button[name='rep-btn']").click(function() {
+		var ename = $("select[name='emp']").val();
+		var dname = $("select[name='dept']").val();
+		
+		if(ename != "모두") {
+			modalRep.val(modalRep.val() + " " + ename + "(" + dname + ")");
+		} else {
+			modalRep.val(modalRep.val() + " " + "모두" + "(" + dname + ")");
+		}
+		
+    });
+    
+	// 일정 전체 뿌려주기
 	function view(element){
 		
 		console.log("ddd");
@@ -500,6 +601,13 @@
 			modalTitle.val(data.title);
 			modalContent.val(data.content);
 			modalGroupId.val(data.groupId);
+			
+			//권한자 보여주기
+			var ename = data.author.substring(0,data.author.lastIndexOf('('));
+			var dname = data.author.substring(data.author.lastIndexOf('(') + 1,data.author.lastIndexOf(')'));
+			modalDeptAuth.val(dname).trigger('change');
+			modalEmpAuth.val(ename).trigger("change");
+			
 			modalStart.val(data.startDate);
 			modalStartTime.val(data.cal_startTime);
 			modalEnd.val(data.endDate);
@@ -553,78 +661,103 @@
 			var dname = rep.substring(rep.lastIndexOf('(') + 1,rep.lastIndexOf(')'));
 			console.log(rep.substring(0,rep.lastIndexOf('(')));
 			console.log(rep.substring(rep.lastIndexOf('(') + 1,rep.lastIndexOf(')')));
-		    
-		    getRepNo(ename, dname, function(data) {
-		    	// 날짜 쪼개서 Date 객체 만들기
-				var mStart = modalStart.val();
-				var mStartTime = modalStartTime.val();
-				var mEnd = modalEnd.val();
-				var mEndTime = modalEndTime.val();
-				
-				var s_date = new Date(mStart);
-				var s_year = s_date.getFullYear();
-				var s_month = s_date.getMonth();
-			    var s_day= s_date.getDate();
-
-			    var e_date = new Date(mEnd);
-				var e_year = e_date.getFullYear();
-				var e_month = e_date.getMonth();
-			    var e_day= e_date.getDate();
-			    
-			    var s_time = mStartTime.split(":");
-			    var s_hour = s_time[0] * 1;
-			    var s_minute = s_time[1] * 1;
-			    
-			    var e_time = mEndTime.split(":");
-			    var e_hour = e_time[0] * 1;
-			    var e_minute = e_time[1] * 1;
-			    
-				var cal = {
-					eno:data.eno,
-					dno:data.dno,
-					title:modalTitle.val(),
-					content:modalContent.val(),
-					groupId:modalGroupId.val(),
-					startDate:modalStart.val(),
-					endDate:modalEnd.val(),
-					cal_startTime:modalStartTime.val(),
-					cal_endTime:modalEndTime.val(),
-					rep:modalRep.val(),
-					memo:modalMemo.val()
-				};
-				
-				$.ajax({
-					url:'/calendar/rest_new/',
-					type:'post',
-					contentType:'application/json',
-					data:JSON.stringify(cal),
-					success:function(result) {
-						console.log("ajax result 값 : "+result);
-						console.log("groupId 값 : "+ modalGroupId.val());
-						console.log(${login.eno});
-						if(${login.eno} == data.eno) {
-							calendar.addEvent({
-								id : result,
-								groupId : modalGroupId.val(),
-								title : String(modalTitle.val()), // 이벤트 제목
-								start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
-								end : new Date(e_year,e_month,e_day, e_hour, e_minute)
-							});
-						}
-					}
-				})
-			});
+			
+			if(ename === "모두") {
+				insert_all(dname);
+			} else {
+				getRepNo(ename, dname, function(data) {
+			    	insert_add(data);
+				});
+			}
 		}
 	    
 		
 		modal.modal("hide");
     }
+  
+  	function insert_all(dname) {
+		getEmps(dname, function(data) {
+			$.each(data, function(idx, element) {
+				getRepNo(element, dname, function(data) {
+			    	insert_add(data);
+				});
+			})
+		})
+  		
+  	}
+  	
+  	function insert_add(data) {
+  	// 날짜 쪼개서 Date 객체 만들기
+		var mStart = modalStart.val();
+		var mStartTime = modalStartTime.val();
+		var mEnd = modalEnd.val();
+		var mEndTime = modalEndTime.val();
+		
+		var s_date = new Date(mStart);
+		var s_year = s_date.getFullYear();
+		var s_month = s_date.getMonth();
+	    var s_day= s_date.getDate();
+
+	    var e_date = new Date(mEnd);
+		var e_year = e_date.getFullYear();
+		var e_month = e_date.getMonth();
+	    var e_day= e_date.getDate();
+	    
+	    var s_time = mStartTime.split(":");
+	    var s_hour = s_time[0] * 1;
+	    var s_minute = s_time[1] * 1;
+	    
+	    var e_time = mEndTime.split(":");
+	    var e_hour = e_time[0] * 1;
+	    var e_minute = e_time[1] * 1;
+	    
+	    var author = modalEmpAuth.val() + "(" + modalDeptAuth.val() + ")";
+	    
+		var cal = {
+			eno:data.eno,
+			dno:data.dno,
+			title:modalTitle.val(),
+			content:modalContent.val(),
+			groupId:modalGroupId.val(),
+			author:author,
+			startDate:modalStart.val(),
+			endDate:modalEnd.val(),
+			cal_startTime:modalStartTime.val(),
+			cal_endTime:modalEndTime.val(),
+			rep:modalRep.val(),
+			memo:modalMemo.val()
+		};
+		
+		$.ajax({
+			url:'/calendar/rest_new/',
+			type:'post',
+			contentType:'application/json',
+			data:JSON.stringify(cal),
+			async:false,
+			success:function(result) {
+				console.log("ajax result 값 : "+result);
+				console.log("groupId 값 : "+ modalGroupId.val());
+				console.log(${login.eno});
+				if(${login.eno} == data.eno) {
+					calendar.addEvent({
+						id : result,
+						groupId : modalGroupId.val(),
+						title : String(modalTitle.val()), // 이벤트 제목
+						start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
+						end : new Date(e_year,e_month,e_day, e_hour, e_minute)
+					});
+				}
+			}
+		})
+  	}
 	
 	// 일정 담당자 이름, 부서명으로 사원번호, 부서번호 가져오기
     function getRepNo(ename, dname, callback) {
+		console.log("ename : " + ename + ", dname : " + dname);
     	$.ajax({
     		url:"/calendar/rest_no/" + String(ename) + "/" + String(dname),
     		type:"POST",
+    		async:false,
     		success:function(data) {
     			
     			if(callback) {
@@ -656,6 +789,21 @@
     		}
     	})
 	}
+	
+	function getEmps(dname, callback) {
+		$.getJSON({
+	    	url:"/calendar/rest_emp/" + String(dname),
+	    	type:"POST",
+	    	async:false,
+	    	success:function(data) {
+	    		if(callback) {
+	    			callback(data);
+	    		}
+	    	}
+	    })
+	}
+	
+	
 	
   })
   
