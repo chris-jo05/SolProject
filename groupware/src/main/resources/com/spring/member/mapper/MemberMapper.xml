@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.member.mapper.MemberMapper">
+	
+	<!-- 로그인 : login(id,password) -->
+	<select id="login" resultType="com.spring.member.domain.MemberVo">
+		select * from emp e, dept d where e.dno = d.dno and id=#{id} and password=#{password}
+	</select>
+	
+	<insert id="insert">
+	insert into emp(ename, position, dno, birthday, address, mobile, hiredate, acou_name, acount, id, password, gender)
+	values(#{ename},#{position},(select dno from dept where dname=#{dname}),#{birthday},#{address},#{mobile},to_date(#{hireDate}),#{acou_name},#{account},#{id},#{password},#{gender})
+	</insert>
+	
+	<select id="list" resultType="com.spring.member.domain.MemberVo">
+	select * from emp where eno>0 order by eno desc, hiredate desc
+	</select>
+	
+</mapper>
