@@ -1,4 +1,4 @@
-package com.spring.domain;
+package com.spring.mail.domain;
 
 import java.util.Date;
 
