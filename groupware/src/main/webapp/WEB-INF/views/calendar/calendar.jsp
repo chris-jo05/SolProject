@@ -145,7 +145,7 @@
         	</div>
         	<div class="form-group">
         		<label for="">일정 담당자</label>
-        		<div class="" style="">
+        		<div id="selectRep" style="">
         			<div class="col-lg-5" style="float: left;margin-bottom: 10px; margin-left: 6px">
 	        			<select name="dept" id="dept" class="form-control" >
 		                	<option value="empty">----------</option>
@@ -183,7 +183,8 @@
       </div>
       <div class="modal-footer">
       	 <button type="button" class="btn btn-success" id="modalRegisterBtn">등록</button>
-      	 <button type="button" class="btn btn-warning" id="modalModifyBtn">수정</button>
+      	 <button type="button" class="btn btn-success" id="modalModifyBtn">확인</button>
+      	 <button type="button" class="btn btn-warning" id="modalModifyEnterBtn">수정</button>
       	 <button type="button" class="btn btn-danger" id="modalRemoveBtn">삭제</button>
          <button type="button" class="btn btn-primary" id='modalCloseBtn' data-dismiss="modal">종료</button>
       </div>
@@ -224,14 +225,18 @@
   
   //모달 영역 안에 있는 버튼 가져오기
   var modalModifyBtn = $("#modalModifyBtn");
+  var modalModifyEnterBtn = $("#modalModifyEnterBtn");
   var modalRegisterBtn = $("#modalRegisterBtn");
   var modalRemoveBtn = $("#modalRemoveBtn");
   
   // 모달 영역 안에 있는 선택된 일정 cno 가져오기
   var modalSelectedCno = modal.find("input[name='selectedCno']");
   
-//모달 영역 안에 있는 선택된 일정 그룹 이름 가져오기
+  //모달 영역 안에 있는 선택된 일정 그룹 이름 가져오기
   var modalSelectedGroup = modal.find("input[name='selectedGroup']");
+  
+  //모달 영역 안에 있는 일정 담당자 선택부분 가져오기
+  var modalSelectRep = modal.find("#selectRep");
   
   $(function () {
 
@@ -466,8 +471,11 @@
     	
     	modalModifyBtn.hide();
 		modalRemoveBtn.hide();
+		modalModifyEnterBtn.hide();
 		modalRegisterBtn.show();
     	
+		modalSelectRep.show();
+		
     	modal.modal("show");
 	})
 	
@@ -482,6 +490,12 @@
 		console.log('remove clicked ' + groupId);
 		
 		removeGroup(groupId);
+	})
+	
+	$("#modalModifyEnterBtn").click(function() {
+		modalSelectRep.show();
+		modalModifyEnterBtn.hide();
+		modalModifyBtn.show();
 	})
 	
 	// 일정 수정 버튼
@@ -616,10 +630,12 @@
 			modalMemo.val(data.memo);
 			
 			// 수정, 삭제 버튼만 보이기
-			modalRegisterBtn.hide();
-			
-			modalModifyBtn.show();
-			modalRemoveBtn.show();
+			modalSelectRep.hide();
+    	  
+    	  	modalModifyBtn.hide();
+    	  	modalModifyEnterBtn.show();
+    	  	modalRegisterBtn.hide();
+    	  	modalRemoveBtn.show();
 			
 			modal.modal("show");
 		  }
@@ -651,7 +667,7 @@
 	 
 	function insert() {
     	// 담당자를 받아서 eno, bno 가져오기
-		var reps = modalRep.val();
+		var reps = modalRep.val().trim();
 		var repSplit = reps.split(" ");
 		console.log(repSplit.length);
 		
@@ -674,7 +690,8 @@
 		
 		modal.modal("hide");
     }
-  
+  	
+	// 모두가 선택됐을 때 삽입
   	function insert_all(dname) {
 		getEmps(dname, function(data) {
 			$.each(data, function(idx, element) {
@@ -686,6 +703,7 @@
   		
   	}
   	
+  	// 삽입 구현부
   	function insert_add(data) {
   	// 날짜 쪼개서 Date 객체 만들기
 		var mStart = modalStart.val();
@@ -771,6 +789,7 @@
 		$.ajax({
     		url:"/calendar/rest_delete/" + groupId,
     		type:"DELETE",
+    		async:false,
     		success:function(data) {
     			console.log("success");
     			
@@ -790,6 +809,7 @@
     	})
 	}
 	
+	// 부서명으로 해당 부서 사원들 이름 가져오기
 	function getEmps(dname, callback) {
 		$.getJSON({
 	    	url:"/calendar/rest_emp/" + String(dname),
