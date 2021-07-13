@@ -1,8 +1,10 @@
+<%@page import="java.util.List"%>
+<%@page import="com.spring.domain.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
            
@@ -64,15 +66,28 @@
                     </tr>
                   </thead>
                   <tbody>
-                  <c:forEach var="vo" items="${list}">
+                  
+                  <%
+                      		List<MemberVo> list = (List<MemberVo>)request.getAttribute("list");
+                  			for(MemberVo vo:list){
+                  				
+                  				
+                  				String date = vo.getHireDate().split(" ")[0];
+                      
+                  %>
+                  <%-- <c:forEach var="vo" items="${list}"> --%>
+                  <%-- <fmt:parseDate value="${vo.hireDate}" var="" />
+                  <fmt:formatDate value="${vo.hireDate}" pattern="yyyy-MM-dd" /> --%>
                     <tr class="text-center" data-widget="expandable-table" aria-expanded="false">
-                      <td>${vo.eno}</td>
-                      <td>${vo.ename}</td>
-                      <td>${vo.dname}</td>
-                      <td>${vo.position}</td>
-                      <td>${vo.hireDate}</td>
-                      <td>${vo.leaveDate}</td>
+                      
+                      <td><%=vo.getEno() %></td>
+                      <td><%=vo.getEname() %></td>
+                      <td><%=vo.getDname() %></td>
+                      <td><%=vo.getPosition() %></td>
+                      <td><%=date %></td>
+                      <td><%=vo.getLeaveDate()%></td>
                     </tr>
+                  <%--   <%} %> --%>
                        <tr class="expandable-body">
                          <td colspan="6">
                            <ul class="list-group list-group-unbordered mb-3">
@@ -101,20 +116,13 @@
                          </ul>                     
                          </td>
                        </tr>
-                      </c:forEach>
+                       <%} %>
+                      <%-- </c:forEach> --%>
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
-              <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
-                  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                </ul>
-              </div>
+             
             </div>
             <!-- /.card -->
         </div>

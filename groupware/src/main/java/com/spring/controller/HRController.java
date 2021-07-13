@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.MemberVo;
 import com.spring.service.MemberService;
@@ -29,8 +28,8 @@ public class HRController {
 		log.info("인사 관리 페이지로 이동합니다.");
 		
 		List<MemberVo> list = service.list();
-		
 		model.addAttribute("list",list);
+		
 	}
 	
 	/*

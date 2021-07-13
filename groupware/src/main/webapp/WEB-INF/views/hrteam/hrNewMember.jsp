@@ -54,7 +54,7 @@
 	                  <label for="exampleSelectBorder">부서명</label>
 	                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="dname">
 	                    <option value="인사팀">인사팀</option>
-	                    <option value="관리팀">관리팀</option>
+	                    <option value="총무팀">총무팀</option>
 	                    <option value="영업팀">영업팀</option>
 	                  </select>
 	                </div>

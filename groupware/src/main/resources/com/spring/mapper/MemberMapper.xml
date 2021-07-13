@@ -12,8 +12,11 @@
 	values(#{ename},#{position},(select dno from dept where dname=#{dname}),#{birthday},#{address},#{mobile},to_date(#{hireDate}),#{acou_name},#{account},#{id},#{password},#{gender})
 	</insert>
 	
-	<select id="list" resultType="com.spring.domain.MemberVo">
+ 	<!-- <select id="list" resultType="com.spring.domain.MemberVo">
 	select * from emp where eno>0 order by eno desc, hiredate desc
-	</select>
+	</select>   -->
 	
+	<select id="list" resultType="com.spring.domain.MemberVo">
+	select e.eno, e.ename, e.position, d.dname, e.birthday, e.address, e.mobile, e.hiredate, e.acou_name, e.acount, e.id, e.password, e.gender from emp e, dept d where e.dno = d.dno and eno>0 order by eno desc, hiredate desc
+	</select>
 </mapper>

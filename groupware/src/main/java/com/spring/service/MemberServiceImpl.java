@@ -33,5 +33,4 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVo> list() {
 		return mapper.list();
 	}
-
 }
