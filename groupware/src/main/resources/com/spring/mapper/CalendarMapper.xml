@@ -21,8 +21,8 @@
 	
 	<!-- 일정 삽입 -->
 	<insert id="insert">
-		insert into calendar(eno, dno, title, content, groupId, startdate, enddate, cal_starttime, cal_endtime, memo)
-		values(#{eno}, #{dno}, #{title}, #{content}, #{groupId}, #{startDate},#{endDate}, #{cal_startTime},#{cal_endTime},#{memo})
+		insert into calendar(eno, dno, title, content, groupId, author, startdate, enddate, cal_starttime, cal_endtime, memo)
+		values(#{eno}, #{dno}, #{title}, #{content}, #{groupId}, #{author}, #{startDate},#{endDate}, #{cal_startTime},#{cal_endTime},#{memo})
 		<selectKey keyProperty="cno" order="AFTER" resultType="int">
 			select CALENDAR_SEQ.currval from dual
 		</selectKey>
@@ -37,5 +37,18 @@
 		select d.dno, e.eno
 		from emp e, dept d
 		where e.dno = d.dno and e.ename = #{ename} and d.dname = #{dname}
+	</select>
+	
+	<!-- 셀렉트 부분 DB 작업 -->
+	<!-- 부서 전체 리스트 -->
+	<select id="dept_list" resultType="java.lang.String">
+		select dname from dept
+	</select>
+	
+	<!-- 해당 부서 사원 전체 리스트 -->
+	<select id="emp_list" resultType="java.lang.String">
+		select ename
+		from emp e, dept d
+		where e.dno = d.dno and d.dname = #{dname}
 	</select>
 </mapper>

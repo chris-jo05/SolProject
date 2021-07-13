@@ -13,4 +13,7 @@ public interface CalendarService {
 	public boolean delete(String groupId);
 	public List<CalendarRepEmpVO> getRepName(String groupId);
 	public CalendarRepEmpVO getRepNo(CalendarRepEmpVO vo);
+	
+	public List<String> dept_list();
+	public List<String> emp_list(String dname);
 }
