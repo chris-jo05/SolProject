@@ -24,4 +24,5 @@ public class CalendarVO {
     private String cal_endTime;
     private String rep;
     private String memo;
+    private String cal_color;
 }

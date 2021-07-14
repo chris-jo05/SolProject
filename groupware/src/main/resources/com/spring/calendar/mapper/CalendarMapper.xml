@@ -21,8 +21,8 @@
 	
 	<!-- 일정 삽입 -->
 	<insert id="insert">
-		insert into calendar(eno, dno, title, content, groupId, author, startdate, enddate, cal_starttime, cal_endtime, memo)
-		values(#{eno}, #{dno}, #{title}, #{content}, #{groupId}, #{author}, #{startDate},#{endDate}, #{cal_startTime},#{cal_endTime},#{memo})
+		insert into calendar(eno, dno, title, content, groupId, author, startdate, enddate, cal_starttime, cal_endtime, memo, cal_color)
+		values(#{eno}, #{dno}, #{title}, #{content}, #{groupId}, #{author}, #{startDate},#{endDate}, #{cal_startTime},#{cal_endTime},#{memo}, #{cal_color})
 		<selectKey keyProperty="cno" order="AFTER" resultType="int">
 			select CALENDAR_SEQ.currval from dual
 		</selectKey>
