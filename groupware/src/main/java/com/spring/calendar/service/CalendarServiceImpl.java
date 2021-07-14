@@ -45,4 +45,14 @@ public class CalendarServiceImpl implements CalendarService {
 	public CalendarRepEmpVO getRepNo(CalendarRepEmpVO vo) {
 		return mapper.getRepNo(vo);
 	}
+	
+	@Override
+	public List<String> dept_list() {
+		return mapper.dept_list();
+	}
+	
+	@Override
+	public List<String> emp_list(String dname) {
+		return mapper.emp_list(dname);
+	}
 }
