@@ -23,7 +23,7 @@ public class CalController {
 	private CalendarService service;
 	
 	@GetMapping("/calendar")
-	public void main(int eno, Model model) {
+	public void main(Model model) {
 		log.info("calender 페이지 요청");
 	}
 }

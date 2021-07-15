@@ -17,10 +17,12 @@ public class CalendarVO {
 	private String title;
 	private String content;
 	private String groupId;
+	private String author;
 	private String startDate;
 	private String endDate;
 	private String cal_startTime;
     private String cal_endTime;
     private String rep;
     private String memo;
+    private String cal_color;
 }
