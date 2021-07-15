@@ -9,5 +9,5 @@ public interface ApprovalService {
 
 	public ApprovalVO approvalRead(String docNo, int eno);
 	
-	public boolean approvalWrite(ApprovalVO VO);
+	public int approvalWrite(ApprovalVO approvalWrite);
 }

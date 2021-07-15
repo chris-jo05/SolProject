@@ -25,8 +25,8 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 	@Override
-	public boolean approvalWrite(ApprovalVO VO) {
-		boolean result = mapper.approvalWrite(VO) > 0 ? true : false;
+	public int approvalWrite(ApprovalVO approvalWrite) {
+		int result = mapper.approvalWrite(approvalWrite);
 		return result;
 	}
 }

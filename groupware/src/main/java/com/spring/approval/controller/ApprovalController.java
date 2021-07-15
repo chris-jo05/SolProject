@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.approval.domain.ApprovalVO;
 import com.spring.approval.service.ApprovalService;
@@ -53,15 +54,18 @@ public class ApprovalController {
 	public void drift() {
 		log.info("기안서로 이동");
 	}
-	
+
 	@PostMapping("/appWriteDraft")
-	public String writeDraft(ApprovalVO VO) {
-		log.info("기안서 상신" + VO);
-		
-		if (service.approvalWrite(VO)) {
-			return "redirect:appMain";
+	public String writeDraft(ApprovalVO approvalWrite, RedirectAttributes rttr) {
+		log.info("기안서 상신" + approvalWrite);
+
+		int result = service.approvalWrite(approvalWrite);
+
+		if (result > 0) {
+			rttr.addFlashAttribute("result", approvalWrite.getDocNo());
+			return "redirect: appMain";
 		} else {
-			return "redirect:appWriteDraft";
+			return "redirect: appWriteDraft";
 		}
 	}
 
