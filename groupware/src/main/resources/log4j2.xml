@@ -6,6 +6,7 @@
     </Console>
   </Appenders>
   <Loggers>
+
   	<!-- controller 로그 -->
   	<Logger name="com.spring.approval.controller" level="info"/>
   	<Logger name="com.spring.board.controller" level="info"/>
@@ -21,6 +22,7 @@
   	<Logger name="com.spring.mail.mapper" level="debug"/>
   	<Logger name="com.spring.member.mapper" level="debug"/>
   	
+
   	<Logger name="com.spring.task" level="info"/>
   	
   	<Logger name="org.springframework.core" level="info"/>

@@ -29,7 +29,8 @@
 	
 	<!-- Connection Pool 설정 -->
 	<bean id="ds" class="oracle.ucp.jdbc.PoolDataSourceImpl">
-		<property name="connectionFactoryClassName" value="oracle.jdbc.pool.OracleDataSource"/>		
+
+		<property name="connectionFactoryClassName" value="oracle.jdbc.pool.OracleDataSource"/>
 		<property name="URL" value="jdbc:oracle:thin:@sol_medium?TNS_ADMIN=c:/sqldriver/Wallet_Sol"/>
 		<property name="user" value="admin"/>
 		<property name="password" value="1q2w3e$R!@#$"/>

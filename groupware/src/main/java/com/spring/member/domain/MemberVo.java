@@ -29,9 +29,9 @@ public class MemberVo {
 //	@DateTimeFormat(pattern="yyyy/MM/dd")
 //	private Date hireDate;		// 입사일
 	private String hireDate;
-	private Date leaveDate; 	// 퇴사일
+	private String leaveDate; 	// 퇴사일
 	private String acou_name;	// 은행 이름
-	private String account;		// 계좌 번호
+	private String acount;		// 계좌 번호
 	private String gender;		// 성별
 	private String dname;
 	private String dphone;	

@@ -10,5 +10,7 @@ public interface MemberService {
 	public MemberVo profile(MemberVo vo);
 	public boolean insert(MemberVo vo);
 	public List<MemberVo> list();
+	public MemberVo selectMember(int eno);
+	public boolean update(MemberVo vo);
 
 }

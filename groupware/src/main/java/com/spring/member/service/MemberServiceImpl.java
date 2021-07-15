@@ -33,5 +33,14 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVo> list() {
 		return mapper.list();
 	}
+	
+	@Override
+	public MemberVo selectMember(int eno) {
+		return mapper.selectMember(eno);
+	}
 
+	@Override
+	public boolean update(MemberVo vo) {
+		return mapper.update(vo)>0?true:false;
+	}
 }

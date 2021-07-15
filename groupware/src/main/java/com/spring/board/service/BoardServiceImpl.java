@@ -43,5 +43,17 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.totalBn(cri);
 	}
 
+	@Override
+	public boolean update(BoardVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.update(vo)>0?true:false;
+	}
+
+	@Override
+	public boolean hit(int bno) {
+		// TODO Auto-generated method stub
+		return mapper.hit(bno)>0?true:false;
+	}
+
 
 }
