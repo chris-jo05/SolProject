@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
-
   
-    
-    <!-- Content Wrapper. Contains page content -->
+  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -127,22 +125,25 @@
         		<label for="">일정 그룹 이름</label>
         		<input type="text" name="groupId" class="form-control" value=""/>
         	</div>
-        	<div class="form-group">
-        		<label for="">일정 시작일 [YYYY-MM-DD] </label>
-        		<input type="text" name="start" class="form-control" value=""/>
-        	</div>
-        	<div class="form-group">
-        		<label for="">일정 시작시간 [HH:mm:SS]</label>
-        		<input type="text" name="startTime" class="form-control" value=""/>
-        	</div>
-        	<div class="form-group">
-        		<label for="">일정 종료일 [YYYY-MM-DD]</label>
-        		<input type="text" name="end" class="form-control" value=""/>
-        	</div>
-        	<div class="form-group">
-        		<label for="">일정 종료시간 [HH:mm:SS]</label>
-        		<input type="text" name="endTime" class="form-control" value=""/>
-        	</div>
+        	 <div class="form-group">
+                  <label>일정 시작</label>
+                    <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+                        <input type="text" name="start" class="form-control datetimepicker-input" data-target="#reservationdatetime"/>
+                        <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+            </div>
+            <div class="form-group">
+                  <label>일정 종료</label>
+                    <div class="input-group date" id="reservationdatetime2" data-target-input="nearest">
+                        <input type="text" name="end" class="form-control datetimepicker-input" data-target="#reservationdatetime2"/>
+                        <div class="input-group-append" data-target="#reservationdatetime2" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+            </div>
+        
         	<div class="form-group">
         		<label for="">일정 담당자</label>
         		<div id="selectRep" style="">
@@ -179,6 +180,23 @@
         		<label for="">비고</label>
         		<input type="text" name="memo" class="form-control" value=""/>
         	</div>
+        	<div class="form-group">
+				<div class="btn-group" style="width: 100%;">
+					<label for="" style="padding-top: 7.5px">일정 색상</label>
+				    <ul class="fc-color-picker" id="color-chooser" style="padding-left: 10px;">
+				      <li><button class="btn btn-success btn-lg"></button></li>
+				      <li><button class="btn btn-warning btn-lg"></button></li>
+				      <li><button class="btn btn-danger btn-lg"></button></li>
+				      <li><button class="btn btn-secondary btn-lg"></button></li>
+				      <li><button class="btn btn-info btn-lg"></button></li>
+				      <li><button class="btn btn-dark btn-lg"></button></li>
+				      <li><button class="btn btn-primary active btn-lg"></button></li>
+				    </ul>
+				    <div class="input-group-append" style="float: right; padding-left: 10px">
+                      <button id="add-new-event" type="button" class="btn btn-primary">Color</button>
+                	</div>
+				</div>
+        	</div>
         </div>
       </div>
       <div class="modal-footer">
@@ -193,6 +211,9 @@
 	  
 	  <!-- 클릭된 일정의 cno 저장하는 곳 -->
 	  <input type="hidden" name="selectedGroup" value=""/>
+	  
+	  <!-- 일정 색깔 저장하는 곳 -->
+	  <button type="button" name="color" style=""></button>
     </div>
   </div>
 </div> 
@@ -215,9 +236,7 @@
   var modalContent = modal.find("input[name='content']");
   var modalGroupId = modal.find("input[name='groupId']");
   var modalStart = modal.find("input[name='start']");
-  var modalStartTime = modal.find("input[name='startTime']");
-  var modalEnd = modal.find("input[name='end']");
-  var modalEndTime = modal.find("input[name='endTime']");
+  var modalEnd = modal.find("input[name='end']");	
   var modalRep = modal.find("input[name='rep']");
   var modalMemo = modal.find("input[name='memo']");
   var modalDeptAuth = modal.find("select[name=dept_auth]");
@@ -362,8 +381,8 @@
             } */
       ],
       
-      editable  : true,
-      droppable : true, // this allows things to be dropped onto the calendar !!!
+      editable  : false,
+      droppable : false, // this allows things to be dropped onto the calendar !!!
       drop      : function(info) {
         // is the "remove after drop" checkbox checked?
         /* if (checkbox.checked) {
@@ -387,10 +406,12 @@
     }); // var calender end
 
     calendar.render();
-    // $('#calendar').fullCalendar()
+    /* $('#calendar').fullCalendar({
+    	
+    }) */
 
     /* ADDING EVENTS */
-   /*  var currColor = '#3c8dbc' //Red by default
+    /* var currColor = '#3c8dbc' //Red by default
     // Color chooser button
     $('#color-chooser > li > a').click(function (e) {
       e.preventDefault()
@@ -439,7 +460,7 @@
 					console.log(element.title);
 					console.log(element.startDate);
 					console.log(element.endDate);
-					console.log(element.cno);
+					console.log(element.cal_color);
 					
 					view(element);
 				})
@@ -603,7 +624,9 @@
 	 		groupId : element.groupId,
 			title : String(element.title), // 이벤트 제목
 			start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
-			end : new Date(e_year,e_month,e_day, e_hour, e_minute)
+			end : new Date(e_year,e_month,e_day, e_hour, e_minute),
+			backgroundColor: element.cal_color,
+	        borderColor    : element.cal_color
 		}); 
 	}
 	
@@ -631,10 +654,8 @@
 			modalDeptAuth.val(dname).trigger('change');
 			modalEmpAuth.val(ename).trigger("change");
 			
-			modalStart.val(data.startDate);
-			modalStartTime.val(data.cal_startTime);
-			modalEnd.val(data.endDate);
-			modalEndTime.val(data.cal_endTime);
+			modalStart.val(data.startDate + " " + data.cal_startTime);
+			modalEnd.val(data.endDate + " " + data.cal_endTime);
 			
 			modalMemo.val(data.memo);
 			
@@ -715,10 +736,13 @@
   	// 삽입 구현부
   	function insert_add(data) {
   	// 날짜 쪼개서 Date 객체 만들기
-		var mStart = modalStart.val();
-		var mStartTime = modalStartTime.val();
-		var mEnd = modalEnd.val();
-		var mEndTime = modalEndTime.val();
+  		var startSpl = modalStart.val().split(" ");
+  		var endSpl = modalEnd.val().split(" ");
+  		
+		var mStart = startSpl[0];
+		var mStartTime = startSpl[1];
+		var mEnd = endSpl[0];
+		var mEndTime = endSpl[1];
 		
 		var s_date = new Date(mStart);
 		var s_year = s_date.getFullYear();
@@ -747,12 +771,13 @@
 			content:modalContent.val(),
 			groupId:modalGroupId.val(),
 			author:author,
-			startDate:modalStart.val(),
-			endDate:modalEnd.val(),
-			cal_startTime:modalStartTime.val(),
-			cal_endTime:modalEndTime.val(),
+			startDate:mStart,
+			endDate:mEnd,
+			cal_startTime:mStartTime,
+			cal_endTime:mEndTime,
 			rep:modalRep.val(),
-			memo:modalMemo.val()
+			memo:modalMemo.val(),
+			cal_color:String($("button[name='color']").css('color'))
 		};
 		
 		$.ajax({
@@ -771,7 +796,9 @@
 						groupId : modalGroupId.val(),
 						title : String(modalTitle.val()), // 이벤트 제목
 						start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
-						end : new Date(e_year,e_month,e_day, e_hour, e_minute)
+						end : new Date(e_year,e_month,e_day, e_hour, e_minute),
+						backgroundColor: String($("button[name='color']").css('color')),
+				        borderColor    : String($("button[name='color']").css('color'))
 					});
 				}
 			}
@@ -832,8 +859,34 @@
 	    })
 	}
 	
+    //Date and time picker
+    $('#reservationdatetime').datetimepicker({
+    	format: 'yyyy-MM-DD HH:mm',
+    	icons: { time: 'far fa-clock' },
+    	ignoreReadonly: true
+    });
+    
+    $('#reservationdatetime2').datetimepicker({
+    	format: 'yyyy-MM-DD HH:mm',
+    	icons: { time: 'far fa-clock' },
+    	ignoreReadonly: true
+    });
 	
-	
+    /* modalStart.attr("readonly",true);
+    modalEnd.attr("readonly",true); */
+    
+    // 일정 색깔
+    $('#color-chooser > li > button').click(function (e) {
+        e.preventDefault()
+        // Save color
+        console.log($(this).css('color'));
+        $("#add-new-event").css('background-color',$(this).css('background-color'));
+        $("#add-new-event").css('border-color',$(this).css('background-color'));
+        $("button[name='color']").css('color',$(this).css('background-color'));
+    })
+    
+      
+     
   })
   
  
