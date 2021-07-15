@@ -13,7 +13,14 @@
 	</insert>
 	
 	<select id="list" resultType="com.spring.member.domain.MemberVo">
-	select * from emp where eno>0 order by eno desc, hiredate desc
+	select e.eno, e.ename, e.position, d.dname, e.birthday, e.address, e.mobile, e.hiredate, e.acou_name, e.acount, e.id, e.password, e.gender from emp e, dept d where e.dno = d.dno and eno>0 order by eno desc, hiredate desc
 	</select>
 	
+	<select id="selectMember" parameterType="int" resultType="com.spring.member.domain.MemberVo">
+	select e.*, d.dname from emp e, dept d where e.dno = d.dno and eno=#{eno}
+	</select>
+	
+	<update id="update">
+	update emp set ename=#{ename}, dno=(select dno from dept where dname=#{dname}), position=#{position}, birthday=#{birthday}, mobile=#{mobile}, id=#{id}, password=#{password}, address=#{address}, hiredate=#{hireDate}, leavedate=#{leaveDate}, acou_name=#{acou_name}, acount=#{acount}, gender=#{gender} where eno=#{eno}
+	</update>
 </mapper>

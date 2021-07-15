@@ -143,10 +143,24 @@
 						</li>
 
 						<li class="nav-item">
-							<a href="/hrteam/hrMain" class="nav-link">
-								<i class="nav-icon fas fa-file"></i>
-								<p>인사 관리</p>
-							</a>
+							<c:if test= "${login.dno == 10}">
+								<a href="/hrteam/hrMain" class="nav-link">
+									<i class="nav-icon fas fa-file"></i>
+									<p>인사 관리</p>
+								</a>
+							</c:if>
+							<c:if test="${login.dno != 10}">
+								<a id="aa" href="/main/home" class="nav-link">
+									<i class="nav-icon fas fa-file"></i>
+									<p>인사 관리</p>
+								</a>
+								<script src="/resources/plugins/jquery/jquery.min.js"></script>
+								<script>
+									$("#aa").click(function() {
+										alert("인사팀만 접근 할 수 있습니다.");
+									});
+								</script>
+							</c:if>
 						</li>
 
 						<!-- 메일함 -->

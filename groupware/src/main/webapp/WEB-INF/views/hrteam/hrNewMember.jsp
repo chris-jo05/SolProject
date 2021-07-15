@@ -164,7 +164,8 @@
 	              </div>
 	                <div class="card-footer">
 	                  <button type="submit" class="btn btn-info">추가 하기</button>
-	                  <button type="reset" class="btn btn-default float-right">취소 하기</button>
+	                  <button type="reset" class="btn btn-default float-right"
+	                  		  onclick="location.href='/hrteam/hrMain'">취소 하기</button>
 	                </div>
 			   </form>
               <!-- /.card-body -->

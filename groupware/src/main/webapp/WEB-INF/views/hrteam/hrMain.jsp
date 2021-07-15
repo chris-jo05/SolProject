@@ -1,5 +1,6 @@
+<%@page import="com.spring.member.domain.MemberVo"%>
 <%@page import="java.util.List"%>
-<%@page import="com.spring.domain.MemberVo"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
@@ -78,40 +79,44 @@
                   <%-- <c:forEach var="vo" items="${list}"> --%>
                   <%-- <fmt:parseDate value="${vo.hireDate}" var="" />
                   <fmt:formatDate value="${vo.hireDate}" pattern="yyyy-MM-dd" /> --%>
-                    <tr class="text-center" data-widget="expandable-table" aria-expanded="false">
+                    <tr class="member-tr text-center" data-widget="expandable-table" aria-expanded="false" onClick="details(<%=vo.getEno() %>)" role="tabpanel">
                       
                       <td><%=vo.getEno() %></td>
                       <td><%=vo.getEname() %></td>
                       <td><%=vo.getDname() %></td>
                       <td><%=vo.getPosition() %></td>
                       <td><%=date %></td>
-                      <td><%=vo.getLeaveDate()%></td>
+                      <td>
+                      	<c:if test="vo.getLeaveDate() != null">
+                      		<%=vo.getLeaveDate()%>
+                      	</c:if>
+                      </td>
                     </tr>
                   <%--   <%} %> --%>
                        <tr class="expandable-body">
                          <td colspan="6">
                            <ul class="list-group list-group-unbordered mb-3">
                            <li class="list-group-item">
-                             <b> 소 속</b> <a class="float-right">인사팀</a>
+                             <b> 소 속</b> <a class="dname float-right"></a>
                            </li>
                            <li class="list-group-item">
-                             <b>&nbsp;직 급</b> <a class="float-right">대리</a>
+                             <b>&nbsp;직 급</b> <a class="position float-right"></a>
                            </li>
                            <li class="list-group-item">
-                             <b>이 메 일</b> <a class="float-right">auto@solcompany.com</a>
+                             <b>이 메 일</b> <a class="id float-right"></a>
                         </li>
                         <li class="list-group-item">
-                               <b>휴 대 폰</b> <a class="float-right">010 - 1234 -1234</a>
+                               <b>휴 대 폰</b> <a class="mobile float-right"></a>
                          </li>
                          <li class="list-group-item">
-                             <b>생 일</b> <a class="float-right">07 / 01</a>
+                             <b>생 일</b> <a class="birthday float-right"></a>
                          </li>
                          <li class="list-group-item">
-                             <b>성 별</b> <a class="float-right">남 / 여</a>
+                             <b>성 별</b> <a class="gender float-right"></a>
                         </li>
                      <li class="list-group-item">
                               <button type="button" class="btn btn-block btn-success" 
-                                    onclick="location.href='/hrteam/hrUpdateMember'">수정하기</button>
+                                    onclick="location.href='/hrteam/hrUpdateMember?eno=<%=vo.getEno() %>'">수정하기</button>
                         </li>
                          </ul>                     
                          </td>
@@ -143,6 +148,27 @@ AdminLTE App
 AdminLTE for demo purposes
 <script src="../../dist/js/demo.js"></script> -->
 
-
+<script>
+function details(eno) {
+	$('.member-tr').attr('aria-expanded', 'true');
+	$('.member-tr').ExpandableTable('toggleRow');
+	$.ajax({
+        url: "/hrteam/hrSelectMember",
+        type: "get",
+        data: {"eno" : eno},
+        success: function(data){
+            $(".dname").html(data.dname);
+            $(".id").html(data.id);
+            $(".position").html(data.position);
+            $(".mobile").html(data.mobile);
+            $(".birthday").html(data.birthday);
+            $(".gender").html(data.gender);
+        },
+        error: function(){
+            alert("simpleWithObject err");
+        }
+    });
+}
+</script>
 
 <%@include file="../includes/footer.jsp" %>

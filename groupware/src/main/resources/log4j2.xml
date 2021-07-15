@@ -6,8 +6,8 @@
     </Console>
   </Appenders>
   <Loggers>
-  	<Logger name="com.spring.controller" level="info"/>
-  	<Logger name="com.spring.mapper" level="debug"/>
+  	<Logger name="com.spring.member.controller" level="info"/>
+  	<Logger name="com.spring.member.mapper" level="debug"/>
   	<Logger name="com.spring.task" level="info"/>
   	
   	<Logger name="org.springframework.core" level="info"/>

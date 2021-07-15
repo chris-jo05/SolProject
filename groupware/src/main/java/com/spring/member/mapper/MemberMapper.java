@@ -9,5 +9,7 @@ public interface MemberMapper {
 	public MemberVo profile(MemberVo vo);
 	public int insert(MemberVo vo);
 	public List<MemberVo> list();
+	public MemberVo selectMember(int eno);
+	public int update(MemberVo vo);
 	
 }
