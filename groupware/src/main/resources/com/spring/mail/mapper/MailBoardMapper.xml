@@ -4,7 +4,19 @@
 
 	<!-- 받은 메일함 조회 -->
 	<select id="mailList" resultType="com.spring.mail.domain.MailBoardVo">
-		select * from e_mail where e_id=#{e_id} order by m_senddate desc, m_no desc
+		<![CDATA[
+		select * from 
+		(select /*+index_desc(E_MAIL PK_E_MAIL)*/ 
+				 rownum rn,m_no, m_title, m_content, m_senddate, e_id, eno,m_read,m_writer,m_id
+			from e_mail
+			where rownum <= (#{cri.pageNum}*#{cri.amount}) and e_id=#{e_id})
+			where rn > ((#{cri.pageNum}-1)*#{cri.amount}) and e_id=#{e_id}
+		]]>
+	</select>
+	
+	<!-- 페이지 나누기를 위한 총 갯수 구하기(받은 메일함) -->
+	<select id="totalCnt" resultType="int">
+		select count(*) from e_mail where e_id=#{e_id} and	m_no > 0 
 	</select>
 	
 	<!-- 메일 하나 읽기 -->
@@ -19,13 +31,28 @@
 	
 	<!-- 보낸 메일함 읽기 -->
 	<select id="sendMailBox" resultType="com.spring.mail.domain.MailBoardVo">
-		select * from e_mail where m_id = #{m_id} order by m_senddate desc, m_no desc
+		<![CDATA[
+		select * from 
+		(select /*+index_desc(E_MAIL PK_E_MAIL)*/ 
+				 rownum rn,m_no, m_title, m_content, m_senddate, e_id, eno,m_read,m_writer,m_id
+			from e_mail
+			where rownum <= (#{cri.pageNum}*#{cri.amount}) and m_id=#{m_id})
+			where rn > ((#{cri.pageNum}-1)*#{cri.amount}) and m_id=#{m_id}
+		]]>
 	</select>
+	<!-- 보낸 메일함 총 갯수 구하기 -->
+	<select id="sendTotalCnt" resultType="int">
+		select count(*) from e_mail where m_id=#{m_id} and	m_no > 0 
+	</select>
+	
 	
 	<!-- 메일 쓰기 -->
 	<insert id="writeMail">
-		insert into e_mail(m_title,m_content, e_id, eno, m_read, m_writer, m_id) 
-		  values(#{m_title}, #{m_content}, #{e_id}, #{eno}, #{m_read}, #{m_writer}, #{m_id})
+		<selectKey keyProperty="m_no" order="BEFORE" resultType="int">
+			select e_mail_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into e_mail(m_no,m_title,m_content, e_id, eno, m_read, m_writer, m_id) 
+		  values(#{m_no}, #{m_title}, #{m_content}, #{e_id}, #{eno}, #{m_read}, #{m_writer}, #{m_id})
 	</insert>
 	
 	<!-- 읽기페이지에서 메일 삭제 -->

@@ -18,7 +18,19 @@
 	
 	<!-- 휴지통에 있는 메일 리스트 가져오기 -->
 	<select id="beanListMail" resultType="com.spring.mail.domain.MailBoardVo">
-		select * from e_mail_bean where e_id=#{e_id} order by m_senddate desc, m_no desc
+		<![CDATA[
+		select * from 
+		(select /*+index_desc(E_MAIL PK_E_MAIL)*/ 
+				 rownum rn,m_no, m_title, m_content, m_senddate, e_id, eno,m_read,m_writer,m_id
+			from e_mail
+			where rownum <= (#{cri.pageNum}*#{cri.amount}) and e_id=#{e_id})
+			where rn > ((#{cri.pageNum}-1)*#{cri.amount}) and e_id=#{e_id}
+		]]>
+	</select>
+	
+	<!-- 휴지통에 있는 메일 총 갯수 구하기 -->
+	<select id="totalBeanCnt" resultType="int">
+		select count(*) from e_mail where e_id=#{e_id} and	m_no > 0 
 	</select>
 
 	<!-- 메일 하나 읽기 -->

@@ -25,11 +25,10 @@
                     <i class="far fa-envelope"></i> 보낸 메일함
                   </a>
                 </li>
-               
                 <li class="nav-item">
-                  <a href="/mailbox/trashBean" class="nav-link">
-                    <i class="far fa-trash-alt"></i> 휴지통
-                  </a>
+	                <a href="/mailbox/trashBean" class="nav-link">
+    	            	<i class="far fa-trash-alt"></i> 휴지통
+    	            </a>
                 </li>
               </ul>
             </div>

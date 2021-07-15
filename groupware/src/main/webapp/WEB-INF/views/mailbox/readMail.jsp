@@ -46,19 +46,19 @@
                 <!-- 메일 주소 -->
                 <h6>보낸 사람 : ${read.m_writer}
                 <br />
-                <h6>메일 주소 : <a href="/mailbox/mailWriteAgain"> ${read.m_id}@SolCompany.com</a> 
+                <h6>메일 주소 : <a href="/mailbox/mailWrite"> ${read.m_id}@SolCompany.com</a> 
                 	<!-- 보낸 날짜 -->
                 	<span class="mailbox-read-time float-right"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${read.m_sendDate}"/></span></h6>
                 </h6> 
                 
                 <div class="mailbox-controls text-center">
-                  <button type="submit" class="btn btn-default btn-sm" data-oper="before" data-container="body" title="이전 메일">
+                  <button type="button" class="btn btn-default btn-sm" data-oper="before" data-container="body" title="이전 메일">
                     <i class="fas fa-reply"></i>
                   </button>
                   <button type="submit" class="btn btn-default btn-sm" data-oper="delete" data-container="body" title="지우기">
                     <i class="far fa-trash-alt"></i>
                   </button>
-                  <button type="submit" class="btn btn-default btn-sm" data-oper="forward" data-container="body" title="다음 메일">
+                  <button type="button" class="btn btn-default btn-sm" data-oper="forward" data-container="body" title="다음 메일">
                     <i class="fas fa-share"></i>
                   </button>
                 </div>
@@ -70,20 +70,12 @@
             <!-- /.card-body -->
             <div class="card-footer bg-white">
             <!-- 첨부파일이 있을 경우 -->
-              <!-- <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
+              <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
                 <li>
-                  <span class="mailbox-attachment-icon"><i class="far fa-file-pdf"></i></span>
-
-                  <div class="mailbox-attachment-info">
-                    <a href="#" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> Sep2014-report.pdf</a>
-                        <span class="mailbox-attachment-size clearfix mt-1">
-                          <span>1,245 KB</span>
-                          <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                        </span>
-                  </div>
+                  
                 </li>
                
-              </ul> -->
+              </ul>
             </div>
             <!-- /.card-footer -->
             
@@ -103,7 +95,10 @@
 	<input type="hidden" name="m_no" value="${read.m_no}" />
 </form>
 <script>
+	let m_no = ${read.m_no};
+	
 $(function(){
+	
 	
 	var operForm = $("#operForm");
 	
@@ -113,10 +108,14 @@ $(function(){
 		var oper = $(this).data("oper");
 		
 		if(oper === "delete"){
+			
 			operForm.attr('action','/mailbox/removeMail');
+			
+		
 		}
 		operForm.submit();
 	})
 });	 
 </script>
+<script src="/resources/project/mail/js/readMail.js"></script>
 <%@include file="../includes/footer.jsp" %>

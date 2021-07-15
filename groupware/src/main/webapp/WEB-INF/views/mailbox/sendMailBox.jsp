@@ -39,17 +39,6 @@
             <div class="card-header">
               <h3 class="card-title">보낸 메일 함</h3>
 
-              <div class="card-tools">
-                <div class="input-group input-group-sm">
-                  <input type="text" class="form-control" placeholder="메일 검색">
-                  <div class="input-group-append">
-                    <div class="btn btn-primary">
-                      <i class="fas fa-search"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.card-tools -->
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
@@ -63,22 +52,7 @@
                   </button>
                 </div>
                 <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm">
-                  <i class="fas fa-sync-alt"></i>
-                </button>
-                <div class="float-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="fas fa-chevron-right"></i>
-                    </button>
-                  </div>
-                  <!-- /.btn-group -->
-                </div>
-                <!-- /.float-right -->
+                
               </div>
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
@@ -91,7 +65,6 @@
                     	    <label for="check${list.m_no}"></label>
                  	     </div>
                	     	</td>
-              	      	<td class="mailbox-star"><a href="#"><i class="fas fa-star-o text-warning"></i></a></td>
               	      	<td class="mailbox-name">${list.m_id} (${list.m_writer})</td>
               	    	<td class="mailbox-subject"><a href="/mailbox/readMail?m_no=${list.m_no}"> ${list.m_title}</a></td>
                	    	<td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
@@ -117,20 +90,29 @@
                   </button>
                 </div>
                 <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm">
-                  <i class="fas fa-sync-alt"></i>
-                </button>
+                
                 <div class="float-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="fas fa-chevron-right"></i>
-                    </button>
-                  </div>
-                  <!-- /.btn-group -->
+                  <ul class="pagination pagination-sm">
+                  	<c:if test="${pageVo.prev}">
+	                    <button type="button" class="btn btn-default btn-sm">
+	                      <i class="fas fa-chevron page-item">
+	                      	<a href="${pageVo.startPage-1}">이전 페이지</a>
+	                      </i>
+	                    </button>
+	                  </c:if>
+	                  <c:forEach var="num" begin="${pageVo.startPage}" end="${pageVo.endPage}" >
+	                  		<li class="page-item ${pageVo.cri.pageNum==num?'active':''}">
+	                  			<a href="${num}" class="page-link">${num}</a>
+	                  		</li>
+	                  </c:forEach>
+	                  <c:if test="${pageVo.next}">
+	                    <button type="button" class="btn btn-default btn-sm">
+	                      <i class="fas fa-chevron page-item">
+	                      	<a href="${pageVo.endPage+1}">다음 페이지</a>
+	                      </i>
+	                    </button>
+	                  </c:if>
+                  </ul>
                 </div>
                 <!-- /.float-right -->
               </div>
@@ -145,61 +127,62 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<form action="" id="operForm" method="post" >
-	
+<form action="" id="operForm" method="post" ></form>
+<form action="" method="get" id="actionForm">
+	<input type="hidden" name="pageNum" value="${pageVo.cri.pageNum}" />
+	<input type="hidden" name="amount" value="${pageVo.cri.amount}" />
 </form>
 <script>
   $(function () {
 	
-	  var checkBoxArr = new Array();
+	// 하단 페이지 나누기 버튼 클릭시 이동
+	var actionForm = $("#actionForm");
+	$(".page-item a").click(function(e){
+		e.preventDefault(); //a 속성 중지
+			
+		//actionForm 안에 pageNum의 값을 사용자가 선택한 번호로 변경
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			
+		//actionForm 보내기 
+		actionForm.submit();
+	})
+	  
+	var checkBoxArr = new Array();
 		
-		var operForm = $("#operForm");
+	var operForm = $("#operForm");
 		
 		  
-		$(".delete-mail").click(function(e){
-			e.preventDefault();
+	$(".delete-mail").click(function(e){
+		e.preventDefault();
 			
-			var str="";
+		var str="";
 			
-		    $('input[name="forDelete"]:checked').each(function (idx) {
-		    	str+="<input type='hidden' name='mNoList["+idx+"].m_no' value='"+$(this).val()+"'>";
-	   		});	  
+	    $('input[name="forDelete"]:checked').each(function (idx) {
+	    	str+="<input type='hidden' name='mNoList["+idx+"].m_no' value='"+$(this).val()+"'>";
+   		});	  
+		
 			
-			
-		    operForm.append(str);
-			operForm.attr('action','/mailbox/removeMailList');
-			
-			operForm.submit();
-		})
+	    operForm.append(str);
+		operForm.attr('action','/mailbox/removeMailList');
+		
+		operForm.submit();
+	})
 	
-    //Enable check and uncheck all functionality
+    //체크 박스 전체 체크 및 전체 체크 해제
     $('.checkbox-toggle').click(function () {
       var clicks = $(this).data('clicks')
       if (clicks) {
-        //Uncheck all checkboxes
+    	//체크 되어있지 않을 경우 
         $('.mailbox-messages input[type=\'checkbox\']').prop('checked', false)
         $('.checkbox-toggle .far.fa-check-square').removeClass('fa-check-square').addClass('fa-square')
       } else {
-        //Check all checkboxes
+        //체크 되어 있을 경우
         $('.mailbox-messages input[type=\'checkbox\']').prop('checked', true)
         $('.checkbox-toggle .far.fa-square').removeClass('fa-square').addClass('fa-check-square')
       }
       $(this).data('clicks', !clicks)
     })
 
-    //Handle starring for font awesome
-    $('.mailbox-star').click(function (e) {
-      e.preventDefault()
-      //detect type
-      var $this = $(this).find('a > i')
-      var fa    = $this.hasClass('fa')
-
-      //Switch states
-      if (fa) {
-        $this.toggleClass('fa-star')
-        $this.toggleClass('fa-star-o')
-      }
-    })
   })
 </script>
 <%@include file="../includes/footer.jsp" %>

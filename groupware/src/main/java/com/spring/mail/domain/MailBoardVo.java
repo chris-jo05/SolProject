@@ -1,6 +1,7 @@
 package com.spring.mail.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,4 +24,7 @@ public class MailBoardVo {
 	private String e_id;		// 메일 받는 사람 아이디
 	private String m_writer;	// 보낸 사람 이름
 	private String m_id;		// 보낸 사람 아이디
+	
+	//첨부 파일 리스트
+	private List<FileAttachVo> attachList;
 }

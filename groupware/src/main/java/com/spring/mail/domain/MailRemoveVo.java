@@ -15,4 +15,5 @@ import lombok.ToString;
 @Getter
 public class MailRemoveVo {
 	private List<MailBoardVo> mNoList;
+	private List<FileAttachVo> fileList;
 }
