@@ -60,7 +60,7 @@
 									<input type="hidden" name="docClass" value="기안서" />
 								</div>
 								<div class="card-tools" style="margin: 0px">
-									<button type="button" class="btn btn-primary btn-sm" style="margin-right: 10px;">상신</button>
+									<button type="submit" class="btn btn-primary btn-sm" style="margin-right: 10px;">상신</button>
 									<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/approval/appMain'">취소</button>
 								</div>
 							</div>
