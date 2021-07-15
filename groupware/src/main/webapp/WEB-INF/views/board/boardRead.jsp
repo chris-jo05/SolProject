@@ -41,7 +41,7 @@
               </div>
               <div class="card-header">
               <h1 class="card-title" >부&nbsp;서 : &nbsp;&nbsp;</h1>
-            	${vo.dno}
+            	${vo.dname}
               </div>
           
               
@@ -79,14 +79,14 @@
               
               <div class="mailbox-controls with-border text-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm" data-container="body" title="Reply">
+                  <button type="button" class="btn btn-default btn-sm" data-container="body" >
                     <i class="fas fa-reply">이전 글</i>
                   </button>
             
-                  <button type="button" class="btn btn-default btn-sm" data-container="body" title="list">
-                    <i class="fas fa-list"><a href="/board/boardMain">목 록</a></i>
+                  <button type="button" class="btn btn-default btn-sm" id="list" data-container="body">
+                    <i class="fas fa-list">목 록</a></i>
                      </button>
-                  <button type="button" class="btn btn-default btn-sm" data-container="body" title="Forward">
+                  <button type="button" class="btn btn-default btn-sm" data-container="body">
                     <i class="fas fa-share">다음 글</i>
                   </button>
                 </div>
@@ -110,11 +110,11 @@
       </div><!-- /.container-fluid -->
 <%-- 페이지 나누기를 위해 필요한 값 --%>
 <form action="list" method="get" id="operForm">
-<%--    <input type="hidden" name="type" value="${cri.type}" />
-   <input type="hidden" name="keyword" value="${cri.keyword}" />
+<%--     <input type="hidden" name="type" value="${cri.type}" />
+   <input type="hidden" name="keyword" value="${cri.keyword}" /> --%>
    <input type="hidden" name="pageNum" value="${cri.pageNum}" />
-   <input type="hidden" name="amount" value="${cri.amount}" />    --%>
-   <input type="hidden" name="bno"  value="${vo.bno}"/>
+   <input type="hidden" name="amount" value="${cri.amount}" />
+   <input type="hidden" name="bno" value="${vo.bno}"/>
 </form> 
 <script>
 //operForm 가져온 후 전송하기
@@ -129,5 +129,11 @@ $(".btn-success").click(function(){
 	operForm.attr('action', 'boardRemove');
 	operForm.submit();
 })
+
+$("#list").click(function(){
+      operForm.find("input[name='bno']").remove();
+      operForm.attr('action','/board/boardMain');
+      operForm.submit();
+   })
 </script>
 <%@include file="../includes/footer.jsp" %>

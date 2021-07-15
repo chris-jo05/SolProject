@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,14 +38,34 @@ public class BoardController {
 		//페이지 나누기
 		model.addAttribute("pageVO",new PageVO(cri, total));
 	}
-
+	
+	
 	@GetMapping({ "/boardRead", "/boardModify" })
-	public void read(int bno, Model model) {
-		log.info(bno + "번의 공지사항을 읽습니다");
+	public void read(int bno,@ModelAttribute("cri") Criteria cri, Model model) {
+		log.info(bno + "번의 공지사항을 읽습니다"+"cri:"+cri);
 		BoardVO vo = service.read(bno);
+		//조회수 올려주기
+		service.hit(bno);
 		model.addAttribute("vo", vo); // /board/read or /board/modify
 	}
 	
+	
+	@PostMapping("/boardModify")
+	public String update(BoardVO vo, Criteria cri, RedirectAttributes rttr) {
+		log.info("수정작업 요청");
+		
+		service.update(vo);
+		
+		rttr.addFlashAttribute("result","성공");
+		
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+
+		
+		return "redirect:boardMain";
+	}
 	
 
 	@GetMapping("/boardWriter")
@@ -66,7 +87,7 @@ public class BoardController {
 
 	}
 
-
+	//삭제
 	@GetMapping("/boardRemove")
 	public String remove(int bno,RedirectAttributes rttr) {
 		log.info("삭제를 요청합니다.");

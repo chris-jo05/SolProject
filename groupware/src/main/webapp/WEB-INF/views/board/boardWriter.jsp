@@ -37,7 +37,7 @@
                    </div>
                  <div class="form-group">
                      <label for="exampleInputBorderWidth2">작성자</label>
-                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="b_writer" placeholder="작성자를 입력해 주세요.">
+                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="b_writer" value="${login.ename}" readonly="readonly" style="background-color:white">
                    </div>
                 <div class="form-group">
                      <div class="form-group">
