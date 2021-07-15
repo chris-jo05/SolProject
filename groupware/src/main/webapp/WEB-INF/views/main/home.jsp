@@ -83,7 +83,7 @@
 										<i class="ion ion-clipboard mr-1"></i> 해야 할일
 									</h3>
 									<!-- 해야 할일 페이지 나누기 -->
-									<div class="card-tools">
+									<!-- <div class="card-tools">
 										<ul class="pagination pagination-sm">
 											<li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
 											<li class="page-item"><a href="#" class="page-link">1</a></li>
@@ -91,23 +91,23 @@
 											<li class="page-item"><a href="#" class="page-link">3</a></li>
 											<li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
 										</ul>
-									</div>
+									</div> -->
 				                
 								</div>
 								<!-- /.card-header -->
 								<div class="card-body">
 									<ul class="todo-list" data-widget="todo-list">
-										<li>
-											<!-- drag handle --> <span class="handle"> <i
+										<!-- <li>
+											drag handle <span class="handle"> <i
 												class="fas fa-ellipsis-v"></i> <i class="fas fa-ellipsis-v"></i>
-										</span> <!-- checkbox -->
+										</span> checkbox
 											<div class="icheck-primary d-inline ml-2">
 												<input type="checkbox" value="" name="todo1" id="todoCheck1">
 												<label for="todoCheck1"></label>
-											</div> <!-- todo text --> <span class="text">Design a nice
-												theme</span> <!-- Emphasis label --> <small
+											</div> todo text <span class="text">Design a nice
+												theme</span> Emphasis label <small
 											class="badge badge-danger"><i class="far fa-clock"></i>
-												2 mins</small> <!-- General tools such as edit or delete-->
+												2 mins</small> General tools such as edit or delete
 											<div class="tools">
 												<i class="fas fa-edit"></i> <i class="fas fa-trash-o"></i>
 											</div>
@@ -159,7 +159,7 @@
 												class="far fa-clock"></i> 1 week</small>
 											<div class="tools">
 												<i class="fas fa-edit"></i> <i class="fas fa-trash-o"></i>
-											</div></li>
+											</div></li> 
 										<li><span class="handle"> <i
 												class="fas fa-ellipsis-v"></i> <i class="fas fa-ellipsis-v"></i>
 										</span>
@@ -171,7 +171,7 @@
 												1 month</small>
 											<div class="tools">
 												<i class="fas fa-edit"></i> <i class="fas fa-trash-o"></i>
-											</div></li>
+											</div></li>-->
 									</ul>
 								</div>
 								<!-- /.card-body -->
@@ -455,6 +455,7 @@
 </html>
 <script>
 let calendarTable = $("#calendar #calendarTable");
+let todolist = $(".todo-list");
 
 $(function() {
 	// 로그인한 사원의 일정 캘린더에 보여주기
@@ -465,23 +466,34 @@ $(function() {
 			success:function(data) {
 				console.log(data);
 				
-				
+				console.log(todolist);
 				$.each(data, function(idx, element) {
 					console.log(element.title);
 					console.log(element.startDate);
 					console.log(element.endDate);
 					console.log(element.cno);
 					
-					var str = "<tr>";
 					
 					var title = element.title;
 					var time = element.startDate + " " + element.cal_startTime + " ~ " + element.endDate + " " + element.cal_endTime;
+					
+					var str = "<tr>";
 					
 					str += "<td>" + title + "</td>";
 					str += "<td>" + time + "</td>";
 					str += "</tr>";
 					
+					var str2 = "<li><span class='handle'>";
+					str2 += "<i class='fas fa-ellipsis-v'></i><i class='fas fa-ellipsis-v'></i></span>";
+					str2 += "<div class='icheck-primary d-inline ml-2'>  "
+					str2 += "<input type='checkbox' value='' name='todo" + idx + "' id='todoCheck"+ idx + "'>";
+					str2 += "<label for='todoCheck" + idx + "'></label></div>";
+					str2 += " <span class='text'>" + title + " " + time + "</span>";
+					str2 += " <small class='badge badge-info'><i class='far fa-clock'></i>1 hour</small>";
+					str2 += "<div class='tools'><i class='fas fa-edit'></i><i class='fas fa-trash-o'></i></div></li>";
+					
 					calendarTable.append(str);
+					todolist.append(str2);
 				})
 			}
 		});
