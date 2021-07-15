@@ -71,4 +71,19 @@ public class CalRestController {
 		return service.delete(groupId) ? new ResponseEntity<String>("success",HttpStatus.OK) :
 			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	@PostMapping("/rest_dept")
+	public ResponseEntity<List<String>> getDept() {
+		log.info("전체 부서 이름 요청 ");
+		
+		return new ResponseEntity<List<String>>(service.dept_list(), HttpStatus.OK);
+	}
+	
+	@PostMapping("/rest_emp/{dname}")
+	public ResponseEntity<List<String>> getEmp(@PathVariable("dname") String dname) {
+		log.info("해당 부서 전체 사원 이름 요청 ");
+		
+		return new ResponseEntity<List<String>>(service.emp_list(dname), HttpStatus.OK);
+	}
+	
 }
