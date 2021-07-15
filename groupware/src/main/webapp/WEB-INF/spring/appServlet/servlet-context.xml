@@ -21,7 +21,14 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.spring.controller" />
+	<!-- 컨트롤러 설정 -->
+	<context:component-scan base-package="com.spring" >
+		<!-- <context:include-filter type="annotation" expression="com.spring.board.controller"/>
+		<context:include-filter type="annotation" expression="com.spring.calendar.controller"/>
+		<context:include-filter type="annotation" expression="com.spring.member.controller"/>
+		<context:include-filter type="annotation" expression="com.spring.mail.controller"/>
+		<context:include-filter type="annotation" expression="com.spring.approval.controller"/> -->
+	</context:component-scan>
 	
 	<!-- 파일 업로드 -->
 	<beans:bean id="multipartResolver" 

@@ -29,16 +29,50 @@
    <section class="content">
       <div class="container-fluid">
          <div class="row">
+         
         	 <div class="col-md-3">
                   <a href="/board/boardWriter"
                      class="btn btn-primary btn-block mb-3">공지 작성</a>
+                     <!-- 공지 페이지 수 -->
                      <select name="" id="amount">
                     	 <option value="10">10</option>
                     	 <option value="20">20</option>
                    	 	 <option value="30">30</option>
                      </select>
              </div>
+             <!-- 검색 -->
+		
+                <div class="input-group input-group-sm">
+                <form action="" id="searchFrom">
+               		 <select name="type" id="" class="form-control">
+               		 <!-- 옵션으로 타입을 정한다. -->
+                 		 <option value="">검색어를 선택하세요</option>
+                 		 <option value="T" <c:out value="${pageVO.cri.type=='T'?'selected':''}"/>>제목</option>
+                  	   	 <option value="D" <c:out value="${pageVO.cri.type=='D'?'selected':''}"/>>부서</option>
+                  		 <option value="W" <c:out value="${pageVO.cri.type=='W'?'selected':''}"/>>작성자</option>
+                 		 <option value="TD" <c:out value="${pageVO.cri.type=='TD'?'selected':''}"/>>제목 or 부서</option>
+                 		  <option value="TDW" <c:out value="${pageVO.cri.type=='TDW'?'selected':''}"/>>제목 or 부서 or 작성자</option>
+                      </select>
+                    
+                      <!-- 키워드 값 설정 -->
+                      	<input type="text" name="keyword" value="${pageVO.cri.keyword}" />
+                      	
+                      	<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}"/>
+                      	<input type="hidden" name="amount" value="${pageVO.cri.amount}" />
+                            			
+					<button type="button" class="btn btn-default">
+                       <i class="fas fa-search"></i>
+               </button>
+          	 </form>
+             </div>
+                   
+         </div>
+                  
+             
+             
+             
             <div class="col-12">
+            
                <div class="card">
 
                   <div class="card-body table-responsive p-0">
@@ -61,7 +95,7 @@
                                  <td>${vo.bno}</td>
                                  <td><a href="${vo.bno}" class="move">${vo.b_title}</a></td>
                                  <td>${vo.b_writer}</td>
-                                  <td>${vo.dno}</td>
+                                  <td>${vo.dname}</td>
                                  <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
                                        value="${vo.b_date}" /></td>
                                  <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
@@ -109,8 +143,8 @@
       
 <!-- 페이지 나누기 추가 -->            
 <form action="boardMain" method="get" id="actionForm">	
-<%-- <input type="hidden" name="type" value="${pageVO.cri.type}" /> --%>
-<%-- <input type="hidden" name="keyword" value="${pageVO.cri.keyword}" /> --%>
+<input type="hidden" name="type" value="${pageVO.cri.type}" />
+<input type="hidden" name="keyword" value="${pageVO.cri.keyword}" />
 <input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" />
 <input type="hidden" name="amount" value="${pageVO.cri.amount}" />	
 </form>        
@@ -175,6 +209,34 @@ $("#amount").change(function(){
 		//actionForm 보내기
 		actionForm.submit();
 	})
+	
+//검색 관련 스크립트
+$(".btn-default").click(function(){
+		//검색 폼 가져오기
+		var searchForm = $("#searchForm");
+		
+		//type 가져오기
+		var type = $("select[name='type']").val();
+		
+		//keyword 가져오기
+		var keyword = $("input[name='keyword']").val();
+		
+		if(type===''){
+			alert("검색 기준을 확인하세요");
+			$("select[name='type']").focus();
+			return false;
+		}else if(keyword===''){
+			alert("검색어를 확인하세요");
+			$("input[name='keyword']").focus();
+			return false;
+		}
+		
+		//검색 처음에는 1page 보여주기
+		searchForm.find("input[name='pageNum']").val("1");
+		
+		searchForm.submit();
+	})
+
 </script>
 
 

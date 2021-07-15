@@ -45,7 +45,7 @@
                <div class="card-header">
               <h3 class="card-title">부  서</h3>
                 <input class="form-control" 
-                     readonly="readonly" value="${vo.dno}">
+                     readonly="readonly" value="${vo.dname}">
               
             
             </div>
@@ -67,7 +67,7 @@
               
               <!-- /.mailbox-controls -->
               <div class="mailbox-read-message">
-            <textarea class="form-control" rows="3" name="b_content">${vo.b_contents}
+            <textarea class="form-control" rows="3" name="b_contents">${vo.b_contents}
 			</textarea>
                 
               </div>
@@ -92,8 +92,8 @@
               <div class="mailbox-controls with-border text-center">
                 <div class="btn-group">
                  
-                  <button type="button" class="btn btn-default btn-sm" data-container="body" title="list">
-                    <i class="fas fa-list"><a href="/board/boardMain">목 록</a></i>
+                  <button type="button" class="btn btn-default btn-sm" data-container="body" id="list">
+                    <i class="fas fa-list">목 록</a></i>
                      </button>
                   
                 </div>
@@ -119,13 +119,21 @@
  
     <!-- /.content -->
   </div>
-  <form action="boardModfy" method="post" id="operForm">
-<%--    <input type="hidden" name="type" value="${cri.type}" />
-   <input type="hidden" name="keyword" value="${cri.keyword}" />
+  <form action="boardModfy" method="get" id="operForm">
+<%--<input type="hidden" name="type" value="${cri.type}" />
+   <input type="hidden" name="keyword" value="${cri.keyword}" />--%>
    <input type="hidden" name="pageNum" value="${cri.pageNum}" />
-   <input type="hidden" name="amount" value="${cri.amount}" />    --%>
+   <input type="hidden" name="amount" value="${cri.amount}" />
 <input type="hidden" name="bno"  value="${vo.bno}"/>
 </form> 
   <!-- /.content-wrapper -->
+  <script>
+ var operForm = $("#operForm");
+$("#list").click(function(){
+      operForm.find("input[name='bno']").remove();
+      operForm.attr('action','/board/boardMain');
+      operForm.submit();
+})
 
+   </script>
 <%@include file="../includes/footer.jsp" %>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.board.mapper.BoardMapper">
+	<!-- 공지글 등록 -->
+	<insert id="insert">
+		insert into board(b_title,b_writer,dno,b_contents)
+		values(#{b_title},#{b_writer},(select dno from dept where
+		dname=#{dname}),#{b_contents})
+	</insert>
+
+	<!-- 공지글 전체 가져오기 <select id="list" resultType="com.spring.domain.BoardVO"> 
+		select * from board where bno>0 order by bno desc, b_date desc </select> -->
+
+	<!-- 페이지 나누기 -->
+	<select id="list" resultType="com.spring.board.domain.BoardVO">
+	<![CDATA[
+		select * from(select /*+INDEX_DESC(board pk_board)*/
+               rownum rn,bno,b_title,b_writer,d.dno,b_date,b_updatedate,hit,dname
+            from BOARD b, dept d
+            where 
+     ]]>       
+     
+     	<include refid="criteria"></include>
+        
+        <![CDATA[		     
+				     
+				     rownum <= (#{pageNum}*#{amount}))
+				where rn > ((#{pageNum}-1)*#{amount})		
+		]]>
+	</select>
+	<!-- 전제 공지글 수 -->
+	<select id="totalBn" resultType="int">
+		select count(*) from board where
+		bno>0
+	</select>
+
+	<!--bno에 해당하는 공지글 가져오기(read) -->
+	<select id="read" resultType="com.spring.board.domain.BoardVO">
+		select b.bno, b.b_date, d.dname, b.b_writer, b.b_title, b.b_contents 
+		from board b, dept d 
+		where b.bno=#{bno} and b.dno=d.dno
+	</select>
+	
+	<!-- 공지글 삭제하기 -->
+	<delete id="delete">
+		delete from board where bno=#{bno}
+	</delete>
+	<!-- 공지글 수정하기 -->
+	<update id="update">
+		update board
+		set b_title=#{b_title},b_contents=#{b_contents},b_updatedate=sysdate
+		where bno=#{bno}
+	</update>
+	
+	<update id="hit">
+	update board
+	set hit = hit + 1
+	WHERE
+		bno = #{bno}
+	</update>
+	<!-- 검색을 위한 sql -->
+	<!-- 동적 SQL -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND"  prefixOverrides="OR" >
+			<foreach collection="typeArr" item='type'>
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='T'.toString()">
+							b_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='D'.toString()">
+							dname like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='W'.toString()">
+							b_writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+</mapper>

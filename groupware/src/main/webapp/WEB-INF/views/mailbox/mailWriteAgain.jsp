@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="../includes/header.jsp" %>
 
 	  <!-- Content Wrapper. Contains page content -->
@@ -42,9 +43,16 @@
               <!-- /.card-header -->
               <div class="card-body">
               <form action="" method="post">
+              	<c:if test="${read.m_id}">
 	                <div class="form-group">
 	                  <input class="form-control" placeholder="${read.m_id}" name="e_id" readonly="readonly" value="${read.m_id}">
 	                </div>
+              	</c:if>
+              	<c:if test="${mailList.m_id}">
+	                <div class="form-group">
+	                  <input class="form-control" placeholder="${mailList.m_id}" name="e_id" readonly="readonly" value="${mailList.m_id}">
+	                </div>
+              	</c:if>
 	                <div class="form-group">
 	                  <input class="form-control" placeholder="제목" name="m_title">
 	                </div>
@@ -65,7 +73,7 @@
 	              <div class="card-footer">
 	                <div class="float-right">
 	                  	<button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> 보내기</button>
-		                <button type="reset" class="btn btn-danger"><i class="fas fa-times"></i> 취소하기</button>
+		                <button type="reset" class="btn btn-danger" onclick="location.href='/mailbox/mailMain'"><i class="fas fa-times"></i> 취소하기</button>
 	                </div>
 	              </div>
 	              <input type="hidden" name="m_writer" value="${login.ename}" />	<!-- 메일 보낸 사람담기 -->
