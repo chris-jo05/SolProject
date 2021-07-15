@@ -87,9 +87,9 @@ public class MailServiceImpl implements MailBoardService {
 	@Transactional
 	@Override
 	public int deleteMailList(MailRemoveVo removeMail) {
-		beanMapper.insertInBean(removeMail);
-		attachMapper.attachFileList(removeMail);
 		attachMapper.insertAttachInBean(removeMail);
+		attachMapper.attachFileList(removeMail);
+		beanMapper.insertInBean(removeMail);
 		return mapper.deleteMailList(removeMail);
 	}
 	
