@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../includes/header.jsp"%>
 
 <!-- DataTables -->
@@ -64,10 +65,14 @@
 									<tr>
 										<td>${vo.docNo}</td>
 										<td>${vo.docClass}</td>
-										<td>${vo.docTitle}</td>
-										<td>${vo.docDate}</td>
-										<td>${vo.dno}</td>
-										<td>${vo.eno}</td>
+										<td>
+											<a href="/approval/appRead?docNo=${vo.docNo}" class="move">${vo.docTitle}</a>
+										</td>
+										<td>
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${vo.docDate}" />
+										</td>
+										<td>${vo.dname}</td>
+										<td>${vo.ename}</td>
 										<td></td>
 									</tr>
 								</c:forEach>
@@ -101,21 +106,14 @@
 
 <!-- Page specific script -->
 <script>
-	$(function() {
-		$("#example1").DataTable({
-			"responsive" : true,
-			"lengthChange" : false,
-			"autoWidth" : false,
-			"buttons" : [ "copy", "csv", "excel", "pdf", "print", "colvis" ]
-		}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-		$('#example2').DataTable({
-			"paging" : true,
-			"lengthChange" : false,
-			"searching" : false,
-			"ordering" : true,
-			"info" : true,
-			"autoWidth" : false,
-			"responsive" : true,
+	$ (function () {
+		$ ("#example1").DataTable ({
+			"responsive" : true, "lengthChange" : false, "autoWidth" : false, "buttons" : [
+					"copy", "csv", "excel", "pdf", "print", "colvis"
+			]
+		}).buttons ().container ().appendTo ('#example1_wrapper .col-md-6:eq(0)');
+		$ ('#example2').DataTable ({
+			"paging" : true, "lengthChange" : false, "searching" : false, "ordering" : true, "info" : true, "autoWidth" : false, "responsive" : true,
 		});
 	});
 </script>
