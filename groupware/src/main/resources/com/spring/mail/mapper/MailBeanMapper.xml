@@ -18,13 +18,42 @@
 	
 	<!-- 휴지통에 있는 메일 리스트 가져오기 -->
 	<select id="beanListMail" resultType="com.spring.mail.domain.MailBoardVo">
-		select * from e_mail_bean where e_id=#{e_id} order by m_senddate desc, m_no desc
+		<![CDATA[
+		select * from 
+		(select /*+index_desc(E_MAIL PK_E_MAIL)*/ 
+				 rownum rn,m_no, m_title, m_content, m_senddate, e_id, eno,m_read,m_writer,m_id
+			from e_mail_bean
+			where rownum <= (#{cri.pageNum}*#{cri.amount}) and e_id=#{e_id})
+			where rn > ((#{cri.pageNum}-1)*#{cri.amount}) and e_id=#{e_id}
+		]]>
+	</select>
+	
+	<!-- 휴지통에 있는 메일 총 갯수 구하기 -->
+	<select id="totalBeanCnt" resultType="int">
+		select count(*) from e_mail where e_id=#{e_id} and	m_no > 0 
 	</select>
 
 	<!-- 메일 하나 읽기 -->
 	<select id="beanReadMail" resultType="com.spring.mail.domain.MailBoardVo">
-		select * from e_mail_bean where m_no=#{m_no}
+		SELECT b.* FROM(
+			SELECT m_no, m_title, m_content, m_senddate, e_id, eno, m_id, m_writer, m_read,
+   				   LAG(m_no) OVER(ORDER BY m_no desc) AS m_prev,
+ 				   LEAD(m_no) OVER(ORDER BY m_no desc) AS m_next 
+				FROM e_mail_bean where e_id=#{e_id}) b
+							WHERE b.m_no = #{m_no}
 	</select>
 	
+	<!-- 휴지통 리스트 지우기 -->
+	<delete id="deleteBeanMailList" parameterType="java.util.List">
+		delete from e_mail_bean
+			where
+			<foreach collection="mNoList" item="item" separator="or" open="" close="">
+				(m_no=#{item.m_no})
+			</foreach>
+	</delete>
 	
+	<!-- 휴지통 읽기페이지에서 메일 삭제 -->
+	<delete id="deleteBeanMail" >
+		delete from e_mail_bean where m_no=#{m_no}
+	</delete>
 </mapper>

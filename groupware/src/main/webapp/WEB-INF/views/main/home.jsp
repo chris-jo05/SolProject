@@ -83,7 +83,7 @@
 										<i class="ion ion-clipboard mr-1"></i> 해야 할일
 									</h3>
 									<!-- 해야 할일 페이지 나누기 -->
-									<div class="card-tools">
+									<!-- <div class="card-tools">
 										<ul class="pagination pagination-sm">
 											<li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
 											<li class="page-item"><a href="#" class="page-link">1</a></li>
@@ -91,23 +91,23 @@
 											<li class="page-item"><a href="#" class="page-link">3</a></li>
 											<li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
 										</ul>
-									</div>
+									</div> -->
 				                
 								</div>
 								<!-- /.card-header -->
 								<div class="card-body">
 									<ul class="todo-list" data-widget="todo-list">
-										<li>
-											<!-- drag handle --> <span class="handle"> <i
+										<!-- <li>
+											drag handle <span class="handle"> <i
 												class="fas fa-ellipsis-v"></i> <i class="fas fa-ellipsis-v"></i>
-										</span> <!-- checkbox -->
+										</span> checkbox
 											<div class="icheck-primary d-inline ml-2">
 												<input type="checkbox" value="" name="todo1" id="todoCheck1">
 												<label for="todoCheck1"></label>
-											</div> <!-- todo text --> <span class="text">Design a nice
-												theme</span> <!-- Emphasis label --> <small
+											</div> todo text <span class="text">Design a nice
+												theme</span> Emphasis label <small
 											class="badge badge-danger"><i class="far fa-clock"></i>
-												2 mins</small> <!-- General tools such as edit or delete-->
+												2 mins</small> General tools such as edit or delete
 											<div class="tools">
 												<i class="fas fa-edit"></i> <i class="fas fa-trash-o"></i>
 											</div>
@@ -159,7 +159,7 @@
 												class="far fa-clock"></i> 1 week</small>
 											<div class="tools">
 												<i class="fas fa-edit"></i> <i class="fas fa-trash-o"></i>
-											</div></li>
+											</div></li> 
 										<li><span class="handle"> <i
 												class="fas fa-ellipsis-v"></i> <i class="fas fa-ellipsis-v"></i>
 										</span>
@@ -171,13 +171,13 @@
 												1 month</small>
 											<div class="tools">
 												<i class="fas fa-edit"></i> <i class="fas fa-trash-o"></i>
-											</div></li>
+											</div></li>-->
 									</ul>
 								</div>
 								<!-- /.card-body -->
 								<div class="card-footer clearfix">
-									<button type="button" class="btn btn-primary float-right">
-										<i class="fas fa-plus"></i> Add item
+									<button id="cal_btn" type="button" class="btn btn-primary float-right">
+										<i  class="fas fa-plus"></i> 일정 관리
 									</button>
 								</div>
 							</div>
@@ -451,10 +451,12 @@
 <form action="mailMain" method="get" id="actionForm">
 	<input type="hidden" name="eno" value="${login.eno}" />
 </form>
+
 </body>
 </html>
 <script>
 let calendarTable = $("#calendar #calendarTable");
+let todolist = $(".todo-list");
 
 $(function() {
 	// 로그인한 사원의 일정 캘린더에 보여주기
@@ -462,29 +464,149 @@ $(function() {
 	$.getJSON({
 			url:"/calendar/rest_list/" + ${login.eno},
 			type:"get",
+			async:false,
 			success:function(data) {
 				console.log(data);
 				
-				
+				console.log(todolist);
 				$.each(data, function(idx, element) {
 					console.log(element.title);
 					console.log(element.startDate);
 					console.log(element.endDate);
-					console.log(element.cno);
+					console.log("일정 번호 : " + element.cno);
 					
-					var str = "<tr>";
 					
 					var title = element.title;
 					var time = element.startDate + " " + element.cal_startTime + " ~ " + element.endDate + " " + element.cal_endTime;
+					
+					var duration = "";
+
+					var startSpl = element.startDate.split("-");
+					var endSpl = element.endDate.split("-");
+					var startTimeSpl = element.cal_startTime.split(":");
+					var endTimeSpl = element.cal_endTime.split(":");
+					
+					var now = new Date();
+					var year = now.getFullYear(); //연도
+					var month = now.getMonth()+1;//월 
+					var date = now.getDate();//일
+					var hr = now.getHours();//시간
+					var min = now.getMinutes();//분
+					
+					var startDate = new Date(startSpl[0], String((startSpl[1] * 1) - 1), startSpl[2], startTimeSpl[0], startTimeSpl[1]);
+					var endDate = new Date(endSpl[0], String((endSpl[1] * 1) - 1), endSpl[2], endTimeSpl[0], endTimeSpl[1]);
+					
+					var between_minute = Math.ceil((endDate.getTime() - now.getTime())/1000/60);
+					
+					console.log(year + " " + month + " " + date + " " + hr + " " + min);				
+					console.log(startSpl);
+					console.log(endSpl);
+					
+					if(now < startDate) {
+						console.log(now);
+						console.log(startDate);
+						console.log("not started");
+						
+						duration = " 시작 예정";
+					} else {
+						if(now > endDate) {
+							duration = " 만료";
+						} else {
+							var between_hour = Math.floor(between_minute / 60);
+							var minute_left = between_minute % 60;
+							var between_day = Math.floor(between_hour / 24);
+							var hour_left = between_hour % 24;
+							
+							if(between_day > 0) {
+								duration = " " + between_day + "일";
+							} else if(between_hour > 0) {
+								duration = " " + between_hour + "시간";
+							} else {
+								duration = " " + between_minute + "분";
+							}
+						}
+					}
+					
+					
+					var str = "<tr>";
 					
 					str += "<td>" + title + "</td>";
 					str += "<td>" + time + "</td>";
 					str += "</tr>";
 					
+					var str2 = "<li>";
+					str2 += "<span class='handle'><i class='fas fa-ellipsis-v'></i><i class='fas fa-ellipsis-v'></i>";
+					str2 += "<div class='icheck-primary d-inline ml-2'>  ";
+					
+					console.log(element.cal_check + " " + typeof(element.cal_check));
+					if(element.cal_check == '1') {
+						str2 += "<input type='checkbox' value='' name='todo " + element.cno + "' id='todoCheck"+ element.cno + "' checked>";
+					} else {
+						str2 += "<input type='checkbox' value='' name='todo " + element.cno + "' id='todoCheck"+ element.cno + "'>";
+					}
+					
+					str2 += "<label for='todoCheck" + element.cno + "'></label></div></span>";
+					str2 += " <span class='text'>" + title + " <br> " + time + "</span>";
+					
+					if(duration == " 만료") {
+						str2 += " <small class='badge badge-danger'><i class='far fa-clock'></i>" + duration + "</small></li>";	
+					} else {
+						str2 += " <small class='badge badge-info'><i class='far fa-clock'></i>" + duration + "</small></li>";
+					}
+					
+					//str2 += "<div class='tools'><i class='fas fa-edit'></i><i class='fas fa-trash-o'></i></div></li>";
+					
 					calendarTable.append(str);
+					todolist.append(str2);
 				})
 			}
-		});
+	});
+	
+	$("#cal_btn").click(function() {
+		console.log("cal_btn clicked");
+		
+		/* $(".todo-list li label").each(function(idx, element){
+			console.log($(element).prev().prop("checked"));
+		}) */
+		
+		location.href = "/calendar/calendar";
+	});
+	
+	$(".todo-list li label").click(function() {
+		
+		if(!$(this).prev().prop("checked")) {
+			//체크가 안된 상태에서 체크 박스 클릭 => 체크 하기
+			console.log($(this).prev().prop("checked"));
+			
+			var cno = String($(this).prev().attr("name")).split(" ")[1] * 1;
+			console.log(cno + " " + typeof(cno));
+			
+			$.ajax({
+				url:"/calendar/rest_check/" + cno + "/1",
+				type:"POST",
+				async:false,
+				success:function(data) {
+					console.log(data);
+				}
+			})
+		} else {
+			// 체크가 된 상태에서 체크 박스 클릭 => 체크 풀기
+			console.log($(this).prev().prop("checked"));
+			
+			var cno = String($(this).prev().attr("name")).split(" ")[1] * 1;
+			console.log(cno + " " + typeof(cno));
+			
+			$.ajax({
+				url:"/calendar/rest_check/" + cno + "/0",
+				type:"POST",
+				async:false,
+				success:function(data) {
+					console.log(data);
+				}
+			})
+		}
+	})
 })
+
 </script>
 <%@include file="../includes/footer.jsp" %>

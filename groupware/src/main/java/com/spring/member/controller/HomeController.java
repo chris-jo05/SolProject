@@ -64,8 +64,10 @@ public class HomeController {
 	}
 	
 	@GetMapping("/main/home")
-	public void home() {
+	public void home(HttpSession session, Model model) {
 		log.info("메인 페이지로 이동합니다.");
+		MemberVo vo = (MemberVo)session.getAttribute("login");
+		model.addAttribute("login", vo);
 	}
 	
 	@GetMapping("/self/profile")

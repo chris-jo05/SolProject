@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.member.domain.Criteria;
 import com.spring.member.domain.MemberVo;
 import com.spring.member.mapper.MemberMapper;
 
@@ -30,8 +31,23 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public List<MemberVo> list() {
-		return mapper.list();
+	public List<MemberVo> list(Criteria cri) {
+		return mapper.list(cri);
+	}
+	
+	@Override
+	public MemberVo selectMember(int eno) {
+		return mapper.selectMember(eno);
 	}
 
+	@Override
+	public boolean update(MemberVo vo) {
+		return mapper.update(vo)>0?true:false;
+	}
+
+	@Override
+	public int total(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.totalEn(cri);
+	}
 }

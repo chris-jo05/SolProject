@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@include file="../includes/header.jsp" %>
 
@@ -46,19 +47,19 @@
                 <!-- 메일 주소 -->
                 <h6>보낸 사람 : ${read.m_writer}
                 <br />
-                <h6>메일 주소 : <a href="/mailbox/mailWriteAgain"> ${read.m_id}@SolCompany.com</a> 
+                <h6>메일 주소 : <a href="/mailbox/mailWrite"> ${read.m_id}@SolCompany.com</a> 
                 	<!-- 보낸 날짜 -->
                 	<span class="mailbox-read-time float-right"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${read.m_sendDate}"/></span></h6>
                 </h6> 
                 
                 <div class="mailbox-controls text-center">
-                  <button type="submit" class="btn btn-default btn-sm" data-oper="before" data-container="body" title="이전 메일">
+                  <button type="button" class="btn btn-default btn-sm" data-oper="prev" data-container="body" title="이전 메일">
                     <i class="fas fa-reply"></i>
                   </button>
-                  <button type="submit" class="btn btn-default btn-sm" data-oper="delete" data-container="body" title="지우기">
+                  <button type="button" class="btn btn-default btn-sm" data-oper="delete" data-container="body" title="지우기">
                     <i class="far fa-trash-alt"></i>
                   </button>
-                  <button type="submit" class="btn btn-default btn-sm" data-oper="forward" data-container="body" title="다음 메일">
+                  <button type="button" class="btn btn-default btn-sm" data-oper="next" data-container="body" title="다음 메일">
                     <i class="fas fa-share"></i>
                   </button>
                 </div>
@@ -70,20 +71,12 @@
             <!-- /.card-body -->
             <div class="card-footer bg-white">
             <!-- 첨부파일이 있을 경우 -->
-              <!-- <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
+              <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
                 <li>
-                  <span class="mailbox-attachment-icon"><i class="far fa-file-pdf"></i></span>
-
-                  <div class="mailbox-attachment-info">
-                    <a href="#" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> Sep2014-report.pdf</a>
-                        <span class="mailbox-attachment-size clearfix mt-1">
-                          <span>1,245 KB</span>
-                          <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                        </span>
-                  </div>
+                  
                 </li>
                
-              </ul> -->
+              </ul>
             </div>
             <!-- /.card-footer -->
             
@@ -103,9 +96,14 @@
 	<input type="hidden" name="m_no" value="${read.m_no}" />
 </form>
 <script>
+	let m_no = ${read.m_no};
+	let prev = ${read.m_prev};
+	let next = ${read.m_next};
+	
 $(function(){
 	
 	var operForm = $("#operForm");
+	var input = $("input[type='hidden']")
 	
 	$("button").click(function(e){
 		e.preventDefault();
@@ -113,10 +111,35 @@ $(function(){
 		var oper = $(this).data("oper");
 		
 		if(oper === "delete"){
+			
 			operForm.attr('action','/mailbox/removeMail');
+			
+		}else if(oper === "prev"){
+			
+			if(prev == 0){
+				operForm.attr('method','get');
+				alert("이전페이지가 존재하지 않습니다.!!");
+			}else if(prev != 0){
+				console.log(prev);
+				input.attr('value',prev)
+				operForm.attr('method','get');
+				operForm.attr('action','/mailbox/readMail?m_no='+prev);
+			}
+		}else if(oper === "next"){
+			
+			if(next == 0){
+				operForm.attr('method','get');
+				alert("다음페이지가 존재하지 않습니다.!!");
+			}else if(next != 0){
+				input.attr('value',next)
+				operForm.attr('method','get');
+				operForm.attr('action',"/mailbox/readMail?m_no=" + next);
+			}
+			
 		}
-		operForm.submit();
+				operForm.submit();	
 	})
 });	 
 </script>
+<script src="/resources/project/mail/js/readMail.js"></script>
 <%@include file="../includes/footer.jsp" %>

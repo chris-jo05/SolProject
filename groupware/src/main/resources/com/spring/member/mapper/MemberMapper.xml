@@ -9,11 +9,39 @@
 	
 	<insert id="insert">
 	insert into emp(ename, position, dno, birthday, address, mobile, hiredate, acou_name, acount, id, password, gender)
-	values(#{ename},#{position},(select dno from dept where dname=#{dname}),#{birthday},#{address},#{mobile},to_date(#{hireDate}),#{acou_name},#{account},#{id},#{password},#{gender})
+	values(#{ename},#{position},(select dno from dept where dname=#{dname}),#{birthday},#{address},#{mobile},to_date(#{hireDate}),#{acou_name},#{acount},#{id},#{password},#{gender})
 	</insert>
 	
 	<select id="list" resultType="com.spring.member.domain.MemberVo">
-	select * from emp where eno>0 order by eno desc, hiredate desc
+	<![CDATA[
+		select * from (select /*+INDEX_DESC(emp eno)*/
+               rownum rn, e.*, d.dname
+            from emp e, dept d
+            where e.dno = d.dno and rownum <= (#{pageNum}*#{amount}))
+				where rn > ((#{pageNum}-1)*#{amount}) order by hiredate desc, eno desc		
+		]]>
 	</select>
 	
+	   <select id="totalEn" resultType="int">
+      select count(*) from emp where
+      eno>0
+   </select>
+   
+   <!-- search -->
+   <select id="search" resultType="com.spring.member.domain.MemberVo">
+   		select e.*,d.dname from emp e, dept d where ename like '%' || #{keyword} || '%'
+   </select>
+   	
+	
+<!-- 	<select id="list" resultType="com.spring.member.domain.MemberVo">
+	select e.eno, e.ename, e.position, d.dname, e.birthday, e.address, e.mobile, e.hiredate, e.leavedate, e.acou_name, e.acount, e.id, e.password, e.gender from emp e, dept d where e.dno = d.dno and eno>0 order by eno desc, hiredate desc
+	</select> -->
+	
+	<select id="selectMember" parameterType="int" resultType="com.spring.member.domain.MemberVo">
+	select e.*, d.dname from emp e, dept d where e.dno = d.dno and eno=#{eno}
+	</select>
+	
+	<update id="update">
+	update emp set ename=#{ename}, dno=(select dno from dept where dname=#{dname}), position=#{position}, birthday=#{birthday}, mobile=#{mobile}, id=#{id}, password=#{password}, address=#{address}, hiredate=#{hireDate}, leavedate=#{leaveDate}, acou_name=#{acou_name}, acount=#{acount}, gender=#{gender} where eno=#{eno}
+	</update>
 </mapper>

@@ -18,4 +18,7 @@ public interface CalendarMapper {
 	
 	public List<String> dept_list();
 	public List<String> emp_list(String dname);
+	
+	public int updateCheck(@Param("cno") int cno, @Param("cal_check") String cal_check);
+	public List<String> groupIdCheck();
 }

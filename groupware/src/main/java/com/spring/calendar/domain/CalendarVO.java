@@ -25,4 +25,5 @@ public class CalendarVO {
     private String rep;
     private String memo;
     private String cal_color;
+    private String cal_check;
 }

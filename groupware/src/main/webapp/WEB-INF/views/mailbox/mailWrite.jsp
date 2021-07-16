@@ -54,14 +54,18 @@
                       
                     </textarea>
                 </div>
-                <!-- <div class="form-group">
+                
+                <!-- 파일 첨부 -->
+                <div class="form-group">
                   <div class="btn btn-default btn-file">
-                    <i class="fas fa-paperclip"></i> 파일 첨부
-                    <input type="file" name="attachment">
+                  	<i class="fas fa-paperclip"></i> 파일 첨부
+                    	<input type="file" name="attachment" multiple>
                   </div>
-                  <p class="help-block">Max. 32MB</p>
-                </div> -->
+                  <p class="help-block"> 
+                  </p>
+                </div>
               </div>
+              
               <!-- /.card-body -->
               <div class="card-footer">
                 <div class="float-right">
@@ -86,12 +90,7 @@
   </div>
   <!-- /.content-wrapper -->
 	
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- 사이드바 등장관련 js -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- 메일 작성시 각종 메뉴js -->
-<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+
 <!-- Page specific script -->
 <script>
   $(function () {
@@ -99,5 +98,5 @@
     $('#compose-textarea').summernote()
   })
 </script>
-
+<script src="/resources/project/mail/js/mailWrite.js"></script>
 <%@include file="../includes/footer.jsp" %>

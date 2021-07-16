@@ -54,7 +54,7 @@
 	                  <label for="exampleSelectBorder">부서명</label>
 	                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="dname">
 	                    <option value="인사팀">인사팀</option>
-	                    <option value="관리팀">관리팀</option>
+	                    <option value="총무팀">총무팀</option>
 	                    <option value="영업팀">영업팀</option>
 	                  </select>
 	                </div>
@@ -148,7 +148,7 @@
 	                </div>
 	                <div class="form-group">
 	                  <label for="exampleInputBorderWidth2">계좌번호</label>
-	                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="계좌번호를 입력해주세요.(78945-12-45646789)" name="account">
+	                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="계좌번호를 입력해주세요.(78945-12-45646789)" name="acount">
 	                </div>
 	                <div class="form-group">
 	                	<label for="exampleInputBorderWidth2" name="gender">성 별</label>
@@ -164,7 +164,8 @@
 	              </div>
 	                <div class="card-footer">
 	                  <button type="submit" class="btn btn-info">추가 하기</button>
-	                  <button type="reset" class="btn btn-default float-right">취소 하기</button>
+	                  <button type="reset" class="btn btn-default float-right"
+	                  		  onclick="location.href='/hrteam/hrMain'">취소 하기</button>
 	                </div>
 			   </form>
               <!-- /.card-body -->
