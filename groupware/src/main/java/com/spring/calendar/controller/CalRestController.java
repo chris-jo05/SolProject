@@ -86,4 +86,18 @@ public class CalRestController {
 		return new ResponseEntity<List<String>>(service.emp_list(dname), HttpStatus.OK);
 	}
 	
+	@PostMapping("/rest_check/{cno}/{cal_check}")
+	public ResponseEntity<String> updateCheck(@PathVariable("cno") int cno, @PathVariable("cal_check") String cal_check) {
+		log.info("일정 체크 변경 요청 " + cno + " " + cal_check);
+		
+		return service.updateCheck(cno, cal_check) ? new ResponseEntity<String>("success",HttpStatus.OK) :
+			new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@GetMapping("/rest_group")
+	public ResponseEntity<List<String>> groupIdCheck() {
+		log.info("일정 그룹 이름 중복 검사 요청");
+		
+		return new ResponseEntity<List<String>>(service.groupIdCheck(),HttpStatus.OK);
+	}
 }
