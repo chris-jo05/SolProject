@@ -38,8 +38,11 @@ public class MailServiceImpl implements MailBoardService {
 	@Override
 	public MailBoardVo readMail(int m_no, String e_id) {
 		
-		MailBoardVo vo = mapper.readMail(m_no);
-		if(vo.getE_id() == e_id) {
+		MailBoardVo vo = mapper.readMail(m_no,e_id);
+		System.out.println(vo.getE_id()+"읽는지 테스트중");
+		if(vo.getM_id() != e_id) {
+			System.out.println(e_id);
+			System.out.println(vo.getE_id());
 			mapper.readVal(true, m_no);
 			return vo;
 		}else {
@@ -78,18 +81,20 @@ public class MailServiceImpl implements MailBoardService {
 
 	@Transactional
 	@Override
-	public int deleteMail(int m_no) {
+	public int deleteMail(FileAttachVo file) {
 		// 휴지통에 메일을 만들어 주면서 받은편지함에서 삭제해준다.
-		beanMapper.beanInMail(m_no);
-		return mapper.deleteMail(m_no);
+		beanMapper.beanInMail(file);
+		attachMapper.deleteFile(file);
+		attachMapper.insertFile(file);
+		return mapper.deleteMail(file);
 	}
 
 	@Transactional
 	@Override
 	public int deleteMailList(MailRemoveVo removeMail) {
 		beanMapper.insertInBean(removeMail);
-		attachMapper.attachFileList(removeMail);
 		attachMapper.insertAttachInBean(removeMail);
+		attachMapper.attachFileList(removeMail);
 		return mapper.deleteMailList(removeMail);
 	}
 	
@@ -104,8 +109,8 @@ public class MailServiceImpl implements MailBoardService {
 	}
 	
 	@Override
-	public MailBoardVo beanReadMail(int m_no) {
-		return beanMapper.beanReadMail(m_no);
+	public MailBoardVo beanReadMail(int m_no, String e_id) {
+		return beanMapper.beanReadMail(m_no, e_id);
 	}
 
 	@Override
@@ -113,10 +118,30 @@ public class MailServiceImpl implements MailBoardService {
 		return attachMapper.findByMno(m_no);
 	}
 
+	@Transactional
+	@Override
+	public int deleteBeanMailList(MailRemoveVo removeMail) {
+		attachMapper.attachFileBeanList(removeMail);
+		return beanMapper.deleteBeanMailList(removeMail);
+	}
 
+	@Transactional
+	@Override
+	public int deleteBeanMail(int m_no) {
+		attachMapper.deleteAttachFile(m_no);
+		return beanMapper.deleteBeanMail(m_no);
+	}
 
+	@Override
+	public MailBoardVo readSendMail(int m_no, String m_id) {
+		return mapper.readSendMail(m_no, m_id);
+	}
+
+	@Override
+	public int getCntUnRead(String e_id) {
+		return mapper.getCntUnRead(e_id);
+	}
 
 	
-
 
 }

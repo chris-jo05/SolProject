@@ -25,11 +25,6 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 	@Override
-	public ApprovalVO appReadPeriod(String docNo, String docKind, int eno) {
-		return mapper.appReadPeriod(docNo, docKind);
-	}
-
-	@Override
 	public int appWrite(ApprovalVO appWrite) {
 		int result = mapper.appWrite(appWrite);
 		return result;

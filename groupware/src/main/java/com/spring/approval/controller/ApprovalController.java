@@ -50,18 +50,6 @@ public class ApprovalController {
 		model.addAttribute("appRead", appRead);
 	}
 
-	@GetMapping("/appReadPeriod")
-	public void readperiod(String docNo, String docKind, HttpSession session, Model model) {
-		log.info("결재문서 읽기로 이동" + docNo);
-
-		MemberVo member = (MemberVo) session.getAttribute("login");
-		log.info(member.getEno());
-		ApprovalVO appReadPeriod = service.appReadPeriod(docNo, docKind, member.getEno());
-		log.info(appReadPeriod.getEno());
-
-		model.addAttribute("appReadPeriod", appReadPeriod);
-	}
-
 	@GetMapping("/appWriteDraft")
 	public void drift() {
 		log.info("기안서로 이동");

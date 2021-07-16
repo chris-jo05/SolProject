@@ -86,7 +86,7 @@ $(function(){
 		e.preventDefault();
 			
 		var str ="";
-		$(".help-block ul li").each(function(idx, obj){
+		$(".help-block li").each(function(idx, obj){
 			var job = $(obj);
 				
 			//수집된 정보를 hidden 태그로 작성

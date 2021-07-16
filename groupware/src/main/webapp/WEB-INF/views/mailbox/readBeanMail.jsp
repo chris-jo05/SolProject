@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@include file="../includes/header.jsp" %>
 
@@ -102,6 +101,7 @@
 	
 $(function(){
 	
+	
 	var operForm = $("#operForm");
 	var input = $("input[type='hidden']")
 	
@@ -112,8 +112,7 @@ $(function(){
 		
 		if(oper === "delete"){
 			
-			operForm.attr('action','/mailbox/removeMail');
-			
+			operForm.attr('action','/mailbox/removeBean');
 		}else if(oper === "prev"){
 			
 			if(prev == 0){
@@ -123,7 +122,7 @@ $(function(){
 				console.log(prev);
 				input.attr('value',prev)
 				operForm.attr('method','get');
-				operForm.attr('action','/mailbox/readMail?m_no='+prev);
+				operForm.attr('action','/mailbox/readBeanMail?m_no='+prev);
 			}
 		}else if(oper === "next"){
 			
@@ -133,11 +132,12 @@ $(function(){
 			}else if(next != 0){
 				input.attr('value',next)
 				operForm.attr('method','get');
-				operForm.attr('action',"/mailbox/readMail?m_no=" + next);
+				operForm.attr('action',"/mailbox/readBeanMail?m_no=" + next);
 			}
 			
 		}
-				operForm.submit();	
+		
+		operForm.submit();
 	})
 });	 
 </script>

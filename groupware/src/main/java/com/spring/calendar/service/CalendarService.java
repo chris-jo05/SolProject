@@ -16,4 +16,7 @@ public interface CalendarService {
 	
 	public List<String> dept_list();
 	public List<String> emp_list(String dname);
+	
+	public boolean updateCheck(int cno, String cal_check);
+	public List<String> groupIdCheck();
 }

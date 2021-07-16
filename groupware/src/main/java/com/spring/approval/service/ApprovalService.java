@@ -9,7 +9,5 @@ public interface ApprovalService {
 
 	public ApprovalVO appRead(String docNo, int eno);
 
-	public ApprovalVO appReadPeriod(String docNo, String docKind, int eno);
-
 	public int appWrite(ApprovalVO appWrite);
 }

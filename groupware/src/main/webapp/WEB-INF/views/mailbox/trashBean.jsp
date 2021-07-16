@@ -46,7 +46,7 @@
                 <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
                 </button>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm">
+                  <button type="button" class="btn btn-default btn-sm delete-mail">
                     <i class="far fa-trash-alt"></i>
                   </button>
                 </div>
@@ -60,13 +60,12 @@
     	             <tr>
         	            <td>
             	         <div class="icheck-primary">
-                	        <input type="checkbox" value="${vo.m_no}" id="check${vo.m_no}">
+                	        <input type="checkbox" value="${vo.m_no}" id="check${vo.m_no}" name="forDelete">
                     	    <label for="check${vo.m_no}"></label>
                  	     </div>
                	     	</td>
               	      	<td class="mailbox-name">${vo.m_id} (${vo.m_writer})</td>
-              	    	<td class="mailbox-subject"><a href="/mailbox/readMail?m_no=${vo.m_no}">${vo.m_title}</a></td>
-               	    	<td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
+              	    	<td class="mailbox-subject"><a href="/mailbox/readBeanMail?m_no=${vo.m_no}">${vo.m_title}</a></td>
                	     	<td class="mailbox-date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.m_sendDate}"/></td>
 	                  </tr>
                   </c:forEach>                 
@@ -163,7 +162,7 @@
 			
 				
 		    operForm.append(str);
-			operForm.attr('action','/mailbox/removeMailList');
+			operForm.attr('action','/mailbox/removeBeanMailList');
 			
 			operForm.submit();
 		})
