@@ -79,14 +79,15 @@
               
               <div class="mailbox-controls with-border text-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm" data-container="body" >
+                  <button type="button" id="pre" class="btn btn-default btn-sm" data-container="body" >
                     <i class="fas fa-reply">이전 글</i>
                   </button>
             
                   <button type="button" class="btn btn-default btn-sm" id="list" data-container="body">
                     <i class="fas fa-list">목 록</a></i>
                      </button>
-                  <button type="button" class="btn btn-default btn-sm" data-container="body">
+                  
+                  <button type="button" id="next" class="btn btn-default btn-sm" data-container="body">
                     <i class="fas fa-share">다음 글</i>
                   </button>
                 </div>
@@ -114,26 +115,76 @@
    <input type="hidden" name="keyword" value="${cri.keyword}" /> --%>
    <input type="hidden" name="pageNum" value="${cri.pageNum}" />
    <input type="hidden" name="amount" value="${cri.amount}" />
-   <input type="hidden" name="bno" value="${vo.bno}"/>
+   <input type="hidden" id="bno" name="bno" value="${vo.bno}"/>
 </form> 
 <script>
 //operForm 가져온 후 전송하기
 var operForm = $("#operForm");
 //Modify버튼 클릭시  get방식 /board/modify
 $(".btn-primary").click(function(){
-   operForm.attr('action','boardModify');
-   operForm.submit();
+   $.ajax({
+        url: "/board/check",
+        type: "POST",
+        data: {"id": "${vo.b_writer}"},
+        success: function(data){
+            if(data == 1) {
+               operForm.attr('action','boardModify');
+               operForm.submit();
+            } else {
+               alert('권한이 없습니다.');
+            }
+        },
+        error: function(){
+            alert("ajaxError");
+        }
+    });
 })
 
 $(".btn-success").click(function(){
-	operForm.attr('action', 'boardRemove');
-	operForm.submit();
+	$.ajax({
+        url: "/board/check",
+        type: "POST",
+        data: {"id": "${vo.b_writer}"},
+        success: function(data){
+            if(data == 1) {
+            	operForm.attr('action', 'boardRemove');
+            	operForm.submit();
+            } else {
+               alert('권한이 없습니다.');
+            }
+        },
+        error: function(){
+            alert("ajaxError");
+        }
+    });
 })
 
 $("#list").click(function(){
       operForm.find("input[name='bno']").remove();
       operForm.attr('action','/board/boardMain');
       operForm.submit();
-   })
+})
+
+$("#next").click(function(){
+	var bno = $("#bno").val();
+	bno = Number(bno);
+	bno = bno+1;
+	$("#bno").val(bno);
+      operForm.attr('action','/board/boardRead');
+      operForm.submit();
+})
+
+$("#pre").click(function(){
+	var bno = $("#bno").val();
+	bno = Number(bno);
+	bno = bno-1;
+	$("#bno").val(bno);
+      operForm.attr('action','/board/boardRead');
+      operForm.submit();
+	
+	
+})
+   
+
 </script>
 <%@include file="../includes/footer.jsp" %>

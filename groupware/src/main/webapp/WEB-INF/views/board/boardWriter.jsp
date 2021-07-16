@@ -42,7 +42,7 @@
                 <div class="form-group">
                      <div class="form-group">
                      <label for="exampleInputBorderWidth2">부서</label>
-                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="dname" placeholder="부서를 입력해 주세요.">
+                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="dname" value="${vo.dname}" readonly="readonly" style="background-color:white">
                    </div>
                    </div>
                        
