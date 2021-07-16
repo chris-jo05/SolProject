@@ -86,7 +86,7 @@
               <div class="card-body" >
                 <!-- THE CALENDAR -->
                 <div id="calendar"></div>
-                <button id="submit" type="button" class="btn btn-primary" >일정 작성</button>
+                <button id="submit" type="button" class="btn btn-primary float-right" style="margin-top: 10px">일정 작성</button>
               </div>
               <!-- /.card-body -->
             </div>
@@ -211,6 +211,9 @@
 	  
 	  <!-- 클릭된 일정의 cno 저장하는 곳 -->
 	  <input type="hidden" name="selectedGroup" value=""/>
+	  
+	  <!-- 변경 전 그룹 이름을 저장하는 곳 -->
+	  <input type="hidden" name="beforeModified" value=""/>
 	  
 	  <!-- 일정 색깔 저장하는 곳 -->
 	  <button type="button" name="color" style=""></button>
@@ -400,6 +403,14 @@
     	  modalSelectedGroup.val(groupId);
     	  console.log(modalSelectedGroup.val());
     	  
+    	  modalTitle.attr("readonly",true);
+    	  modalContent.attr("readonly",true);
+    	  modalGroupId.attr("readonly",true);
+    	  modalStart.attr("readonly",true);
+    	  modalEnd.attr("readonly",true);
+    	  modalRep.attr("readonly",true);
+    	  modalMemo.attr("readonly",true);
+    	  
     	  getOne(cno);
 	  }
       
@@ -490,6 +501,14 @@
     	//input안에 들어있는 value 제거
     	modal.find("input").val("");
     	
+    	modalTitle.attr("readonly",false);
+    	modalContent.attr("readonly",false);
+    	modalGroupId.attr("readonly",false);
+    	modalStart.attr("readonly",false);
+    	modalEnd.attr("readonly",false);
+    	modalRep.attr("readonly",false);
+        modalMemo.attr("readonly",false);
+        
     	modalModifyBtn.hide();
 		modalRemoveBtn.hide();
 		modalModifyEnterBtn.hide();
@@ -502,6 +521,61 @@
 	
 	// 일정 등록 버튼
 	$("#modalRegisterBtn").click(function () {
+		
+		console.log(modalTitle.val() == "");
+		if(modalTitle.val() == "" || modalContent.val() == "" || modalGroupId.val() == "" || modalStart.val() == "" || modalEnd.val() == "" || modalRep.val() == "") {
+			if(modalTitle.val() == "") {
+				alert("일정 이름을 입력해주세요.");
+				modalTitle.focus();
+			} else if(modalContent.val() == "") {
+				alert("일정 내용을 입력해주세요.");
+				modalContent.focus();
+			} else if(modalGroupId.val() == "") {
+				alert("일정 그룹 이름을 입력해주세요.");
+				modalContent.focus();
+			} else if(modalStart.val() == "") {
+				alert("일정 시작란을 입력해주세요.");
+				modalStart.focus();
+			} else if(modalEnd.val() == "") {
+				alert("일정 종료란을 입력해주세요.");
+				modalEnd.focus();
+			} else if(modalRep.val() == "") {
+				alert("일정 담당자를 입력해주세요.");
+				modalRep.focus();
+			}
+			
+			return;
+		} 
+		
+		if(time_check()) {
+			alert("종료일이 시작일 보다 이전입니다.");
+			modalStart.focus();
+			
+			return;
+		}
+		
+		var flag = true;
+		
+		$.ajax({
+			url:"/calendar/rest_group",
+			type:"GET",
+			async:false,
+			success:function(data) {
+				$.each(data, function(idx, element) {
+					if(modalGroupId.val() == element) {
+						flag = false;
+					}
+				})
+			}
+		})
+		
+		if(!flag) {
+			alert("그룹 이름이 중복됩니다.")
+			modalGroupId.focus();
+			
+			return;
+		}
+		
 		insert();
 	})
 	
@@ -525,16 +599,79 @@
 			modalSelectRep.show();
 			modalModifyEnterBtn.hide();
 			modalModifyBtn.show();
+			
+			modal.find("input[name='beforeModified']").val(modalGroupId.val());
+			modalTitle.attr("readonly",false);
+	    	modalContent.attr("readonly",false);
+	    	modalGroupId.attr("readonly",false);
+	    	modalStart.attr("readonly",false);
+	    	modalEnd.attr("readonly",false);
+	    	modalRep.attr("readonly",false);
+	        modalMemo.attr("readonly",false);
 		}
 	})
 	
 	// 일정 수정 확인 버튼
 	$("#modalModifyBtn").click(function() {
 		var groupId = modalSelectedGroup.val();
+		
 		console.log('remove clicked ' + groupId);
 		
-		removeGroup(groupId);
+		console.log(modalTitle.val() == "");
+		if(modalTitle.val() == "" || modalContent.val() == "" || modalGroupId.val() == "" || modalStart.val() == "" || modalEnd.val() == "" || modalRep.val() == "") {
+			if(modalTitle.val() == "") {
+				alert("일정 이름을 입력해주세요.");
+				modalTitle.focus();
+			} else if(modalContent.val() == "") {
+				alert("일정 내용을 입력해주세요.");
+				modalContent.focus();
+			} else if(modalGroupId.val() == "") {
+				alert("일정 그룹 이름을 입력해주세요.");
+				modalContent.focus();
+			} else if(modalStart.val() == "") {
+				alert("일정 시작란을 입력해주세요.");
+				modalStart.focus();
+			} else if(modalEnd.val() == "") {
+				alert("일정 종료란을 입력해주세요.");
+				modalEnd.focus();
+			} else if(modalRep.val() == "") {
+				alert("일정 담당자를 입력해주세요.");
+				modalRep.focus();
+			}
+			
+			return;
+		} 
 		
+		if(time_check()) {
+			alert("종료일이 시작일 보다 이전입니다.");
+			modalStart.focus();
+			
+			return;
+		}
+		
+		var flag = true;
+		console.log("변경 전 그룹 이름 : " + modal.find("input[name='beforeModified']").val());
+		$.ajax({
+			url:"/calendar/rest_group",
+			type:"GET",
+			async:false,
+			success:function(data) {
+				$.each(data, function(idx, element) {
+					if(modalGroupId.val() == element && modalGroupId.val() != modal.find("input[name='beforeModified']").val()) {
+						flag = false;
+					}
+				})
+			}
+		})
+		
+		if(!flag) {
+			alert("그룹 이름이 중복됩니다.")
+			modalGroupId.focus();
+			
+			return;
+		}
+		
+		removeGroup(groupId);
 		insert();
 	})
 	
@@ -762,6 +899,9 @@
 	    var e_hour = e_time[0] * 1;
 	    var e_minute = e_time[1] * 1;
 	    
+	    var sDate = new Date(s_year,s_month,s_day, s_hour, s_minute);
+	    var eDate = new Date(e_year,e_month,e_day, e_hour, e_minute);
+	    
 	    var author = modalEmpAuth.val() + "(" + modalDeptAuth.val() + ")";
 	    
 		var cal = {
@@ -795,8 +935,8 @@
 						id : result,
 						groupId : modalGroupId.val(),
 						title : String(modalTitle.val()), // 이벤트 제목
-						start : new Date(s_year,s_month,s_day, s_hour, s_minute), //달력 날짜에 매핑
-						end : new Date(e_year,e_month,e_day, e_hour, e_minute),
+						start : sDate, //달력 날짜에 매핑
+						end : eDate,
 						backgroundColor: String($("button[name='color']").css('color')),
 				        borderColor    : String($("button[name='color']").css('color'))
 					});
@@ -857,6 +997,43 @@
 	    		}
 	    	}
 	    })
+	}
+	
+	function time_check() {
+		var startSpl = modalStart.val().split(" ");
+  		var endSpl = modalEnd.val().split(" ");
+  		
+		var mStart = startSpl[0];
+		var mStartTime = startSpl[1];
+		var mEnd = endSpl[0];
+		var mEndTime = endSpl[1];
+		
+		var s_date = new Date(mStart);
+		var s_year = s_date.getFullYear();
+		var s_month = s_date.getMonth();
+	    var s_day= s_date.getDate();
+
+	    var e_date = new Date(mEnd);
+		var e_year = e_date.getFullYear();
+		var e_month = e_date.getMonth();
+	    var e_day= e_date.getDate();
+	    
+	    var s_time = mStartTime.split(":");
+	    var s_hour = s_time[0] * 1;
+	    var s_minute = s_time[1] * 1;
+	    
+	    var e_time = mEndTime.split(":");
+	    var e_hour = e_time[0] * 1;
+	    var e_minute = e_time[1] * 1;
+	    
+	    var sDate = new Date(s_year,s_month,s_day, s_hour, s_minute);
+	    var eDate = new Date(e_year,e_month,e_day, e_hour, e_minute);
+	    
+	    if(sDate >= eDate) {
+	    	return true;
+	    } else {
+	    	return false;
+	    }
 	}
 	
     //Date and time picker

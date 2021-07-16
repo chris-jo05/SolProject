@@ -55,4 +55,14 @@ public class CalendarServiceImpl implements CalendarService {
 	public List<String> emp_list(String dname) {
 		return mapper.emp_list(dname);
 	}
+	
+	@Override
+	public boolean updateCheck(int cno, String cal_check) {
+		return mapper.updateCheck(cno, cal_check) > 0 ? true : false;
+	}
+	
+	@Override
+	public List<String> groupIdCheck() {
+		return mapper.groupIdCheck();
+	}
 }
