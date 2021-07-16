@@ -148,7 +148,7 @@
 	                </div>
 	                <div class="form-group">
 	                  <label for="exampleInputBorderWidth2">계좌번호</label>
-	                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="계좌번호를 입력해주세요.(78945-12-45646789)" name="account">
+	                  <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="계좌번호를 입력해주세요.(78945-12-45646789)" name="acount">
 	                </div>
 	                <div class="form-group">
 	                	<label for="exampleInputBorderWidth2" name="gender">성 별</label>

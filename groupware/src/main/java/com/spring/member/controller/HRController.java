@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.member.domain.Criteria;
 import com.spring.member.domain.MemberVo;
+import com.spring.member.domain.PageVO;
 import com.spring.member.service.MemberService;
 
 import lombok.extern.log4j.Log4j2;
@@ -27,16 +29,16 @@ public class HRController {
 	private MemberService service;
 
 	@GetMapping("/hrMain")
-	public void main(Model model, HttpSession session) throws Exception {
-		log.info("인사 관리 페이지로 이동합니다.");
+	public void main(Model model, HttpSession session, Criteria cri) throws Exception {
+		log.info("인사 관리 페이지로 이동합니다."+cri);
 
-		List<MemberVo> list = service.list();
+		List<MemberVo> list = service.list(cri);
+		int total = service.total(cri);
 		model.addAttribute("list", list);
+		
+		model.addAttribute("pageVO",new PageVO(cri, total));
+		
 	}
-
-	/*
-	 * @GetMapping("/list") public void list() { log.info("사원 리스트 요청"); }
-	 */
 
 	@GetMapping("/hrNewMember")
 	public void newMember() {
