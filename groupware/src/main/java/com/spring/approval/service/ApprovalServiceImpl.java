@@ -15,17 +15,18 @@ public class ApprovalServiceImpl implements ApprovalService {
 	private ApprovalMapper mapper;
 
 	@Override
-	public List<ApprovalVO> approvalList(int eno) {
-		return mapper.approvalList(eno);
+	public List<ApprovalVO> appList(int eno) {
+		return mapper.appList(eno);
 	}
 
 	@Override
-	public ApprovalVO approvalRead(String docNo, int eno) {
-		return mapper.approvalRead(docNo);
+	public ApprovalVO appRead(String docNo, int eno) {
+		return mapper.appRead(docNo);
 	}
 
 	@Override
-	public int approvalWrite(ApprovalVO approvalWrite) {
-		return mapper.approvalWrite(approvalWrite);
+	public int appWrite(ApprovalVO appWrite) {
+		int result = mapper.appWrite(appWrite);
+		return result;
 	}
 }

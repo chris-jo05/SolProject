@@ -5,9 +5,9 @@ import java.util.List;
 import com.spring.approval.domain.ApprovalVO;
 
 public interface ApprovalService {
-	public List<ApprovalVO> approvalList(int eno);
+	public List<ApprovalVO> appList(int eno);
 
-	public ApprovalVO approvalRead(String docNo, int eno);
-	
-	public int approvalWrite(ApprovalVO approvalWrite);
+	public ApprovalVO appRead(String docNo, int eno);
+
+	public int appWrite(ApprovalVO appWrite);
 }

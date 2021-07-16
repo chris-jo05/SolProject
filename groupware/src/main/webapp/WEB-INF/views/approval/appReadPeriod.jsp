@@ -66,7 +66,7 @@ textarea.form-control {
 				<div class="col-md-9">
 					<div class="card card-primary card-outline">
 						<div class="card-header">
-							<h3 class="card-title" style="font-weight: bold;">${appRead.docClass}</h3>
+							<h3 class="card-title" style="font-weight: bold;">${appReadPeriod.docClass}</h3>
 						</div>
 
 						<div class="card-body">
@@ -76,7 +76,7 @@ textarea.form-control {
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">문서번호</label>
 											<div class="col">
-												<input type="text" class="form-control" id="colFormLabel" value="${appRead.docNo}" disabled>
+												<input type="text" class="form-control" id="colFormLabel" value="${appReadPeriod.docNo}" disabled>
 											</div>
 										</div>
 									</div>
@@ -85,7 +85,7 @@ textarea.form-control {
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">기안일자</label>
 											<div class="col">
-												<input type="text" class="form-control" id="colFormLabel" value="<fmt:formatDate pattern="yyyy-MM-dd kk:ss" value="${appRead.docDate}" />" disabled>
+												<input type="text" class="form-control" id="colFormLabel" value="<fmt:formatDate pattern="yyyy-MM-dd kk:ss" value="${appReadPeriod.docDate}" />" disabled>
 											</div>
 										</div>
 									</div>
@@ -94,7 +94,7 @@ textarea.form-control {
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">기안부서</label>
 											<div class="col">
-												<input name="dno" type="text" class="form-control" id="colFormLabel" value="${appRead.dname}" disabled>
+												<input name="dname" type="text" class="form-control" id="colFormLabel" value="${appReadPeriod.dname}" disabled>
 											</div>
 										</div>
 									</div>
@@ -103,7 +103,7 @@ textarea.form-control {
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">기안자</label>
 											<div class="col">
-												<input name="eno" type="text" class="form-control" id="colFormLabel" value="${appRead.ename}" disabled>
+												<input name="ename" type="text" class="form-control" id="colFormLabel" value="${appReadPeriod.ename}" disabled>
 											</div>
 										</div>
 									</div>
@@ -161,24 +161,24 @@ textarea.form-control {
 										</div>
 									</div>
 
-									<div class="form-group" style="display: none;">
+									<div class="form-group">
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">근태구분</label>
 											<div class="col">
-												<input name="docKind" type="text" class="form-control" id="docKind" value="${appRead.docKind}" disabled>
+												<input name="docKind" type="text" class="form-control" id="colFormLabel" value="${appReadPeriod.docKind}" disabled>
 											</div>
 										</div>
 									</div>
 
-									<div class="form-group" style="display: none;">
+									<div class="form-group">
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">기간</label>
 											<div class="col">
-												<input name="docStartDate" type="text" class="form-control" id="docStartDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${appRead.docStartDate}" />" disabled>
+												<input name="docStartDate" type="text" class="form-control" id="colFormLabel" value="${appReadPeriod.docStartDate}" disabled>
 											</div>
 
 											<div class="col">
-												<input name="docEndDate" type="text" class="form-control" id="docEndDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${appRead.docEndDate}" />" disabled>
+												<input name="docEndDate" type="text" class="form-control" id="colFormLabel" value="${appReadPeriod.docStartDate}" disabled>
 											</div>
 										</div>
 									</div>
@@ -187,7 +187,7 @@ textarea.form-control {
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">제목</label>
 											<div class="col">
-												<input name="docTitle" type="text" class="form-control" id="docTitle" value="${appRead.docTitle}" disabled>
+												<input name="docTitle" type="text" class="form-control" id="docTitle" value="${appReadPeriod.docTitle}" disabled>
 											</div>
 										</div>
 									</div>
@@ -199,7 +199,7 @@ textarea.form-control {
 												<table class="table table-bordered" style="height: 500px;">
 													<tbody>
 														<tr>
-															<td>${appRead.docContent}</td>
+															<td>${appReadPeriod.docContent}</td>
 														</tr>
 													</tbody>
 												</table>
@@ -252,7 +252,16 @@ textarea.form-control {
 <!-- Page specific script -->
 <script>
 	$ (function () {
-		// input value값 없을 시 form-group display:none;
+		// Summernote
+		$ ('#summernote').summernote ()
+
+		// Date and Time picker
+		$ ('#datetimepicker').datetimepicker ({
+			format : 'YYYY.MM.DD'
+		});
+		
+		// Initialize Select2 Elements
+		$ ('.select2').select2 ()
 	})
 </script>
 
