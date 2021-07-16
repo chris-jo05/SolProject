@@ -3,7 +3,7 @@
 <mapper namespace="com.spring.approval.mapper.ApprovalMapper">
 
 	<!-- 상신함 List -->
-	<select id="approvalList" resultType="com.spring.approval.domain.ApprovalVO">
+	<select id="appList" resultType="com.spring.approval.domain.ApprovalVO">
 		select doc.*, dept.dname, emp.ename
 		from doc, dept, emp
 		where doc.dno = dept.dno
@@ -12,7 +12,7 @@
 	</select>
 
 	<!-- 결제문서 읽기 -->
-	<select id="approvalRead" resultType="com.spring.approval.domain.ApprovalVO">
+	<select id="appRead" resultType="com.spring.approval.domain.ApprovalVO">
 		select doc.*, dept.dname, emp.ename
 		from doc, dept, emp
 		where doc.dno = dept.dno
@@ -21,8 +21,8 @@
 	</select>
 
 	<!-- 결제문서 작성 -->
-	<insert id="approvalWrite">
-		insert into doc(docNo, docClass, docDate, dno, eno, docTitle, docContent)
-		values(docNO('now'), #{docClass}, #{docDate}, #{dno}, #{eno}, #{docTitle}, #{docContent})
+	<insert id="appWrite">
+		insert into doc(docNo, docClass, docDate, dno, eno, docTitle, docContent, docStartDate, docEndDate, docKind)
+		values(docNO('now'), #{docClass}, #{docDate}, #{dno}, #{eno}, #{docTitle}, #{docContent}, #{docStartDate}, #{docEndDate}, #{docKind})
 	</insert>
 </mapper>

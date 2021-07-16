@@ -56,16 +56,19 @@
 						<div class="card card-primary card-outline">
 							<div class="card-header">
 								<div class="card-title">
-									<p class="font-weight-bold" style="font-size: 20px; margin-bottom: 0px">기안서</p>
+									<h3 class="card-title" style="font-weight: bold;">기안서</h3>
 									<input type="hidden" name="docClass" value="기안서" />
-								</div>
-								<div class="card-tools" style="margin: 0px">
-									<button type="button" class="btn btn-primary btn-sm" style="margin-right: 10px;">상신</button>
-									<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/approval/appMain'">취소</button>
 								</div>
 							</div>
 
 							<div class="card-body">
+								<div class="col" style="float: right; padding: 0px;">
+									<div class="form-group" style="float: right;">
+										<button type="submit" class="btn btn-primary btn-sm" style="margin-right: 10px;">상신</button>
+										<button type="reset" class="btn btn-secondary btn-sm" style="" onclick="location.href='/approval/appMain'">취소</button>
+									</div>
+								</div>
+
 								<div class="row">
 									<div class="col-md-8">
 										<div class="form-group">
@@ -90,7 +93,8 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">기안부서</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled> <input type="hidden" name="dno" value="${login.dno}" />
+													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled>
+													<input type="hidden" name="dno" value="${login.dno}" />
 												</div>
 											</div>
 										</div>
@@ -99,7 +103,8 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">기안자</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled> <input type="hidden" name="eno" value="${login.eno}" />
+													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled>
+													<input type="hidden" name="eno" value="${login.eno}" />
 												</div>
 											</div>
 										</div>
@@ -109,9 +114,8 @@
 										<table class="table table-bordered" style="height: 92.5%">
 											<tbody>
 												<tr style="height: 0">
-													<td class="text-center align-middle" rowspan="2" style="width: 10%;">
-														<b>결<br>제
-														</b>
+													<td class="text-center align-middle" rowspan="2" style="width: 10%; font-weight: bold;">
+														결<br>제
 													</td>
 													<td style="width: 22.5%;"></td>
 													<td style="width: 22.5%;"></td>
@@ -127,9 +131,8 @@
 												</tr>
 
 												<tr style="height: 0">
-													<td class="text-center align-middle" rowspan="2" style="width: 10%;">
-														<b>합<br>의
-														</b>
+													<td class="text-center align-middle" rowspan="2" style="width: 10%; font-weight: bold;">
+														합<br>의
 													</td>
 													<td style="width: 22.5%;"></td>
 													<td style="width: 22.5%;"></td>
@@ -170,7 +173,7 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">내용</label>
 												<div class="col">
-													<textarea name="docContent" id="summernote"></textarea>
+													<textarea name="docContent" id="summernote"><br><br><br><br><br><br><br><br><br><br></textarea>
 												</div>
 											</div>
 										</div>
@@ -226,7 +229,7 @@
 
 		// Date and Time picker
 		$ ('#datetimepicker').datetimepicker ({
-			format : 'YYYY.MM.DD'
+			format : 'YYYY/MM/DD kk:mm'
 		});
 		
 		// Initialize Select2 Elements

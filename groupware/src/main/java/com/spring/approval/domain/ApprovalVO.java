@@ -25,6 +25,9 @@ public class ApprovalVO {
 	private int eno; // 기안자번호
 	private String docTitle; // 제목
 	private String docContent; // 내용
+	private Date docStartDate; // 시작일자
+	private Date docEndDate; // 종료일자
+	private String docKind; // 근태구분
 
 	private String dname; // 기안부서이름
 	private String ename; // 기안자이름

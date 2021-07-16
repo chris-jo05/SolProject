@@ -61,18 +61,18 @@
 							</thead>
 
 							<tbody>
-								<c:forEach var="vo" items="${approvalList}">
+								<c:forEach var="appList" items="${appList}">
 									<tr>
-										<td>${vo.docNo}</td>
-										<td>${vo.docClass}</td>
+										<td>${appList.docNo}</td>
+										<td>${appList.docClass}</td>
 										<td>
-											<a href="/approval/appRead?docNo=${vo.docNo}" class="move">${vo.docTitle}</a>
+											<a href="/approval/appRead?docNo=${appList.docNo}" class="move">${appList.docTitle}</a>
 										</td>
 										<td>
-											<fmt:formatDate pattern="yyyy-MM-dd" value="${vo.docDate}" />
+											<fmt:formatDate pattern="yyyy-MM-dd kk:ss" value="${appList.docDate}" />
 										</td>
-										<td>${vo.dname}</td>
-										<td>${vo.ename}</td>
+										<td>${appList.dname}</td>
+										<td>${appList.ename}</td>
 										<td></td>
 									</tr>
 								</c:forEach>

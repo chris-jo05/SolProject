@@ -32,10 +32,10 @@ public class ApprovalController {
 
 		MemberVo member = (MemberVo) session.getAttribute("login");
 		log.info(member.getEno());
-		List<ApprovalVO> approvalList = service.approvalList(member.getEno());
-		log.info(approvalList);
+		List<ApprovalVO> appList = service.appList(member.getEno());
+		log.info(appList);
 
-		model.addAttribute("approvalList", approvalList);
+		model.addAttribute("appList", appList);
 	}
 
 	@GetMapping("/appRead")
@@ -44,10 +44,22 @@ public class ApprovalController {
 
 		MemberVo member = (MemberVo) session.getAttribute("login");
 		log.info(member.getEno());
-		ApprovalVO approvalRead = service.approvalRead(docNo, member.getEno());
-		log.info(approvalRead.getEno());
+		ApprovalVO appRead = service.appRead(docNo, member.getEno());
+		log.info(appRead.getEno());
 
-		model.addAttribute("approvalRead", approvalRead);
+		model.addAttribute("appRead", appRead);
+	}
+
+	@GetMapping("/appReadPeriod")
+	public void readperiod(String docNo, String docKind, HttpSession session, Model model) {
+		log.info("결재문서 읽기로 이동" + docNo);
+
+		MemberVo member = (MemberVo) session.getAttribute("login");
+		log.info(member.getEno());
+		ApprovalVO appReadPeriod = service.appReadPeriod(docNo, docKind, member.getEno());
+		log.info(appReadPeriod.getEno());
+
+		model.addAttribute("appReadPeriod", appReadPeriod);
 	}
 
 	@GetMapping("/appWriteDraft")
@@ -56,13 +68,13 @@ public class ApprovalController {
 	}
 
 	@PostMapping("/appWriteDraft")
-	public String writeDraft(ApprovalVO approvalWrite, RedirectAttributes rttr) {
-		log.info("기안서 상신" + approvalWrite);
+	public String writeDraft(ApprovalVO appWrite, RedirectAttributes rttr) {
+		log.info("기안서 상신" + appWrite);
 
-		int result = service.approvalWrite(approvalWrite);
+		int result = service.appWrite(appWrite);
 
 		if (result > 0) {
-			rttr.addFlashAttribute("result", approvalWrite.getDocNo());
+			rttr.addFlashAttribute("result", appWrite.getDocNo());
 			return "redirect: appMain";
 		} else {
 			return "redirect: appWriteDraft";
@@ -74,9 +86,37 @@ public class ApprovalController {
 		log.info("보고서로 이동");
 	}
 
+	@PostMapping("/appWriteReport")
+	public String WriteReport(ApprovalVO appWrite, RedirectAttributes rttr) {
+		log.info("보고서 상신" + appWrite);
+
+		int result = service.appWrite(appWrite);
+
+		if (result > 0) {
+			rttr.addFlashAttribute("result", appWrite.getDocNo());
+			return "redirect: appMain";
+		} else {
+			return "redirect: appWriteReport";
+		}
+	}
+
 	@GetMapping("/appWriteResignation")
 	public void resignation() {
 		log.info("사직서로 이동");
+	}
+
+	@PostMapping("/appWriteResignation")
+	public String Writeresignation(ApprovalVO appWrite, RedirectAttributes rttr) {
+		log.info("사직서 상신" + appWrite);
+
+		int result = service.appWrite(appWrite);
+
+		if (result > 0) {
+			rttr.addFlashAttribute("result", appWrite.getDocNo());
+			return "redirect: appMain";
+		} else {
+			return "redirect: appWriteResignation";
+		}
 	}
 
 	@GetMapping("/appWriteExpenseStatement")
@@ -84,14 +124,56 @@ public class ApprovalController {
 		log.info("지출내역서로 이동");
 	}
 
+	@PostMapping("/appWriteExpenseStatement")
+	public String WriteExpenseStatement(ApprovalVO appWrite, RedirectAttributes rttr) {
+		log.info("지출내역서 상신" + appWrite);
+
+		int result = service.appWrite(appWrite);
+
+		if (result > 0) {
+			rttr.addFlashAttribute("result", appWrite.getDocNo());
+			return "redirect: appMain";
+		} else {
+			return "redirect: appWriteExpenseStatement";
+		}
+	}
+
 	@GetMapping("/appWriteAnnualPlan")
 	public void annualplan() {
 		log.info("연차신청서로 이동");
 	}
 
+	@PostMapping("/appWriteAnnualPlan")
+	public String WriteAnnualPlan(ApprovalVO appWrite, RedirectAttributes rttr) {
+		log.info("연차신청서 상신" + appWrite);
+
+		int result = service.appWrite(appWrite);
+
+		if (result > 0) {
+			rttr.addFlashAttribute("result", appWrite.getDocNo());
+			return "redirect: appMain";
+		} else {
+			return "redirect: appWriteAnnualPlan";
+		}
+	}
+
 	@GetMapping("/appWriteBusinessTrip")
 	public void businesstrip() {
 		log.info("출장신청서로 이동");
+	}
+
+	@PostMapping("/appWriteBusinessTrip")
+	public String WriteBusinessTrip(ApprovalVO appWrite, RedirectAttributes rttr) {
+		log.info("출장신청서 상신" + appWrite);
+
+		int result = service.appWrite(appWrite);
+
+		if (result > 0) {
+			rttr.addFlashAttribute("result", appWrite.getDocNo());
+			return "redirect: appMain";
+		} else {
+			return "redirect: appWriteBusinessTrip";
+		}
 	}
 
 	@GetMapping("/appBoxReceive")
