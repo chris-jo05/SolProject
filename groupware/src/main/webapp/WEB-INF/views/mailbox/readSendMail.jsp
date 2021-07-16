@@ -56,9 +56,7 @@
                   <button type="button" class="btn btn-default btn-sm" data-oper="prev" data-container="body" title="이전 메일">
                     <i class="fas fa-reply"></i>
                   </button>
-                  <button type="button" class="btn btn-default btn-sm" data-oper="delete" data-container="body" title="지우기">
-                    <i class="far fa-trash-alt"></i>
-                  </button>
+                  
                   <button type="button" class="btn btn-default btn-sm" data-oper="next" data-container="body" title="다음 메일">
                     <i class="fas fa-share"></i>
                   </button>
@@ -110,11 +108,7 @@ $(function(){
 		
 		var oper = $(this).data("oper");
 		
-		if(oper === "delete"){
-			
-			operForm.attr('action','/mailbox/removeMail');
-			
-		}else if(oper === "prev"){
+		if(oper === "prev"){
 			
 			if(prev == 0){
 				operForm.attr('method','get');
@@ -123,7 +117,7 @@ $(function(){
 				console.log(prev);
 				input.attr('value',prev)
 				operForm.attr('method','get');
-				operForm.attr('action','/mailbox/readMail?m_no='+prev);
+				operForm.attr('action','/mailbox/readSendMail?m_no='+prev);
 			}
 		}else if(oper === "next"){
 			
@@ -133,7 +127,7 @@ $(function(){
 			}else if(next != 0){
 				input.attr('value',next)
 				operForm.attr('method','get');
-				operForm.attr('action',"/mailbox/readMail?m_no=" + next);
+				operForm.attr('action',"/mailbox/readSendMail?m_no=" + next);
 			}
 			
 		}

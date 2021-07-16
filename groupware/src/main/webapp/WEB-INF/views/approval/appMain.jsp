@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../includes/header.jsp"%>
 
 <!-- DataTables -->
@@ -59,45 +61,21 @@
 							</thead>
 
 							<tbody>
-								<tr>
-									<td>2021-07-001</td>
-									<td>기안서</td>
-									<td>신규 개발 기안서</td>
-									<td>21/07/03 09:48</td>
-									<td>개발 1팀</td>
-									<td>박진우</td>
-									<td>결재완료</td>
-								</tr>
-
-								<tr>
-									<td>2021-07-002</td>
-									<td>보고서</td>
-									<td>신규 개발 보고서</td>
-									<td>21/07/04 11:27</td>
-									<td>개발 1팀</td>
-									<td>박진우</td>
-									<td>진행중</td>
-								</tr>
-
-								<tr>
-									<td>2021-07-003</td>
-									<td>사직서</td>
-									<td>사직서 (21.07.05 개발 1팀 박진우)</td>
-									<td>21/07/05 09:48</td>
-									<td>개발 1팀</td>
-									<td>박진우</td>
-									<td>반려</td>
-								</tr>
-
-								<tr>
-									<td>2021-07-004</td>
-									<td>휴가신청서</td>
-									<td>휴가신청서 (21.07.05 개발 1팀 박진우)</td>
-									<td>21/07/05 10:14</td>
-									<td>개발 1팀</td>
-									<td>박진우</td>
-									<td>상신</td>
-								</tr>
+								<c:forEach var="vo" items="${approvalList}">
+									<tr>
+										<td>${vo.docNo}</td>
+										<td>${vo.docClass}</td>
+										<td>
+											<a href="/approval/appRead?docNo=${vo.docNo}" class="move">${vo.docTitle}</a>
+										</td>
+										<td>
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${vo.docDate}" />
+										</td>
+										<td>${vo.dname}</td>
+										<td>${vo.ename}</td>
+										<td></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -128,21 +106,14 @@
 
 <!-- Page specific script -->
 <script>
-	$(function() {
-		$("#example1").DataTable({
-			"responsive" : true,
-			"lengthChange" : false,
-			"autoWidth" : false,
-			"buttons" : [ "copy", "csv", "excel", "pdf", "print", "colvis" ]
-		}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-		$('#example2').DataTable({
-			"paging" : true,
-			"lengthChange" : false,
-			"searching" : false,
-			"ordering" : true,
-			"info" : true,
-			"autoWidth" : false,
-			"responsive" : true,
+	$ (function () {
+		$ ("#example1").DataTable ({
+			"responsive" : true, "lengthChange" : false, "autoWidth" : false, "buttons" : [
+					"copy", "csv", "excel", "pdf", "print", "colvis"
+			]
+		}).buttons ().container ().appendTo ('#example1_wrapper .col-md-6:eq(0)');
+		$ ('#example2').DataTable ({
+			"paging" : true, "lengthChange" : false, "searching" : false, "ordering" : true, "info" : true, "autoWidth" : false, "responsive" : true,
 		});
 	});
 </script>

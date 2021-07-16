@@ -138,7 +138,7 @@
 						<li class="nav-item">
 							<a href="/approval/appMain" class="nav-link">
 								<i class="nav-icon fas fa-file"></i>
-								<p>전자 결제</p>
+								<p>전자 결재</p>
 							</a>
 						</li>
 
@@ -193,7 +193,6 @@
 					</ul>
 				</nav>
 
-								
 
 				<!-- /.sidebar-menu -->
 			</div>

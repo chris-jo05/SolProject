@@ -52,146 +52,141 @@
 				</div>
 
 				<div class="col-md-9">
-					<div class="card card-primary card-outline">
-						<div class="card-header">
-							<div class="card-title">
-								<p class="font-weight-bold" style="font-size: 20px; margin-bottom: 0px">기안서</p>
+					<form action="" method="post" role="form">
+						<div class="card card-primary card-outline">
+							<div class="card-header">
+								<div class="card-title">
+									<p class="font-weight-bold" style="font-size: 20px; margin-bottom: 0px">기안서</p>
+									<input type="hidden" name="docClass" value="기안서" />
+								</div>
+								<div class="card-tools" style="margin: 0px">
+									<button type="submit" class="btn btn-primary btn-sm" style="margin-right: 10px;">상신</button>
+									<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/approval/appMain'">취소</button>
+								</div>
 							</div>
-							<div class="card-tools" style="margin: 0px">
-								<button type="button" class="btn btn-primary btn-sm" style="margin-right: 10px;">상신</button>
-								<button type="button" class="btn btn-secondary btn-sm">취소</button>
-							</div>
-						</div>
 
-						<div class="card-body">
-							<div class="row">
-								<div class="col-md-8">
-									<div class="form-group">
-										<div class="row">
-											<label for="colFormLabel" class="col-form-label">문서번호</label>
-											<div class="col">
-												<input type="email" class="form-control" id="colFormLabel" placeholder="기본채번" disabled>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-8">
+										<div class="form-group">
+											<div class="row">
+												<label for="colFormLabel" class="col-form-label">문서번호</label>
+												<div class="col">
+													<input type="text" class="form-control" id="colFormLabel" placeholder="기본채번" disabled>
+												</div>
 											</div>
 										</div>
-									</div>
 
-									<div class="form-group">
-										<div class="row">
-											<label for="colFormLabel" class="col-form-label">기안일자</label>
-											<div class="col">
-												<div class="input-group date" id="datetimepicker5" data-target-input="nearest">
-													<input type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5" />
+										<div class="form-group">
+											<div class="row">
+												<label for="colFormLabel" class="col-form-label">기안일자</label>
+												<div class="col">
+													<input name="docDate" type="text" class="form-control datetimepicker-input" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker" />
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<label for="colFormLabel" class="col-form-label">기안부서</label>
+												<div class="col">
+													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled> <input type="hidden" name="dno" value="${login.dno}" />
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<label for="colFormLabel" class="col-form-label">기안자</label>
+												<div class="col">
+													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled> <input type="hidden" name="eno" value="${login.eno}" />
 												</div>
 											</div>
 										</div>
 									</div>
 
-									<div class="form-group">
-										<div class="row">
-											<label for="colFormLabel" class="col-form-label">기안부서</label>
-											<div class="col">
-												<input type="email" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled>
-											</div>
-										</div>
+									<div class="col-md-4">
+										<table class="table table-bordered" style="height: 92.5%">
+											<tbody>
+												<tr style="height: 0">
+													<td class="text-center align-middle" rowspan="2" style="width: 10%;">
+														<b>결<br>제
+														</b>
+													</td>
+													<td style="width: 22.5%;"></td>
+													<td style="width: 22.5%;"></td>
+													<td style="width: 22.5%;"></td>
+													<td style="width: 22.5%;"></td>
+												</tr>
+
+												<tr>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+
+												<tr style="height: 0">
+													<td class="text-center align-middle" rowspan="2" style="width: 10%;">
+														<b>합<br>의
+														</b>
+													</td>
+													<td style="width: 22.5%;"></td>
+													<td style="width: 22.5%;"></td>
+													<td style="width: 22.5%;"></td>
+													<td style="width: 22.5%;"></td>
+												</tr>
+
+												<tr>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 
-									<div class="form-group">
-										<div class="row">
-											<label for="colFormLabel" class="col-form-label">기안자</label>
-											<div class="col">
-												<input type="email" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled>
+									<div class="col">
+										<div class="form-group">
+											<div class="row">
+												<label for="colFormLabel" class="col-form-label">수신 및 참조</label>
+												<div class="col">
+													<input type="text" class="form-control" id="colFormLabel" placeholder="부서선택">
+												</div>
 											</div>
 										</div>
-									</div>
-								</div>
 
-								<div class="col-md-4">
-									<table class="table table-bordered" style="height: 92.5%">
-										<tbody>
-											<tr style="height: 0">
-												<td class="text-center align-middle" rowspan="2" style="width: 10%;">
-													<b>결<br>제
-													</b>
-												</td>
-												<td>대리</td>
-												<td>과장</td>
-												<td>차장</td>
-												<td>부장</td>
-											</tr>
-
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-
-											<tr style="height: 0">
-												<td class="text-center align-middle" rowspan="2" style="width: 10%;">
-													<b>합<br>의
-													</b>
-												</td>
-												<td>대리</td>
-												<td>과장</td>
-												<td>차장</td>
-												<td>부장</td>
-											</tr>
-
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-
-								<div class="col">
-									<div class="form-group">
-										<div class="row">
-											<label for="colFormLabel" class="col-form-label">수신 및 참조</label>
-											<div class="col">
-												<select class="select2" multiple="multiple" data-placeholder="부서 선택" style="width: 100%;">
-													<option>부서 1</option>
-													<option>부서 2</option>
-													<option>부서 3</option>
-													<option>부서 4</option>
-													<option>부서 5</option>
-												</select>
+										<div class="form-group">
+											<div class="row">
+												<label for="colFormLabel" class="col-form-label">제목</label>
+												<div class="col">
+													<input name="docTitle" type="text" class="form-control" id="appSubtitle" placeholder="제목 입력">
+												</div>
 											</div>
 										</div>
-									</div>
 
-									<div class="form-group">
-										<div class="row">
-											<label for="colFormLabel" class="col-form-label">제목</label>
-											<div class="col">
-												<input type="" class="form-control" id="appSubtitle" placeholder="제목 입력">
+										<div class="form-group">
+											<div class="row">
+												<label for="colFormLabel" class="col-form-label">내용</label>
+												<div class="col">
+													<textarea name="docContent" id="summernote"></textarea>
+												</div>
 											</div>
 										</div>
-									</div>
 
-									<div class="form-group">
-										<div class="row">
-											<label for="colFormLabel" class="col-form-label">내용</label>
-											<div class="col">
-												<textarea id="summernote"><br><br><br><br><br><br><br><br><br><br></textarea>
-											</div>
-										</div>
-									</div>
-
-									<div class="form-group">
-										<div class="row">
-											<label for="colFormLabel" class="col-form-label">첨부파일</label>
-											<div class="col">
-												<div class="input-group">
-													<div class="custom-file">
-														<input type="file" class="custom-file-input" id="exampleInputFile">
-														<label class="custom-file-label" for="exampleInputFile">파일선택</label>
-													</div>
-													<div class="input-group-append">
-														<span class="input-group-text">Upload</span>
+										<div class="form-group">
+											<div class="row">
+												<label for="colFormLabel" class="col-form-label">첨부파일</label>
+												<div class="col">
+													<div class="input-group">
+														<div class="custom-file">
+															<input type="file" class="custom-file-input" id="exampleInputFile">
+															<label class="custom-file-label" for="exampleInputFile">파일선택</label>
+														</div>
+														<div class="input-group-append">
+															<span class="input-group-text">Upload</span>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -200,7 +195,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -225,20 +220,17 @@
 
 <!-- Page specific script -->
 <script>
-	$(function() {
+	$ (function () {
 		// Summernote
-		$('#summernote').summernote()
+		$ ('#summernote').summernote ()
 
-		//Date and time picker
-		$('#datetimepicker5').datetimepicker({
-			locale : 'ko'
+		// Date and Time picker
+		$ ('#datetimepicker').datetimepicker ({
+			format : 'YYYY.MM.DD'
 		});
-
-		// Date range picker
-		$('#reservation').daterangepicker()
-
+		
 		// Initialize Select2 Elements
-		$('.select2').select2()
+		$ ('.select2').select2 ()
 	})
 </script>
 

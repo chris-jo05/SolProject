@@ -17,7 +17,7 @@
                 <li class="nav-item active">
                   <a href="/mailbox/mailMain" class="nav-link">
                     <i class="fas fa-inbox"></i> 받은 메일함
-                    <span class="badge bg-primary float-right">12</span>
+                    <span class="badge bg-primary float-right"></span>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -25,13 +25,37 @@
                     <i class="far fa-envelope"></i> 보낸 메일함
                   </a>
                 </li>
-               
                 <li class="nav-item">
-                  <a href="/mailbox/trashBean" class="nav-link">
-                    <i class="far fa-trash-alt"></i> 휴지통
-                  </a>
+	                <a href="/mailbox/trashBean" class="nav-link">
+    	            	<i class="far fa-trash-alt"></i> 휴지통
+    	            </a>
                 </li>
               </ul>
             </div>
             <!-- /.card-body -->
           </div>
+          
+<script>
+
+	let e_id = "${login.id}";
+	
+$(function(){
+	
+	//메일 읽었는지에 대한 여부 확인하기
+	$.getJSON({
+		url:'getCntUnRead',
+		data:{
+			e_id:e_id
+		},
+		success:function(result){
+			console.log(result);
+			
+			$(".badge").html(result);
+		},
+		error:function(xhr,status,error){
+			console.log("에러발생")
+		}
+	})
+})
+
+</script>

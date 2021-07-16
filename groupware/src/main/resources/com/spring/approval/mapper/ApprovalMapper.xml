@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.approval.mapper.ApprovalMapper">
+
+	<!-- 상신함 List -->
+	<select id="approvalList" resultType="com.spring.approval.domain.ApprovalVO">
+		select doc.*, dept.dname, emp.ename
+		from doc, dept, emp
+		where doc.dno = dept.dno
+		and doc.eno = emp.eno
+		and doc.eno = #{eno}
+	</select>
+
+	<!-- 결제문서 읽기 -->
+	<select id="approvalRead" resultType="com.spring.approval.domain.ApprovalVO">
+		select doc.*, dept.dname, emp.ename
+		from doc, dept, emp
+		where doc.dno = dept.dno
+		and doc.eno = emp.eno
+		and docNo = #{docNo}
+	</select>
+
+	<!-- 결제문서 작성 -->
+	<insert id="approvalWrite">
+		insert into doc(docNo, docClass, docDate, dno, eno, docTitle, docContent)
+		values(docNO('now'), #{docClass}, #{docDate}, #{dno}, #{eno}, #{docTitle}, #{docContent})
+	</insert>
+</mapper>
