@@ -11,4 +11,9 @@ public interface MailAttachMapper {
 	public List<FileAttachVo> findByMno(int m_no);
 	public int attachFileList(MailRemoveVo removeMail);
 	public int insertAttachInBean(MailRemoveVo removeMail);
+	public int attachFileBeanList(MailRemoveVo removeMail);
+	public int deleteAttachFile(int m_no);
+	
+	public int deleteFile(FileAttachVo file);
+	public int insertFile(FileAttachVo file);
 }

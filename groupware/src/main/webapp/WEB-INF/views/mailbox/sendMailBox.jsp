@@ -66,8 +66,7 @@
                  	     </div>
                	     	</td>
               	      	<td class="mailbox-name">${list.m_id} (${list.m_writer})</td>
-              	    	<td class="mailbox-subject"><a href="/mailbox/readMail?m_no=${list.m_no}"> ${list.m_title}</a></td>
-               	    	<td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
+              	    	<td class="mailbox-subject"><a href="/mailbox/readSendMail?m_no=${list.m_no}"> ${list.m_title}</a></td>
                	     	<td class="mailbox-date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.m_sendDate}"/></td>
 	                  </tr>
                   </c:forEach>

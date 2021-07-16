@@ -13,19 +13,45 @@
 		select * from e_mail_attach where m_no=#{m_no}
 	</select>
 	
+	<!-- 메일 하나 삭제시 첨부파일 삭제 -->
+	<delete id="deleteFile">
+		delete from e_mail_attach where m_no=#{m_no}
+	</delete>
+	
+	<!-- 메일 하나 삭제시 첨부파일 추가 -->
+	<insert id="insertFile">
+		insert into e_mail_attach_bean(uuid, uploadPath, fileName, fileType, m_no)
+		values(#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{m_no})
+	</insert>
+	
 	<!-- 메일 삭제시 리스트 삭제 -->
 	<delete id="attachFileList" parameterType="java.util.List">
 		delete from e_mail_attach
 			where
-			<foreach collection="fileList" item="item" separator="or" open="" close="">
+			<foreach collection="mNoList" item="item" separator="or" open="" close="">
 				(m_no=#{item.m_no})
 			</foreach>
 	</delete>
 	
+	<!-- 첨부파일 리스트로 넣어주기(휴지통에) -->
 	<update id="insertAttachInBean" parameterType="java.util.List">
 		insert into e_mail_attach_bean 
-		<foreach collection="fileList" item="item" separator="union all" open="" close="">
+		<foreach collection="mNoList" item="item" separator="union all" open="" close="">
 			(select * from e_mail_attach where m_no=#{item.m_no})
 		</foreach>
 	</update>
+	
+	<!-- 휴지통에 메일 삭제시 첨부파일 같이 삭제 -->
+	<delete id="attachFileBeanList" parameterType="java.util.List">
+		delete from e_mail_attach_bean
+			where
+			<foreach collection="mNoList" item="item" separator="or" open="" close="">
+				(m_no=#{item.m_no})
+			</foreach>
+	</delete>
+	
+	<!-- 휴지통에서 메일 하나 삭제시 첨부파일 삭제 -->
+	<delete id="deleteAttachFile">
+		delete from e_mail_attach_bean where m_no=#{m_no}
+	</delete>
 </mapper>

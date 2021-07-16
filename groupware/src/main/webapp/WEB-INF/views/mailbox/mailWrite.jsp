@@ -62,7 +62,6 @@
                     	<input type="file" name="attachment" multiple>
                   </div>
                   <p class="help-block"> 
-                  	<ul></ul>
                   </p>
                 </div>
               </div>

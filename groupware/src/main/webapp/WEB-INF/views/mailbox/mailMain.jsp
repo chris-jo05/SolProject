@@ -162,7 +162,7 @@
 		
 		var operForm = $("#operForm");
 	
-	  
+	  //메일 리스트를 보낼 때 m_no를 보내주기위한
 	$(".delete-mail").click(function(e){
 		e.preventDefault();
 		

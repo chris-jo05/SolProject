@@ -116,7 +116,7 @@ public class UploadAttachController {
 		log.info("파일 삭제 : "+fileName + " 타입 : "+ type);
 		
 		try {
-			File file = new File("c:\\upload\\"+URLDecoder.decode(fileName,"utf-8"));
+			File file = new File("c:\\Solcompany\\"+URLDecoder.decode(fileName,"utf-8"));
 			
 			file.delete();
 				
