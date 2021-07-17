@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.approval.mapper.ApprovalAttachMapper">
+
+	<!-- 파일 보내기 -->
+	<insert id="AppAttachInsert">
+		insert into doc_attach(doc_fileNo, docNo, doc_fileName, doc_uploadPath, doc_fileType)
+		values(#{doc_fileNo}, #{docNo}, #{doc_fileName}, #{doc_uploadPath}, #{doc_fileType})
+	</insert>
+
+	<!-- 결제문서 읽기시 해당 메일의 파일첨부 읽기 -->
+	<select id="AppAttachRead" resultType="com.spring.approval.domain.ApprovalAttachVO">
+		select * from doc_attach where docNo = #{docNo}
+	</select>
+</mapper>
