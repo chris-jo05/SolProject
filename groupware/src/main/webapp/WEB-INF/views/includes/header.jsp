@@ -105,10 +105,17 @@
 					<div class="info">
 						<a href="/self/profile" class="d-block">${login.ename} 님</a>
 						<p></p>
-						<form action="">
+						<form action="/work/check" id="checkForm" method="POST">
 							<div class="btn-group">
-								<button type="button" class="btn btn-success btn-xs" value="0">출근</button>
-								<button type="button" class="btn btn-danger btn-xs" value="1">퇴근</button>
+								<input type="hidden" name="eno" value="${login.eno}"/>
+								<input type="hidden" name="dno" value="${login.dno}"/>
+								<input type="hidden" name="workDay" value=""/>
+								<input type="hidden" name="startTime" value=""/>
+								<input type="hidden" name="finishTime" value=""/>
+								<input type="hidden" name="overTime" value=""/>
+								<input type="hidden" name="inout" value=""/>
+								<button type="button" id="checkIn" class="btn btn-success btn-xs" value="0">출근</button>
+								<button type="button" id="checkOut" class="btn btn-danger btn-xs" value="1">퇴근</button>
 							</div>
 						</form>
 					</div>
@@ -129,7 +136,7 @@
 						</li>
 
 						<li class="nav-item">
-							<a href="/work/workTable" class="nav-link">
+							<a href="/work/workTable?eno=${login.eno}" class="nav-link">
 								<i class="nav-icon far fa-plus-square"></i>
 								<p>근무 관리</p>
 							</a>
@@ -231,3 +238,121 @@
 		<script src="/resources/dist/js/adminlte.js"></script>
 		<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 		<script src="/resources/dist/js/pages/dashboard.js"></script>
+<script>
+let checkForm = $("#checkForm");
+
+
+
+$(function() {
+	$("#checkIn").click(function(e) {
+		console.log("checkIn");
+		e.preventDefault();
+		
+		var now = new Date();
+		var year = now.getFullYear();
+		var month = ((now.getMonth() + 1) > 9 ? "" : "0") + (now.getMonth() + 1);
+		var day = (now.getDate() > 9 ? "" : "0") + now.getDate();
+		var cur_day = year + "-" + month + "-" + day;
+
+		var hours = now.getHours();
+		var minutes = now.getMinutes();
+		var cur_time = hours + ":" + minutes;
+		
+		check(${login.eno}, cur_day, function(data) {
+			if(data == "") {
+				checkForm.find("input[name=workDay]").val(cur_day);
+				checkForm.find("input[name=startTime]").val(cur_time);
+				checkForm.find("input[name=finishTime]").val(" - ");
+				checkForm.find("input[name=overTime]").val(" - ");
+				checkForm.find("input[name=inout]").val("in");
+				
+				alert("출근확인 되었습니다.");
+				checkForm.submit();
+			} else {
+				alert("이미 출근 하셨습니다");
+			}
+		})
+		
+	})
+	
+	$("#checkOut").click(function(e) {
+		console.log("checkOut");
+		e.preventDefault();
+		
+		var now = new Date();
+		var year = now.getFullYear();
+		var month = ((now.getMonth() + 1) > 9 ? "" : "0") + (now.getMonth() + 1);
+		var day = (now.getDate() > 9 ? "" : "0") + now.getDate();
+	    var cur_day = year + "-" + month + "-" + day;
+	    
+	    var hours = (now.getHours() > 9 ? "" : "0") + now.getHours();
+	    var minutes = (now.getMinutes() > 9 ? "" : "0") + now.getMinutes();
+	    var cur_time = hours + ":" + minutes;
+	    
+	    check(${login.eno}, cur_day, function(data) {
+			if(data == "") {
+				alert("출근 버튼을 먼저 눌러주세요");
+			} else {
+				console.log(data);
+				console.log(now);
+				
+				$.each(data, function(idx, element) {
+					var startTimeSpl = element.startTime.split(":");
+					var finishTimeSpl = cur_time.split(":");
+					
+					var cal_hour = (finishTimeSpl[0] * 1) - (startTimeSpl[0] * 1);
+					var cal_min = (finishTimeSpl[1] * 1) - (startTimeSpl[1] * 1);
+					
+					console.log(cal_hour);
+					console.log(cal_min);
+					var overTime = "";
+					
+					if(cal_min >= 0) {
+						overTime = ((cal_hour > 9 ? "" : "0") + cal_hour) + "시간 " + ((cal_min > 9 ? "" : "0") + cal_min) + "분";
+					} else {
+						cal_hour = cal_hour - 1;
+						cal_min = 60 + cal_min;
+						
+						overTime = ((cal_hour > 9 ? "" : "0") + cal_hour) + "시간 " + ((cal_min > 9 ? "" : "0") + cal_min) + " 분";
+					}
+					console.log(overTime);
+					
+					let param = {
+						eno:element.eno,
+						workDay:element.workDay,
+						finishTime:cur_time,
+						overTime:overTime
+					}
+					
+					$.ajax({
+						url:"/work/rest_update/",
+						type:"POST",
+						contentType:"application/json",
+						async:false,
+						data:JSON.stringify(param),
+						success:function(data) {
+							console.log(data);
+						}
+					})
+				})
+				
+				alert("퇴근 처리 되었습니다.");
+			}
+		})
+	    
+	})
+	
+	function check(eno, cur_day, callback) {
+		$.getJSON({
+			url:"/work/rest_check/" + eno + "/" + cur_day,
+			type:"POST",
+			async:false,
+			success:function(data) {
+				if(callback) {
+					callback(data);
+				}
+			}
+		})
+	}
+})
+</script>

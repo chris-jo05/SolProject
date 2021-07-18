@@ -22,6 +22,7 @@
 	
 	<!-- mapper 설정 -->
 	<mybatis-spring:scan base-package="com.spring.approval.mapper" />
+	<mybatis-spring:scan base-package="com.spring.attendance.mapper" />
 	<mybatis-spring:scan base-package="com.spring.board.mapper"/>
 	<mybatis-spring:scan base-package="com.spring.calendar.mapper"/>
 	<mybatis-spring:scan base-package="com.spring.mail.mapper"/>
