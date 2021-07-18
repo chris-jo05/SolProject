@@ -136,6 +136,13 @@
 						</li>
 
 						<li class="nav-item">
+							<a href="/teamview/teamViewMain" class="nav-link">
+								<i class="nav-icon fas fa-th"></i>
+								<p>조직도</p>
+							</a>
+						</li>
+						
+						<li class="nav-item">
 							<a href="/approval/appMain" class="nav-link">
 								<i class="nav-icon fas fa-file"></i>
 								<p>전자 결재</p>
