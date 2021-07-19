@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -61,16 +62,9 @@ public class MailController {
 	
 	
 	@GetMapping("/mailWrite")
-	public void write() {
-		log.info("메일 쓰기 페이지로 이동합니다." );
-		
-	}
-	
-	@GetMapping("/mailWriteId")
-	public String writeGetId(String id) {
-		log.info("메일 쓰기 페이지로 이동합니다." + id);
-		
-		return "redirect: mailWrite";
+	public void writeGetId(@RequestParam(value="m_id",required = false)String m_id, Model model) {
+		log.info("메일 쓰기 페이지로 이동합니다." + m_id);
+		model.addAttribute("m_id", m_id);
 	}
 	
 	@PostMapping("/mailWrite")

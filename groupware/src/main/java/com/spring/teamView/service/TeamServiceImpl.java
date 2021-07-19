@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.teamView.domain.TeamCriteria;
 import com.spring.teamView.domain.TeamMemberVo;
 import com.spring.teamView.domain.TeamNameVo;
 import com.spring.teamView.mapper.TeamMapper;
@@ -16,8 +17,13 @@ public class TeamServiceImpl implements TeamService {
 	private TeamMapper mapper;
 	
 	@Override
-	public List<TeamNameVo> teamList() {
-		return mapper.teamList();
+	public List<TeamNameVo> teamList(TeamCriteria cri) {
+		return mapper.teamList(cri);
+	}
+
+	@Override
+	public int totalTeam() {
+		return mapper.totalTeam();
 	}
 
 	@Override
@@ -26,8 +32,14 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public List<TeamMemberVo> showTeamList(int dno) {
-		return mapper.showTeamList(dno);
+	public List<TeamMemberVo> showTeamList(TeamCriteria cri ,int dno) {
+		return mapper.showTeamList(cri, dno);
 	}
+
+	@Override
+	public int totalTeamCount(int dno) {
+		return mapper.totalTeamCount(dno);
+	}
+
 
 }

@@ -44,7 +44,7 @@
 	                      <p class="text-muted text-sm">직급 : ${vo.position}</p>
 	                      <ul class="ml-4 mb-0 fa-ul text-muted">
 	                        <li class="small"><span class="fa-li"><i class="nav-icon far fa-envelope"></i></span>
-	                         이메일 : <a href="/mailbox/mailWriteId" value="${vo.id}">${vo.id}@solcompany.com</a>
+	                         이메일 : <a href="/mailbox/mailWrite?m_id=${vo.id}">${vo.id}@solcompany.com</a>
 	                         </li>
 	                        <br />
 	                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> 휴대폰 : ${vo.mobile}</li>
@@ -66,46 +66,63 @@
             </c:forEach>
             
             
-            
-            
-            
           </div>
         </div>
         <!-- /.card-body -->
+        
+        <!-- 페이지 나누기 부분 -->
         <div class="card-footer">
           <nav aria-label="Contacts Page Navigation">
             <ul class="pagination justify-content-center m-0">
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-              <li class="page-item"><a class="page-link" href="#">6</a></li>
-              <li class="page-item"><a class="page-link" href="#">7</a></li>
-              <li class="page-item"><a class="page-link" href="#">8</a></li>
+            	<c:if test="${pageVo.prev}">
+	            	<button type="button" class="btn btn-default btn-sm">
+	                	<i class="fas fa-chevron page-item">
+	                    	<a href="${pageVo.startPage-1}">이전 페이지</a>
+	                	</i>
+	            	</button>
+	            </c:if>
+            	<c:forEach var="num" begin="${pageVo.startPage}" end="${pageVo.endPage}"  >
+	            	<li class="page-item ${pageVo.cri.pageNum==num?'active':''}" >
+	                	<a href="${num}" class="page-link">${num}</a>
+	            	</li>
+	            </c:forEach>
+	            <c:if test="${pageVo.next}">
+	            	<button type="button" class="btn btn-default btn-sm">
+	            		<i class="fas fa-chevron page-item">
+	            			<a href="${pageVo.endPage+1}">다음 페이지</a>
+	            		</i>
+	            	</button>
+	            </c:if>
             </ul>
           </nav>
         </div>
         <!-- /.card-footer -->
       </div>
       <!-- /.card -->
-
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-</body>
-</html>
-
+<form action="" method="get" id="actionForm">
+<input type="hidden" name="dno" value="<%=request.getParameter("dno")%>" />
+	<input type="hidden" name="pageNum" value="${pageVo.cri.pageNum}" />
+	<input type="hidden" name="amount" value="${pageVo.cri.amount}" />
+</form>
+<script>
+$(function(){
+	// 하단 페이지 나누기 버튼 클릭시 이동
+	var actionForm = $("#actionForm");
+	
+	$(".page-item a").click(function(e){
+		e.preventDefault(); //a 속성 중지
+			
+		//actionForm 안에 pageNum의 값을 사용자가 선택한 번호로 변경
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			
+		//actionForm 보내기 
+		actionForm.submit();
+	})
+})
+</script>
 
 <%@include file="../includes/footer.jsp" %>
