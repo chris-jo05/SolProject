@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.board.domain.PageVO;
+import com.spring.teamView.domain.TeamCriteria;
 import com.spring.teamView.domain.TeamMemberVo;
 import com.spring.teamView.domain.TeamNameVo;
+import com.spring.teamView.domain.TeamPageVo;
 import com.spring.teamView.service.TeamService;
 
 import lombok.extern.log4j.Log4j2;
@@ -27,11 +30,15 @@ public class TeamViewController {
 	private TeamService service;
 	
 	@GetMapping("/teamViewMain")
-	public void teamMain(HttpSession session) {
-		log.info("조직도 페이지로 이동합니다");
+	public void teamMain(TeamCriteria cri ,HttpSession session,Model model) {
+		log.info("조직도 페이지로 이동합니다" + cri);
 		
-		List<TeamNameVo> teamList = service.teamList();
+		List<TeamNameVo> teamList = service.teamList(cri);
+		int total = service.totalTeam();
+		log.info(total + "개의 부서가 존재합니다.");
+		
 		session.setAttribute("teamList", teamList);
+		model.addAttribute("pageVo", new TeamPageVo(cri, total));
 	}
 	
 	@PostMapping("/newTeam")
@@ -47,10 +54,12 @@ public class TeamViewController {
 	}
 	
 	@GetMapping("/teamViewHr")
-	public void hrTeam(int dno,Model model) {
-		log.info("인사팀 페이지로 이동합니다");
+	public void hrTeam(TeamCriteria cri, int dno,Model model) {
+		log.info("부서별 페이지로 이동합니다" + cri + dno);
 		
-		List<TeamMemberVo> member = service.showTeamList(dno);
+		List<TeamMemberVo> member = service.showTeamList(cri, dno);
+		int total = service.totalTeamCount(dno);
 		model.addAttribute("member", member);
+		model.addAttribute("pageVo", new TeamPageVo(cri, total));
 	}
 }
