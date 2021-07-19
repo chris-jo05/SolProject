@@ -83,7 +83,7 @@
 				</div>
 				<div class="col-md-2 col-md-offset-2">
                	   	<!--페이지 목록 갯수 지정하는 폼-->
-               	   	<select name="" id="amount" class="form-control">
+               	   	<select name="" id="amount" class="form-control" style="display:none">
                	   		<option value="10" <c:out value="${pageVo.cri.amount==10?'selected':''}"/> >10</option>
                	   		<option value="20" <c:out value="${pageVo.cri.amount==20?'selected':''}"/>>20</option>
                	   		<option value="30" <c:out value="${pageVo.cri.amount==30?'selected':''}"/> >30</option>

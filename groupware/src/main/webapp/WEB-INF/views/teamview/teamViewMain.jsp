@@ -50,7 +50,7 @@
 	                </div>
 	                <div class="card-footer">
 	                  <div class="text-right">
-	                     <a href="/teamview/teamViewHr" class="btn btn-sm btn-primary">
+	                     <a href="/teamview/teamViewHr?dno=${vo.dno}" class="btn btn-sm btn-primary" value="${vo.dno}">
                       <i class="fas fa-user"></i> 사원 보기
                     </a>
 	                  </div>
@@ -115,15 +115,6 @@
 </div> 
 
 <script>
-let error = '${error}';
-let success = '${success}';
-
-if(error){
-	alert(error);
-}
-if(success){
-	alert(success);
-}
 
 let modal = $(".modal");
 

@@ -11,7 +11,7 @@
 		and doc.eno = #{eno}
 	</select>
 
-	<!-- 결제문서 읽기 -->
+	<!-- 결제문서 불러오기-->
 	<select id="appRead" resultType="com.spring.approval.domain.ApprovalVO">
 		select doc.*, dept.dname, emp.ename
 		from doc, dept, emp
@@ -20,8 +20,14 @@
 		and docNo = #{docNo}
 	</select>
 
-	<!-- 결제문서 작성 -->
-	<insert id="appWrite">
+	<!-- 결제문서 작성(근태구분 및 기간 X) -->
+	<insert id="appWrite1">
+		insert into doc(docNo, docClass, docDate, dno, eno, docTitle, docContent)
+		values(docNO('now'), #{docClass}, #{docDate}, #{dno}, #{eno}, #{docTitle}, #{docContent})
+	</insert>
+
+	<!-- 결제문서 작성(근태구분 및 기간 O) -->
+	<insert id="appWrite2">
 		insert into doc(docNo, docClass, docDate, dno, eno, docTitle, docContent, docStartDate, docEndDate, docKind)
 		values(docNO('now'), #{docClass}, #{docDate}, #{dno}, #{eno}, #{docTitle}, #{docContent}, #{docStartDate}, #{docEndDate}, #{docKind})
 	</insert>

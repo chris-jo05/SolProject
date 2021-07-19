@@ -180,13 +180,10 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">첨부파일</label>
 												<div class="col">
-													<div class="input-group">
+													<div class="form-group">
 														<div class="custom-file">
-															<input type="file" class="custom-file-input" id="exampleInputFile">
-															<label class="custom-file-label" for="exampleInputFile">파일선택</label>
-														</div>
-														<div class="input-group-append">
-															<span class="input-group-text">Upload</span>
+															<input type="file" name="AppAttachInsert" class="custom-file-input" id="customFile" multiple>
+															<label class="custom-file-label" for="customFile">파일선택</label>
 														</div>
 													</div>
 												</div>
@@ -219,6 +216,9 @@
 <!-- Select2 -->
 <script src="/resources/plugins/select2/js/select2.full.min.js"></script>
 
+<!-- bs-custom-file-input -->
+<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
 <!-- Page specific script -->
 <script>
 	$ (function () {
@@ -233,6 +233,11 @@
 		// Initialize Select2 Elements
 		$ ('.select2').select2 ()
 	})
+
+	// file Input
+	$ (function () {
+		bsCustomFileInput.init ();
+	});
 </script>
 
 <%@include file="../includes/footer.jsp"%>

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.approval.domain.ApprovalAttachVO;
 import com.spring.approval.domain.ApprovalVO;
 import com.spring.approval.service.ApprovalService;
 import com.spring.member.domain.MemberVo;
@@ -56,13 +59,18 @@ public class ApprovalController {
 	}
 
 	@PostMapping("/appWriteDraft")
-	public String writeDraft(ApprovalVO appWrite, RedirectAttributes rttr) {
-		log.info("기안서 상신" + appWrite);
+	public String writeDraft(ApprovalVO appWrite1, RedirectAttributes rttr) {
+		log.info("기안서 상신" + appWrite1);
 
-		int result = service.appWrite(appWrite);
+		// 첨부파일 확인
+		if (appWrite1.getAppAttachList() != null) {
+			appWrite1.getAppAttachList().forEach(attach -> log.info("" + attach));
+		}
+
+		int result = service.appWrite1(appWrite1);
 
 		if (result > 0) {
-			rttr.addFlashAttribute("result", appWrite.getDocNo());
+			rttr.addFlashAttribute("result", appWrite1.getDocNo());
 			return "redirect: appMain";
 		} else {
 			return "redirect: appWriteDraft";
@@ -75,13 +83,18 @@ public class ApprovalController {
 	}
 
 	@PostMapping("/appWriteReport")
-	public String WriteReport(ApprovalVO appWrite, RedirectAttributes rttr) {
-		log.info("보고서 상신" + appWrite);
+	public String WriteReport(ApprovalVO appWrite1, RedirectAttributes rttr) {
+		log.info("보고서 상신" + appWrite1);
 
-		int result = service.appWrite(appWrite);
+		// 첨부파일 확인
+		if (appWrite1.getAppAttachList() != null) {
+			appWrite1.getAppAttachList().forEach(attach -> log.info("" + attach));
+		}
+
+		int result = service.appWrite1(appWrite1);
 
 		if (result > 0) {
-			rttr.addFlashAttribute("result", appWrite.getDocNo());
+			rttr.addFlashAttribute("result", appWrite1.getDocNo());
 			return "redirect: appMain";
 		} else {
 			return "redirect: appWriteReport";
@@ -94,13 +107,18 @@ public class ApprovalController {
 	}
 
 	@PostMapping("/appWriteResignation")
-	public String Writeresignation(ApprovalVO appWrite, RedirectAttributes rttr) {
-		log.info("사직서 상신" + appWrite);
+	public String Writeresignation(ApprovalVO appWrite1, RedirectAttributes rttr) {
+		log.info("사직서 상신" + appWrite1);
 
-		int result = service.appWrite(appWrite);
+		// 첨부파일 확인
+		if (appWrite1.getAppAttachList() != null) {
+			appWrite1.getAppAttachList().forEach(attach -> log.info("" + attach));
+		}
+
+		int result = service.appWrite1(appWrite1);
 
 		if (result > 0) {
-			rttr.addFlashAttribute("result", appWrite.getDocNo());
+			rttr.addFlashAttribute("result", appWrite1.getDocNo());
 			return "redirect: appMain";
 		} else {
 			return "redirect: appWriteResignation";
@@ -113,13 +131,18 @@ public class ApprovalController {
 	}
 
 	@PostMapping("/appWriteExpenseStatement")
-	public String WriteExpenseStatement(ApprovalVO appWrite, RedirectAttributes rttr) {
-		log.info("지출내역서 상신" + appWrite);
+	public String WriteExpenseStatement(ApprovalVO appWrite1, RedirectAttributes rttr) {
+		log.info("지출내역서 상신" + appWrite1);
 
-		int result = service.appWrite(appWrite);
+		// 첨부파일 확인
+		if (appWrite1.getAppAttachList() != null) {
+			appWrite1.getAppAttachList().forEach(attach -> log.info("" + attach));
+		}
+
+		int result = service.appWrite1(appWrite1);
 
 		if (result > 0) {
-			rttr.addFlashAttribute("result", appWrite.getDocNo());
+			rttr.addFlashAttribute("result", appWrite1.getDocNo());
 			return "redirect: appMain";
 		} else {
 			return "redirect: appWriteExpenseStatement";
@@ -132,13 +155,18 @@ public class ApprovalController {
 	}
 
 	@PostMapping("/appWriteAnnualPlan")
-	public String WriteAnnualPlan(ApprovalVO appWrite, RedirectAttributes rttr) {
-		log.info("연차신청서 상신" + appWrite);
+	public String WriteAnnualPlan(ApprovalVO appWrite2, RedirectAttributes rttr) {
+		log.info("연차신청서 상신" + appWrite2);
 
-		int result = service.appWrite(appWrite);
+		// 첨부파일 확인
+		if (appWrite2.getAppAttachList() != null) {
+			appWrite2.getAppAttachList().forEach(attach -> log.info("" + attach));
+		}
+
+		int result = service.appWrite1(appWrite2);
 
 		if (result > 0) {
-			rttr.addFlashAttribute("result", appWrite.getDocNo());
+			rttr.addFlashAttribute("result", appWrite2.getDocNo());
 			return "redirect: appMain";
 		} else {
 			return "redirect: appWriteAnnualPlan";
@@ -151,13 +179,18 @@ public class ApprovalController {
 	}
 
 	@PostMapping("/appWriteBusinessTrip")
-	public String WriteBusinessTrip(ApprovalVO appWrite, RedirectAttributes rttr) {
-		log.info("출장신청서 상신" + appWrite);
+	public String WriteBusinessTrip(ApprovalVO appWrite2, RedirectAttributes rttr) {
+		log.info("출장신청서 상신" + appWrite2);
 
-		int result = service.appWrite(appWrite);
+		// 첨부파일 확인
+		if (appWrite2.getAppAttachList() != null) {
+			appWrite2.getAppAttachList().forEach(attach -> log.info("" + attach));
+		}
+
+		int result = service.appWrite1(appWrite2);
 
 		if (result > 0) {
-			rttr.addFlashAttribute("result", appWrite.getDocNo());
+			rttr.addFlashAttribute("result", appWrite2.getDocNo());
 			return "redirect: appMain";
 		} else {
 			return "redirect: appWriteBusinessTrip";
@@ -177,5 +210,12 @@ public class ApprovalController {
 	@GetMapping("/appBoxReference")
 	public void boxreference() {
 		log.info("수신참조함으로 이동");
+	}
+
+	@GetMapping("/appAttachList")
+	public ResponseEntity<List<ApprovalAttachVO>> appAttachList(String docNo) {
+		log.info("첨부 파일 가져오기 " + docNo);
+
+		return new ResponseEntity<List<ApprovalAttachVO>>(service.appAttachList(docNo), HttpStatus.OK);
 	}
 }

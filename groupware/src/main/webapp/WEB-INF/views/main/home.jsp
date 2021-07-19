@@ -437,7 +437,7 @@ $(function() {
 			async:false,
 			success:function(data) {
 				console.log(data);
-				
+				var count = 0;
 				console.log(todolist);
 				$.each(data, function(idx, element) {
 					console.log(element.title);
@@ -526,7 +526,10 @@ $(function() {
 					
 					//str2 += "<div class='tools'><i class='fas fa-edit'></i><i class='fas fa-trash-o'></i></div></li>";
 					
-					todolist.append(str2);
+					if(count < 5) {
+						todolist.append(str2);
+						count = count + 1;
+					}
 				})
 			}
 	});

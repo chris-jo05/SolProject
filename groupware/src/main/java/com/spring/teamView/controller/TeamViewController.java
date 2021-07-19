@@ -6,11 +6,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.teamView.domain.TeamMemberVo;
 import com.spring.teamView.domain.TeamNameVo;
 import com.spring.teamView.service.TeamService;
 
@@ -33,21 +35,22 @@ public class TeamViewController {
 	}
 	
 	@PostMapping("/newTeam")
-	public String newTeam(String dname, String dphone,RedirectAttributes rttr) {
+	public String newTeam(String dname, String dphone) {
 		log.info("새 부서를 생성합니다." + dname + dphone);
 		
 		if(service.newTeam(dname, dphone)>0) {
-			rttr.addFlashAttribute("success", "새 부서를 추가하였습니다");
 			return "redirect: teamViewMain";
 		}else {
-			rttr.addFlashAttribute("error", "부서를 생성하지 못하였습니다.");
 			return "redirect: teamViewMain";
 		}
 		
 	}
 	
 	@GetMapping("/teamViewHr")
-	public void hrTeam() {
+	public void hrTeam(int dno,Model model) {
 		log.info("인사팀 페이지로 이동합니다");
+		
+		List<TeamMemberVo> member = service.showTeamList(dno);
+		model.addAttribute("member", member);
 	}
 }
