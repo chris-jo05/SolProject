@@ -66,7 +66,7 @@
             
  			 <!-- 첨부파일이 있을 경우 -->
               <div class="uploadResult">
-                  <ul>dd</ul>
+                  <ul>d</ul>
                </div>      
               
               
