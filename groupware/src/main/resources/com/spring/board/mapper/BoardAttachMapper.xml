@@ -3,8 +3,8 @@
 <mapper namespace="com.spring.board.mapper.BoardAttachMapper">
 <!-- insert :  -->
 <insert id="insert">
-insert into board_attach(uuid,uploadPath,fileName,fileType)
-		values(#{uuid},#{uploadPath},#{fileName},#{fileType})
+insert into board_attach(uuid,uploadPath,fileName,fileType,bno)
+		values(#{uuid},#{uploadPath},#{fileName},#{fileType},#{bno})
 </insert>
 
 <!-- delete : bno 일치시  -->
