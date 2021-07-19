@@ -14,18 +14,16 @@
 	<!-- 페이지 나누기 -->
 	<select id="list" resultType="com.spring.board.domain.BoardVO">
 	<![CDATA[
-		select * from(select /*+INDEX_DESC(board pk_board)*/
-               rownum rn,bno,b_title,b_writer,d.dno,b_date,b_updatedate,hit,dname
-            from BOARD b, dept d
-            where 
-     ]]>       
-     
-     	<include refid="criteria"></include>
-        
+		select * from
+			(select rownum rn, bno,b_title,b_writer,b_date,b_updatedate,hit,dno,dname from 
+			(select bno,b_title,b_writer,b_date,b_updatedate,hit,d.dno,dname from board b,dept d where b.dno=d.dno order by bno desc)
+			where
+		]]>  
+        <include refid="criteria"></include>
         <![CDATA[		     
-				     
-				     rownum <= (#{pageNum}*#{amount}))
-				where rn > ((#{pageNum}-1)*#{amount})		
+		 rownum<=(#{pageNum}*#{amount}))
+         where rn>((#{pageNum}-1)*#{amount})
+			
 		]]>
 	</select>
 	<!-- 전제 공지글 수 -->

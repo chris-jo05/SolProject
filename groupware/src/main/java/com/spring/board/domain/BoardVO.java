@@ -1,6 +1,7 @@
 package com.spring.board.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,4 +23,6 @@ public class BoardVO {
 	private Date b_updatedate;
 	private int hit;
 	private String dname;
+	
+	private List<AttachFileDTO> attachList;
 }

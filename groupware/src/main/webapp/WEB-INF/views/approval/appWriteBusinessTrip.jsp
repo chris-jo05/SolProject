@@ -56,8 +56,7 @@
 						<div class="card card-primary card-outline">
 							<div class="card-header">
 								<div class="card-title">
-									<h3 class="card-title" style="font-weight: bold;">출장신청서</h3>
-									<input type="hidden" name="docClass" value="출장신청서" />
+									<h3 class="card-title" style="font-weight: bold;">출장신청서</h3> <input type="hidden" name="docClass" value="출장신청서" />
 								</div>
 							</div>
 
@@ -93,8 +92,7 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">기안부서</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled>
-													<input type="hidden" name="dno" value="${login.dno}" />
+													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled> <input type="hidden" name="dno" value="${login.dno}" />
 												</div>
 											</div>
 										</div>
@@ -103,8 +101,7 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">기안자</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled>
-													<input type="hidden" name="eno" value="${login.eno}" />
+													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled> <input type="hidden" name="eno" value="${login.eno}" />
 												</div>
 											</div>
 										</div>
@@ -208,13 +205,10 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">첨부파일</label>
 												<div class="col">
-													<div class="input-group">
+													<div class="form-group">
 														<div class="custom-file">
-															<input type="file" class="custom-file-input" id="exampleInputFile">
-															<label class="custom-file-label" for="exampleInputFile">파일선택</label>
-														</div>
-														<div class="input-group-append">
-															<span class="input-group-text">Upload</span>
+															<input type="file" name="AppAttachInsert" class="custom-file-input" id="customFile" multiple>
+															<label class="custom-file-label" for="customFile">파일선택</label>
 														</div>
 													</div>
 												</div>
@@ -269,6 +263,11 @@
 		// Initialize Select2 Elements
 		$ ('.select2').select2 ()
 	})
+
+	// file Input
+	$ (function () {
+		bsCustomFileInput.init ();
+	});
 </script>
 
 <%@include file="../includes/footer.jsp"%>

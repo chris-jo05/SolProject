@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.teamView.mapper.TeamMapper">
+
+	<!-- 전체 부서 보여주기 -->
+	<select id="teamList" resultType="com.spring.teamView.domain.TeamNameVo">
+		select * from dept
+	</select>
+	
+	<!-- 부서 추가하기 -->
+	<insert id="newTeam">
+		insert into dept(dno,dname,dphone) values(dept_seq.nextval,#{dname},#{dphone})
+	</insert>
+	
+	<!-- 해당 부서번호에 따른 전체 사원 보여주기 -->
+	<select id="showTeamList" resultType="com.spring.teamView.domain.TeamMemberVo">
+		select id,position,ename,mobile,dname from emp e,dept d where e.dno=d.dno and e.dno=#{dno}
+	</select>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.attendance.mapper.AttendanceMapper">
+	
+	<select id="list" resultType="com.spring.attendance.domain.AttendanceVO">
+		<![CDATA[
+			select *
+			from (select rownum rn, eno, ename, position, workday, startTime, finishTime, overTime
+	      		  from (select e.eno, e.ename, e.position, a.workday, a.startTime, a.finishTime, a.overTime 
+	      		  		from att a, emp e 
+	      		  		where e.eno = a.eno order by a.workDay desc, a.starttime asc)
+	      		  where rownum <= (#{cri.pageNum}*#{cri.amount}) and eno = #{eno})
+			where rn > ((#{cri.pageNum}-1)*#{cri.amount})
+		]]>
+	</select>
+	
+	<select id="check" resultType="com.spring.attendance.domain.AttendanceVO">
+		select * from att where eno = #{eno} and workDay = #{workDay}
+	</select>
+	
+	<insert id="insert">
+		insert into att(eno, dno, workday, startTime, finishTime, overTime)
+		values(#{eno}, #{dno}, #{workDay}, #{startTime}, #{finishTime}, #{overTime})
+	</insert>
+	
+	<update id="update">
+		update att
+		set finishTime = #{finishTime}, overTime = #{overTime}
+		where eno = #{eno} and workDay = #{workDay}
+	</update>
+	
+	<select id="totalCnt" resultType="int">
+		select count(*) from att where eno = #{eno}
+	</select>
+</mapper>

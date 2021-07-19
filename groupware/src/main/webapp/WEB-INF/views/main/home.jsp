@@ -80,7 +80,7 @@
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">
-										<i class="ion ion-clipboard mr-1"></i> 해야 할일
+										<i class="ion ion-clipboard mr-1"></i> 일 정
 									</h3>
 									<!-- 해야 할일 페이지 나누기 -->
 									<!-- <div class="card-tools">
@@ -390,20 +390,6 @@
 									</h3>
 									<!-- tools card -->
 									<div class="card-tools">
-										<!-- button with a dropdown -->
-										<div class="btn-group">
-											<!-- <button type="button"
-												class="btn btn-success btn-sm dropdown-toggle"
-												data-toggle="dropdown" data-offset="-52">
-												<i class="fas fa-bars"></i>
-											</button> -->
-											<!-- <div class="dropdown-menu" role="menu">
-												<a href="#" class="dropdown-item">일정 추가</a> <a
-													href="#" class="dropdown-item">일정 지우기</a>
-												<div class="dropdown-divider"></div>
-												<a href="#" class="dropdown-item">달력 보기</a>
-											</div> -->
-										</div>
 										<button type="button" class="btn btn-success btn-sm"
 											data-card-widget="collapse">
 											<i class="fas fa-minus"></i>
@@ -417,22 +403,7 @@
 								</div>
 								<!-- /.card-header -->
 								<div class="card-body pt-0">
-									<!--The calendar -->
-									<div id="calendar" style="width: 100%; background-color: white">
-										<table class="table table-hover text-nowrap" id="calendarTable">
-					            	      <thead style="color: black">
-					          	 	       	<tr>
-					           		         	<th>일정 이름</th>
-					           		            <th>일정 시간</th>
-					        	            </tr>									
-					    	              </thead>
-					    	              <tbody style="color: black">
-					    	              <tr>
-					    	             	<!-- 일정 불러오는 부분 -->
-						                  </tr>
-										  </tbody>
-					                	</table>
-									</div>
+									<!-- 날씨 api 넣기 -->
 								</div>
 								<!-- /.card-body -->
 							</div>
@@ -455,7 +426,6 @@
 </body>
 </html>
 <script>
-let calendarTable = $("#calendar #calendarTable");
 let todolist = $(".todo-list");
 
 $(function() {
@@ -467,7 +437,7 @@ $(function() {
 			async:false,
 			success:function(data) {
 				console.log(data);
-				
+				var count = 0;
 				console.log(todolist);
 				$.each(data, function(idx, element) {
 					console.log(element.title);
@@ -556,8 +526,10 @@ $(function() {
 					
 					//str2 += "<div class='tools'><i class='fas fa-edit'></i><i class='fas fa-trash-o'></i></div></li>";
 					
-					calendarTable.append(str);
-					todolist.append(str2);
+					if(count < 5) {
+						todolist.append(str2);
+						count = count + 1;
+					}
 				})
 			}
 	});

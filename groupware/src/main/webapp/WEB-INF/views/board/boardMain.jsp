@@ -43,7 +43,7 @@
              <!-- 검색 -->
 		
                 <div class="input-group input-group-sm">
-                <form action="" id="searchFrom">
+                <form action="" id="searchForm">
                		 <select name="type" id="" class="form-control">
                		 <!-- 옵션으로 타입을 정한다. -->
                  		 <option value="">검색어를 선택하세요</option>
@@ -51,12 +51,12 @@
                   	   	 <option value="D" <c:out value="${pageVO.cri.type=='D'?'selected':''}"/>>부서</option>
                   		 <option value="W" <c:out value="${pageVO.cri.type=='W'?'selected':''}"/>>작성자</option>
                  		 <option value="TD" <c:out value="${pageVO.cri.type=='TD'?'selected':''}"/>>제목 or 부서</option>
-                 		  <option value="TDW" <c:out value="${pageVO.cri.type=='TDW'?'selected':''}"/>>제목 or 부서 or 작성자</option>
+                 		 <option value="TDW" <c:out value="${pageVO.cri.type=='TDW'?'selected':''}"/>>제목 or 부서 or 작성자</option>
+                
                       </select>
                     
                       <!-- 키워드 값 설정 -->
                       	<input type="text" name="keyword" value="${pageVO.cri.keyword}" />
-                      	
                       	<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}"/>
                       	<input type="hidden" name="amount" value="${pageVO.cri.amount}" />
                             			
@@ -112,7 +112,7 @@
                </div>
                   <!-- 페이지 담당 -->
                      <div class="text-center">
-                            <ul class="pagination">
+                            <ul class="pagination justify-content-center">
                             	<c:if test="${pageVO.prev}">
                             		<li class="paginate_button previous"><a class="page-link"  href="${pageVO.startPage-1}">이전</a></li>
                  				</c:if>          		
@@ -226,7 +226,7 @@ $(".btn-default").click(function(){
 			$("select[name='type']").focus();
 			return false;
 		}else if(keyword===''){
-			alert("검색어를 확인하세요");
+			alert("검색어를 입력해주세요");
 			$("input[name='keyword']").focus();
 			return false;
 		}
