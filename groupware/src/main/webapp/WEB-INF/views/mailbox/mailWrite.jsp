@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="../includes/header.jsp" %>
 
 	  <!-- Content Wrapper. Contains page content -->
@@ -42,9 +43,16 @@
               <!-- /.card-header -->
               <div class="card-body">
               <form action="" method="post">
-                <div class="form-group">
-                  <input class="form-control" placeholder="To:" name="e_id">
-                </div>
+	              <c:if test="${member.id}">
+	                <div class="form-group">
+	                  <input class="form-control" placeholder="${member.id}" name="e_id" readonly="readonly">
+	                </div>
+	              </c:if>
+	              <c:otherwise>
+	              	<div class="form-group">
+	                  <input class="form-control" placeholder="To:" name="e_id">
+	                </div>
+	              </c:otherwise>
 
                 <div class="form-group">
                   <input class="form-control" placeholder="Subject:" name="m_title">

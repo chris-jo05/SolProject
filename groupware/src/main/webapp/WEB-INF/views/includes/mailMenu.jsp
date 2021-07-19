@@ -17,7 +17,7 @@
                 <li class="nav-item active">
                   <a href="/mailbox/mailMain" class="nav-link">
                     <i class="fas fa-inbox"></i> 받은 메일함
-                    <span class="badge bg-primary float-right"></span>
+                    <span class="badge bg-primary float-right mailCount"></span>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -50,7 +50,7 @@ $(function(){
 		success:function(result){
 			console.log(result);
 			
-			$(".badge").html(result);
+			$(".mailCount").html(result);
 		},
 		error:function(xhr,status,error){
 			console.log("에러발생")

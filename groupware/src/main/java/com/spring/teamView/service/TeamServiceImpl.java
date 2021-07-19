@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.teamView.domain.TeamMemberVo;
 import com.spring.teamView.domain.TeamNameVo;
 import com.spring.teamView.mapper.TeamMapper;
 
@@ -22,6 +23,11 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public int newTeam(String dname, String dphone) {
 		return mapper.newTeam(dname, dphone);
+	}
+
+	@Override
+	public List<TeamMemberVo> showTeamList(int dno) {
+		return mapper.showTeamList(dno);
 	}
 
 }

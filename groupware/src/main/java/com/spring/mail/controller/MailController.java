@@ -66,6 +66,13 @@ public class MailController {
 		
 	}
 	
+	@GetMapping("/mailWriteId")
+	public String writeGetId(String id) {
+		log.info("메일 쓰기 페이지로 이동합니다." + id);
+		
+		return "redirect: mailWrite";
+	}
+	
 	@PostMapping("/mailWrite")
 	public String writeMail(MailBoardVo write, RedirectAttributes rttr) {
 		log.info("메일을 보냅니다" + write);

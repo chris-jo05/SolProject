@@ -188,10 +188,7 @@
 						<li class="nav-item">
 							<a href="/calendar/calendar" class="nav-link">
 								<i class="nav-icon far fa-calendar-alt"></i>
-								<p>
-									일정
-									<span class="badge badge-info right">2</span>
-								</p>
+								<p>일정</p>
 							</a>
 						</li>
 

@@ -106,12 +106,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+        <h5 class="modal-title">일정 작성</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h5 class="modal-title">일정 작성</h5>
       </div>
-      <div class="modal-body">
         <div class="modal-body">
         	<div class="form-group">
         		<label for="">일정 이름</label>
@@ -198,7 +197,6 @@
 				</div>
         	</div>
         </div>
-      </div>
       <div class="modal-footer">
       	 <button type="button" class="btn btn-success" id="modalRegisterBtn">등록</button>
       	 <button type="button" class="btn btn-success" id="modalModifyBtn">확인</button>
@@ -297,26 +295,10 @@
         y    = date.getFullYear()
 
     var Calendar = FullCalendar.Calendar;
-   /*  var Draggable = FullCalendar.Draggable; */
-
-    /* var containerEl = document.getElementById('external-events');
-    var checkbox = document.getElementById('drop-remove'); */
+  
     var calendarEl = document.getElementById('calendar');
 
-    // initialize the external events
-    // -----------------------------------------------------------------
-
-    /* new Draggable(containerEl, {
-      itemSelector: '.external-event',
-      eventData: function(eventEl) {
-        return {
-          title: eventEl.innerText,
-          backgroundColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
-          borderColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
-          textColor: window.getComputedStyle( eventEl ,null).getPropertyValue('color'),
-        };
-      }
-    }); */
+    
 
     var calendar = new Calendar(calendarEl, {
       headerToolbar: {
@@ -325,63 +307,9 @@
         right : 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       themeSystem: 'bootstrap',
-      //Random default events
+      
       events: [
-        /* {
-          title          : 'All Day Event',
-          start          : new Date(y, m, 1),
-          backgroundColor: '#f56954', //red
-          borderColor    : '#f56954', //red
-          allDay         : true
-        },
-        {
-          title          : 'Long Event',
-          start          : new Date(y, m, d - 5),
-          end            : new Date(y, m, d - 2),
-          backgroundColor: '#f39c12', //yellow
-          borderColor    : '#f39c12' //yellow
-        },
-        {
-          title          : 'Meeting',
-          start          : new Date(y, m, d, 10, 30),
-          allDay         : false,
-          backgroundColor: '#0073b7', //Blue
-          borderColor    : '#0073b7' //Blue
-        },
-        {
-          title          : 'Lunch',
-          start          : new Date(y, m, d, 12, 0),
-          end            : new Date(y, m, d, 14, 0),
-          allDay         : false,
-          backgroundColor: '#00c0ef', //Info (aqua)
-          borderColor    : '#00c0ef' //Info (aqua)
-        },
-        
-        {
-          title          : 'Click for Google',
-          start          : new Date(y, m, 28),
-          end            : new Date(y, m, 29),
-          url            : 'https://www.google.com/',
-          backgroundColor: '#3c8dbc', //Primary (light-blue)
-          borderColor    : '#3c8dbc' //Primary (light-blue)
-        },
-        {
-            title          : 'Click for Google',
-            start          : new Date(y, m, 26),
-            end            : new Date(y, m, 27),
-            url            : 'https://www.google.com/',
-            backgroundColor: '#3c8dbc', //Primary (light-blue)
-            borderColor    : '#3c8dbc' //Primary (light-blue)
-          } */
-    	  /* {
-              title          : 'Birthday Party',
-              start          : new Date(y, m, d + 1, 8, 0),
-              end            : new Date(y, m, d + 1, 22, 30),
-              allDay         : false,
-              backgroundColor: '#00a65a', //Success (green)
-              borderColor    : '#00a65a', //Success (green)
-              
-            } */
+       
       ],
       
       editable  : false,
@@ -417,47 +345,6 @@
     }); // var calender end
 
     calendar.render();
-    /* $('#calendar').fullCalendar({
-    	
-    }) */
-
-    /* ADDING EVENTS */
-    /* var currColor = '#3c8dbc' //Red by default
-    // Color chooser button
-    $('#color-chooser > li > a').click(function (e) {
-      e.preventDefault()
-      // Save color
-      currColor = $(this).css('color')
-      // Add color effect to button
-      $('#add-new-event').css({
-        'background-color': currColor,
-        'border-color'    : currColor
-      })
-    })
-    $('#add-new-event').click(function (e) {
-      e.preventDefault()
-      // Get value and make sure it is not null
-      var val = $('#new-event').val()
-      if (val.length == 0) {
-        return
-      }
-
-      // Create events
-      var event = $('<div />')
-      event.css({
-        'background-color': currColor,
-        'border-color'    : currColor,
-        'color'           : '#fff'
-      }).addClass('external-event')
-      event.text(val)
-      $('#external-events').prepend(event)
-
-      // Add draggable funtionality
-      ini_events(event)
-
-      // Remove event from text input
-      $('#new-event').val('')
-    }) */
     
     
 	// 로그인한 사원의 일정 캘린더에 보여주기
@@ -729,15 +616,7 @@
 		
 		console.log("ddd");
 		
-		/* calendar.addEvent({
-			 title : String(element.memo), // 이벤트 제목
-			start : String(element.startDate), //달력 날짜에 매핑
-			end : String(element.endDate) 			
-		}); */
 		
-		/* var startDate = String(element.startDate);
-		var endDate = (element.endDate);
-		 */
 		var s_date = new Date(element.startDate);
 		var s_year = s_date.getFullYear();
 		var s_month = s_date.getMonth();
@@ -1049,9 +928,6 @@
     	ignoreReadonly: true
     });
 	
-    /* modalStart.attr("readonly",true);
-    modalEnd.attr("readonly",true); */
-    
     // 일정 색깔
     $('#color-chooser > li > button').click(function (e) {
         e.preventDefault()
