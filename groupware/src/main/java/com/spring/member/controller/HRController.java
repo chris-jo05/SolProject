@@ -29,14 +29,25 @@ public class HRController {
 	private MemberService service;
 
 	@GetMapping("/hrMain")
-	public void main(Model model, HttpSession session, Criteria cri) throws Exception {
+	public void main(Model model, Criteria cri) throws Exception {
 		log.info("인사 관리 페이지로 이동합니다."+cri);
-
-		List<MemberVo> list = service.list(cri);
-		int total = service.total(cri);
-		model.addAttribute("list", list);
+			
+		log.info("테스트 검색 용" + cri);
 		
-		model.addAttribute("pageVO",new PageVO(cri, total));
+		if(cri.getKeyword() == null) {
+			List<MemberVo> list = service.list(cri);
+			int total = service.total(cri);
+			model.addAttribute("list", list);
+			
+			model.addAttribute("pageVO",new PageVO(cri, total));
+		} else {
+			
+			List<MemberVo> list = service.search(cri);
+			int total = service.totalSr(cri);
+			model.addAttribute("list", list);
+			model.addAttribute("pageVO",new PageVO(cri, total));
+			
+		}
 		
 	}
 
@@ -90,4 +101,6 @@ public class HRController {
 
 		return vo;
 	}
+	
+
 }

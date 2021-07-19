@@ -22,16 +22,29 @@
 		]]>
 	</select>
 	
-	   <select id="totalEn" resultType="int">
+	<select id="totalEn" resultType="int">
       select count(*) from emp where
       eno>0
    </select>
    
    <!-- search -->
    <select id="search" resultType="com.spring.member.domain.MemberVo">
-   		select e.*,d.dname from emp e, dept d where ename like '%' || #{keyword} || '%'
+   <![CDATA[
+		select * from (select /*+INDEX_DESC(emp eno)*/
+               rownum rn, e.*, d.dname
+            from emp e, dept d
+            where e.dno = d.dno
+            and ename like '%' || #{keyword} || '%'
+            and rownum <= (#{pageNum}*#{amount}))
+				where rn > ((#{pageNum}-1)*#{amount}) order by hiredate desc, eno desc		
+		]]>
+   		<!-- select e.*,d.dname from emp e, dept d where ename like '%' || #{keyword} || '%' -->
    </select>
    	
+   	<select id="totalSr" resultType="int">
+      select count(*) from emp where eno>0
+      and ename like '%' || #{keyword} || '%'
+   </select>
 	
 <!-- 	<select id="list" resultType="com.spring.member.domain.MemberVo">
 	select e.eno, e.ename, e.position, d.dname, e.birthday, e.address, e.mobile, e.hiredate, e.leavedate, e.acou_name, e.acount, e.id, e.password, e.gender from emp e, dept d where e.dno = d.dno and eno>0 order by eno desc, hiredate desc

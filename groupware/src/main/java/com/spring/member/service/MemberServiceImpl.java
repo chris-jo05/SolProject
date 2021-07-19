@@ -50,4 +50,15 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return mapper.totalEn(cri);
 	}
+
+	@Override
+	public List<MemberVo> search(Criteria cri) {
+		return mapper.search(cri);
+	}
+
+	@Override
+	public int totalSr(Criteria cri) {
+		return mapper.totalSr(cri);
+	}
+
 }

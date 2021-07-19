@@ -43,19 +43,22 @@
               <!-- /.card-header -->
               <div class="card-body">
               <form action="" method="post">
-	              <c:if test="${member.id}">
-	                <div class="form-group">
-	                  <input class="form-control" placeholder="${member.id}" name="e_id" readonly="readonly">
-	                </div>
-	              </c:if>
-	              <c:otherwise>
-	              	<div class="form-group">
-	                  <input class="form-control" placeholder="To:" name="e_id">
-	                </div>
-	              </c:otherwise>
+              <input type="hidden" value="${m_id}" />
+	              <c:choose>
+	              	<c:when test="${m_id ne null}">
+		                <div class="form-group">
+		                  <input class="form-control" placeholder="${m_id}" name="e_id" readonly="readonly">
+		                </div>
+	              	</c:when>
+		              <c:otherwise>
+		              	<div class="form-group">
+		                  <input class="form-control" placeholder="To:" name="e_id">
+		                </div>
+		              </c:otherwise>
+	              </c:choose>
 
                 <div class="form-group">
-                  <input class="form-control" placeholder="Subject:" name="m_title">
+                  <input class="form-control" placeholder="제목 : " name="m_title">
                 </div>
                 <div class="form-group">
                     <textarea id="compose-textarea" class="form-control" style="height: 300px" name="m_content">

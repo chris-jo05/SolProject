@@ -14,5 +14,6 @@ public interface MemberService {
 	public MemberVo selectMember(int eno);
 	public boolean update(MemberVo vo);
 	public int total(Criteria cri);
-
+	public List<MemberVo> search(Criteria cri);
+	public int totalSr(Criteria cri);
 }

@@ -50,7 +50,7 @@
 	                </div>
 	                <div class="card-footer">
 	                  <div class="text-right">
-	                     <a href="/teamview/teamViewHr?dno=${vo.dno}" class="btn btn-sm btn-primary" value="${vo.dno}">
+	                     <a href="/teamview/teamViewHr?dno=${vo.dno}" class="btn btn-sm btn-primary">
                       <i class="fas fa-user"></i> 사원 보기
                     </a>
 	                  </div>
@@ -67,11 +67,11 @@
             <button type="button" class="btn btn-primary" id="newTeam">부서 추가</button>
             
             <ul class="pagination pagination m-0 float-right">
-            	<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-            	<li class="page-item"><a class="page-link" href="#">1</a></li>
-            	<li class="page-item"><a class="page-link" href="#">2</a></li>
-            	<li class="page-item"><a class="page-link" href="#">3</a></li>
-            	<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+            	<c:forEach var="num" begin="${pageVo.startPage}" end="${pageVo.endPage}"  >
+	            	<li class="page-item ${pageVo.cri.pageNum==num?'active':''}" >
+	                	<a href="${num}" class="page-link">${num}</a>
+	            	</li>
+	            </c:forEach>
         	</ul>
         </div>
         <!-- /.card-footer -->
@@ -113,8 +113,26 @@
     </div>
   </div>
 </div> 
-
+<form action="" method="get" id="actionForm">
+	<input type="hidden" name="pageNum" value="${pageVo.cri.pageNum}" />
+	<input type="hidden" name="amount" value="${pageVo.cri.amount}" />
+</form>
 <script>
+
+$(function(){
+	// 하단 페이지 나누기 버튼 클릭시 이동
+	var actionForm = $("#actionForm");
+	
+	$(".page-item a").click(function(e){
+		e.preventDefault(); //a 속성 중지
+			
+		//actionForm 안에 pageNum의 값을 사용자가 선택한 번호로 변경
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			
+		//actionForm 보내기 
+		actionForm.submit();
+	})
+})
 
 let modal = $(".modal");
 
