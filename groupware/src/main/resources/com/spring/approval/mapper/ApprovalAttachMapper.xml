@@ -4,8 +4,8 @@
 
 	<!-- 파일 보내기 -->
 	<insert id="AppAttachInsert">
-		insert into doc_attach(doc_fileNo, docNo, doc_fileName, doc_uploadPath, doc_fileType)
-		values(#{doc_fileNo}, #{docNo}, #{doc_fileName}, #{doc_uploadPath}, #{doc_fileType})
+		insert into doc_attach(doc_fileNo, docNo, doc_fileName, doc_uploadPath, doc_fileType, doc_uuid)
+		values(#{doc_fileNo}, #{docNo}, #{doc_fileName}, #{doc_uploadPath}, #{doc_fileType}, #{doc_uuid})
 	</insert>
 
 	<!-- 결제문서 읽기시 해당 메일의 파일첨부 읽기 -->

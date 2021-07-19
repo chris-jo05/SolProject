@@ -18,4 +18,5 @@ public class ApprovalAttachVO {
 	private String doc_fileName;
 	private String doc_uploadPath;
 	private boolean doc_fileType;
+	private String doc_uuid;
 }

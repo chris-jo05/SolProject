@@ -161,7 +161,7 @@ textarea.form-control {
 										</div>
 									</div>
 
-									<div class="form-group" style="display: none;">
+									<div class="form-group">
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">근태구분</label>
 											<div class="col">
@@ -170,7 +170,7 @@ textarea.form-control {
 										</div>
 									</div>
 
-									<div class="form-group" style="display: none;">
+									<div class="form-group">
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">기간</label>
 											<div class="col">
@@ -211,15 +211,20 @@ textarea.form-control {
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">첨부파일</label>
 											<div class="col">
-												<div class="input-group">
-													<div class="custom-file">
-														<input type="file" class="custom-file-input" id="exampleInputFile">
-														<label class="custom-file-label" for="exampleInputFile">파일선택</label>
-													</div>
-													<div class="input-group-append">
-														<span class="input-group-text">Upload</span>
-													</div>
-												</div>
+												<input type="text" class="form-control" id="docTitle" value="${AppAttachRead.doc_Filename}" disabled>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<label for="colFormLabel" class="col-form-label">결제의견</label>
+											<div class="col-md-2">
+												<input type="text" class="form-control" id="docTitle" value="" disabled>
+											</div>
+
+											<div class="col">
+												<input type="text" class="form-control" id="docTitle" value="" disabled>
 											</div>
 										</div>
 									</div>
