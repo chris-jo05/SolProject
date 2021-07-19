@@ -95,5 +95,11 @@ public class BoardServiceImpl implements BoardService {
 		return attachMapper.findByBno(bno);
 	}
 
+	@Override
+	public int totalBsr(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.totalBsr(cri);
+	}
+
 
 }

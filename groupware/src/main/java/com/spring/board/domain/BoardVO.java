@@ -24,5 +24,7 @@ public class BoardVO {
 	private int hit;
 	private String dname;
 	
+	private int b_prev;	// 이전페이지
+	private int b_next;	// 다음페이지
 	private List<AttachFileDTO> attachList;
 }

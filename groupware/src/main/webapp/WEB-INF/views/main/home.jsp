@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -17,62 +19,49 @@
 			<section class="content">
 				<div class="container-fluid">
 					
-					<!-- Main row -->
-					<div class="row">
-						<!-- Left col -->
-						<section class="col-lg-7 connectedSortable">
-							<!-- Custom tabs (Charts with tabs)-->
-							<div class="card">
-								<div class="card-header">
+		<!-- Main row -->
+		<div class="row">
+			<!-- Left col -->
+			<section class="col-lg-7 connectedSortable">
+				<!-- Custom tabs (Charts with tabs)-->
+				<div class="card">
+					<div class="card-header border-0 text-center">
+
 									<h3 class="card-title">
-										<i class="ion ion-clipboard mr-1"></i> 공지 사항
+										<i class="fas fa-clipboard"></i> Notice
 									</h3>
-									<!-- 공지사항 페이지 나누기 -->
-									<div class="card-tools">
-										<ul class="pagination pagination-sm">
-											<li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
-											<li class="page-item"><a href="#" class="page-link">1</a></li>
-											<li class="page-item"><a href="#" class="page-link">2</a></li>
-											<li class="page-item"><a href="#" class="page-link">3</a></li>
-											<li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
-										</ul>
-									</div>
-								</div>
 								<!-- /.card-header -->
-								<!-- 공지 사항 게시판  -->
-								<div class="card-body">
-									<table class="table table-hover text-nowrap">
-				            	      <thead>
-				          	 	       	<tr>
-				           		         	<th>글 번호</th>
-				           		            <th>제 목</th>
-				                    	    <th>글쓴이</th>
-				                	        <th>날짜</th>
-				            	            <th>조회</th>
-				        	            </tr>									
-				    	              </thead>
-				    	              <tbody>
-				    	              <tr>
-				    	              	<td>1</td>
-					                  	<td><a href="/board/boardRead">인사말</a></td>
-					                  	<td>인사팀</td>
-					                  	<td>2021/07/01</td>
-					                  	<td>0</td>
-					                  </tr>
-									  <!-- 게시판 리스트 반복문 -->
-									  <c:forEach var="vo" items="${list}">
-									  	<tr>
-											<td>${vo.bno}</td>
-											<td><a href="${vo.bno}" class="move">${vo.title}</a></td>
-											<td>${vo.writer}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.regdate}"/></td>
-											<td>${vo.replycnt}</td>
-										</tr>
-									  </c:forEach>	
+				<!-- 공지 사항 게시판  -->
+				<div class="card-body">
+					<table class="table table-hover text-nowrap">
+            	      <thead>
+          	 	       	<tr>
+           		         	<th>글 번호</th>
+           		            <th>제목</th>
+                    	    <th>작성자</th>
+                	        <th>부서</th>
+            	            <th>등록날짜</th>
+        	            </tr>									
+    	              </thead>
+    	              <tbody>
+				    	             
+						<!-- 게시판 리스트 반복문 -->
+						<c:forEach var="vo" items="${list}">
+                              <tr>
+                           		<td>${vo.bno}</td>
+                                 <td><a href="/board/boardRead?bno=${vo.bno}" class="move">${vo.b_title}</a></td>
+                                 <td>${vo.b_writer}</td>
+                                  <td>${vo.dname}</td>
+                                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.b_date}" /></td>
+                                 
+                                       
+                              </tr>
+                           </c:forEach>
 									  </tbody>
 					                </table>
 								</div>
 								<!-- /.card-body -->
+							</div>
 							</div>
 							<!-- /.card -->
 
@@ -579,6 +568,16 @@ $(function() {
 		}
 	})
 })
+
+$("#cal_btn").click(function() {
+		console.log("cal_btn clicked");
+		
+		/* $(".todo-list li label").each(function(idx, element){
+			console.log($(element).prev().prop("checked"));
+		}) */
+		
+		location.href = "/calendar/calendar";
+	});
 
 </script>
 <%@include file="../includes/footer.jsp" %>

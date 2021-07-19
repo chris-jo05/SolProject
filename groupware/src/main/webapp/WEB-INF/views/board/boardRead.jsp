@@ -82,17 +82,17 @@
               
               <div class="mailbox-controls with-border text-center">
                 <div class="btn-group">
-                  <button type="button" id="pre" class="btn btn-default btn-sm" data-container="body" >
+                 <!--  <button type="button" id="pre" class="btn btn-default btn-sm" data-container="body" >
                     <i class="fas fa-reply">이전 글</i>
-                  </button>
+                  </button> -->
             
                   <button type="button" class="btn btn-default btn-sm" id="list" data-container="body">
                     <i class="fas fa-list">목 록</a></i>
                      </button>
                   
-                  <button type="button" id="next" class="btn btn-default btn-sm" data-container="body">
+                  <!-- <button type="button" id="next" class="btn btn-default btn-sm" data-container="body">
                     <i class="fas fa-share">다음 글</i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
@@ -168,27 +168,10 @@ $("#list").click(function(){
       operForm.submit();
 })
 
-$("#next").click(function(){
-	var bno = $("#bno").val();
-	bno = Number(bno);
-	bno = bno+1;
-	$("#bno").val(bno);
-      operForm.attr('action','/board/boardRead');
-      operForm.submit();
-})
-
-$("#pre").click(function(){
-	var bno = $("#bno").val();
-	bno = Number(bno);
-	bno = bno-1;
-	$("#bno").val(bno);
-      operForm.attr('action','/board/boardRead');
-      operForm.submit();
 	
-	
-})
    
-
 </script>
+
+
 <script src="/resources/project/board/js/boardReader.js"></script>
 <%@include file="../includes/footer.jsp" %>
