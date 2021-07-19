@@ -13,5 +13,6 @@ public interface MemberMapper {
 	public MemberVo selectMember(int eno);
 	public int update(MemberVo vo);
 	public int totalEn(Criteria cri);
-	
+	public List<MemberVo> search(Criteria cri);
+	public int totalSr(Criteria cri);
 }

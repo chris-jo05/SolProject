@@ -37,30 +37,26 @@
 
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">사원 프로필</h3>
-						
-						<div class="card-tools">
-							<div>
-							<div class="input-group input-group-sm">
-								
-								<input type="text" name="keyword"
-									   class="form-control float-right" 
-									   placeholder="성명">
-								
+						<button type="submit" class="btn btn-success"
+								onclick="location.href='/hrteam/hrNewMember' ">사원 추가</button>
+							<div class="card-tools">
+							<form action="" id="searchForm">
+							<div class="input-group input-group-sm" style="top:10px">
+								<input type="text" name="keyword" class="form-control float-right" placeholder="성명" >
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-default">
 										<i class="fas fa-search"></i>
 									</button>
-					
 									</div>
-								</div>
+									</form>
+							
+									
 								&nbsp
 								
-								<button type="submit" class="btn btn-success btn-sm"
-									onclick="location.href='/hrteam/hrNewMember' ">사원 추가</button>
+								
+								</div>									
 							</div>
-						</div>
-					</div>
+							</div>
 					<!-- ./card-header -->
 					<div class="card-body">
 						<table class="table table-bordered table-hover">
@@ -159,8 +155,9 @@
 							</c:if>
 
 						</ul>
+					
 					</div>
-				</div>
+					<div>
 				<!-- /.card-body -->
 			</div>
 			<!-- /.card -->
@@ -174,9 +171,9 @@
 
 <form action="hrMain" method="get" id="actionForm">
 	<%-- <input type="hidden" name="type" value="${pageVO.cri.type}" />--%>
-	<input type="hidden" name="keyword" value="${pageVO.cri.keyword}" /> <input
-		type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" /> <input
-		type="hidden" name="amount" value="${pageVO.cri.amount}" />
+	<input type="hidden" name="keyword" value="${pageVO.cri.keyword}" />
+	<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" /> 
+	<input type="hidden" name="amount" value="${pageVO.cri.amount}" />
 </form>
 <!-- /.content-wrapper -->
 
@@ -219,8 +216,11 @@ $("#amount").change(function(){
 
 
 function details(eno) {
-	$('.member-tr').attr('aria-expanded', 'true');
+	
+
+	$('.member-tr').attr('aria-expanded', 'true');	
 	$('.member-tr').ExpandableTable('toggleRow');
+	
 	$.ajax({
         url: "/hrteam/hrSelectMember",
         type: "get",
@@ -238,6 +238,14 @@ function details(eno) {
         }
     });
 }
+
+	$(".btn-default").click(function() {
+	var keyword = $("input[name='keyword']").val();
+	
+	searchForm.find("input[name='pageNum']").val("1");
+	
+	searchForm.submit();
+})
 
 </script>
 
