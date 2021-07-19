@@ -300,47 +300,58 @@ $(function() {
 				console.log(data);
 				console.log(now);
 				
-				$.each(data, function(idx, element) {
-					var startTimeSpl = element.startTime.split(":");
-					var finishTimeSpl = cur_time.split(":");
-					
-					var cal_hour = (finishTimeSpl[0] * 1) - (startTimeSpl[0] * 1);
-					var cal_min = (finishTimeSpl[1] * 1) - (startTimeSpl[1] * 1);
-					
-					console.log(cal_hour);
-					console.log(cal_min);
-					var overTime = "";
-					
-					if(cal_min >= 0) {
-						overTime = ((cal_hour > 9 ? "" : "0") + cal_hour) + "시간 " + ((cal_min > 9 ? "" : "0") + cal_min) + "분";
-					} else {
-						cal_hour = cal_hour - 1;
-						cal_min = 60 + cal_min;
+				if(data[0].finishTime != " - ") {
+					alert("이미 퇴근 하셨습니다.");
+					return;
+				} else {
+					$.each(data, function(idx, element) {
+						var startTimeSpl = element.startTime.split(":");
+						var finishTimeSpl = cur_time.split(":");
 						
-						overTime = ((cal_hour > 9 ? "" : "0") + cal_hour) + "시간 " + ((cal_min > 9 ? "" : "0") + cal_min) + " 분";
-					}
-					console.log(overTime);
-					
-					let param = {
-						eno:element.eno,
-						workDay:element.workDay,
-						finishTime:cur_time,
-						overTime:overTime
-					}
-					
-					$.ajax({
-						url:"/work/rest_update/",
-						type:"POST",
-						contentType:"application/json",
-						async:false,
-						data:JSON.stringify(param),
-						success:function(data) {
-							console.log(data);
+						var cal_hour = (finishTimeSpl[0] * 1) - (startTimeSpl[0] * 1) - 9;
+						var cal_min = (finishTimeSpl[1] * 1) - (startTimeSpl[1] * 1);
+						
+						if(cal_hour < 0) {
+							cal_hour = 0;
+							cal_min = 0;
 						}
+						
+						console.log(cal_hour);
+						console.log(cal_min);
+						
+						var overTime = "";
+						
+						if(cal_min >= 0) {
+							overTime = ((cal_hour > 9 ? "" : "0") + cal_hour) + "시간 " + ((cal_min > 9 ? "" : "0") + cal_min) + "분";
+						} else {
+							cal_hour = cal_hour - 1;
+							cal_min = 60 + cal_min;
+							
+							overTime = ((cal_hour > 9 ? "" : "0") + cal_hour) + "시간 " + ((cal_min > 9 ? "" : "0") + cal_min) + " 분";
+						}
+						console.log(overTime);
+						
+						let param = {
+							eno:element.eno,
+							workDay:element.workDay,
+							finishTime:cur_time,
+							overTime:overTime
+						}
+						
+						$.ajax({
+							url:"/work/rest_update/",
+							type:"POST",
+							contentType:"application/json",
+							async:false,
+							data:JSON.stringify(param),
+							success:function(data) {
+								console.log(data);
+							}
+						})
 					})
-				})
-				
-				alert("퇴근 처리 되었습니다.");
+					
+					alert("퇴근 처리 되었습니다.");
+				}
 			}
 		})
 	    

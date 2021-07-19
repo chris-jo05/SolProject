@@ -928,6 +928,8 @@
     	ignoreReadonly: true
     });
 	
+    $("button[name='color']").hide();
+    
     // 일정 색깔
     $('#color-chooser > li > button').click(function (e) {
         e.preventDefault()
@@ -936,9 +938,9 @@
         $("#add-new-event").css('background-color',$(this).css('background-color'));
         $("#add-new-event").css('border-color',$(this).css('background-color'));
         $("button[name='color']").css('color',$(this).css('background-color'));
-    })
+    });
     
-      
+   
      
   })
   
