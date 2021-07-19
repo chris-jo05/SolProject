@@ -63,19 +63,12 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer bg-white">
-              <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
-                <li>
-                  <span class="mailbox-attachment-icon"><i class="far fa-file-pdf"></i></span>
-
-                  <div class="mailbox-attachment-info">
-                    <a href="#" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> Sep2014-report.pdf</a>
-                        <span class="mailbox-attachment-size clearfix mt-1">
-                          <span>1,245 KB</span>
-                          <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                        </span>
-                  </div>
-                </li>
-              </ul>
+            
+ 			 <!-- 첨부파일이 있을 경우 -->
+              <div class="uploadResult">
+                  <ul>dd</ul>
+               </div>      
+              
               
               <div class="mailbox-controls with-border text-center">
                 <div class="btn-group">
@@ -187,4 +180,5 @@ $("#pre").click(function(){
    
 
 </script>
+<script src="/resources/project/board/js/boardReader.js"></script>
 <%@include file="../includes/footer.jsp" %>

@@ -2,6 +2,7 @@ package com.spring.board.service;
 
 import java.util.List;
 
+import com.spring.board.domain.AttachFileDTO;
 import com.spring.board.domain.BoardVO;
 import com.spring.board.domain.Criteria;
 
@@ -15,4 +16,5 @@ public interface BoardService {
 	public boolean update(BoardVO vo);
 	public boolean hit(int bno);
 
+	public List<AttachFileDTO> getAttachList(int bno);
 }

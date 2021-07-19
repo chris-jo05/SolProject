@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.board.domain.AttachFileDTO;
 import com.spring.board.domain.BoardVO;
 import com.spring.board.domain.Criteria;
 import com.spring.board.domain.PageVO;
@@ -69,7 +72,11 @@ public class BoardController {
 	@PostMapping("/boardModify")
 	public String update(BoardVO vo, Criteria cri, RedirectAttributes rttr, HttpSession session) {
 		log.info("수정작업 요청");
-
+		
+		//첨부파일 확인
+		if(vo.getAttachList()!=null) {
+			vo.getAttachList().forEach(attach->log.info(""+attach));
+		}
 		service.update(vo);
 
 		rttr.addFlashAttribute("result", "성공");
@@ -90,7 +97,12 @@ public class BoardController {
 	// 게시글 등록
 	@PostMapping("/boardWriter")
 	public String writerPost(BoardVO vo, RedirectAttributes rttr) {
-		log.info("공지사항 작성을 요청합니다");
+		//첨부파일 확인
+		if(vo.getAttachList()!=null) {
+			vo.getAttachList().forEach(attach->log.info(""+attach));
+		}
+
+		
 
 		if (service.insert(vo)) {
 			rttr.addFlashAttribute("result", vo.getBno());
@@ -114,5 +126,14 @@ public class BoardController {
 		}
 
 	}
+	
+	//첨부물 가져오기
+		@GetMapping("/getAttachList")
+		public ResponseEntity<List<AttachFileDTO>> getAttachList(int bno){
+			log.info("첨부물 가져오기"+bno);
+			
+			return new ResponseEntity<List<AttachFileDTO>>(service.getAttachList(bno),HttpStatus.OK);
+			
+		}
 
 }
