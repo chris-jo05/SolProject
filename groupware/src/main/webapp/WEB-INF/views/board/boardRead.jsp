@@ -32,34 +32,36 @@
 		    <form action="" id="form">
 		    
           <div class="card card-primary card-outline">
-            <div class="card-header">
-              <h3 class="card-title" >작성일 : &nbsp;
-              <fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.b_date}"/>
-              </h3>
-              
-              
-              </div>
-              <div class="card-header">
-              <h1 class="card-title" >부&nbsp;서 : &nbsp;&nbsp;</h1>
-            	${vo.dname}
-              </div>
-          
-              
-              <div class="card-header">
-              <h1 class="card-title">작성자: &nbsp;&nbsp;</h1>
-             ${vo.b_writer}
-          	  </div>
-            
              <div class="card-header">
               <h3 class="card-title" >제목 : &nbsp;&nbsp;</h3>
               ${vo.b_title}
          	</div>
+            
+            <div class="card-tools">
+            <table class="table table-board col-12">
+            	<tbody>
+            		<tr>
+            			<td>
+	            		  <h1 class="card-title" >부&nbsp;서 : &nbsp;&nbsp;${vo.dname}</h1>
+            			</td>
+            			<td>
+          				    <h1 class="card-title">작성자: &nbsp;&nbsp;${vo.b_writer}</h1>
+            			</td>
+            			<td class="float-right">
+			              <h3 class="card-title" >작성일 : &nbsp;
+			              <fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.b_date}"/>
+			              </h3>
+            			</td>
+            		</tr>
+            	</tbody>
+            </table>
+              
+              </div>
+              
             <!-- /.card-header -->
 
             <div class="card-body p-0">
               <textarea class="form-control" rows="3"  readonly="readonly" style="background-color:white">${vo.b_contents}</textarea>                           
-         
-              <!-- /.mailbox-read-message -->
             </div>
             <!-- /.card-body -->
             <div class="card-footer bg-white">
