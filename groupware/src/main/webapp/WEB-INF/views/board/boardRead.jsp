@@ -114,6 +114,9 @@
    <input type="hidden" id="bno" name="bno" value="${vo.bno}"/>
 </form> 
 <script>
+   let bno = ${vo.bno};
+</script>
+<script>
 //operForm 가져온 후 전송하기
 var operForm = $("#operForm");
 //Modify버튼 클릭시  get방식 /board/modify
