@@ -27,6 +27,7 @@
 	<mybatis-spring:scan base-package="com.spring.calendar.mapper"/>
 	<mybatis-spring:scan base-package="com.spring.mail.mapper"/>
 	<mybatis-spring:scan base-package="com.spring.member.mapper"/>
+	<mybatis-spring:scan base-package="com.spring.paystub.mapper"/>
 	<mybatis-spring:scan base-package="com.spring.teamView.mapper"/>
 	
 	<!-- Connection Pool 설정 -->

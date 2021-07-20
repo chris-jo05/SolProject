@@ -56,7 +56,7 @@
                 </ul>
 				<div class="btn-group-center text-center">
                         <button type="button" class="btn btn-info" onclick="location.href='/work/workTable?eno=${login.eno}'">근무  관리</button>
-                        <button type="button" class="btn btn-success" onclick="location.href='/paystub/paystubList'">급여 명세서</button>
+                        <button type="button" class="btn btn-success" onclick="location.href='/paystub/paystubList?eno=${login.eno}'">급여 명세서</button>
                 </div>
               </div>
               <!-- /.card-body -->
