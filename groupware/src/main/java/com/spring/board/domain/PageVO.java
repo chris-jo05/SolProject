@@ -1,4 +1,4 @@
-package com.spring.board.domain;
+ package com.spring.board.domain;
 
 import lombok.Getter;
 import lombok.ToString;
