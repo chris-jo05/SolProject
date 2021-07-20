@@ -55,6 +55,9 @@ public class HRController {
 	public void newMember() {
 		log.info("사원 추가 페이지로 이동합니다.");
 	}
+	
+	// 중복 아이디 검사
+	
 
 	@PostMapping("/hrNewMember")
 	public String memberInsert(MemberVo vo) {
@@ -66,7 +69,7 @@ public class HRController {
 			return "redirect:hrNewMember";
 		}
 	}
-
+	
 	
 	  @GetMapping("/hrUpdateMember") 
 	  public void updateMember(HttpServletRequest req, Model model) {

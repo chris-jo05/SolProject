@@ -23,6 +23,7 @@
       </div><!-- /.container-fluid -->
     </section>
 
+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -32,37 +33,55 @@
 		    <form action="" id="form">
 		    
           <div class="card card-primary card-outline">
-            <div class="card-header">
-              <h3 class="card-title" >작성일 : &nbsp;
-              <fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.b_date}"/>
-              </h3>
-              
-              
-              </div>
-              <div class="card-header">
-              <h1 class="card-title" >부&nbsp;서 : &nbsp;&nbsp;</h1>
-            	${vo.dname}
-              </div>
-          
-              
-              <div class="card-header">
-              <h1 class="card-title">작성자: &nbsp;&nbsp;</h1>
-             ${vo.b_writer}
-          	  </div>
-            
              <div class="card-header">
-              <h3 class="card-title" >제목 : &nbsp;&nbsp;</h3>
-              ${vo.b_title}
+              <h3 class="card-title" >제목 : &nbsp;&nbsp;${vo.b_title}</h3>
          	</div>
             <!-- /.card-header -->
 
-            <div class="card-body p-0">
-              <textarea class="form-control" rows="3"  readonly="readonly" style="background-color:white">${vo.b_contents}</textarea>                           
-         
-              <!-- /.mailbox-read-message -->
+            
+            <div class="card-tools">
+	            <table class="table table-board col-12">
+	            	<tbody>
+	            		<tr>
+	            			<td>
+		            		  <h1 class="card-title" >
+		            		  
+		            		  부&nbsp;서 : &nbsp;&nbsp;${vo.dname}
+		            		  
+		            		  <span>
+		            		  
+	          				    작성자: &nbsp;&nbsp;${vo.b_writer}
+		            		  </span>
+		            		  <span class="float-right">
+				              작성일 : &nbsp;
+				              <fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.b_date}"/>
+		            		  
+		            		  </span>
+		            		  </h1>
+	            			</td>
+	            			<td>
+	          				    <h1 class="card-title">
+	          				    </h1>
+	            			</td>
+	            			<td class="float-right">
+				              <h3 class="card-title" >
+				              </h3>
+	            			</td>
+	            		</tr>
+	            	</tbody>
+	            </table>
+              </div>
+              
+
+            <div class="card-body">
+<!--               <textarea class="form-control" rows="3"  readonly="readonly" style="background-color:white">
+              </textarea>                            -->
+              <div class="mailbox-read-message">
+              ${vo.b_contents}
+              </div>
             </div>
             <!-- /.card-body -->
-            <div class="card-footer bg-white">
+            
             
  			<%-- 첨부파일 목록 보여주기 --%>
 			<!-- 첨부파일이 있을 경우 -->
@@ -73,6 +92,7 @@
 			   
 			  </ul>
 	              
+            <div class="card-footer bg-white">
               <div class="mailbox-controls with-border text-center">
                 <div class="btn-group">
                  <!--  <button type="button" id="pre" class="btn btn-default btn-sm" data-container="body" >
@@ -118,6 +138,7 @@
 </script>
 <script>
 //operForm 가져온 후 전송하기
+let bno = ${vo.bno}
 var operForm = $("#operForm");
 //Modify버튼 클릭시  get방식 /board/modify
 $(".btn-primary").click(function(){

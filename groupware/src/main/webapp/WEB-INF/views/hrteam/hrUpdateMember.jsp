@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<script src="/resources/project/member/js/update.js"></script>
+
 <!-- daterange picker -->
 <link rel="stylesheet" href="/resources/plugins/daterangepicker/daterangepicker.css">
 
@@ -36,7 +41,7 @@
                 <h3 class="card-title">사원 정보 수정하기</h3>
               </div>
               <!-- /.card-header -->
-              <form action="" method="post">
+              <form id="update" action="" method="post">
 	              <div class="card-body">
 	                <h4>사원 정보</h4>
 	                <br/>
@@ -44,17 +49,22 @@
 	                  <label for="exampleInputBorderWidth2">사원 이름</label>
 	                  <input type="text" 
 	                  class="form-control form-control-border border-width-2" 
-	                  id="exampleInputBorderWidth2" 
+	                  id="ename" 
 	                  placeholder="이름을 작성해 주세요."
 	                  name="ename" value="${member.ename}">
+	                  <small id="ename" class="text-info"></small>
 	                </div>
 	                
 	                <div class="form-group">
 	                  <label for="exampleSelectBorder">부서 명</label>
 	                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="dname">
-	                    <option>인사팀</option>
-	                    <option>관리팀</option>
-	                    <option>영업팀</option>
+	                    <option selected>${member.dname}</option>
+	                    <option value="총무팀">총무팀</option>
+	                    <option value="영업팀">영업팀</option>
+	                    <option value="영업2팀">영업2팀</option>
+	                    <option value="인사팀">인사팀</option>
+	                    <option value="비서팀">비서팀</option>
+	                    <option value="관리팀">관리팀</option>
 	                  </select>
 	                </div>
 	                 
@@ -83,38 +93,42 @@
 	                  <label for="exampleInputBorderWidth2">전화 번호</label>
 	                  <input type="text" 
 	                  class="form-control form-control-border border-width-2" 
-	                  id="exampleInputBorderWidth2" 
+	                  id="mobile" 
 	                  placeholder="휴대폰 번호를 입력해 주세요.(010-1234-1234)"
 	                  name="mobile"
 	                  value="${member.mobile}">
+	                  <small id="mobile" class="text-info"></small>
+	                  
 	                </div>
 	                <div class="form-group">
 	                  <label for="exampleInputBorderWidth2">이메일</label>
 	                  <input type="text" 
 	                  class="form-control form-control-border border-width-2" 
-	                  id="exampleInputBorderWidth2" 
+	                  id="id" 
 	                  placeholder="이메일 주소를 입력해 주세요."
 	                  name="id"
-	                  value="${member.id}"
-	                  readonly="readonly">
+	                  value="${member.id}">
+	                 <small id="id" class="text-info"></small>
 	                </div>
 	                <div class="form-group">
 	                  <label for="exampleInputBorderWidth2">비밀 번호</label>
 	                  <input type="password" 
 	                  class="form-control form-control-border border-width-2" 
-	                  id="exampleInputBorderWidth2" 
+	                  id="pwd" 
 	                  placeholder="사용하실 비밀번호를 입력해 주세요."
 	                  name="password"
 	                  value="${member.password}">
+	                  <small id="pwd" class="text-info"></small>
 	                </div>
 	                <div class="form-group">
 	                  <label for="exampleInputBorderWidth2">주소</label>
 	                  <input type="text" 
 	                  class="form-control form-control-border border-width-2" 
-	                  id="exampleInputBorderWidth2" 
+	                  id="address" 
 	                  placeholder="주소를 입력해주세요."
 	                  name="address"
 	                  value="${member.address}">
+	                  <small id="address" class="text-info"></small>
 	                </div>
 	                <div class="form-group">
 	                  <label>입사일</label>
@@ -151,31 +165,33 @@
 	                  <label for="exampleInputBorderWidth2">계좌번호</label>
 	                  <input type="text" 
 	                  class="form-control form-control-border border-width-2" 
-	                  id="exampleInputBorderWidth2" 
+	                  id="account" 
 	                  placeholder="계좌번호를 입력해주세요.(78945-12-45646789)" 
 	                  name="acount"
 	                  value="${member.acount}">
+	                  <small id="account" class="text-info"></small>
 	                </div>
 	                <div class="form-group">
 	                	<label for="exampleInputBorderWidth2">성 별</label>
 	                	<div>
 	                	
 	                	<c:if test="${member.gender == '남자'}">
-		                  <label class="btn btn-primary" name="gender">
-		                    <input type="radio" name="gender" id="option_b2" value="남자" checked> 남 자
+		                  <label class="btn btn-primary" id="gender">
+		                    <input type="radio" name="gender" id="gender" value="남자" checked> 남 자
 		                  </label>
 		                  <label class="btn btn-danger">
-		                    <input type="radio" name="gender" id="option_b3" value="여자"> 여 자
+		                    <input type="radio" name="gender" id="gender" value="여자"> 여 자
 		                  </label>
 	                	</c:if>
 	                	<c:if test="${member.gender == '여자'}">
-		                  <label class="btn btn-primary" name="gender">
-		                    <input type="radio" name="gender" id="option_b2" value="남자"> 남 자
+		                  <label class="btn btn-primary" id="gender">
+		                    <input type="radio" name="gender" id="gender" value="남자"> 남 자
 		                  </label>
 		                  <label class="btn btn-danger">
-		                    <input type="radio" name="gender" id="option_b3" value="여자" checked> 여 자
+		                    <input type="radio" name="gender" id="gender" value="여자" checked> 여 자
 		                  </label>
 	                	</c:if>
+	                		<small id="gender" class="text-info"></small>
 	                	</div>
 	                </div>
 	              </div>
