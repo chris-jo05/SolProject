@@ -106,12 +106,13 @@
 	                </div>
 	                
 	                <div class="form-group">
-	                  <label for="exampleInputBorderWidth2">이메일</label>
+	                  <label for="exampleInputBorderWidth2">아이디</label>
 	                  <input 
 	                  type="text" 
 	                  class="form-control form-control-border border-width-2" 
 	                  id="id" 
-	                  placeholder="이메일 주소를 입력해 주세요."
+	                  placeholder="아이디를 입력해 주세요."
+	                  value="${member.id}"
 	                  name="id" />
 	                  <small id="id" class="text-info"></small>
 	                </div>
