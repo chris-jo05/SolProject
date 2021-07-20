@@ -1,5 +1,6 @@
 package com.spring.member.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.board.domain.BoardVO;
+import com.spring.board.domain.Criteria;
+import com.spring.board.domain.PageVO;
+import com.spring.board.service.BoardService;
 import com.spring.member.domain.MemberVo;
 import com.spring.member.service.MemberService;
 
@@ -27,6 +32,8 @@ public class HomeController {
 	
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private BoardService b_service;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -64,10 +71,20 @@ public class HomeController {
 	}
 	
 	@GetMapping("/main/home")
-	public void home(HttpSession session, Model model) {
+	public void home(HttpSession session, Model model,Criteria cri) {
 		log.info("메인 페이지로 이동합니다.");
+		cri.setAmount(5);
 		MemberVo vo = (MemberVo)session.getAttribute("login");
 		model.addAttribute("login", vo);
+		
+		List<BoardVO> list = b_service.list(cri); 
+		int total = b_service.total(cri); 
+		model.addAttribute("list", list);
+	  
+		model.addAttribute("pageVO",new PageVO(cri, total)); 
+		
+		
+		
 	}
 	
 	@GetMapping("/self/profile")

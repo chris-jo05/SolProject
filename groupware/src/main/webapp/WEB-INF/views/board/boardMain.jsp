@@ -57,8 +57,8 @@
                     
                       <!-- 키워드 값 설정 -->
                       	<input type="text" name="keyword" value="${pageVO.cri.keyword}" />
-                      	<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}"/>
-                      	<input type="hidden" name="amount" value="${pageVO.cri.amount}" />
+                      	<!--<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}"/>
+                      	<input type="hidden" name="amount" value="${pageVO.cri.amount}" />-->
                             			
 					<button type="button" class="btn btn-default">
                        <i class="fas fa-search"></i>

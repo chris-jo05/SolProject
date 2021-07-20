@@ -3,8 +3,11 @@
 <mapper namespace="com.spring.board.mapper.BoardMapper">
 	<!-- 공지글 등록 -->
 	<insert id="insert">
-		insert into board(b_title,b_writer,dno,b_contents)
-		values(#{b_title},#{b_writer},(select dno from dept where
+	<selectKey keyProperty="bno" order="BEFORE" resultType="int">
+			select board_seq.nextval from dual		
+		</selectKey>	
+		insert into board(bno,b_title,b_writer,dno,b_contents)
+		values(#{bno},#{b_title},#{b_writer},(select dno from dept where
 		dname=#{dname}),#{b_contents})
 	</insert>
 
@@ -31,7 +34,14 @@
 		select count(*) from board where
 		bno>0
 	</select>
-
+	
+	<select id="totalBsr" resultType="int">
+    select count(*) from board b,  dept d where b.dno=d.dno and bno>0
+      and b.b_title like '%' || #{keyword} || '%'
+      or d.dname like '%' || #{keyword} || '%'
+      or b.b_contents like '%' || #{keyword} || '%'
+   </select>
+	
 	<!--bno에 해당하는 공지글 가져오기(read) -->
 	<select id="read" resultType="com.spring.board.domain.BoardVO">
 		select b.bno, b.b_date, d.dname, b.b_writer, b.b_title, b.b_contents 

@@ -32,57 +32,62 @@
 		    <form action="" id="form">
 		    
           <div class="card card-primary card-outline">
-            <div class="card-header">
-              <h3 class="card-title" >작성일 : &nbsp;
-              <fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.b_date}"/>
-              </h3>
-              
-              
-              </div>
-              <div class="card-header">
-              <h1 class="card-title" >부&nbsp;서 : &nbsp;&nbsp;</h1>
-            	${vo.dname}
-              </div>
-          
-              
-              <div class="card-header">
-              <h1 class="card-title">작성자: &nbsp;&nbsp;</h1>
-             ${vo.b_writer}
-          	  </div>
-            
              <div class="card-header">
               <h3 class="card-title" >제목 : &nbsp;&nbsp;</h3>
               ${vo.b_title}
          	</div>
+            
+            <div class="card-tools">
+            <table class="table table-board col-12">
+            	<tbody>
+            		<tr>
+            			<td>
+	            		  <h1 class="card-title" >부&nbsp;서 : &nbsp;&nbsp;${vo.dname}</h1>
+            			</td>
+            			<td>
+          				    <h1 class="card-title">작성자: &nbsp;&nbsp;${vo.b_writer}</h1>
+            			</td>
+            			<td class="float-right">
+			              <h3 class="card-title" >작성일 : &nbsp;
+			              <fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.b_date}"/>
+			              </h3>
+            			</td>
+            		</tr>
+            	</tbody>
+            </table>
+              
+              </div>
+              
             <!-- /.card-header -->
 
             <div class="card-body p-0">
               <textarea class="form-control" rows="3"  readonly="readonly" style="background-color:white">${vo.b_contents}</textarea>                           
-         
-              <!-- /.mailbox-read-message -->
             </div>
             <!-- /.card-body -->
             <div class="card-footer bg-white">
             
- 			 <!-- 첨부파일이 있을 경우 -->
-              <div class="uploadResult">
-                  <ul>d</ul>
-               </div>      
-              
-              
+ 			<%-- 첨부파일 목록 보여주기 --%>
+			<!-- 첨부파일이 있을 경우 -->
+			  <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
+			    <li>
+			      
+			    </li>
+			   
+			  </ul>
+	              
               <div class="mailbox-controls with-border text-center">
                 <div class="btn-group">
-                  <button type="button" id="pre" class="btn btn-default btn-sm" data-container="body" >
+                 <!--  <button type="button" id="pre" class="btn btn-default btn-sm" data-container="body" >
                     <i class="fas fa-reply">이전 글</i>
-                  </button>
+                  </button> -->
             
                   <button type="button" class="btn btn-default btn-sm" id="list" data-container="body">
                     <i class="fas fa-list">목 록</a></i>
                      </button>
                   
-                  <button type="button" id="next" class="btn btn-default btn-sm" data-container="body">
+                  <!-- <button type="button" id="next" class="btn btn-default btn-sm" data-container="body">
                     <i class="fas fa-share">다음 글</i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
@@ -158,27 +163,10 @@ $("#list").click(function(){
       operForm.submit();
 })
 
-$("#next").click(function(){
-	var bno = $("#bno").val();
-	bno = Number(bno);
-	bno = bno+1;
-	$("#bno").val(bno);
-      operForm.attr('action','/board/boardRead');
-      operForm.submit();
-})
-
-$("#pre").click(function(){
-	var bno = $("#bno").val();
-	bno = Number(bno);
-	bno = bno-1;
-	$("#bno").val(bno);
-      operForm.attr('action','/board/boardRead');
-      operForm.submit();
 	
-	
-})
    
-
 </script>
+
+
 <script src="/resources/project/board/js/boardReader.js"></script>
 <%@include file="../includes/footer.jsp" %>

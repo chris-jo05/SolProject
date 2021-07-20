@@ -4,7 +4,17 @@
 
 	<!-- 전체 부서 보여주기 -->
 	<select id="teamList" resultType="com.spring.teamView.domain.TeamNameVo">
-		select * from dept
+		<![CDATA[
+		select * from 
+		(select rownum rn,dno,dname,dphone from dept
+			where rownum <= (#{pageNum}*#{amount}))
+			where rn > ((#{pageNum}-1)*#{amount})
+		]]>
+	</select>
+	
+	<!-- 총 부서의 수 구하기 -->
+	<select id="totalTeam" resultType="int">
+		select count(*) from dept
 	</select>
 	
 	<!-- 부서 추가하기 -->
@@ -14,6 +24,17 @@
 	
 	<!-- 해당 부서번호에 따른 전체 사원 보여주기 -->
 	<select id="showTeamList" resultType="com.spring.teamView.domain.TeamMemberVo">
-		select id,position,ename,mobile,dname from emp e,dept d where e.dno=d.dno and e.dno=#{dno}
+		<![CDATA[
+		select * from 
+		(select rownum rn,id,position, ename, mobile, dname,e.dno
+			from emp e, dept d
+			where rownum <= (#{cri.pageNum}*#{cri.amount}) and e.dno =d.dno)
+			where rn > ((#{cri.pageNum}-1)*#{cri.amount}) and dno=#{dno}
+		]]>
+	</select>
+	
+	<!-- 각부서별 인원 총 수 구하기 -->
+	<select id="totalTeamCount" resultType="int">
+		select count(*) from emp where dno=#{dno}
 	</select>
 </mapper>

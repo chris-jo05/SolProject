@@ -26,7 +26,7 @@
         <div class="row">
           <!-- /.col -->
           <div class="col-md-9">
-          <form action="" method="post" role="form">
+          <form action="" method="post" role="form" id="operForm">
             <div class="card card-primary card-outline">
             
               <!-- /.card-header -->
@@ -50,15 +50,12 @@
                   <label>Content</label>
                   <textarea class="form-control" rows="3" name="b_contents"></textarea>
             </div>
-               <!-- 파일 첨부 -->
+                <!-- 파일 첨부 -->
                 <div class="form-group">
                   <div class="btn btn-default btn-file">
                   	<i class="fas fa-paperclip"></i> 파일 첨부
-                    	<input type="file" name="uploadFile" multiple>
+                    	<input type="file" name="attachment" multiple>
                   </div>
-                  <div class="uploadResult">
-					<ul></ul>
-					</div>
                   <p class="help-block"> 
                   </p>
                 </div>
@@ -91,4 +88,9 @@
 <!-- 사이드바 등장관련 js -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <script src="/resources/project/board/js/boardWriter.js"></script>
+<script>
+
+
+
+</script>
 <%@include file="../includes/footer.jsp" %>

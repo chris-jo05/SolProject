@@ -13,6 +13,7 @@ public interface BoardService {
 	public BoardVO read(int bno);
 	public boolean delete(int bno);
 	public int total(Criteria cri);
+	public int totalBsr(Criteria cri);
 	public boolean update(BoardVO vo);
 	public boolean hit(int bno);
 
