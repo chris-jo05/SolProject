@@ -1,5 +1,9 @@
 package com.spring.board.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -136,13 +140,16 @@ public class BoardController {
 	@GetMapping("/boardRemove")
 	public String remove(int bno, RedirectAttributes rttr) {
 		log.info("삭제를 요청합니다.");
+		List<AttachFileDTO> attachList = service.getAttachList(bno);
 
-		if (service.delete(bno)) {
-			return "redirect:/board/boardMain";
-		} else {
-
-			return "redirect:/";
-		}
+		//게시글 삭제 + 첨부파일 삭제
+		if(service.delete(bno)) {
+		//2) 폴더 파일 삭제
+			deleteFiles(attachList);
+			rttr.addFlashAttribute("result","성공");
+		
+	}
+		return "redirect:boardMain";
 
 	}
 
@@ -154,5 +161,27 @@ public class BoardController {
 		return new ResponseEntity<List<AttachFileDTO>>(service.getAttachList(bno), HttpStatus.OK);
 
 	}
+	private void deleteFiles(List<AttachFileDTO> attachList) {
+		log.info("첨부 파일 삭제 "+attachList);
+		
+		if(attachList==null||attachList.size()<=0) {
+			return;
+		}
+		for(AttachFileDTO dto:attachList) {
+			Path path = Paths.get("d:\\upload\\", dto.getUploadPath()+"\\"+dto.getUuid()+"_"+dto.getFileName());
+			
+			try {
+				Files.deleteIfExists(path);
+				if(Files.probeContentType(path).startsWith("image")) {
+					Path thumbnail = Paths.get("d:\\upload\\",
+							dto.getUploadPath()+"\\s_"+dto.getUuid()+"_"+dto.getFileName());
+							Files.delete(thumbnail);
+				}
+			} catch (IOException e) {
+			e.printStackTrace();
+			}
+				
+			}
+		}
 
 }

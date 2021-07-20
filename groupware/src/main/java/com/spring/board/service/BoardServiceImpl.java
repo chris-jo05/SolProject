@@ -22,6 +22,7 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	@Override
 	public boolean insert(BoardVO vo) {
+		//새 개시글 등록
 		boolean result=mapper.insert(vo)>0?true:false;
 		//첨부파일 등록
 		if(vo.getAttachList()==null||vo.getAttachList().size()<=0) {

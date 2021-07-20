@@ -65,21 +65,14 @@
             <div class="card-footer bg-white">
             
  			<%-- 첨부파일 목록 보여주기 --%>
-<div class="row">
-   <div class="col-lg-12">
-      <div class="panel panel-default">
-         <div class="panel-heading">
-         <i class="fa fas fa-file"></i>Files
-         </div>
-            <div class="panel-body">
-               <div class="uploadResult">
-                  <ul></ul>
-               </div>
-            </div>
-      </div>
-   </div>
-</div>
-              
+			<!-- 첨부파일이 있을 경우 -->
+			  <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
+			    <li>
+			      
+			    </li>
+			   
+			  </ul>
+	              
               <div class="mailbox-controls with-border text-center">
                 <div class="btn-group">
                  <!--  <button type="button" id="pre" class="btn btn-default btn-sm" data-container="body" >

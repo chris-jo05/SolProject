@@ -55,8 +55,7 @@ public class UploadAjaxController {
 //         log.info("upload File Size : "+f.getSize());   
          
          
-         //���� ������ ���۵� ���� �����ϱ�
-         //UUID �� ����
+         
          UUID uuid = UUID.randomUUID();
          uploadFileName = uuid.toString()+"_"+f.getOriginalFilename();
          
