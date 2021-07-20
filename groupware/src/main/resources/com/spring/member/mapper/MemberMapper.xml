@@ -18,7 +18,7 @@
                rownum rn, e.*, d.dname
             from emp e, dept d
             where e.dno = d.dno and rownum <= (#{pageNum}*#{amount}))
-				where rn > ((#{pageNum}-1)*#{amount}) order by hiredate desc, eno desc		
+				where rn > ((#{pageNum}-1)*#{amount}) order by eno desc		
 		]]>
 	</select>
 	
@@ -36,7 +36,7 @@
             where e.dno = d.dno
             and ename like '%' || #{keyword} || '%'
             and rownum <= (#{pageNum}*#{amount}))
-				where rn > ((#{pageNum}-1)*#{amount}) order by hiredate desc, eno desc		
+				where rn > ((#{pageNum}-1)*#{amount}) order by eno desc		
 		]]>
    		<!-- select e.*,d.dname from emp e, dept d where ename like '%' || #{keyword} || '%' -->
    </select>

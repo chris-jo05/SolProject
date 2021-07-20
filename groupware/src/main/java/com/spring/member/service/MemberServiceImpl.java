@@ -60,5 +60,4 @@ public class MemberServiceImpl implements MemberService {
 	public int totalSr(Criteria cri) {
 		return mapper.totalSr(cri);
 	}
-
 }
