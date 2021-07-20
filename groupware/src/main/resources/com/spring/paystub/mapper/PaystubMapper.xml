@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.paystub.mapper.PaystubMapper">
+
+	<select id="list" resultType="com.spring.paystub.domain.PaystubListVO">
+		select p.pay_year, p.pay_month, d.dname, e.position, e.acount, e.acou_name
+		from paystub p, emp e, dept d
+		where p.eno = e.eno and e.dno = d.dno and e.eno = #{eno}
+	</select>
+	
+	<select id="get" resultType="com.spring.paystub.domain.PaystubVO">
+		select p.* , e.ename
+		from paystub p, emp e
+		where p.eno = e.eno and e.eno = #{eno} and p.pay_year = #{pay_year} and p.pay_month = #{pay_month}
+	</select>
+</mapper>
