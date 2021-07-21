@@ -84,7 +84,10 @@ $(function(){
 	//submit 버튼 중지
 	$("button[type='submit']").click(function(e){
 		e.preventDefault();
-			
+		
+		
+		
+		
 		var str ="";
 		$(".help-block li").each(function(idx, obj){
 			var job = $(obj);

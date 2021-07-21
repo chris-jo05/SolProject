@@ -33,15 +33,15 @@
               <div class="card-body">
                <div class="form-group">
                      <label for="exampleInputBorderWidth2">제 목</label>
-                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="b_title" placeholder="제목을 입력해 주세요.">
+                     <input type="text" class="b-title form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="b_title" placeholder="제목을 입력해 주세요.">
                    </div>
                  <div class="form-group">
                      <label for="exampleInputBorderWidth2">작성자</label>
-                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="b_writer" value="${login.ename}" readonly="readonly" style="background-color:white">
+                     <input type="text" class="b-writer form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="b_writer" value="${login.ename}" readonly="readonly" style="background-color:white">
                    </div>
                 <div class="form-group">
 	                  <label for="exampleSelectBorder">부서명</label>
-	                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="dname">
+	                  <select class="b-select custom-select form-control-border" id="exampleSelectBorder" name="dname">
 	                    <option selected value="">부서 선택</option>
 	                    <option value="총무팀">총무팀</option>
 	                    <option value="영업팀">영업팀</option>
@@ -55,7 +55,7 @@
                        
                <div class="form-group">
                   <label>Content</label>
-                  <textarea class="form-control" rows="3" name="b_contents"></textarea>
+                  <textarea class="b-content form-control" rows="3" name="b_contents"></textarea>
             </div>
                 <!-- 파일 첨부 -->
                 <div class="form-group">
