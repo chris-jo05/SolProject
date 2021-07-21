@@ -36,7 +36,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class UploadAjaxController {
 
    @PostMapping("/uploadAjax")
-   public ResponseEntity<List<AttachFileDTO>> uploadFormPost(MultipartFile[] uploadFile) {
+   public ResponseEntity<List<AttachFileDTO>> uploadFormPost(MultipartFile[] attachment) {
       log.info("���� ���ε� ��û");
       String uploadFileName =null;
       String uploadFolder="d:\\upload";
@@ -50,7 +50,7 @@ public class UploadAjaxController {
       
       List<AttachFileDTO> attachList = new ArrayList<AttachFileDTO>();
       
-      for(MultipartFile f:uploadFile) {
+      for(MultipartFile f:attachment) {
 //         log.info("upload File Name : "+f.getOriginalFilename());
 //         log.info("upload File Size : "+f.getSize());   
          
