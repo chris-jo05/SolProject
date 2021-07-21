@@ -104,7 +104,7 @@
   </div>
   <!-- /.content-wrapper -->
 <form action="" method="get" id="actionForm">
-<input type="hidden" name="dno" value="<%=request.getParameter("dno")%>" />
+	<input type="hidden" name="dno" value="<%=request.getParameter("dno")%>" />
 	<input type="hidden" name="pageNum" value="${pageVo.cri.pageNum}" />
 	<input type="hidden" name="amount" value="${pageVo.cri.amount}" />
 </form>

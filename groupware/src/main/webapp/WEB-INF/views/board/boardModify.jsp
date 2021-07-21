@@ -129,15 +129,12 @@
 <input type="hidden" name="bno"  value="${vo.bno}"/>
 </form> 
   <!-- /.content-wrapper -->
- <script>
+<script>
  let bno = ${vo.bno};
- </script>
-  <script>
 
  var operForm = $("#operForm");
-$("#list").click(function(){
-      operForm.find("input[name='bno']").remove();
-      operForm.attr('action','/board/boardMain');
+$(".btn-danger").click(function(){
+      operForm.attr('action','/board/boardRead?bno=' + bno);
       operForm.submit();
 })
 
