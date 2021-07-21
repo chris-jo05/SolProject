@@ -77,56 +77,53 @@
 								for (MemberVo vo : list) {
 
 									String date = vo.getHireDate().split(" ")[0];
+									vo.setHireDate(date);
+									if (vo.getLeaveDate() != null) {
+										String leaveDate = vo.getLeaveDate().split(" ")[0];
+										vo.setLeaveDate(leaveDate);
+									}
+								}
 								%>
-								<%-- <c:forEach var="vo" items="${list}"> --%>
-								<%-- <fmt:parseDate value="${vo.hireDate}" var="" />
-                  <fmt:formatDate value="${vo.hireDate}" pattern="yyyy-MM-dd" /> --%>
+								
+                  				<c:forEach var="vo" items="${list}">
+                  				
 								<tr class="member-tr text-center" data-widget="expandable-table"
-									aria-expanded="false" onClick="details(<%=vo.getEno()%>)"
+									aria-expanded="false" onClick="details(${vo.eno})"
 									role="tabpanel">
 
-									<td><%=vo.getEno()%></td>
-									<td><%=vo.getEname()%></td>
-									<td><%=vo.getDname()%></td>
-									<td><%=vo.getPosition()%></td>
-									<td><%=date%></td>
-
-									<td>
-										<%
-										if (vo.getLeaveDate() != null) {
-										%> <%=vo.getLeaveDate().split(" ")[0]%></td>
-									<%
-									}
-									%>
+									
+									<td>${vo.eno}</td>
+									<td>${vo.ename}</td>
+									<td>${vo.dname}</td>
+									<td>${vo.position}</td>
+									<td>${vo.hireDate}</td>
+									<td>${vo.leaveDate}</td>
+							
 								</tr>
-								<%--   <%} %> --%>
+
 								<tr class="expandable-body">
 									<td colspan="6">
 										<ul class="list-group list-group-unbordered mb-3">
 											<li class="list-group-item"><b> 소 속</b> <a
-												class="dname float-right"></a></li>
+												class="dname-${vo.eno} float-right"></a></li>
 											<li class="list-group-item"><b>&nbsp;직 급</b> <a
-												class="position float-right"></a></li>
+												class="position-${vo.eno} float-right"></a></li>
 											<li class="list-group-item"><b>이 메 일</b> <a
-												class="id float-right"></a></li>
+												class="id-${vo.eno} float-right"></a></li>
 											<li class="list-group-item"><b>휴 대 폰</b> <a
-												class="mobile float-right"></a></li>
+												class="mobile-${vo.eno} float-right"></a></li>
 											<li class="list-group-item"><b>생 일</b> <a
-												class="birthday float-right"></a></li>
+												class="birthday-${vo.eno} float-right"></a></li>
 											<li class="list-group-item"><b>성 별</b> <a
-												class="gender float-right"></a></li>
+												class="gender-${vo.eno} float-right"></a></li>
 											<li class="list-group-item">
 												<button type="button" class="btn btn-block btn-success"
-													onclick="location.href='/hrteam/hrUpdateMember?eno=<%=vo.getEno()%>'">수정하기</button>
+													onclick="location.href='/hrteam/hrUpdateMember?eno=${vo.eno}'">수정하기</button>
 											</li>
 										</ul>
 									</td>
 								</tr>
-								<%
-								}
-								%>
-
-								<%-- </c:forEach> --%>
+								</c:forEach>
 							</tbody>
 
 						</table>
@@ -216,22 +213,17 @@ $("#amount").change(function(){
 
 
 function details(eno) {
-	
-
-	$('.member-tr').attr('aria-expanded', 'true');	
-	$('.member-tr').ExpandableTable('toggleRow');
-	
 	$.ajax({
         url: "/hrteam/hrSelectMember",
         type: "get",
         data: {"eno" : eno},
         success: function(data){
-            $(".dname").html(data.dname);
-            $(".id").html(data.id);
-            $(".position").html(data.position);
-            $(".mobile").html(data.mobile);
-            $(".birthday").html(data.birthday);
-            $(".gender").html(data.gender);
+            $(".dname-" + eno).html(data.dname);
+            $(".id-" + eno).html(data.id);
+            $(".position-" + eno).html(data.position);
+            $(".mobile-" + eno).html(data.mobile);
+            $(".birthday-" + eno).html(data.birthday);
+            $(".gender-" + eno).html(data.gender);
         },
         error: function(){
             alert("simpleWithObject err");
