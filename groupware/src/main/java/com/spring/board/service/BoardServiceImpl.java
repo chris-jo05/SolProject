@@ -48,6 +48,7 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return mapper.read(bno);
 	}
+	
 	@Transactional
 	@Override
 	public boolean delete(int bno) {
@@ -63,6 +64,7 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return mapper.totalBn(cri);
 	}
+	
 	@Transactional
 	@Override
 	public boolean update(BoardVO vo) {

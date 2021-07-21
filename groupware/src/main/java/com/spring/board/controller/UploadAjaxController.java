@@ -36,7 +36,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class UploadAjaxController {
 
    @PostMapping("/uploadAjax")
-   public ResponseEntity<List<AttachFileDTO>> uploadFormPost(MultipartFile[] uploadFile) {
+   public ResponseEntity<List<AttachFileDTO>> uploadFormPost(MultipartFile[] attachment) {
       log.info("���� ���ε� ��û");
       String uploadFileName =null;
       String uploadFolder="d:\\upload";
@@ -50,7 +50,7 @@ public class UploadAjaxController {
       
       List<AttachFileDTO> attachList = new ArrayList<AttachFileDTO>();
       
-      for(MultipartFile f:uploadFile) {
+      for(MultipartFile f:attachment) {
 //         log.info("upload File Name : "+f.getOriginalFilename());
 //         log.info("upload File Size : "+f.getSize());   
          
@@ -109,7 +109,7 @@ public class UploadAjaxController {
       return entity;
    }
    
-   @GetMapping(value="/download1",produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+   @GetMapping(value="/b_download",produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
    public ResponseEntity<Resource> downloadFile(String fileName){
       log.info("download file "+fileName);
       
@@ -133,7 +133,7 @@ public class UploadAjaxController {
    
    
    //upload������ �ִ� ���� ����
-   @PostMapping("/deleteFile1")
+   @PostMapping("/b_deleteFile")
    public ResponseEntity<String> deleteFile(String fileName, String type){
 	   log.info("���ϻ���"+fileName+"type : "+type);
 	   try {

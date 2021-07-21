@@ -40,11 +40,18 @@
                      <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="b_writer" value="${login.ename}" readonly="readonly" style="background-color:white">
                    </div>
                 <div class="form-group">
-                     <div class="form-group">
-                     <label for="exampleInputBorderWidth2">부서</label>
-                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="dname"  style="background-color:white">
-                   </div>
-                   </div>
+	                  <label for="exampleSelectBorder">부서명</label>
+	                  <select class="custom-select form-control-border" id="exampleSelectBorder" name="dname">
+	                    <option selected value="">부서 선택</option>
+	                    <option value="총무팀">총무팀</option>
+	                    <option value="영업팀">영업팀</option>
+	                    <option value="영업2팀">영업2팀</option>
+	                    <option value="인사팀">인사팀</option>
+	                    <option value="비서팀">비서팀</option>
+	                    <option value="관리팀">관리팀</option>
+	                  </select>
+	                  <small id="exampleSelectBorder" class="text-info"></small>
+	                </div>
                        
                <div class="form-group">
                   <label>Content</label>

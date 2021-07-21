@@ -44,9 +44,12 @@
 	
 	<!--bno에 해당하는 공지글 가져오기(read) -->
 	<select id="read" resultType="com.spring.board.domain.BoardVO">
-		select b.bno, b.b_date, d.dname, b.b_writer, b.b_title, b.b_contents 
-		from board b, dept d 
-		where b.bno=#{bno} and b.dno=d.dno
+		select * from 
+		(select b.bno, b.b_date, d.dname, b.b_writer, b.b_title, b.b_contents,
+        LAG(b.bno) OVER(ORDER BY b.bno desc) AS b_prev,
+        LEAD(b.bno) OVER(ORDER BY b.bno desc) AS b_next 
+      from board b, dept d 
+      where b.dno=d.dno) where bno=#{bno}
 	</select>
 	
 	<!-- 공지글 삭제하기 -->

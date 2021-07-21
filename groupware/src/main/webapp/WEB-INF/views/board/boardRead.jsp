@@ -23,89 +23,69 @@
       </div><!-- /.container-fluid -->
     </section>
 
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
           <!-- /.col -->
         <div class="col-md-9">
-		    <form action="" id="form">
-		    
+          <form action="" id="form">
+          
           <div class="card card-primary card-outline">
+            <div class="card-header">
+              <h3 class="card-title" >작성일 : &nbsp;
+              <fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.b_date}"/>
+              </h3>
+              
+              
+              </div>
+              <div class="card-header">
+              <h1 class="card-title" >부&nbsp;서 : &nbsp;&nbsp;</h1>
+               ${vo.dname}
+              </div>
+          
+              
+              <div class="card-header">
+              <h1 class="card-title">작성자: &nbsp;&nbsp;</h1>
+             ${vo.b_writer}
+               </div>
+            
              <div class="card-header">
-              <h3 class="card-title" >제목 : &nbsp;&nbsp;${vo.b_title}</h3>
-         	</div>
+              <h3 class="card-title" >제목 : &nbsp;&nbsp;</h3>
+              ${vo.b_title}
+            </div>
             <!-- /.card-header -->
 
-            
-            <div class="card-tools">
-	            <table class="table table-board col-12">
-	            	<tbody>
-	            		<tr>
-	            			<td>
-		            		  <h1 class="card-title" >
-		            		  
-		            		  부&nbsp;서 : &nbsp;&nbsp;${vo.dname}
-		            		  
-		            		  <span>
-		            		  
-	          				    작성자: &nbsp;&nbsp;${vo.b_writer}
-		            		  </span>
-		            		  <span class="float-right">
-				              작성일 : &nbsp;
-				              <fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${vo.b_date}"/>
-		            		  
-		            		  </span>
-		            		  </h1>
-	            			</td>
-	            			<td>
-	          				    <h1 class="card-title">
-	          				    </h1>
-	            			</td>
-	            			<td class="float-right">
-				              <h3 class="card-title" >
-				              </h3>
-	            			</td>
-	            		</tr>
-	            	</tbody>
-	            </table>
-              </div>
-              
-
-            <div class="card-body">
-<!--               <textarea class="form-control" rows="3"  readonly="readonly" style="background-color:white">
-              </textarea>                            -->
-              <div class="mailbox-read-message">
-              ${vo.b_contents}
-              </div>
+            <div class="card-body p-0">
+              <textarea class="form-control" rows="3"  readonly="readonly" style="background-color:white">${vo.b_contents}</textarea>                           
+         
+              <!-- /.mailbox-read-message -->
             </div>
             <!-- /.card-body -->
-            
-            
- 			<%-- 첨부파일 목록 보여주기 --%>
-			<!-- 첨부파일이 있을 경우 -->
-			  <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
-			    <li>
-			      
-			    </li>
-			   
-			  </ul>
-	              
             <div class="card-footer bg-white">
+            
+          <%-- 첨부파일 목록 보여주기 --%>
+         <!-- 첨부파일이 있을 경우 -->
+           <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
+             <li>
+               
+             </li>
+            
+           </ul> 
+                 
               <div class="mailbox-controls with-border text-center">
                 <div class="btn-group">
-                 <!--  <button type="button" id="pre" class="btn btn-default btn-sm" data-container="body" >
+           <!--        <button type="button" id="pre" class="btn btn-default btn-sm" data-container="body" >
                     <i class="fas fa-reply">이전 글</i>
-                  </button> -->
+                  </button>  -->
             
                   <button type="button" class="btn btn-default btn-sm" id="list" data-container="body">
-                    <i class="fas fa-list">목 록</a></i>
+                    <i class="fas fa-list">목 록</i>
                      </button>
                   
-                  <!-- <button type="button" id="next" class="btn btn-default btn-sm" data-container="body">
+                 <!--  <button type="button" id="next" class="btn btn-default btn-sm" data-container="body">
                     <i class="fas fa-share">다음 글</i>
-                  </button> -->
+                  </button>  -->
                 </div>
               </div>
             </div>
@@ -118,9 +98,9 @@
                      <button type="button" class="btn btn-success">삭제</button>
             </div>
             
-		<input type="hidden" name="bno"  value="${vo.bno}"/>
-		</form>
-        	</div>    <!-- /.col -->
+      <input type="hidden" name="bno"  value="${vo.bno}"/>
+      </form>
+           </div>    <!-- /.col -->
         </div>
       </div>      <!-- /.row -->
     </section>
@@ -134,9 +114,16 @@
    <input type="hidden" id="bno" name="bno" value="${vo.bno}"/>
 </form> 
 <script>
+   	let bno = ${vo.bno};
+	let prev = ${vo.b_prev};
+	let next = ${vo.b_next};
+
+
+</script>
+<script>
 //operForm 가져온 후 전송하기
-let bno = ${vo.bno}
 var operForm = $("#operForm");
+
 //Modify버튼 클릭시  get방식 /board/modify
 $(".btn-primary").click(function(){
    $.ajax({
@@ -158,14 +145,14 @@ $(".btn-primary").click(function(){
 })
 
 $(".btn-success").click(function(){
-	$.ajax({
+   $.ajax({
         url: "/board/check",
         type: "POST",
         data: {"id": "${vo.b_writer}"},
         success: function(data){
             if(data == 1) {
-            	operForm.attr('action', 'boardRemove');
-            	operForm.submit();
+               operForm.attr('action', 'boardRemove');
+               operForm.submit();
             } else {
                alert('권한이 없습니다.');
             }
@@ -182,10 +169,35 @@ $("#list").click(function(){
       operForm.submit();
 })
 
-	
-   
+/* $("#next").click(function(){
+	if(oper === "next"){
+		
+		if(next == 0){
+			operForm.attr('method','get');
+			alert("다음페이지가 존재하지 않습니다.!!");
+		}else if(next != 0){
+			input.attr('value',next)
+			operForm.attr('method','get');
+			operForm.attr('action','/board/boardRead?bno=' + next);
+		}
+		
+	}
+			operForm.submit();	
+})
+
+$("#pre").click(function(){
+	if(prev == 0){
+		operForm.attr('method','get');
+		alert("이전페이지가 존재하지 않습니다.!!");
+	}else if(prev != 0){
+		console.log(prev);
+		input.attr('value',prev)
+		operForm.attr('method','get');
+		operForm.attr('action','/board/boardRead?bno='+prev);
+	}
+	operForm.submit();	
+}) */
+
 </script>
-
-
 <script src="/resources/project/board/js/boardReader.js"></script>
 <%@include file="../includes/footer.jsp" %>
