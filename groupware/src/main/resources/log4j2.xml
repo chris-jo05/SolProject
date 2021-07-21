@@ -14,6 +14,7 @@
   	<Logger name="com.spring.calendar.controller" level="info"/>
   	<Logger name="com.spring.mail.controller" level="info"/>
   	<Logger name="com.spring.member.controller" level="info"/>
+  	<Logger name="com.spring.paystub.controller" level="info"/>
   	<Logger name="com.spring.teamView.controller" level="info"/>
   	
   	<!-- mapper 로그 -->
@@ -23,6 +24,7 @@
   	<Logger name="com.spring.calendar.mapper" level="debug"/>
   	<Logger name="com.spring.mail.mapper" level="debug"/>
   	<Logger name="com.spring.member.mapper" level="debug"/>
+  	<Logger name="com.spring.paystub.mapper" level="debug"/>
   	
 
   	<Logger name="com.spring.task" level="info"/>

@@ -57,7 +57,18 @@ public class HRController {
 	}
 	
 	// 중복 아이디 검사
-	
+	@ResponseBody
+	@PostMapping("/checkId")
+	public String checkId(String id) {
+		log.info("중복아이디 검사" + id);
+		
+		MemberVo vo = service.dupId(id);
+		if(vo!=null) {
+			return "false";
+		}
+		return "true";
+		
+	}
 
 	@PostMapping("/hrNewMember")
 	public String memberInsert(MemberVo vo) {

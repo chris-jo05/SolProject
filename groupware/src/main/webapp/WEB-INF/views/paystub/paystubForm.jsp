@@ -10,14 +10,14 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row mb-2">	
           <div class="col-sm-6">
-            <h1>천상현님의 2021년 07월 급여명세서</h1>
+            <h1>${paystubVO.ename}님의 ${paystubVO.pay_year}년 ${paystubVO.pay_month}월 급여명세서</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/main/home">Home</a></li>
-              <li class="breadcrumb-item active">7월 급여명세서</li>
+              <li class="breadcrumb-item active">${paystubVO.pay_month}월 급여명세서</li>
             </ol>
           </div>
         </div>
@@ -46,9 +46,9 @@
               	</thead>
               	<tbody>
               	<tr>
-             	 <td>&#8361; 4,010,000</td>
-             	 <td>&#8361; 317,200</td>
-             	 <td>&#8361; 3,692,800</td>
+             	 <td>&#8361; ${paystubVO.totalWages}</td>
+             	 <td>&#8361; ${paystubVO.totalTaxs}</td>
+             	 <td>&#8361; ${paystubVO.real_amount}</td>
           		</tr>
               	</tbody>
               </table>
@@ -63,40 +63,111 @@
                   </thead>
                   <tbody>
  				<tr>
- 				<td style="font-weight:bolder;">기본급</td>
- 				<td>&#8361; 3,000,000</td>
- 				<td style="font-weight:bolder;">국민연금</td>
- 				<td>&#8361; 57,000</td>
+	 				<td style="font-weight:bolder;">기본급</td>
+	 				<c:if test="${paystubVO.normal_wage == 'wage:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.normal_wage != 'wage:'}">
+	 					<td>&#8361; ${paystubVO.normal_wage}</td>
+	 				</c:if>
+	 				<td style="font-weight:bolder;">소득세</td>
+	 				<c:if test="${paystubVO.income_tax == 'tax:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.income_tax != 'tax:'}">
+	 					<td>&#8361; ${paystubVO.income_tax}</td>
+	 				</c:if>
  				</tr>
  				<tr>
- 				<td style="font-weight:bolder;">상여급</td>
- 				<td>&#8361; 500,000</td>
- 				<td style="font-weight:bolder;">건강보험</td>
- 				<td>&#8361; 100,300</td>
+	 				<td style="font-weight:bolder;">상여급</td>
+	 				<c:if test="${paystubVO.bonus_wage == 'wage:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.bonus_wage != 'wage:'}">
+	 					<td>&#8361; ${paystubVO.bonus_wage}</td>
+	 				</c:if>
+	 				<td style="font-weight:bolder;">주민세</td>
+	 				<c:if test="${paystubVO.resident_tax == 'tax:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.resident_tax != 'tax:'}">
+	 					<td>&#8361; ${paystubVO.resident_tax}</td>
+	 				</c:if>
  				</tr>
  				<tr>
- 				<td style="font-weight:bolder;">직책수당</td>
- 				<td>&#8361; 130,000</td>
- 				<td style="font-weight:bolder;">고용보험</td>
- 				<td>&#8361; 11,300</td>
+	 				<td style="font-weight:bolder;">직책수당</td>
+	 				<c:if test="${paystubVO.position_wage == 'wage:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.position_wage != 'wage:'}">
+	 					<td>&#8361; ${paystubVO.position_wage}</td>
+	 				</c:if>
+	 				<td style="font-weight:bolder;">국민연금</td>
+	 				<c:if test="${paystubVO.national_pension == 'tax:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.national_pension != 'tax:'}">
+	 					<td>&#8361; ${paystubVO.national_pension}</td>
+	 				</c:if>
  				</tr>
  				<tr>
- 				<td style="font-weight:bolder;">야근수당</td>
- 				<td>&#8361; 170,000</td>
- 				<td style="font-weight:bolder;">갑근세</td>
- 				<td>&#8361; 44,300</td>
+	 				<td style="font-weight:bolder;">연장수당</td>
+	 				<c:if test="${paystubVO.overtime_wage == 'wage:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.overtime_wage != 'wage:'}">
+	 					<td>&#8361; ${paystubVO.overtime_wage}</td>
+	 				</c:if>
+	 				<td style="font-weight:bolder;">건강보험</td>
+	 				<c:if test="${paystubVO.health_insurance == 'tax:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.health_insurance != 'tax:'}">
+	 					<td>&#8361; ${paystubVO.health_insurance}</td>
+	 				</c:if>
  				</tr>
- 					<tr>
- 				<td style="font-weight:bolder;">특근수당</td>
- 				<td>&#8361; 110,000</td>
- 				<td style="font-weight:bolder;">주민세</td>
- 				<td>&#8361; 4,300</td>
+ 				<tr>
+	 				<td style="font-weight:bolder;">휴일수당</td>
+	 				<c:if test="${paystubVO.holiday_wage == 'wage:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.holiday_wage != 'wage:'}">
+	 					<td>&#8361; ${paystubVO.holiday_wage}</td>
+	 				</c:if>
+	 				<td style="font-weight:bolder;">고용보험</td>
+	 				<c:if test="${paystubVO.emp_Insurance == 'tax:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.emp_Insurance != 'tax:'}">
+	 					<td>&#8361; ${paystubVO.emp_Insurance}</td>
+	 				</c:if>
  				</tr>
- 					<tr>
- 				<td style="font-weight:bolder;">기타</td>
- 				<td>&#8361; 100,000</td>
- 				<td style="font-weight:bolder;">기타</td>
- 				<td>&#8361; 100,000</td>
+ 				<tr>
+	 				<td style="font-weight:bolder;">복리후생비</td>
+	 				<c:if test="${paystubVO.benefits == 'wage:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.benefits != 'wage:'}">
+	 					<td>&#8361; ${paystubVO.benefits}</td>
+	 				</c:if>
+	 				<td style="font-weight:bolder;">장기요양</td>
+	 				<c:if test="${paystubVO.longterm_care == 'tax:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.longterm_care != 'tax:'}">
+	 					<td>&#8361; ${paystubVO.longterm_care}</td>
+	 				</c:if>
+ 				</tr>
+ 				<tr>
+	 				<td style="font-weight:bolder;">기타</td>
+	 				<c:if test="${paystubVO.etc_wage == 'wage:'}">
+	 					<td>-</td>
+	 				</c:if>
+	 				<c:if test="${paystubVO.etc_wage != 'wage:'}">
+	 					<td>&#8361; ${paystubVO.etc_wage}</td>
+	 				</c:if>
+	 				<td style="font-weight:bolder;">-</td>
+	 				<td>-</td>
  				</tr>
                   </tbody>
                   </table> 

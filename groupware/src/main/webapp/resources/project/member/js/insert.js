@@ -30,7 +30,16 @@ $(function() {
 			validMobile: true
 		},
 		id: {
-			required: true
+			required: true,
+			remote: {
+				url:"/hrteam/checkId",
+				type:"post",
+				data:{
+					id:function(){
+						return $('#id').val();
+					}
+				}
+			}
 		},
 		password: {
 			required: true
@@ -70,6 +79,7 @@ $(function() {
 			required: "휴대폰 번호를 입력해주세요."
 		},
 		id: {
+			remote: "아이디가 중복되었습니다.",
 			required: "아이디를 입력해주세요."
 		},
 		password: {

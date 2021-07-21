@@ -7,6 +7,12 @@
 		select * from emp e, dept d where e.dno = d.dno and id=#{id} and password=#{password}
 	</select>
 	
+	<!-- 중복 id 검사 -->
+	<select id ="dupId" resultType="com.spring.member.domain.MemberVo">
+	select * from emp where id=#{id}
+	</select>
+	
+	
 	<insert id="insert">
 	insert into emp(ename, position, dno, birthday, address, mobile, hiredate, acou_name, acount, id, password, gender)
 	values(#{ename},#{position},(select dno from dept where dname=#{dname}),#{birthday},#{address},#{mobile},to_date(#{hireDate}),#{acou_name},#{acount},#{id},#{password},#{gender})

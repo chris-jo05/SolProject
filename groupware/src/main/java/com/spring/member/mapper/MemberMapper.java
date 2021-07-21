@@ -15,4 +15,5 @@ public interface MemberMapper {
 	public int totalEn(Criteria cri);
 	public List<MemberVo> search(Criteria cri);
 	public int totalSr(Criteria cri);
+	public MemberVo dupId(String id);
 }
