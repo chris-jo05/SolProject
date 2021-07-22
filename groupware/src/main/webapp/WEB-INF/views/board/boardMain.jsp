@@ -51,6 +51,8 @@
 										</div>
 										<!-- /btn-group -->
 										<input type="text" name="keyword" value="${pageVO.cri.keyword}"  />
+										<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" />
+										<input type="hidden" name="amount" value="${pageVO.cri.amount}" />
 										<button type="button" class="btn btn-default keyword">
 											<i class="fas fa-search"></i>
 										</button>
@@ -128,7 +130,7 @@
 </div>
 <!-- 페이지 나누기 추가 -->            
 <form action="boardMain" method="get" id="actionForm">	
-	<input type="hidden" name="type" value="${pageVO.cri.type}" />
+	<input type="hidden" name="type" value="${pageVO.cri.type}" /> 
 	<input type="hidden" name="keyword" value="${pageVO.cri.keyword}" />
 	<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" />
 	<input type="hidden" name="amount" value="${pageVO.cri.amount}" />	
