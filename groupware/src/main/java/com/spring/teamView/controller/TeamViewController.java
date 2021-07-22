@@ -58,7 +58,11 @@ public class TeamViewController {
 		log.info("부서별 페이지로 이동합니다" + cri + dno);
 		
 		List<TeamMemberVo> member = service.showTeamList(cri, dno);
+		log.info("각 사원들의 정보를 불러옵니다." + member);
+		
 		int total = service.totalTeamCount(dno);
+		log.info(total + "명의 사원을 불러옵니다.");
+		
 		model.addAttribute("member", member);
 		model.addAttribute("pageVo", new TeamPageVo(cri, total));
 	}

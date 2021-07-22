@@ -84,7 +84,20 @@ $(function(){
 	//submit 버튼 중지
 	$("button[type='submit']").click(function(e){
 		e.preventDefault();
-			
+		
+		
+		if($(".b-title").val() == "") {
+			alert("제목을 입력해주세요.");
+			return false;
+		}
+		if($(".b-select option:selected").val() == "") {
+			alert("부서를 선택해주세요.");
+			return false;
+		}
+		if($(".b-content").val() == "") {
+			alert("내용을 입력해주세요.");
+			return false;
+		}
 		var str ="";
 		$(".help-block li").each(function(idx, obj){
 			var job = $(obj);

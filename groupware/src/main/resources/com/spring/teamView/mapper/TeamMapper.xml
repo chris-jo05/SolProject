@@ -26,10 +26,10 @@
 	<select id="showTeamList" resultType="com.spring.teamView.domain.TeamMemberVo">
 		<![CDATA[
 		select * from 
-		(select rownum rn,id,position, ename, mobile, dname,e.dno
-			from emp e, dept d
-			where rownum <= (#{cri.pageNum}*#{cri.amount}) and e.dno =d.dno)
-			where rn > ((#{cri.pageNum}-1)*#{cri.amount}) and dno=#{dno}
+		(select rownum rn,id,position,ename,mobile,dname,dno,eno
+			from (select id,position,ename,mobile,dname,e.dno,eno from emp e, dept d where e.dno=#{dno})
+			where rownum <= (#{cri.pageNum}*#{cri.amount}) ) 
+			where rn > ((#{cri.pageNum}-1)*#{cri.amount})
 		]]>
 	</select>
 	
