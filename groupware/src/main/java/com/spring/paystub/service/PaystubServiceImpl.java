@@ -24,5 +24,9 @@ public class PaystubServiceImpl implements PaystubService {
 	public PaystubVO get(int pay_year, int pay_month, int eno) {
 		return mapper.get(pay_year, pay_month, eno);
 	}
-
+	
+	@Override
+	public boolean insert(PaystubVO vo) {
+		return mapper.insert(vo) > 0 ? true : false;
+	}
 }

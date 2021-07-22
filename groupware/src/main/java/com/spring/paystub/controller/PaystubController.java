@@ -99,4 +99,9 @@ public class PaystubController {
 		model.addAttribute("paystubVO", result);
 	}
 	
+	@GetMapping("/paystubInsertForm")
+	public void insertGet() {
+		log.info("급여명세서 삽입 페이지 요청");
+		
+	}
 }
