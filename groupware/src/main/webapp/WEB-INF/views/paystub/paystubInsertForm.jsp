@@ -289,8 +289,11 @@ $(function () {
 						console.log("paystub 삽입 " + result);
 					}
 				});
+				
+				location.href = "/paystub/paystubList?eno=" + data.eno;
 		});
 		
+		 
 	})
 	
 	// 일정 담당자 이름, 부서명으로 사원번호, 부서번호 가져오기
