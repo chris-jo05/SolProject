@@ -104,6 +104,21 @@
 
 <!-- Page specific script -->
 <script>
+
+$(".btn-primary").click(function(){
+	let e_id = $("input[name='e_id']").val();
+	let m_id = '${login.id}';
+	let url = '/mailbox/mailMain';
+	
+	console.log("소켓이 연결되었습니다 " + socket);
+	
+	let socketMsg = "mail,"+m_id + "," + e_id + "," + url;
+	console.log("소켓에 전송할 메세지 : " + socketMsg);
+	if(socket){
+		socket.send(socketMsg);
+	}
+})
+
   $(function () {
     //Add text editor
     $('#compose-textarea').summernote()

@@ -31,6 +31,67 @@
 <link rel="stylesheet" href="/resources/plugins/fullcalendar/main.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="/resources/dist/css/adminlte.min.css">
+
+  <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<!-- sockJS -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<!-- 알람 기능 관련 소켓 -->
+
+<script type="text/javascript">
+var socket = null;
+
+
+$(document).ready(function(){
+	connect();
+	showMessageAlert();
+});
+
+function connect(){
+	var ws = new SockJS("/mail");
+	socket = ws;
+	
+	
+	// 커넥션이 연결되고 나서
+	ws.onopen = function(){
+		console.log("Info : connection opended.");
+	};
+	
+	ws.onmessage = function(e){
+		console.log("Receive Message : " , e.data + '\n');
+		
+		let socketAlert = $('div#socketAlertMail');
+		sessionStorage.setItem("message",e.data);
+		showMessageAlert();
+	};
+	
+	ws.onclose = function(e){
+		console.log("Info : connection closed.");
+		/* setTimeout(function(){
+			connect();
+		}, 1000); */
+	};
+	
+	ws.onerror = function(err){
+		console.log("Error : : ",err);
+	};
+}
+
+function showMessageAlert(){
+	let socketAlert = $('div#socketAlertMail');
+	if(sessionStorage.length != 0){
+		console.log(sessionStorage.getItem("message"));
+		socketAlert.html(sessionStorage.getItem("message"));
+		socketAlert.css('display','block');
+		$("a[class='dropdown-item']").click(function(e){
+			sessionStorage.removeItem("message");
+			socketAlert.html("");
+			
+		});
+	}
+}
+</script>  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
@@ -56,16 +117,13 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link" data-toggle="dropdown" href="#">
 						<i class="far fa-bell"></i>
-						<span class="badge badge-warning navbar-badge">15</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 						<span class="dropdown-item dropdown-header">새로운 알람 </span>
+						
 						<div class="dropdown-divider"></div>
-						<a href="/mailbox/mailMain" class="dropdown-item">
-							<i class="fas fa-envelope mr-2"></i>
-							새 메일
-							<span class="float-right text-muted text-sm">3 mins</span>
-						</a>
+						<div id="socketAlertMail"></div>
+						
 						<div class="dropdown-divider"></div>
 						<a href="/board/boardMain" class="dropdown-item">
 							<i class="fas fa-file mr-2"></i>
@@ -142,19 +200,19 @@
 							</a>
 						</li>
 
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a href="/teamview/teamViewMain" class="nav-link">
 								<i class="nav-icon fas fa-th"></i>
 								<p>조직도</p>
 							</a>
-						</li>
+						</li> -->
 						
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a href="/approval/appMain" class="nav-link">
 								<i class="nav-icon fas fa-file"></i>
 								<p>전자 결재</p>
 							</a>
-						</li>
+						</li> -->
 
 						<li class="nav-item">
 							<c:if test= "${login.dno == 10}">
@@ -178,7 +236,7 @@
 						</li>
 
 						<!-- 메일함 -->
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a href="/mailbox/mailMain" class="nav-link">
 								<i class="nav-icon far fa-envelope"></i>
 								<p>메일함</p>
@@ -190,9 +248,9 @@
 								<i class="nav-icon far fa-calendar-alt"></i>
 								<p>일정</p>
 							</a>
-						</li>
+						</li> -->
 
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a href="../resources/pages/calendar.html" class="nav-link">
 								<i class="nav-icon far fa-calendar-alt"></i>
 								<p>
@@ -200,7 +258,7 @@
 									<span class="badge badge-info right">2</span>
 								</p>
 							</a>
-						</li>
+						</li> -->
 					</ul>
 				</nav>
 

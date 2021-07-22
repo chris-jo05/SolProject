@@ -27,6 +27,7 @@
   	<Logger name="com.spring.paystub.mapper" level="debug"/>
   	
 
+  	<Logger name="com.spring.mail.util" level="info"/>
   	<Logger name="com.spring.task" level="info"/>
   	
   	<Logger name="org.springframework.core" level="info"/>
@@ -34,6 +35,7 @@
   	<Logger name="org.springframework.context" level="info"/>
   	<Logger name="org.springframework.web" level="debug"/>
   	<Logger name="org.springframework.jdbc" level="debug"/>
+  	<Logger name="org.springframework.websocket" level="info"/>
   	
     <Root level="error">
     <!-- 에러가 발생하면 지정한대로 출력요청 -->
