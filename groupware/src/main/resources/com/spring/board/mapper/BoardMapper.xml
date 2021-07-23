@@ -36,8 +36,9 @@
 	</select>
 	
 	<select id="totalBsr" resultType="int">
-    select count(*) from board b,  dept d where b.dno=d.dno and bno>0
-      and <include refid="criteria2"></include>
+    select count(*) from board b,  dept d where b.dno=d.dno and
+      <include refid="criteria"></include>
+      bno>0
    </select>
 	
 	<!--bno에 해당하는 공지글 가져오기(read) -->
@@ -89,23 +90,4 @@
 		</trim>
 	</sql>
 	
-	<sql id="criteria2">
-		<trim prefix="(" suffix=")"  prefixOverrides="OR" >
-			<foreach collection="typeArr" item='type'>
-				<trim prefix="OR">
-					<choose>
-						<when test="type=='T'.toString()">
-							b_title like '%'||#{keyword}||'%'
-						</when>
-						<when test="type=='D'.toString()">
-							dname like '%'||#{keyword}||'%'
-						</when>
-						<when test="type=='W'.toString()">
-							b_writer like '%'||#{keyword}||'%'
-						</when>
-					</choose>
-				</trim>
-			</foreach>
-		</trim>
-	</sql>
 </mapper>

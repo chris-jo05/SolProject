@@ -200,19 +200,19 @@ function showMessageAlert(){
 							</a>
 						</li>
 
-						<!-- <li class="nav-item">
+						<li class="nav-item">
 							<a href="/teamview/teamViewMain" class="nav-link">
 								<i class="nav-icon fas fa-th"></i>
 								<p>조직도</p>
 							</a>
-						</li> -->
+						</li>
 						
-						<!-- <li class="nav-item">
+						<li class="nav-item">
 							<a href="/approval/appMain" class="nav-link">
 								<i class="nav-icon fas fa-file"></i>
 								<p>전자 결재</p>
 							</a>
-						</li> -->
+						</li>
 
 						<li class="nav-item">
 							<c:if test= "${login.dno == 10}">
@@ -236,7 +236,7 @@ function showMessageAlert(){
 						</li>
 
 						<!-- 메일함 -->
-						<!-- <li class="nav-item">
+						 <li class="nav-item">
 							<a href="/mailbox/mailMain" class="nav-link">
 								<i class="nav-icon far fa-envelope"></i>
 								<p>메일함</p>
@@ -248,9 +248,9 @@ function showMessageAlert(){
 								<i class="nav-icon far fa-calendar-alt"></i>
 								<p>일정</p>
 							</a>
-						</li> -->
+						</li>
 
-						<!-- <li class="nav-item">
+						<li class="nav-item">
 							<a href="../resources/pages/calendar.html" class="nav-link">
 								<i class="nav-icon far fa-calendar-alt"></i>
 								<p>
@@ -258,7 +258,7 @@ function showMessageAlert(){
 									<span class="badge badge-info right">2</span>
 								</p>
 							</a>
-						</li> -->
+						</li>
 					</ul>
 				</nav>
 
