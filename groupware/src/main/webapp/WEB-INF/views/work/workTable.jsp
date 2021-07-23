@@ -44,20 +44,25 @@
                     </tr>									
                   </thead>
                   <tbody>
-				  <!-- 게시판 리스트 반복문 -->
-				  <c:forEach var="vo" items="${workList}">
-				  	<tr>
-						<td>${vo.eno}</td>
-						<td>${vo.ename}</td>
-						<td>${vo.position}</td>
-						<td>${vo.workDay}</td>
-						<td>${vo.startTime}</td>
-						<td>${vo.finishTime}</td>
-						<td>${vo.overTime}</td>
-					</tr>
-				  </c:forEach>	
+					  <!-- 게시판 리스트 반복문 -->
+					  <c:if test="${not empty workList}">
+					  	<c:forEach var="vo" items="${workList}">
+						  	<tr>
+								<td>${vo.eno}</td>
+								<td>${vo.ename}</td>
+								<td>${vo.position}</td>
+								<td>${vo.workDay}</td>
+								<td>${vo.startTime}</td>
+								<td>${vo.finishTime}</td>
+								<td>${vo.overTime}</td>
+							</tr>
+						  </c:forEach>	
+					  </c:if>  
 				  </tbody>
                 </table>
+                 <c:if test="${empty workList}">
+					  	<div style="text-align: center; margin-top: 10px;">출근한 날이 없습니다</div>
+				</c:if>
               </div>
               <!-- /.card-body -->
               
