@@ -81,14 +81,20 @@
 	                    </c:if>
 					</ul>
 				</div>
-				<div class="col-md-2 col-md-offset-2">
-               	   	<!--페이지 목록 갯수 지정하는 폼-->
-               	   	<select name="" id="amount" class="form-control" style="display:none">
-               	   		<option value="10" <c:out value="${pageVo.cri.amount==10?'selected':''}"/> >10</option>
-               	   		<option value="20" <c:out value="${pageVo.cri.amount==20?'selected':''}"/>>20</option>
-               	   		<option value="30" <c:out value="${pageVo.cri.amount==30?'selected':''}"/> >30</option>
-               	   	</select>
-			  </div>
+				 <label for="" style="float: left">년도</label>
+                <div class="col-lg-1" style="float: left;margin-bottom: 10px; margin-left: 6px">
+	        			<select name="yearBox" id="yearBox" class="form-control">
+		                	<option value="empty">----------</option>
+		             	</select>
+	        	</div>
+                
+                <label for="" style="float: left;margin-left: 6px;">월</label>
+                <div class="col-lg-1" style="float: left;margin-bottom: 10px; margin-left: 6px">
+	        			<select name="monthBox" id="monthBox" class="form-control" >
+		                	<option value="empty">----------</option>
+		             	</select>
+	        	</div>
+	        	<button id="search" type="button" class="btn btn-primary float-left">검색</button>
               </div>
               <!-- 페이지 끝 -->
             </div>
@@ -106,12 +112,14 @@
 		<input type="hidden" name="pageNum" value="${pageVo.cri.pageNum}" />
 		<input type="hidden" name="amount" value="${pageVo.cri.amount}" />
 		<input type="hidden" name="eno" value="${login.eno}" />
+		<input type="hidden" name="year" value="" />
+		<input type="hidden" name="month" value="" />
 </form>	
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
+<!-- <script src="../../plugins/jquery/jquery.min.js"></script>
+Bootstrap 4
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables  & Plugins -->
+DataTables  & Plugins
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -124,19 +132,76 @@
 <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+AdminLTE App
+<script src="../../dist/js/adminlte.min.js"></script> -->
 
 <!-- Page specific script -->
 <script>
   $(function () {
+	  
+	  $(document).ready(function() {
+		setDate();
+	 });
+	 
+	 function setDate() {
+		 var workDay = "${workList[0].workDay}";
+		var year = workDay.split("-")[0];
+		var month = workDay.split("-")[1] * 1 > 9 ? workDay.split("-")[1] : workDay.split("-")[1].charAt(1);
+		
+		console.log(year);
+		console.log(month);
+		getYears(year);
+		getMonths(month);
+		
+		$("#yearBox").val(year);
+		$("#monthBox").val(month);
+		
+		$("#yearBox").change(function() {
+			var changeYear = $(this).val();
+			getYears(changeYear);
+			$("#yearBox").val(changeYear);
+		});
+		
+		$("#monthBox").change(function() {
+			var changeMonth = $(this).val();
+			getMonths(changeMonth);
+			$("#monthBox").val(changeMonth);
+		});
+	 }
+	 
+	 function getYears(getY) {
+		 $("#yearBox option").remove();
+		 
+		 var stYear = Number(getY) - 2;
+		 var endYear = Number(getY) + 5;
+		 
+		 for(var y = stYear; y <= endYear; y++) {
+			 $("#yearBox").append("<option value='"+ y + "'>" + y + "</option>")
+		 }
+	 }
+	 
+	 function getMonths(getM) {
+		 $("#monthBox option").remove();
+		 
+		 for(var m = 1; m <= 12; m++) {
+			 $("#monthBox").append("<option value='"+ m + "'>" + m + "</option>")
+		 }
+	 }
+	 
 	// 하단 페이지 나누기 버튼 클릭시 이동
 	var actionForm = $("#actionForm");
+	
 	$(".page-item a").click(function(e){
 		e.preventDefault(); //a 속성 중지
 		
+		var workDay = "${workList[0].workDay}";
+		var year = workDay.split("-")[0];
+		var month = workDay.split("-")[1] * 1 > 9 ? workDay.split("-")[1] : workDay.split("-")[1].charAt(1);
+		
 		//actionForm 안에 pageNum의 값을 사용자가 선택한 번호로 변경
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.find("input[name='year']").val(year);
+		actionForm.find("input[name='month']").val(month);
 		
 		//actionForm 보내기 
 		actionForm.submit();
@@ -150,19 +215,17 @@
 		actionForm.submit();
 	})
 	
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
+    $("#search").click(function() {
+    	console.log("search clicked");
+    	
+    	//actionForm 안에 pageNum의 값을 사용자가 선택한 번호로 변경
+		actionForm.find("input[name='pageNum']").val("1");
+		actionForm.find("input[name='year']").val($("#yearBox").val());
+		actionForm.find("input[name='month']").val($("#monthBox").val());
+		
+		//actionForm 보내기 
+		actionForm.submit();
+    })
     
 	
   });

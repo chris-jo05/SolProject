@@ -29,14 +29,16 @@ public class AttendanceController {
 	private AttendanceService service;
 	
 	@GetMapping("/workTable")
-	public void work(Criteria cri, int eno, Model model) {
+	public void work(Criteria cri, int eno, String year, String month, Model model) {
 		log.info("근무 관리 페이지로 이동합니다.");
 		
-		//MemberVo member=(MemberVo)session.getAttribute("login");
-		List<AttendanceVO> list = service.list(cri, eno);
+		String workDay = year + "-";
+		workDay += Integer.parseInt(month) > 9 ? month : "0" + month;
 		
-		int total = service.totalCnt(eno);
+		List<AttendanceVO> list = service.list(cri, eno, workDay);
 		
+		int total = service.totalCnt(eno, workDay);
+		log.info("total : " + total);
 		model.addAttribute("workList", list);
 		model.addAttribute("pageVo", new PageVO(cri, total));
 	}

@@ -15,8 +15,8 @@ public class AttendanceServiceImpl implements AttendanceService {
 	@Autowired
 	private AttendanceMapper mapper;
 	
-	public List<AttendanceVO> list(Criteria cri, int eno) {
-		return mapper.list(cri, eno);
+	public List<AttendanceVO> list(Criteria cri, int eno, String workDay) {
+		return mapper.list(cri, eno, workDay);
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 	}
 	
 	@Override
-	public int totalCnt(int eno) {
-		return mapper.totalCnt(eno);
+	public int totalCnt(int eno, String workDay) {
+		return mapper.totalCnt(eno, workDay);
 	}
 }
