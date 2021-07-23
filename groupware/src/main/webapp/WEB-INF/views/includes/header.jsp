@@ -408,7 +408,8 @@ $(function() {
 					
 					alert("퇴근 처리 되었습니다.");
 					
-					location.href = "/work/workTable?eno=" + ${login.eno};
+					var rMonth = month.charAt(0) == '0' ? month.charAt(1) : month.charAt(0);
+					location.href = "/work/workTable?eno=" + ${login.eno} + "&year=" + year + "&month=" + rMonth;
 				}
 			}
 		})

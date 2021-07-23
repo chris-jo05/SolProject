@@ -48,6 +48,12 @@ public class AttendanceController {
 		log.info("출퇴근 확인 요청 " + vo);
 		
 		boolean result = true;
+		String workDay = vo.getWorkDay();
+		String year = workDay.split("-")[0];
+		String month = workDay.split("-")[1]; 
+		if(month.charAt(0) == '0') {
+			month = Character.toString(month.charAt(1));
+		}
 		
 		if(vo.getInout().equals("in")) {
 			result = service.insert(vo);
@@ -56,7 +62,7 @@ public class AttendanceController {
 		}
 			
 		if(result) {
-			return "redirect:workTable?eno=" + vo.getEno();
+			return "redirect:workTable?eno=" + vo.getEno() + "&year=" + year + "&month=" + month;
 		} else {
 			return "redirect:/main/home";
 		}
