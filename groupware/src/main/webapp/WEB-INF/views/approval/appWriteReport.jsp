@@ -33,7 +33,7 @@
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item">
-							<a href="#">Home</a>
+							<a href="/main/home">Home</a>
 						</li>
 						<li class="breadcrumb-item active">전자 결재</li>
 					</ol>
@@ -56,8 +56,7 @@
 						<div class="card card-primary card-outline">
 							<div class="card-header">
 								<div class="card-title">
-									<h3 class="card-title" style="font-weight: bold;">보고서</h3>
-									<input type="hidden" name="docClass" value="보고서" />
+									<h3 class="card-title" style="font-weight: bold;">보고서</h3> <input type="hidden" name="docClass" value="보고서" />
 								</div>
 							</div>
 
