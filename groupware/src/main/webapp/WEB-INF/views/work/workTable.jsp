@@ -84,14 +84,14 @@
 				 <label for="" style="float: left">년도</label>
                 <div class="col-lg-1" style="float: left;margin-bottom: 10px; margin-left: 6px">
 	        			<select name="yearBox" id="yearBox" class="form-control">
-		                	<option value="empty">----------</option>
+		                	
 		             	</select>
 	        	</div>
                 
                 <label for="" style="float: left;margin-left: 6px;">월</label>
                 <div class="col-lg-1" style="float: left;margin-bottom: 10px; margin-left: 6px">
 	        			<select name="monthBox" id="monthBox" class="form-control" >
-		                	<option value="empty">----------</option>
+		                	
 		             	</select>
 	        	</div>
 	        	<button id="search" type="button" class="btn btn-primary float-left">검색</button>
@@ -144,9 +144,8 @@ AdminLTE App
 	 });
 	 
 	 function setDate() {
-		 var workDay = "${workList[0].workDay}";
-		var year = workDay.split("-")[0];
-		var month = workDay.split("-")[1] * 1 > 9 ? workDay.split("-")[1] : workDay.split("-")[1].charAt(1);
+		var year = ${param.year};
+		var month = ${param.month};
 		
 		console.log(year);
 		console.log(month);
