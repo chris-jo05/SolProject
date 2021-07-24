@@ -47,10 +47,7 @@ public class MailWebSocketHandler extends TextWebSocketHandler {
 		String senderId = getId(session);
 		log.info(senderId + " =>>>>>> 값이 무엇인지 확인하기");
 		
-		// 전체에 보내줄 때
-//		for(WebSocketSession sess : sessions) {
-//			sess.sendMessage(new TextMessage(senderId + " : " + message.getPayload()));
-//		}
+	
 		
 		//protocol : cmd, 메일보낸자(m_id), 메일 받는자(e_id), 메일 번호(m_no) 
 		String msg = message.getPayload();
@@ -84,10 +81,22 @@ public class MailWebSocketHandler extends TextWebSocketHandler {
 					log.info(tmpMsg + "의 메세지를 보낼 수 있는지");
 					mailReceiveSession.sendMessage(tmpMsg);
 				}
-			}
+			}else if(strs != null && strs.length ==1) {
+				
+				String boa = strs[0];
+				log.info(boa + " <><>>>>>boa값");
+				log.info(sessions);
+				for(WebSocketSession sess : sessions){
+					log.info(sess + "sess가 되나 안되나");
+					 
+			        sess.sendMessage(new TextMessage("<a href='/board/boardMain' class='dropdown-item'>\r\n"
+			            + "							<i class='fas fa-file mr-2'></i>새로운 공지사항" ));
+			     } // for문 종료
+			} // else if문 종료
 		}
 		
 	}
+	
 	
 	
 	private String getId(WebSocketSession session) {
@@ -110,6 +119,10 @@ public class MailWebSocketHandler extends TextWebSocketHandler {
 		// 유저가 로그아웃 했을 때
 		log.info("afterConnectionClosed : " + session + " : " + status);
 		System.out.println("afterConnectionClosed : " + session + " : " + status);
+		String senderId = getId(session);
+		
+		sessions.remove(session);
+		userSessions.remove(senderId, session);
 	}
 	
 }

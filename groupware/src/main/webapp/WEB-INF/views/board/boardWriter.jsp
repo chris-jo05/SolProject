@@ -70,7 +70,7 @@
               <!-- /.card-body -->
               <div class="card-footer">
                 <div class="float-right">
-                   <button type="submit" class="btn btn-primary"> 등록하기</button>
+                   <button type="submit" class="btn btn-primary" id="board"> 등록하기</button>
                    <button type="reset" class="btn btn-danger"> 취소하기</button>
                 </div>
               </div>
@@ -88,16 +88,19 @@
   </div>
   <!-- /.content-wrapper -->
    
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- 사이드바 등장관련 js -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<script src="/resources/project/board/js/boardWriter.js"></script>
 <script>
 
-
+$(".btn-primary").click(function(){
+	
+	console.log("소켓이 연결되었습니다 " + socket);
+	
+	let socketMsg = "새로운 공지사항,";
+	console.log("소켓에 전송할 메세지 : " + socketMsg);
+	if(socket){
+		socket.send(socketMsg);
+	}
+})
 
 </script>
+<script src="/resources/project/board/js/boardWriter.js"></script>
 <%@include file="../includes/footer.jsp" %>

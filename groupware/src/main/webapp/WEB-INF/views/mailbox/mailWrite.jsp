@@ -80,7 +80,7 @@
               <!-- /.card-body -->
               <div class="card-footer">
                 <div class="float-right">
-	               <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> 보내기</button>
+	               <button type="submit" class="btn btn-primary" id="mail"><i class="far fa-envelope"></i> 보내기</button>
 		           <button type="reset" class="btn btn-danger" onclick="location.href='/mailbox/mailMain'"><i class="fas fa-times"></i>취소하기</button>
 	            </div>
               </div>
