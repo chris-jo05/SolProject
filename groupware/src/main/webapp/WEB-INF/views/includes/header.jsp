@@ -38,18 +38,19 @@
 <!-- sockJS -->
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <!-- 알람 기능 관련 소켓 -->
-
 <script type="text/javascript">
 var socket = null;
 
 
 $(document).ready(function(){
-	connect();
+	
+	connectWs();
 	showMessageAlert();
 });
 
-function connect(){
+function connectWs(){
 	var ws = new SockJS("/mail");
+	
 	socket = ws;
 	
 	

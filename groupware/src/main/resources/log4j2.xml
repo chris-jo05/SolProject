@@ -28,6 +28,8 @@
   	
 
   	<Logger name="com.spring.mail.util" level="info"/>
+  	<Logger name="com.spring.board.util" level="info"/>
+  	
   	<Logger name="com.spring.task" level="info"/>
   	
   	<Logger name="org.springframework.core" level="info"/>
