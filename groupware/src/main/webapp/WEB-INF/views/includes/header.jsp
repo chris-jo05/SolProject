@@ -195,7 +195,7 @@ function showMessageAlert(){
 						</li>
 
 						<li class="nav-item">
-							<a href="/work/workTable?eno=${login.eno}" class="nav-link">
+							<a href="/work/workTable?eno=${login.eno}" name="workTable" class="nav-link">
 								<i class="nav-icon far fa-plus-square"></i>
 								<p>근무 관리</p>
 							</a>
@@ -304,8 +304,6 @@ function showMessageAlert(){
 <script>
 let checkForm = $("#checkForm");
 
-
-
 $(function() {
 	$("#checkIn").click(function(e) {
 		console.log("checkIn");
@@ -317,8 +315,8 @@ $(function() {
 		var day = (now.getDate() > 9 ? "" : "0") + now.getDate();
 		var cur_day = year + "-" + month + "-" + day;
 
-		var hours = now.getHours();
-		var minutes = now.getMinutes();
+		var hours = (now.getHours() > 9 ? "" : "0") + now.getHours();
+	    var minutes = (now.getMinutes() > 9 ? "" : "0") + now.getMinutes();
 		var cur_time = hours + ":" + minutes;
 		
 		check(${login.eno}, cur_day, function(data) {
@@ -410,6 +408,9 @@ $(function() {
 					})
 					
 					alert("퇴근 처리 되었습니다.");
+					
+					var rMonth = month.charAt(0) == '0' ? month.charAt(1) : month.charAt(0);
+					location.href = "/work/workTable?eno=" + ${login.eno} + "&year=" + year + "&month=" + rMonth;
 				}
 			}
 		})
@@ -428,5 +429,16 @@ $(function() {
 			}
 		})
 	}
+	
+	$("a[name='workTable']").click(function(e) {
+		e.preventDefault();
+		
+		console.log("workTable clicked");
+		var now = new Date();
+		var year = now.getFullYear();
+		var month = now.getMonth() + 1;
+		
+		location.href = "/work/workTable?eno=" + ${login.eno} + "&year=" + year + "&month=" + month;
+	})
 })
 </script>

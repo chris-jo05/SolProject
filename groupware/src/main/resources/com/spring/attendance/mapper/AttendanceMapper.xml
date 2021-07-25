@@ -9,7 +9,7 @@
 	      		  from (select e.eno, e.ename, e.position, a.workday, a.startTime, a.finishTime, a.overTime 
 	      		  		from att a, emp e 
 	      		  		where e.eno = a.eno order by a.workDay desc, a.starttime asc)
-	      		  where rownum <= (#{cri.pageNum}*#{cri.amount}) and eno = #{eno})
+	      		  where rownum <= (#{cri.pageNum}*#{cri.amount}) and eno = #{eno} and workDay like #{workDay} || '-%')
 			where rn > ((#{cri.pageNum}-1)*#{cri.amount})
 		]]>
 	</select>
@@ -30,6 +30,6 @@
 	</update>
 	
 	<select id="totalCnt" resultType="int">
-		select count(*) from att where eno = #{eno}
+		select count(*) from att where eno = #{eno} and workDay like #{workDay} || '-%'
 	</select>
 </mapper>
