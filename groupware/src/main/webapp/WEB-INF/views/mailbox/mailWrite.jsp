@@ -80,7 +80,7 @@
               <!-- /.card-body -->
               <div class="card-footer">
                 <div class="float-right">
-	               <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> 보내기</button>
+	               <button type="submit" class="btn btn-primary" id="mail"><i class="far fa-envelope"></i> 보내기</button>
 		           <button type="reset" class="btn btn-danger" onclick="location.href='/mailbox/mailMain'"><i class="fas fa-times"></i>취소하기</button>
 	            </div>
               </div>
@@ -104,6 +104,21 @@
 
 <!-- Page specific script -->
 <script>
+
+$(".btn-primary").click(function(){
+	let e_id = $("input[name='e_id']").val();
+	let m_id = '${login.id}';
+	let url = '/mailbox/mailMain';
+	
+	console.log("소켓이 연결되었습니다 " + socket);
+	
+	let socketMsg = "mail,"+m_id + "," + e_id + "," + url;
+	console.log("소켓에 전송할 메세지 : " + socketMsg);
+	if(socket){
+		socket.send(socketMsg);
+	}
+})
+
   $(function () {
     //Add text editor
     $('#compose-textarea').summernote()

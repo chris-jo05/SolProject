@@ -31,6 +31,68 @@
 <link rel="stylesheet" href="/resources/plugins/fullcalendar/main.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="/resources/dist/css/adminlte.min.css">
+
+  <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<!-- sockJS -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<!-- 알람 기능 관련 소켓 -->
+<script type="text/javascript">
+var socket = null;
+
+
+$(document).ready(function(){
+	
+	connectWs();
+	showMessageAlert();
+});
+
+function connectWs(){
+	var ws = new SockJS("/mail");
+	
+	socket = ws;
+	
+	
+	// 커넥션이 연결되고 나서
+	ws.onopen = function(){
+		console.log("Info : connection opended.");
+	};
+	
+	ws.onmessage = function(e){
+		console.log("Receive Message : " , e.data + '\n');
+		
+		let socketAlert = $('div#socketAlertMail');
+		sessionStorage.setItem("message",e.data);
+		showMessageAlert();
+	};
+	
+	ws.onclose = function(e){
+		console.log("Info : connection closed.");
+		/* setTimeout(function(){
+			connect();
+		}, 1000); */
+	};
+	
+	ws.onerror = function(err){
+		console.log("Error : : ",err);
+	};
+}
+
+function showMessageAlert(){
+	let socketAlert = $('div#socketAlertMail');
+	if(sessionStorage.length != 0){
+		console.log(sessionStorage.getItem("message"));
+		socketAlert.html(sessionStorage.getItem("message"));
+		socketAlert.css('display','block');
+		$("a[class='dropdown-item']").click(function(e){
+			sessionStorage.removeItem("message");
+			socketAlert.html("");
+			
+		});
+	}
+}
+</script>  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
@@ -56,16 +118,13 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link" data-toggle="dropdown" href="#">
 						<i class="far fa-bell"></i>
-						<span class="badge badge-warning navbar-badge">15</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 						<span class="dropdown-item dropdown-header">새로운 알람 </span>
+						
 						<div class="dropdown-divider"></div>
-						<a href="/mailbox/mailMain" class="dropdown-item">
-							<i class="fas fa-envelope mr-2"></i>
-							새 메일
-							<span class="float-right text-muted text-sm">3 mins</span>
-						</a>
+						<div id="socketAlertMail"></div>
+						
 						<div class="dropdown-divider"></div>
 						<a href="/board/boardMain" class="dropdown-item">
 							<i class="fas fa-file mr-2"></i>
@@ -136,7 +195,7 @@
 						</li>
 
 						<li class="nav-item">
-							<a href="/work/workTable?eno=${login.eno}" class="nav-link">
+							<a href="/work/workTable?eno=${login.eno}" name="workTable" class="nav-link">
 								<i class="nav-icon far fa-plus-square"></i>
 								<p>근무 관리</p>
 							</a>
@@ -178,7 +237,11 @@
 						</li>
 
 						<!-- 메일함 -->
+<<<<<<< HEAD
 						<!-- <li class="nav-item">
+=======
+						 <li class="nav-item">
+>>>>>>> branch 'master' of https://github.com/chris-jo05/SolProject.git
 							<a href="/mailbox/mailMain" class="nav-link">
 								<i class="nav-icon far fa-envelope"></i>
 								<p>메일함</p>
@@ -245,8 +308,6 @@
 <script>
 let checkForm = $("#checkForm");
 
-
-
 $(function() {
 	$("#checkIn").click(function(e) {
 		console.log("checkIn");
@@ -258,8 +319,8 @@ $(function() {
 		var day = (now.getDate() > 9 ? "" : "0") + now.getDate();
 		var cur_day = year + "-" + month + "-" + day;
 
-		var hours = now.getHours();
-		var minutes = now.getMinutes();
+		var hours = (now.getHours() > 9 ? "" : "0") + now.getHours();
+	    var minutes = (now.getMinutes() > 9 ? "" : "0") + now.getMinutes();
 		var cur_time = hours + ":" + minutes;
 		
 		check(${login.eno}, cur_day, function(data) {
@@ -351,6 +412,9 @@ $(function() {
 					})
 					
 					alert("퇴근 처리 되었습니다.");
+					
+					var rMonth = month.charAt(0) == '0' ? month.charAt(1) : month.charAt(0);
+					location.href = "/work/workTable?eno=" + ${login.eno} + "&year=" + year + "&month=" + rMonth;
 				}
 			}
 		})
@@ -369,5 +433,16 @@ $(function() {
 			}
 		})
 	}
+	
+	$("a[name='workTable']").click(function(e) {
+		e.preventDefault();
+		
+		console.log("workTable clicked");
+		var now = new Date();
+		var year = now.getFullYear();
+		var month = now.getMonth() + 1;
+		
+		location.href = "/work/workTable?eno=" + ${login.eno} + "&year=" + year + "&month=" + month;
+	})
 })
 </script>

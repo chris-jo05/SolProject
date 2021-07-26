@@ -29,14 +29,16 @@ public class AttendanceController {
 	private AttendanceService service;
 	
 	@GetMapping("/workTable")
-	public void work(Criteria cri, int eno, Model model) {
+	public void work(Criteria cri, int eno, String year, String month, Model model) {
 		log.info("근무 관리 페이지로 이동합니다.");
 		
-		//MemberVo member=(MemberVo)session.getAttribute("login");
-		List<AttendanceVO> list = service.list(cri, eno);
+		String workDay = year + "-";
+		workDay += Integer.parseInt(month) > 9 ? month : "0" + month;
 		
-		int total = service.totalCnt(eno);
+		List<AttendanceVO> list = service.list(cri, eno, workDay);
 		
+		int total = service.totalCnt(eno, workDay);
+		log.info("total : " + total);
 		model.addAttribute("workList", list);
 		model.addAttribute("pageVo", new PageVO(cri, total));
 	}
@@ -46,6 +48,12 @@ public class AttendanceController {
 		log.info("출퇴근 확인 요청 " + vo);
 		
 		boolean result = true;
+		String workDay = vo.getWorkDay();
+		String year = workDay.split("-")[0];
+		String month = workDay.split("-")[1]; 
+		if(month.charAt(0) == '0') {
+			month = Character.toString(month.charAt(1));
+		}
 		
 		if(vo.getInout().equals("in")) {
 			result = service.insert(vo);
@@ -54,7 +62,7 @@ public class AttendanceController {
 		}
 			
 		if(result) {
-			return "redirect:workTable?eno=" + vo.getEno();
+			return "redirect:workTable?eno=" + vo.getEno() + "&year=" + year + "&month=" + month;
 		} else {
 			return "redirect:/main/home";
 		}

@@ -13,4 +13,9 @@
 		from paystub p, emp e
 		where p.eno = e.eno and e.eno = #{eno} and p.pay_year = #{pay_year} and p.pay_month = #{pay_month}
 	</select>
+	
+	<insert id="insert">
+		insert into paystub(eno, pay_year, pay_month, normal_wage, bonus_wage, position_wage, overtime_wage, holiday_wage, benefits, etc_wage, income_tax, resident_tax, national_pension, health_insurance, emp_Insurance, longterm_care)
+		values(#{eno}, #{pay_year}, #{pay_month}, #{normal_wage}, #{bonus_wage}, #{position_wage}, #{overtime_wage}, #{holiday_wage}, #{benefits}, #{etc_wage}, #{income_tax}, #{resident_tax}, #{national_pension}, #{health_insurance}, #{emp_Insurance}, #{longterm_care})
+	</insert>
 </mapper>

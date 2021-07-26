@@ -6,6 +6,7 @@ import com.spring.paystub.domain.PaystubListVO;
 import com.spring.paystub.domain.PaystubVO;
 
 public interface PaystubService {
-	List<PaystubListVO> list(int eno);
-	PaystubVO get(int pay_year, int pay_month, int eno);
+	public List<PaystubListVO> list(int eno);
+	public boolean insert(PaystubVO vo);
+	public PaystubVO get(int pay_year, int pay_month, int eno);
 }
