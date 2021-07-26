@@ -5,7 +5,7 @@
 	<select id="list" resultType="com.spring.paystub.domain.PaystubListVO">
 		select p.pay_year, p.pay_month, d.dname, e.position, e.acount, e.acou_name
 		from paystub p, emp e, dept d
-		where p.eno = e.eno and e.dno = d.dno and e.eno = #{eno}
+		where p.eno = e.eno and e.dno = d.dno and e.eno = #{eno} and p.pay_year = #{pay_year}
 	</select>
 	
 	<select id="get" resultType="com.spring.paystub.domain.PaystubVO">

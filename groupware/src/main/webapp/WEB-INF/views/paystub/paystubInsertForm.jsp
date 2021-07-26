@@ -32,12 +32,12 @@
             <div class="card">
               <div class="card-header">
               	<label for="" style="float: left">급여자</label>
-                <div class="col-lg-1" style="float: left;margin-bottom: 10px; margin-left: 6px">
+                <div class="col-lg-2" style="float: left;margin-bottom: 10px; margin-left: 6px">
 	        			<select name="dept" id="dept" class="form-control" >
 		                	<option value="empty">----------</option>
 		             	</select>
 	        	</div>
-	        	<div class="col-lg-1" style="float: left; margin-right: 6px">
+	        	<div class="col-lg-2" style="float: left; margin-right: 6px">
         			<select name="emp" id="emp" class="form-control" >
 	                	
 	             	</select>

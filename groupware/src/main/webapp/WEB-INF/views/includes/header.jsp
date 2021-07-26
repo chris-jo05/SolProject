@@ -235,7 +235,15 @@ function showMessageAlert(){
 								</script>
 							</c:if>
 						</li>
-
+						
+						<c:if test="${login.dno eq 10}">
+							<li class="nav-item">
+								<a href="/paystub/paystubInsertForm" class="nav-link">
+									<i class="nav-icon fas fa-file"></i>
+									<p>급여명세서 발급</p>
+								</a>
+							</li>
+						</c:if>
 						<!-- 메일함 -->
 						 <li class="nav-item">
 							<a href="/mailbox/mailMain" class="nav-link">
@@ -250,6 +258,8 @@ function showMessageAlert(){
 								<p>일정</p>
 							</a>
 						</li>
+						
+						
 
 						<li class="nav-item">
 							<a href="../resources/pages/calendar.html" class="nav-link">
