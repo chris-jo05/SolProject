@@ -27,11 +27,11 @@ public class PaystubController {
 	public PaystubService service;
 	
 	@GetMapping("/paystubList")
-	public void listGet(int eno, Model model) {
+	public void listGet(int eno, int year, Model model) {
 		log.info("급여 명세서 목록 페이지로 이동합니다.");
 		
 		//MemberVo member=(MemberVo)session.getAttribute("login");
-		List<PaystubListVO> list = service.list(eno);
+		List<PaystubListVO> list = service.list(eno, year);
 		
 		model.addAttribute("paystubList", list);
 		

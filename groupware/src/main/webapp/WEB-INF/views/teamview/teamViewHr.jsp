@@ -27,6 +27,15 @@
     <section class="content">
       <!-- Default box -->
       <div class="card card-solid">
+      
+      <div class="btn float-right">
+        <button type="submit" class="btn-lg btn-success" onclick="location.href='/hrteam/hrNewMember'" id="insertMember" style="float: right">사원 추가</button>
+        </div>
+      	<c:if test="${login.dno!=10}">
+        <script>
+        $("#insertMember").hide();
+        </script>
+        </c:if>
         <div class="card-body pb-0">
           <div class="row">
           <!-- 각 사원 정보 -->
@@ -51,6 +60,7 @@
 	                      </ul>
 	                    </div>
 	                </div>
+	               
 	                <div class="card-footer">
 	                  <div class="text-right">
 	                    <a href="#" class="btn btn-sm bg-teal">
