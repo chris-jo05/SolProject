@@ -27,7 +27,7 @@
 		<![CDATA[
 		select * from 
 		(select rownum rn,id,position,ename,mobile,dname,dno,eno
-			from (select id,position,ename,mobile,dname,e.dno,eno from emp e, dept d where e.dno=#{dno})
+			from (select id,position,ename,mobile,dname,e.dno,eno from emp e left outer join dept d on e.dno = d.dno where e.dno=#{dno})
 			where rownum <= (#{cri.pageNum}*#{cri.amount}) ) 
 			where rn > ((#{cri.pageNum}-1)*#{cri.amount})
 		]]>

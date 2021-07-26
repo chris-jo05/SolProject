@@ -55,8 +55,8 @@
                   </li>
                 </ul>
 				<div class="btn-group-center text-center">
-                        <button type="button" class="btn btn-info" onclick="location.href='/work/workTable?eno=${login.eno}'">근무  관리</button>
-                        <button type="button" class="btn btn-success" onclick="location.href='/paystub/paystubList?eno=${login.eno}'">급여 명세서</button>
+                        <button type="button" class="btn btn-info" id="att-btn">근무  관리</button>
+                        <button type="button" class="btn btn-success" id="pay-btn">급여 명세서</button>
                 </div>
               </div>
               <!-- /.card-body -->
@@ -64,5 +64,25 @@
             <!-- /.card -->
           </div>  
 
-
+<script>
+$(function() {
+	$("#att-btn").click(function() {
+		var now = new Date();
+		var year = now.getFullYear();
+		var month = now.getMonth() + 1;
+		var eno = ${login.eno};
+		
+		
+		location.href = "/work/workTable?eno=" + eno + "&year=" + year + "&month=" + month;
+	})
+	
+	$("#pay-btn").click(function() {
+		var now = new Date();
+		var year = now.getFullYear();
+		var eno = ${login.eno};
+		
+		location.href='/paystub/paystubList?eno=' + eno + '&year=' + year;
+	})
+})
+</script>
 <%@include file="../includes/footer.jsp" %>

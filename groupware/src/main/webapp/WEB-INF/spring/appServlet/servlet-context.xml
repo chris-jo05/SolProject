@@ -40,7 +40,6 @@
 	<!-- 실시간 알람을 위한 웹소켓 -->
 	<beans:bean id="MailWebSocketHandler" class="com.spring.mail.util.MailWebSocketHandler" />
 
-
 	<websocket:handlers >
     	<websocket:mapping handler="MailWebSocketHandler" path="/mail" />
    		<websocket:handshake-interceptors>

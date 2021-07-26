@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp"%>
 
+<script>
+	function appLine () {
+		window.open ("appLine", "결재선", "width=800, height=700");
+	}
+</script>
+
 <style>
 .table tr td {
 	padding: 1px;
@@ -32,9 +38,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item">
-							<a href="#">Home</a>
-						</li>
+						<li class="breadcrumb-item"><a href="/main/home">Home</a></li>
 						<li class="breadcrumb-item active">전자 결재</li>
 					</ol>
 				</div>
@@ -64,7 +68,7 @@
 								<div class="col" style="float: right; padding: 0px;">
 									<div class="form-group" style="float: right;">
 										<button type="submit" class="btn btn-primary btn-sm" style="margin-right: 10px;">상신</button>
-										<button type="reset" class="btn btn-secondary btn-sm" style="" onclick="location.href='/approval/appMain'">취소</button>
+										<button type="reset" class="btn btn-secondary btn-sm" style="" onclick="location.href='appMain'">취소</button>
 									</div>
 								</div>
 
@@ -108,19 +112,19 @@
 									</div>
 
 									<div class="col-md-4">
-										<table class="table table-bordered" style="height: 92.5%">
+										<table class="table table-bordered" style="height: 92.5%; cursor: pointer;" onClick="appLine()">
 											<tbody>
 												<tr style="height: 0">
 													<td class="text-center align-middle" rowspan="2" style="width: 10%; font-weight: bold;">
 														결<br>제
 													</td>
-													<td style="width: 22.5%;"></td>
+													<td style="width: 22.5%; height: 10%;"></td>
 													<td style="width: 22.5%;"></td>
 													<td style="width: 22.5%;"></td>
 													<td style="width: 22.5%;"></td>
 												</tr>
 
-												<tr>
+												<tr style="height: 40%; font-weight: bold; font-size: 16pt;">
 													<td></td>
 													<td></td>
 													<td></td>
@@ -131,13 +135,13 @@
 													<td class="text-center align-middle" rowspan="2" style="width: 10%; font-weight: bold;">
 														합<br>의
 													</td>
-													<td style="width: 22.5%;"></td>
+													<td style="width: 22.5%; height: 10%;"></td>
 													<td style="width: 22.5%;"></td>
 													<td style="width: 22.5%;"></td>
 													<td style="width: 22.5%;"></td>
 												</tr>
 
-												<tr>
+												<tr style="height: 40%; font-weight: bold;">
 													<td></td>
 													<td></td>
 													<td></td>
