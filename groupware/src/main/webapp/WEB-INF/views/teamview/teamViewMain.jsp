@@ -65,7 +65,12 @@
         <!-- 페이지 나누기  -->
         <div class="card-footer clearfix">
             <button type="button" class="btn btn-primary" id="newTeam">부서 추가</button>
-            
+            <!-- 부서추가버튼 인사관리팀만 보일 수 있도록 -->
+            <c:if test="${login.dno!= 10}">
+        	<script>
+        	$("#newTeam").hide();
+        	</script>
+        	</c:if>
             <ul class="pagination pagination m-0 float-right">
             	<c:forEach var="num" begin="${pageVo.startPage}" end="${pageVo.endPage}"  >
 	            	<li class="page-item ${pageVo.cri.pageNum==num?'active':''}" >
