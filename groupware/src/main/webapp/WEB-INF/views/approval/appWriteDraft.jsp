@@ -3,7 +3,7 @@
 
 <script>
 	function appLine () {
-		window.open ("appLine", "결제선", "width=800, height=900");
+		window.open ("appLine", "결재선", "width=800, height=700");
 	}
 </script>
 
@@ -38,9 +38,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item">
-							<a href="/main/home">Home</a>
-						</li>
+						<li class="breadcrumb-item"><a href="/main/home">Home</a></li>
 						<li class="breadcrumb-item active">전자 결재</li>
 					</ol>
 				</div>
