@@ -36,8 +36,8 @@
 	</select>
 	
 	<select id="totalBsr" resultType="int">
-    select count(*) from board b,  dept d where b.dno=d.dno and bno>0
-      and <include refid="criteria2"></include>
+    select count(*) from board b, dept d where b.dno=d.dno and bno>0
+      and <include refid="criteria"></include>
    </select>
 	
 	<!--bno에 해당하는 공지글 가져오기(read) -->
