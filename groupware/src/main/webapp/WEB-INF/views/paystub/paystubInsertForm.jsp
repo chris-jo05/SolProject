@@ -301,7 +301,7 @@ $(function () {
 					}
 				});
 				
-				location.href = "/paystub/paystubList?eno=" + data.eno;
+				location.href = "/paystub/paystubList?eno=" + data.eno + "&year=" + $("#yearBox").val();
 		});
 		
 		 
