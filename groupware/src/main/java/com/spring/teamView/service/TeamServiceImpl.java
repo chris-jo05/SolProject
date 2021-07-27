@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.member.domain.MemberVo;
 import com.spring.teamView.domain.TeamCriteria;
 import com.spring.teamView.domain.TeamMemberVo;
 import com.spring.teamView.domain.TeamNameVo;
@@ -41,5 +42,8 @@ public class TeamServiceImpl implements TeamService {
 		return mapper.totalTeamCount(dno);
 	}
 
-
+	@Override
+	public MemberVo get(int eno) {
+		return mapper.get(eno);
+	}
 }

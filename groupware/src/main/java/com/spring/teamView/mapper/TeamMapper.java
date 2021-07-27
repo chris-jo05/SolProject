@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.spring.member.domain.MemberVo;
 import com.spring.teamView.domain.TeamCriteria;
 import com.spring.teamView.domain.TeamMemberVo;
 import com.spring.teamView.domain.TeamNameVo;
@@ -16,4 +17,6 @@ public interface TeamMapper {
 	
 	public List<TeamMemberVo> showTeamList(@Param("cri")TeamCriteria cri ,@Param("dno") int dno);	// dno를 받아 팀원들의 정보를 받는다
 	public int totalTeamCount(int dno);
+	
+	public MemberVo get(int eno);
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.board.domain.PageVO;
+import com.spring.member.domain.MemberVo;
 import com.spring.teamView.domain.TeamCriteria;
 import com.spring.teamView.domain.TeamMemberVo;
 import com.spring.teamView.domain.TeamNameVo;
@@ -66,4 +67,16 @@ public class TeamViewController {
 		model.addAttribute("member", member);
 		model.addAttribute("pageVo", new TeamPageVo(cri, total));
 	}
+	
+	@GetMapping("/member_profile")
+	public void memberProfile(int eno, Model model) {
+		MemberVo vo = service.get(eno);
+		
+		model.addAttribute("member", vo);
+	}
+	
+	
+	
+	
+	
 }

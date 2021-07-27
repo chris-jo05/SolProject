@@ -29,7 +29,7 @@
       <div class="card card-solid">
       
       <div class="btn float-right">
-        <button type="submit" class="btn-lg btn-success" onclick="location.href='/hrteam/hrNewMember'" id="insertMember" style="float: right">사원 추가</button>
+        <button type="submit" class="btn-lg btn-success" onclick="location.href='/hrteam/hrNewDeptMember?dname=${member[0].dname}'" id="insertMember" style="float: right">사원 추가</button>
         </div>
       	<c:if test="${login.dno!=10}">
         <script>
@@ -63,10 +63,13 @@
 	               
 	                <div class="card-footer">
 	                  <div class="text-right">
-	                    <a href="/insertChatRoom?receiver_name=${vo.ename}" class="btn btn-sm bg-teal">
+	                     <a href="/insertChatRoom?receiver_name=${vo.ename}" class="btn btn-sm bg-teal">
 	                      <i class="fas fa-comments"></i>
 	                    </a>
-	                    <a href="#" class="btn btn-sm btn-primary">
+	                    <a href="/paystub/paystubInsertForm?dname=${vo.dname}&ename=${vo.ename}" class="btn btn-sm btn-warning" style="color : white;">
+	                      급여 명세서
+	                    </a>
+	                    <a href="/teamview/member_profile?eno=${vo.eno}" class="btn btn-sm btn-primary">
 	                      <i class="fas fa-user"></i> View Profile
 	                    </a>
 	                  </div>

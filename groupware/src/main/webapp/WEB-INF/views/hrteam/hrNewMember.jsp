@@ -214,7 +214,13 @@
 <!-- 입사일을 위한 스크립트 -->
 <script>
 $(function(){
+	let dname = "${param.dname}";
 	
+	console.log(dname);
+	
+	if(dname != "") {
+		$("select[name='dname']").val(dname);
+	}
 	//Date picker
     $('#reservationdate').datetimepicker({
         format: 'L'

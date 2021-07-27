@@ -153,6 +153,9 @@
 <script src="../../dist/js/demo.js"></script>
 
 <script>
+let dname = "${param.dname}";
+let ename = "${param.ename}";
+
 $(function () {
 	 $(document).ready(function() {
 		setDate();
@@ -208,17 +211,25 @@ $(function () {
 	  	type:"POST",
 	  	success:function(data) {
 	  		var options = "";
-	  		
+	  		console.log("rest_dept enterd");
 	  		$.each(data, function(idx, element) {
 	  			//console.log(idx);
 					options += "<option value=" + element + ">" + element + "</option>";
 			})
 				
 			$("select[name='dept']").append(options);
-		    
-			$("select[name='dept_auth']").append(options);
+	  		
+	  		if(dname != "" && ename != "") {
+				console.log("param : " + dname + " : " + ename);
+				
+				$("#dept").val(dname).trigger('change');
+				$("#emp").val(ename);
+			
+			}
 	  	}
 	  })
+	  
+	  
   
 	//일정 담당자 선택 부분
 	// 일정 담당 부분의 부서 셀렉트 변경 시
@@ -311,6 +322,8 @@ $(function () {
     		}
     	})
     }
+	
+	
 });
 </script>
 

@@ -56,6 +56,15 @@ public class HRController {
 		log.info("사원 추가 페이지로 이동합니다.");
 	}
 	
+	@GetMapping("/hrNewDeptMember")
+	public String newMem(String dname, Model model) {
+		log.info("선택된 부서 사원 추가 " + dname);
+		
+		model.addAttribute("dname", dname);
+		
+		return "/hrteam/hrNewMember";
+	}
+	
 	// 중복 아이디 검사
 	@ResponseBody
 	@PostMapping("/checkId")
