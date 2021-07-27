@@ -29,6 +29,7 @@
 	<mybatis-spring:scan base-package="com.spring.member.mapper"/>
 	<mybatis-spring:scan base-package="com.spring.paystub.mapper"/>
 	<mybatis-spring:scan base-package="com.spring.teamView.mapper"/>
+	<mybatis-spring:scan base-package="com.spring.chat.mapper"/>
 	
 	<!-- Connection Pool 설정 -->
 	<bean id="ds" class="oracle.ucp.jdbc.PoolDataSourceImpl">

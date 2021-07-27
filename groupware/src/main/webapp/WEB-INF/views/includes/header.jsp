@@ -41,11 +41,13 @@
 <script type="text/javascript">
 var socket = null;
 
+var userid = "${login.id}";
 
 $(document).ready(function(){
 	
 	connectWs();
-	showMessageAlert();
+	showMailMessageAlert();
+	showBoardMessageAlert();
 });
 
 function connectWs(){
@@ -62,16 +64,38 @@ function connectWs(){
 	ws.onmessage = function(e){
 		console.log("Receive Message : " , e.data + '\n');
 		
-		let socketAlert = $('div#socketAlertMail');
-		sessionStorage.setItem("message",e.data);
-		showMessageAlert();
+		var data = e.data;
+		
+		if(data.search("메일") > -1){
+			console.log("메일 알림 보내기 !!!");
+			
+			sessionStorage.setItem("mailMessage",e.data);
+			showMailMessageAlert();
+		}else if(data.search("공지사항") > -1){
+			console.log("공지사항 메일 보내기 !!!");
+			
+			sessionStorage.setItem("boardMessage",e.data);
+			showBoardMessageAlert();
+		}else{
+			console.log("채팅 기능 구현 연습");
+			
+			var arr = data.split(",");
+			var id = arr[0];
+			var msg = arr[1];
+			console.log(id + "값은?");
+			console.log(msg + "은 무엇일까???");
+			if(id == userid){
+				$("#sendMsg").append(msg +"<br/>");
+			}else if(id != userid){
+				$("#receiveMsg").append(msg + "<br/>");
+			}
+			$("#chatArea").append(e.data + "<br/>");
+		}
+		
 	};
 	
 	ws.onclose = function(e){
 		console.log("Info : connection closed.");
-		/* setTimeout(function(){
-			connect();
-		}, 1000); */
 	};
 	
 	ws.onerror = function(err){
@@ -79,15 +103,36 @@ function connectWs(){
 	};
 }
 
-function showMessageAlert(){
+function showMailMessageAlert(){
 	let socketAlert = $('div#socketAlertMail');
+	
 	if(sessionStorage.length != 0){
-		console.log(sessionStorage.getItem("message"));
-		socketAlert.html(sessionStorage.getItem("message"));
+		console.log(sessionStorage.getItem("mailMessage"));
+		
+		socketAlert.html(sessionStorage.getItem("mailMessage"));
+		
 		socketAlert.css('display','block');
 		$("a[class='dropdown-item']").click(function(e){
-			sessionStorage.removeItem("message");
+			sessionStorage.removeItem("mailMessage");
 			socketAlert.html("");
+			
+		});
+	}
+}
+
+function showBoardMessageAlert(){
+	let boardAlert = $('div#socketAlertBoard');
+	
+	if(sessionStorage.length != 0){
+		console.log(sessionStorage.getItem("boardMessage"));
+		
+		boardAlert.html(sessionStorage.getItem("boardMessage"));
+		
+		boardAlert.css('display','block');
+		
+		$("a[class='dropdown-item']").click(function(e){
+			sessionStorage.removeItem("boardMessage");
+			boardAlert.html("");
 			
 		});
 	}
@@ -126,11 +171,15 @@ function showMessageAlert(){
 						<div id="socketAlertMail"></div>
 						
 						<div class="dropdown-divider"></div>
+						<div id="socketAlertBoard"></div>
+						
+						<div class="dropdown-divider"></div>
 						<a href="/board/boardMain" class="dropdown-item">
 							<i class="fas fa-file mr-2"></i>
 							새로운 공지사항
 							<span class="float-right text-muted text-sm">2 days</span>
 						</a>
+						
 						<div class="dropdown-divider"></div>
 						<a href="#" class="dropdown-item dropdown-footer"> 모든 알림 보기</a>
 					</div>
@@ -283,7 +332,6 @@ function showMessageAlert(){
 		<script src="/resources/plugins/jquery/jquery.min.js"></script>
 		<!-- jQuery UI 1.11.4 -->
 		<script src="/resources/plugins/jquery-ui/jquery-ui.min.js"></script>
-		<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 		<script>
 			$.widget.bridge('uibutton', $.ui.button)
 		</script>

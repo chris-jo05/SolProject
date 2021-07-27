@@ -40,6 +40,7 @@
 									</thead>
 									<tbody>
 
+
 										<!-- 게시판 리스트 반복문 -->
 										<c:forEach var="vo" items="${list}">
 											<tr>
@@ -52,8 +53,6 @@
 												<td>
 													<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.b_date}" />
 												</td>
-
-
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -88,7 +87,6 @@
 									</li>
 								</ul>
 							</div>
-
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">
@@ -228,6 +226,7 @@
 				<!-- right col (We are only adding the ID to make the widgets sortable)-->
 				<section class="col-lg-5 connectedSortable">
 
+
 					<!-- DIRECT CHAT -->
 					<div class="card direct-chat direct-chat-primary">
 						<div class="card-header">
@@ -292,6 +291,44 @@
 								</div>
 								<!-- /.direct-chat-msg -->
 
+								<!-- 채팅방 리스트 -->
+                           <!-- Contacts are loaded here -->
+                           <div class="direct-chat-contacts">
+                              <ul class="contacts-list">
+                                
+                                 <li>
+                                 	<a href="#"> 
+                                       <div class="contacts-list-info">
+                                          <span class="contacts-list-name"> Kenneth M. 
+                                          	<small class="contacts-list-date float-right">1/4/2015</small>
+                                          </span> 
+                                          <span class="contacts-list-msg">Never mind I found...</span>
+                                       </div> <!-- /.contacts-list-info -->
+	                                 </a>
+                                 </li>
+                                 <!-- End Contact Item -->
+                                 
+                                 <li>
+                                 	<a href="#"> 
+                                 		<img class="contacts-list-img"
+                                      		 src="../resources/dist/img/user3-128x128.jpg"
+                                      		 alt="User Avatar">
+                                      		 <div class="contacts-list-info">
+                                          <span class="contacts-list-name"> Nadia Jolie 
+                                          	<small class="contacts-list-date float-right">2/20/2015</small>
+                                          </span> 
+                                          <span class="contacts-list-msg">I'll call you back at...
+                                          	<span title="3 New Messages" class="badge badge-primary float-right">3</span>
+                                          </span>
+                                       </div> <!-- /.contacts-list-info -->
+                                 	</a>
+                                 </li>
+                                 <!-- End Contact Item -->
+                                 
+                                 <li><a href="#"> <img class="contacts-list-img"
+                                       src="../resources/dist/img/user3-128x128.jpg"
+                                       alt="User Avatar">
+
 								<!-- Message to the right -->
 								<div class="direct-chat-msg right">
 									<div class="direct-chat-infos clearfix">
@@ -330,6 +367,54 @@
 									<li>
 										<a href="#">
 											<img class="contacts-list-img" src="../resources/dist/img/user7-128x128.jpg" alt="User Avatar">
+
+                                       <div class="contacts-list-info">
+                                          <span class="contacts-list-name"> Nadia Jolie <small
+                                             class="contacts-list-date float-right">2/20/2015</small>
+                                          </span> <span class="contacts-list-msg">I'll call you back
+                                             at...</span>
+                                       </div> <!-- /.contacts-list-info -->
+                                 </a></li>
+                                 <!-- End Contact Item -->
+                              </ul>
+                              <!-- /.contacts-list -->
+                           </div>
+                           <!-- /.direct-chat-pane -->
+                        </div>
+                        <!-- /.card-body -->
+                        
+                        <!-- 내용 작성하여 보내는 부분 -->
+                        <div class="card-footer">
+                           <form action="#" method="post">
+                              <div class="input-group">
+                                 <input type="text" name="message"
+                                    placeholder="Type Message ..." class="form-control">
+                                 <span class="input-group-append">
+                                    <button type="button" class="btn btn-primary" id="sendChat">Send</button>
+                                 </span>
+                              </div>
+                           </form>
+                        </div>
+                        <!-- /.card-footer-->
+                     </div>
+                     <!--/.direct-chat -->
+                     
+                     <script type="text/javascript">
+                     $("#sendChat").click(function(){
+                    	if(socket){
+                    		
+                    		chatMsg = $("input[name='message']").val();
+                    		chatMsg += ","+"${login.id}";
+                    		socket.send(chatMsg);
+                    		$("input[name='message']").val("");
+                    		console.log(chatMsg);
+                    	} 
+                     })
+                     
+                     </script>
+                     
+                    <%--  <%@include file="../chat/chatMain.jsp" %> --%>
+                     
 
 											<div class="contacts-list-info">
 												<span class="contacts-list-name">

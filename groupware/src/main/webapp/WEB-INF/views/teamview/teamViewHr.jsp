@@ -48,7 +48,7 @@
 	                </div>
 	                <div class="card-body">
 	                    <div class="col-12">
-	                      <h2 class="lead"><b>${vo.ename}</b></h2>
+	                      <h2 class="lead" name="receiver_name">${vo.ename}</h2>
 	                      <br />
 	                      <p class="text-muted text-sm">직급 : ${vo.position}</p>
 	                      <ul class="ml-4 mb-0 fa-ul text-muted">
@@ -63,7 +63,7 @@
 	               
 	                <div class="card-footer">
 	                  <div class="text-right">
-	                    <a href="#" class="btn btn-sm bg-teal">
+	                    <a href="/insertChatRoom?receiver_name=${vo.ename}" class="btn btn-sm bg-teal">
 	                      <i class="fas fa-comments"></i>
 	                    </a>
 	                    <a href="#" class="btn btn-sm btn-primary">
@@ -113,13 +113,18 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+<form action="" id="chatForm" >
+</form>
 <form action="" method="get" id="actionForm">
 	<input type="hidden" name="dno" value="<%=request.getParameter("dno")%>" />
 	<input type="hidden" name="pageNum" value="${pageVo.cri.pageNum}" />
 	<input type="hidden" name="amount" value="${pageVo.cri.amount}" />
 </form>
 <script>
+	let sender_name = "${login.ename}";
+	let receiver_name = $(".lead").html();
 $(function(){
+	
 	// 하단 페이지 나누기 버튼 클릭시 이동
 	var actionForm = $("#actionForm");
 	
