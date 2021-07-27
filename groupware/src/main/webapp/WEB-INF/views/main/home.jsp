@@ -67,31 +67,11 @@
 					<div class="card">
 						<div class="card-header">
 							<h3 class="card-title"><i class="ion ion-clipboard mr-1"></i> 일 정</h3>
-							<!-- 해야 할일 페이지 나누기 -->
-							<div class="card-tools">
-								<ul class="pagination pagination-sm">
-									<li class="page-item">
-										<a href="#" class="page-link">&laquo;</a>
-									</li>
-									<li class="page-item">
-										<a href="#" class="page-link">1</a>
-									</li>
-									<li class="page-item">
-										<a href="#" class="page-link">2</a>
-									</li>
-									<li class="page-item">
-										<a href="#" class="page-link">3</a>
-									</li>
-									<li class="page-item">
-										<a href="#" class="page-link">&raquo;</a>
-									</li>
-								</ul>
-							</div>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">
 							<ul class="todo-list" data-widget="todo-list">
-								<li>
+								<!-- <li>
 									drag handle
 									<span class="handle">
 										<i class="fas fa-ellipsis-v"></i>
@@ -209,7 +189,7 @@
 										<i class="fas fa-edit"></i>
 										<i class="fas fa-trash-o"></i>
 									</div>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 						<!-- /.card-body -->
@@ -290,7 +270,7 @@
 									<!-- /.direct-chat-text -->
 								</div>
 								<!-- /.direct-chat-msg -->
-
+							</div>
 								<!-- 채팅방 리스트 -->
                            <!-- Contacts are loaded here -->
                            <div class="direct-chat-contacts">
@@ -323,58 +303,6 @@
                                        </div> <!-- /.contacts-list-info -->
                                  	</a>
                                  </li>
-                                 <!-- End Contact Item -->
-                                 
-                                 <li><a href="#"> <img class="contacts-list-img"
-                                       src="../resources/dist/img/user3-128x128.jpg"
-                                       alt="User Avatar">
-
-								<!-- Message to the right -->
-								<div class="direct-chat-msg right">
-									<div class="direct-chat-infos clearfix">
-										<span class="direct-chat-name float-right">Sarah Bullock</span>
-										<span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
-									</div>
-									<!-- /.direct-chat-infos -->
-									<img class="direct-chat-img" src="../resources/dist/img/user3-128x128.jpg" alt="message user image">
-									<!-- /.direct-chat-img -->
-									<div class="direct-chat-text">I would love to.</div>
-									<!-- /.direct-chat-text -->
-								</div>
-								<!-- /.direct-chat-msg -->
-
-							</div>
-							<!--/.direct-chat-messages-->
-
-							<!-- Contacts are loaded here -->
-							<div class="direct-chat-contacts">
-								<ul class="contacts-list">
-									<li>
-										<a href="#">
-											<img class="contacts-list-img" src="../resources/dist/img/user1-128x128.jpg" alt="User Avatar">
-
-											<div class="contacts-list-info">
-												<span class="contacts-list-name">
-													Count Dracula
-													<small class="contacts-list-date float-right">2/28/2015</small>
-												</span>
-												<span class="contacts-list-msg">How have you been? I was...</span>
-											</div>
-											<!-- /.contacts-list-info -->
-										</a>
-									</li>
-									<!-- End Contact Item -->
-									<li>
-										<a href="#">
-											<img class="contacts-list-img" src="../resources/dist/img/user7-128x128.jpg" alt="User Avatar">
-
-                                       <div class="contacts-list-info">
-                                          <span class="contacts-list-name"> Nadia Jolie <small
-                                             class="contacts-list-date float-right">2/20/2015</small>
-                                          </span> <span class="contacts-list-msg">I'll call you back
-                                             at...</span>
-                                       </div> <!-- /.contacts-list-info -->
-                                 </a></li>
                                  <!-- End Contact Item -->
                               </ul>
                               <!-- /.contacts-list -->
@@ -415,131 +343,43 @@
                      
                     <%--  <%@include file="../chat/chatMain.jsp" %> --%>
                      
-
-											<div class="contacts-list-info">
-												<span class="contacts-list-name">
-													Sarah Doe
-													<small class="contacts-list-date float-right">2/23/2015</small>
-												</span>
-												<span class="contacts-list-msg">I will be waiting for...</span>
-											</div>
-											<!-- /.contacts-list-info -->
-										</a>
-									</li>
-									<!-- End Contact Item -->
-									<li>
-										<a href="#">
-											<img class="contacts-list-img" src="../resources/dist/img/user3-128x128.jpg" alt="User Avatar">
-
-											<div class="contacts-list-info">
-												<span class="contacts-list-name">
-													Nadia Jolie
-													<small class="contacts-list-date float-right">2/20/2015</small>
-												</span>
-												<span class="contacts-list-msg">I'll call you back at...</span>
-											</div>
-											<!-- /.contacts-list-info -->
-										</a>
-									</li>
-									<!-- End Contact Item -->
-									<li>
-										<a href="#">
-											<img class="contacts-list-img" src="../resources/dist/img/user5-128x128.jpg" alt="User Avatar">
-
-											<div class="contacts-list-info">
-												<span class="contacts-list-name">
-													Nora S. Vans
-													<small class="contacts-list-date float-right">2/10/2015</small>
-												</span>
-												<span class="contacts-list-msg">Where is your new...</span>
-											</div>
-											<!-- /.contacts-list-info -->
-										</a>
-									</li>
-									<!-- End Contact Item -->
-									<li>
-										<a href="#">
-											<img class="contacts-list-img" src="../resources/dist/img/user6-128x128.jpg" alt="User Avatar">
-
-											<div class="contacts-list-info">
-												<span class="contacts-list-name">
-													John K.
-													<small class="contacts-list-date float-right">1/27/2015</small>
-												</span>
-												<span class="contacts-list-msg">Can I take a look at...</span>
-											</div>
-											<!-- /.contacts-list-info -->
-										</a>
-									</li>
-									<!-- End Contact Item -->
-									<li>
-										<a href="#">
-											<img class="contacts-list-img" src="../resources/dist/img/user8-128x128.jpg" alt="User Avatar">
-
-											<div class="contacts-list-info">
-												<span class="contacts-list-name">
-													Kenneth M.
-													<small class="contacts-list-date float-right">1/4/2015</small>
-												</span>
-												<span class="contacts-list-msg">Never mind I found...</span>
-											</div>
-											<!-- /.contacts-list-info -->
-										</a>
-									</li>
-									<!-- End Contact Item -->
-								</ul>
-								<!-- /.contacts-list -->
-							</div>
-							<!-- /.direct-chat-pane -->
-						</div>
-						<!-- /.card-body -->
-						<div class="card-footer">
-							<form action="#" method="post">
-								<div class="input-group">
-									<input type="text" name="message" placeholder="Type Message ..." class="form-control">
-									<span class="input-group-append">
-										<button type="button" class="btn btn-primary">Send</button>
-									</span>
-								</div>
-							</form>
-						</div>
-						<!-- /.card-footer-->
-					</div>
-					<!--/.direct-chat -->
-
 					<!-- Calendar -->
-					<div class="card bg-gradient-success">
-						<div class="card-header border-0">
+                     <div class="card bg-gradient-success">
+                        <div class="card-header border-0">
 
-							<h3 class="card-title"><i class="far fa-calendar-alt"></i> 일정</h3>
-							<!-- tools card -->
-							<div class="card-tools">
-								<button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-									<i class="fas fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
-									<i class="fas fa-times"></i>
-								</button>
-							</div>
-							<!-- /. tools -->
-						</div>
-						<!-- /.card-header -->
-						<div class="card-body pt-0">
-							<!-- 날씨 api 넣기 -->
-						</div>
-						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</section>
-				<!-- right col -->
-			</div>
-			<!-- /.row (main row) -->
-		</div>
-		<!-- /.container-fluid -->
-	</section>
-	<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+                           <h3 class="card-title">
+                              <i class="far fa-calendar-alt"></i> 일정
+                           </h3>
+                           <!-- tools card -->
+                           <div class="card-tools">
+                              <button type="button" class="btn btn-success btn-sm"
+                                 data-card-widget="collapse">
+                                 <i class="fas fa-minus"></i>
+                              </button>
+                              <button type="button" class="btn btn-success btn-sm"
+                                 data-card-widget="remove">
+                                 <i class="fas fa-times"></i>
+                              </button>
+                           </div>
+                           <!-- /. tools -->
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body pt-0">
+                           <!-- 날씨 api 넣기 -->
+                        </div>
+                        <!-- /.card-body -->
+                     </div>
+                     <!-- /.card -->
+                  </section>
+                  <!-- right col -->
+               </div>
+               <!-- /.row (main row) -->
+            </div>
+            <!-- /.container-fluid -->
+         </section>
+         <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
 <!-- 값을 넘겨줄때 pk값 놓기 -->
 <form action="mailMain" method="get" id="actionForm">
 	<input type="hidden" name="eno" value="${login.eno}" />
