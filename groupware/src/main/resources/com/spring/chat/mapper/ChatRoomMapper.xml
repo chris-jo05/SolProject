@@ -8,7 +8,7 @@
 	</insert>
 	
 	<select id="chatRoomList" resultType="com.spring.chat.domain.ChatRoomVo">
-		select * from chatroom
+		select * from chatroom where sender_name=#{sender_name} or receiver_name=#{sender_name}
 	</select>
 
 </mapper>
