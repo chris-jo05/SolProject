@@ -71,125 +71,7 @@
 						<!-- /.card-header -->
 						<div class="card-body">
 							<ul class="todo-list" data-widget="todo-list">
-								<!-- <li>
-									drag handle
-									<span class="handle">
-										<i class="fas fa-ellipsis-v"></i>
-										<i class="fas fa-ellipsis-v"></i>
-									</span>
-									checkbox
-									<div class="icheck-primary d-inline ml-2">
-										<input type="checkbox" value="" name="todo1" id="todoCheck1">
-										<label for="todoCheck1"></label>
-									</div>
-									todo text
-									<span class="text">Design a nice theme</span>
-									Emphasis label
-									<small class="badge badge-danger">
-										<i class="far fa-clock"></i>
-										2 mins
-									</small>
-									General tools such as edit or delete
-									<div class="tools">
-										<i class="fas fa-edit"></i>
-										<i class="fas fa-trash-o"></i>
-									</div>
-								</li>
-								<li>
-									<span class="handle">
-										<i class="fas fa-ellipsis-v"></i>
-										<i class="fas fa-ellipsis-v"></i>
-									</span>
-									<div class="icheck-primary d-inline ml-2">
-										<input type="checkbox" value="" name="todo2" id="todoCheck2" checked>
-										<label for="todoCheck2"></label>
-									</div>
-									<span class="text">Make the theme responsive</span>
-									<small class="badge badge-info">
-										<i class="far fa-clock"></i>
-										4 hours
-									</small>
-									<div class="tools">
-										<i class="fas fa-edit"></i>
-										<i class="fas fa-trash-o"></i>
-									</div>
-								</li>
-								<li>
-									<span class="handle">
-										<i class="fas fa-ellipsis-v"></i>
-										<i class="fas fa-ellipsis-v"></i>
-									</span>
-									<div class="icheck-primary d-inline ml-2">
-										<input type="checkbox" value="" name="todo3" id="todoCheck3">
-										<label for="todoCheck3"></label>
-									</div>
-									<span class="text">Let theme shine like a star</span>
-									<small class="badge badge-warning">
-										<i class="far fa-clock"></i>
-										1 day
-									</small>
-									<div class="tools">
-										<i class="fas fa-edit"></i>
-										<i class="fas fa-trash-o"></i>
-									</div>
-								</li>
-								<li>
-									<span class="handle">
-										<i class="fas fa-ellipsis-v"></i>
-										<i class="fas fa-ellipsis-v"></i>
-									</span>
-									<div class="icheck-primary d-inline ml-2">
-										<input type="checkbox" value="" name="todo4" id="todoCheck4">
-										<label for="todoCheck4"></label>
-									</div>
-									<span class="text">Let theme shine like a star</span>
-									<small class="badge badge-success">
-										<i class="far fa-clock"></i>
-										3 days
-									</small>
-									<div class="tools">
-										<i class="fas fa-edit"></i>
-										<i class="fas fa-trash-o"></i>
-									</div>
-								</li>
-								<li>
-									<span class="handle">
-										<i class="fas fa-ellipsis-v"></i>
-										<i class="fas fa-ellipsis-v"></i>
-									</span>
-									<div class="icheck-primary d-inline ml-2">
-										<input type="checkbox" value="" name="todo5" id="todoCheck5">
-										<label for="todoCheck5"></label>
-									</div>
-									<span class="text">Check your messages and notifications</span>
-									<small class="badge badge-primary">
-										<i class="far fa-clock"></i>
-										1 week
-									</small>
-									<div class="tools">
-										<i class="fas fa-edit"></i>
-										<i class="fas fa-trash-o"></i>
-									</div>
-								</li>
-								<li>
-									<span class="handle">
-										<i class="fas fa-ellipsis-v"></i>
-										<i class="fas fa-ellipsis-v"></i>
-									</span>
-									<div class="icheck-primary d-inline ml-2">
-										<input type="checkbox" value="" name="todo6" id="todoCheck6">
-										<label for="todoCheck6"></label>
-									</div>
-									<span class="text">Let theme shine like a star</span>
-									<small class="badge badge-secondary">
-										<i class="far fa-clock"></i>
-										1 month
-									</small>
-									<div class="tools">
-										<i class="fas fa-edit"></i>
-										<i class="fas fa-trash-o"></i>
-									</div>
-								</li> -->
+								
 							</ul>
 						</div>
 						<!-- /.card-body -->
@@ -217,7 +99,7 @@
 								<button type="button" class="btn btn-tool" data-card-widget="collapse">
 									<i class="fas fa-minus"></i>
 								</button>
-								<button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle">
+								<button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle" id="chatList">
 									<i class="fas fa-comments"></i>
 								</button>
 								<button type="button" class="btn btn-tool" data-card-widget="remove">
@@ -229,6 +111,7 @@
 						<div class="card-body">
 							<!-- Conversations are loaded here -->
 							<div class="direct-chat-messages">
+							
 								<!-- Message. Default to the left -->
 								<div class="direct-chat-msg">
 									<div class="direct-chat-infos clearfix">
@@ -238,7 +121,7 @@
 									<!-- /.direct-chat-infos -->
 									<img class="direct-chat-img" src="../resources/dist/img/user1-128x128.jpg" alt="message user image">
 									<!-- /.direct-chat-img -->
-									<div class="direct-chat-text">Is this template really for free? That's unbelievable!</div>
+									<div class="direct-chat-text" id="receiveMsg">Is this template really for free? That's unbelievable!</div>
 									<!-- /.direct-chat-text -->
 								</div>
 								<!-- /.direct-chat-msg -->
@@ -252,41 +135,17 @@
 									<!-- /.direct-chat-infos -->
 									<img class="direct-chat-img" src="../resources/dist/img/user3-128x128.jpg" alt="message user image">
 									<!-- /.direct-chat-img -->
-									<div class="direct-chat-text">You better believe it!</div>
+									<div class="direct-chat-text" id="sendMsg">You better believe it!</div>
 									<!-- /.direct-chat-text -->
 								</div>
 								<!-- /.direct-chat-msg -->
 
-								<!-- Message. Default to the left -->
-								<div class="direct-chat-msg">
-									<div class="direct-chat-infos clearfix">
-										<span class="direct-chat-name float-left">Alexander Pierce</span>
-										<span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
-									</div>
-									<!-- /.direct-chat-infos -->
-									<img class="direct-chat-img" src="../resources/dist/img/user1-128x128.jpg" alt="message user image">
-									<!-- /.direct-chat-img -->
-									<div class="direct-chat-text">Working with AdminLTE on a great new app! Wanna join?</div>
-									<!-- /.direct-chat-text -->
-								</div>
-								<!-- /.direct-chat-msg -->
 							</div>
 								<!-- 채팅방 리스트 -->
                            <!-- Contacts are loaded here -->
                            <div class="direct-chat-contacts">
                               <ul class="contacts-list">
                                 
-                                 <li>
-                                 	<a href="#"> 
-                                       <div class="contacts-list-info">
-                                          <span class="contacts-list-name"> Kenneth M. 
-                                          	<small class="contacts-list-date float-right">1/4/2015</small>
-                                          </span> 
-                                          <span class="contacts-list-msg">Never mind I found...</span>
-                                       </div> <!-- /.contacts-list-info -->
-	                                 </a>
-                                 </li>
-                                 <!-- End Contact Item -->
                                  
                                  <li>
                                  	<a href="#"> 
@@ -300,6 +159,7 @@
                                           <span class="contacts-list-msg">I'll call you back at...
                                           	<span title="3 New Messages" class="badge badge-primary float-right">3</span>
                                           </span>
+                                          <input type="hidden" name="name" id="" />
                                        </div> <!-- /.contacts-list-info -->
                                  	</a>
                                  </li>
@@ -328,7 +188,106 @@
                      <!--/.direct-chat -->
                      
                      <script type="text/javascript">
+                     var sender_name = "${login.ename}";
+                     
+                     
+                     $(function(){
+                    	 
+                    	 $.getJSON({
+                    		 url:"/chatRoomList",                    		 
+                    		 success:function(data){
+                    			 console.log("data 값은 >> " + data[0]);
+                    			 
+                   				 str = "";
+                   				 
+                    			 $.each(data,function(idx,ele){
+                    				 console.log(ele);
+                    				 
+                    				 if(sender_name == ele.sender_name){
+                    					 
+										 str = "<li><a onclick='chat(" + ele.chatroom_num + ")'>";
+	                    				 
+	                    				 str += "<div class='contacts-list-info'>";
+	                    				 str += "<span class='contacts-list-name'>" + ele.receiver_name;
+	                    				 str += "<small class='contacts-list-date float-right'>1/4/2015</small>";
+	                    				 str += "</span><span class='contacts-list-msg'>Never mind I found...</span>";
+	                    				 str += "</div></a></li>"
+                    				 }else if(sender_name != ele.receiver_name){
+                    					 
+	                    				 str = "<li><a onclick='chat(" + ele.chatroom_num + ")'>";
+	                    				 
+	                    				 str += "<div class='contacts-list-info'>";
+	                    				 str += "<span class='contacts-list-name'>" + ele.sender_name;
+	                    				 str += "<small class='contacts-list-date float-right'>1/4/2015</small>";
+	                    				 str += "</span><span class='contacts-list-msg'>Never mind I found...</span>";
+	                    				 str += "</div></a></li>"
+                    					 
+                    				 }
+                    				 console.log(str);
+                    			 $(".contacts-list").append(str);
+                    			 })  // each 종료
+                    			 console.log(str);
+                    		 } // success 종료
+                    	 }) // getJSON 종료
+                    	 
+                    	 
+                     })
+                     
+                     function chat(e){
+                    	 
+                    	 $(".direct-chat-msg").remove();
+                    	 
+                    	 $.getJSON({
+                    		url:"/chatRoom/" + e,
+                    		type:"get",
+                    		async:false,
+                    	 	success:function(data){
+                    	 		
+                    	 		str = "";
+                    	 		
+                    	 		$.each(data,function(idx,ele){
+                    	 		
+	                    	 		if(ele.sender_name != sender_name){
+	                    	 			
+	                    	 			str += "<div class='direct-chat-msg'>";
+										str += "<div class='direct-chat-infos clearfix'>";
+										str += "<span class='direct-chat-name float-left'>" + ele.sender_name + "</span>";
+										str += "<span class='direct-chat-timestamp float-right'>";
+										str += ele.send_date + "</span></div>";
+										str += "<div class='direct-chat-text' id='receiveMsg'>" + ele.chat_msg + "</div></div>";
+										
+	                    	 		}else if(ele.sender_name == sender_name){
+	                    	 			
+	                    	 			str += "<div class='direct-chat-msg right'>";
+										str += "<div class='direct-chat-infos clearfix'>";
+										str += "<span class='direct-chat-name float-right'>" + ele.sender_name + "</span>";
+										str += "<span class='direct-chat-timestamp float-left'>";
+										str += ele.send_date + "</span></div>";
+										str += "<div class='direct-chat-text' id='sendMsg'>" + ele.chat_msg + "</div></div>";
+										
+	                    	 		}
+                    	 		})
+	                    	 		$(".direct-chat-messages").append(str);
+                    	 		
+                    	 	} // success 종료
+                    	 }) //getJSON 종료
+                    	 $("#chatList").click();
+                     }
+                     
+                     
                      $("#sendChat").click(function(){
+                    	 
+                    	 $.ajax({
+                    		 url:'/sendMsg',
+                    		 type:'post',
+                    		 success:function(data){
+                    			 console.log(data);
+                    		 },
+                    		 error:function(err){
+                    			 console.log(err);
+                    		 }
+                    	 })
+                    	 
                     	if(socket){
                     		
                     		chatMsg = $("input[name='message']").val();
@@ -392,21 +351,14 @@ let todolist = $(".todo-list");
 
 $(function() {
    // 로그인한 사원의 일정 캘린더에 보여주기
-   console.log("${login.eno}");
    $.getJSON({
          url:"/calendar/rest_list/" + ${login.eno},
          type:"get",
          async:false,
          success:function(data) {
-            console.log(data);
+        	 
             var count = 0;
-            console.log(todolist);
             $.each(data, function(idx, element) {
-               console.log(element.title);
-               console.log(element.startDate);
-               console.log(element.endDate);
-               console.log("일정 번호 : " + element.cno);
-               
                
                var title = element.title;
                var time = element.startDate + " " + element.cal_startTime + " ~ " + element.endDate + " " + element.cal_endTime;
@@ -430,14 +382,8 @@ $(function() {
                
                var between_minute = Math.ceil((endDate.getTime() - now.getTime())/1000/60);
                
-               console.log(year + " " + month + " " + date + " " + hr + " " + min);            
-               console.log(startSpl);
-               console.log(endSpl);
                
                if(now < startDate) {
-                  console.log(now);
-                  console.log(startDate);
-                  console.log("not started");
                   
                   duration = " 시작 예정";
                } else {
@@ -496,11 +442,6 @@ $(function() {
    });
    
    $("#cal_btn").click(function() {
-      console.log("cal_btn clicked");
-      
-      /* $(".todo-list li label").each(function(idx, element){
-         console.log($(element).prev().prop("checked"));
-      }) */
       
       location.href = "/calendar/calendar";
    });
@@ -509,32 +450,26 @@ $(function() {
       
       if(!$(this).prev().prop("checked")) {
          //체크가 안된 상태에서 체크 박스 클릭 => 체크 하기
-         console.log($(this).prev().prop("checked"));
          
          var cno = String($(this).prev().attr("name")).split(" ")[1] * 1;
-         console.log(cno + " " + typeof(cno));
          
          $.ajax({
             url:"/calendar/rest_check/" + cno + "/1",
             type:"POST",
             async:false,
             success:function(data) {
-               console.log(data);
             }
          })
       } else {
          // 체크가 된 상태에서 체크 박스 클릭 => 체크 풀기
-         console.log($(this).prev().prop("checked"));
          
          var cno = String($(this).prev().attr("name")).split(" ")[1] * 1;
-         console.log(cno + " " + typeof(cno));
          
          $.ajax({
             url:"/calendar/rest_check/" + cno + "/0",
             type:"POST",
             async:false,
             success:function(data) {
-               console.log(data);
             }
          })
       }
@@ -542,11 +477,6 @@ $(function() {
 })
 
 $("#cal_btn").click(function() {
-      console.log("cal_btn clicked");
-      
-      /* $(".todo-list li label").each(function(idx, element){
-         console.log($(element).prev().prop("checked"));
-      }) */
       
       location.href = "/calendar/calendar";
    });

@@ -16,5 +16,5 @@ public class ChatRoomVo {
 	private String sender_name;
 	private String receiver_name;
 	
-	private ChatMemberVo member;
+	private ChatUserMsgrVo member;
 }
