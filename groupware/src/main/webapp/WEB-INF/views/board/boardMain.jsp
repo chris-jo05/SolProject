@@ -51,8 +51,6 @@
 										</div>
 										<!-- /btn-group -->
 										<input type="text" name="keyword" value="${pageVO.cri.keyword}"  />
-										<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" />
-										<input type="hidden" name="amount" value="${pageVO.cri.amount}" />
 										<button type="button" class="btn btn-default keyword">
 											<i class="fas fa-search"></i>
 										</button>

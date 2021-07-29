@@ -168,7 +168,7 @@ public class BoardController {
 			return;
 		}
 		for(AttachFileDTO dto:attachList) {
-			Path path = Paths.get("d:\\upload\\", dto.getUploadPath()+"\\"+dto.getUuid()+"_"+dto.getFileName());
+			Path path = Paths.get("c:\\Solcompany\\", dto.getUploadPath()+"\\"+dto.getUuid()+"_"+dto.getFileName());
 			
 			try {
 				Files.deleteIfExists(path);
