@@ -53,7 +53,7 @@
 	                      <p class="text-muted text-sm">직급 : ${vo.position}</p>
 	                      <ul class="ml-4 mb-0 fa-ul text-muted">
 	                        <li class="small"><span class="fa-li"><i class="nav-icon far fa-envelope"></i></span>
-	                         이메일 : <a href="/mailbox/mailWrite?m_id=${vo.id}">${vo.id}@solcompany.com</a>
+	                         이메일 : <a href="/mailbox/mailWrite?id=${vo.id}">${vo.id}@solcompany.com</a>
 	                         </li>
 	                        <br />
 	                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> 휴대폰 : ${vo.mobile}</li>
