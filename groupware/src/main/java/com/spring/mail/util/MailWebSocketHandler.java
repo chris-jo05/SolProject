@@ -143,9 +143,8 @@ public class MailWebSocketHandler extends TextWebSocketHandler {
 						log.info("chatReceiveSession의 값을 확인 해보기 : " + chatReceiveSession);
 						log.info("chatSenderSession의 값을 확인 해보기 : " + chatSenderSession);
 						
-						if("chat".equals(cmd) && chatReceiveSession != null) {
+						if("chat".equals(cmd) && chatReceiveSession != null && chatSenderSession != null) {
 							
-							if(chatSenderSession != null && chatReceiveSession != null) {
 								TextMessage chatMessage = new TextMessage(cmd +","+chatMsg+","+sender_name+","+receive.getEname()+","+chatroom_num);
 								
 								log.info("보내는 사람에게 보내지는 메세지 : " + chatMessage);
@@ -153,7 +152,14 @@ public class MailWebSocketHandler extends TextWebSocketHandler {
 								chatSenderSession.sendMessage(chatMessage);
 								chatReceiveSession.sendMessage(chatMessage);
 								
-							}
+						}else if("chat".equals(cmd) && chatReceiveSession == null && chatSenderSession != null) {
+							
+							TextMessage chatMessage = new TextMessage(cmd +","+chatMsg+","+sender_name+","+receive.getEname()+","+chatroom_num);
+							
+							log.info("보내는 사람에게 보내지는 메세지 : " + chatMessage);
+							
+							chatSenderSession.sendMessage(chatMessage);
+							
 						}
 						
 					} // if(result)문 종료

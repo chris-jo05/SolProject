@@ -47,7 +47,7 @@
                 <!-- 메일 주소 -->
                 <h6>보낸 사람 : ${read.m_writer}
                 <br />
-                <h6>메일 주소 : <a href="/mailbox/mailWrite?m_id=${read.m_id}"> ${read.m_id}@SolCompany.com</a> 
+                <h6>메일 주소 : <a href="/mailbox/mailWrite?id=${read.m_id}"> ${read.m_id}@SolCompany.com</a> 
                 	<!-- 보낸 날짜 -->
                 	<span class="mailbox-read-time float-right"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${read.m_sendDate}"/></span></h6>
                 </h6> 

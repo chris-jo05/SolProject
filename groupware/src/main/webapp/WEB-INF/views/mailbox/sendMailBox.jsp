@@ -65,7 +65,7 @@
                     	    <label for="check${list.m_no}"></label>
                  	     </div>
                	     	</td>
-              	      	<td class="mailbox-name">${list.m_id} (${list.m_writer})</td>
+              	      	<td class="mailbox-name">${list.e_id}</td>
               	    	<td class="mailbox-subject"><a href="/mailbox/readSendMail?m_no=${list.m_no}"> ${list.m_title}</a></td>
                	     	<td class="mailbox-date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.m_sendDate}"/></td>
 	                  </tr>
