@@ -71,19 +71,17 @@ public class HomeController {
 	}
 	
 	@GetMapping("/main/home")
-	public void home(HttpSession session, Model model,Criteria cri) {
+	public void home(HttpSession session, Model model) {
 		log.info("메인 페이지로 이동합니다.");
+		
+		Criteria cri = new Criteria();
 		cri.setAmount(5);
-		MemberVo vo = (MemberVo)session.getAttribute("login");
-		model.addAttribute("login", vo);
 		
 		List<BoardVO> list = b_service.list(cri); 
 		int total = b_service.total(cri); 
+		
 		model.addAttribute("list", list);
-	  
 		model.addAttribute("pageVO",new PageVO(cri, total)); 
-		
-		
 		
 	}
 	

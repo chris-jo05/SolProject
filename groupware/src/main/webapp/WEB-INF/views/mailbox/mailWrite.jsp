@@ -86,7 +86,7 @@
               </div>
               <!-- /.card-footer -->
               <input type="hidden" name="m_writer" value="${login.ename}" />	<!-- 메일 보낸 사람담기 -->
-	          <input type="hidden" name="m_id" value="${login.id}" /> 		<!-- 메일 보낸 사람 아이디 담기 -->
+	          <input type="hidden" name="e_id" value="${login.id}" /> 		<!-- 메일 보낸 사람 아이디 담기 -->
 	          <input type="hidden" name="eno" value="${login.eno}" />
 			</form>
             </div>

@@ -18,13 +18,13 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 	private ChatUserMsgMapper memberMapper;
 	
 	@Override
-	public int insertChatRoom(String sender_name, String receiver_name) {
-		return roomMapper.insertChatRoom(sender_name, receiver_name);
+	public int insertChatRoom(ChatRoomVo vo) {
+		return roomMapper.insertChatRoom(vo);
 	}
 
 	@Override
-	public List<ChatRoomVo> chatRoomList(String sender_name) {
-		return roomMapper.chatRoomList(sender_name);
+	public List<ChatRoomVo> chatRoomList(int eno) {
+		return roomMapper.chatRoomList(eno);
 	}
 
 }

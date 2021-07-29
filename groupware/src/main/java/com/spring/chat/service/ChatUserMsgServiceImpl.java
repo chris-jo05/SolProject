@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.chat.domain.ChatUserMsgrVo;
 import com.spring.chat.mapper.ChatUserMsgMapper;
+import com.spring.member.domain.MemberVo;
 
 @Service
 public class ChatUserMsgServiceImpl implements ChatUserMsgService{
@@ -22,5 +23,10 @@ public class ChatUserMsgServiceImpl implements ChatUserMsgService{
 	@Override
 	public int insertMsg(ChatUserMsgrVo vo) {
 		return mapper.insertMsg(vo);
+	}
+
+	@Override
+	public MemberVo findUserId(int eno) {
+		return mapper.findUserId(eno);
 	}
 }

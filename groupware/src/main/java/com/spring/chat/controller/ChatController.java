@@ -31,11 +31,23 @@ public class ChatController {
 	private ChatUserMsgService userService;
 	
 	@GetMapping("/insertChatRoom")
-	public String insertChatRoom(String receiver_name,HttpSession session) {
+	public String insertChatRoom(String receiver_name,int receive_eno,HttpSession session) {
 		
 		MemberVo member = (MemberVo)session.getAttribute("login");
-		log.info("채팅방을 생성합니다 " +member.getEname() + " , " + receiver_name);
-		int result = service.insertChatRoom(member.getEname(), receiver_name);
+		
+		System.out.println(receiver_name);
+		System.out.println(receive_eno);
+		
+		ChatRoomVo vo = new ChatRoomVo();
+		
+		vo.setReceiver_name(receiver_name);
+		vo.setReceive_eno(receive_eno);
+		
+		vo.setSender_name(member.getEname());
+		vo.setSend_eno(member.getEno());
+		
+		log.info("채팅방을 생성합니다 " +vo);
+		int result = service.insertChatRoom(vo);
 		
 		if(result > 0) {
 			return "redirect: /main/home";
@@ -49,9 +61,9 @@ public class ChatController {
 		
 		MemberVo vo = (MemberVo)session.getAttribute("login");
 		
-		log.info("채팅방 목록을 가져옵니다 " + vo.getEname());
+		log.info("채팅방 목록을 가져옵니다 " + vo.getEno());
 		
-		return new ResponseEntity<List<ChatRoomVo>>(service.chatRoomList(vo.getEname()),HttpStatus.OK);
+		return new ResponseEntity<List<ChatRoomVo>>(service.chatRoomList(vo.getEno()),HttpStatus.OK);
 	}
 	
 	@GetMapping("/chatRoom/{chatroom_num}")
@@ -61,10 +73,5 @@ public class ChatController {
 		return new ResponseEntity<List<ChatUserMsgrVo>>(userService.chatList(chatroom_num), HttpStatus.OK);
 	}
 	
-	@PostMapping("/sendMsg")
-	public ResponseEntity<Integer> insertMsg(ChatUserMsgrVo vo){
-		log.info(vo + " 대화내용을 보냅니다.");
-		
-		return new ResponseEntity<Integer>(userService.insertMsg(vo),HttpStatus.OK);
-	}
+	
 }

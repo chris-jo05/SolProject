@@ -111,59 +111,18 @@
 						<div class="card-body">
 							<!-- Conversations are loaded here -->
 							<div class="direct-chat-messages">
-							
-								<!-- Message. Default to the left -->
-								<div class="direct-chat-msg">
-									<div class="direct-chat-infos clearfix">
-										<span class="direct-chat-name float-left">Alexander Pierce</span>
-										<span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-									</div>
-									<!-- /.direct-chat-infos -->
-									<img class="direct-chat-img" src="../resources/dist/img/user1-128x128.jpg" alt="message user image">
-									<!-- /.direct-chat-img -->
-									<div class="direct-chat-text" id="receiveMsg">Is this template really for free? That's unbelievable!</div>
-									<!-- /.direct-chat-text -->
-								</div>
-								<!-- /.direct-chat-msg -->
-
-								<!-- Message to the right -->
-								<div class="direct-chat-msg right">
-									<div class="direct-chat-infos clearfix">
-										<span class="direct-chat-name float-right">Sarah Bullock</span>
-										<span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-									</div>
-									<!-- /.direct-chat-infos -->
-									<img class="direct-chat-img" src="../resources/dist/img/user3-128x128.jpg" alt="message user image">
-									<!-- /.direct-chat-img -->
-									<div class="direct-chat-text" id="sendMsg">You better believe it!</div>
-									<!-- /.direct-chat-text -->
-								</div>
-								<!-- /.direct-chat-msg -->
-
+								<input type="hidden" name="receiver_name" value=""/>
+								<input type="hidden" name="chatroom_num" value=""/>
+								<input type="hidden" name="receive_eno" value=""/>
+								
+								
 							</div>
-								<!-- 채팅방 리스트 -->
+							
                            <!-- Contacts are loaded here -->
                            <div class="direct-chat-contacts">
+							<!-- 채팅방 리스트 넣어주는 곳-->
                               <ul class="contacts-list">
                                 
-                                 
-                                 <li>
-                                 	<a href="#"> 
-                                 		<img class="contacts-list-img"
-                                      		 src="../resources/dist/img/user3-128x128.jpg"
-                                      		 alt="User Avatar">
-                                      		 <div class="contacts-list-info">
-                                          <span class="contacts-list-name"> Nadia Jolie 
-                                          	<small class="contacts-list-date float-right">2/20/2015</small>
-                                          </span> 
-                                          <span class="contacts-list-msg">I'll call you back at...
-                                          	<span title="3 New Messages" class="badge badge-primary float-right">3</span>
-                                          </span>
-                                          <input type="hidden" name="name" id="" />
-                                       </div> <!-- /.contacts-list-info -->
-                                 	</a>
-                                 </li>
-                                 <!-- End Contact Item -->
                               </ul>
                               <!-- /.contacts-list -->
                            </div>
@@ -173,10 +132,10 @@
                         
                         <!-- 내용 작성하여 보내는 부분 -->
                         <div class="card-footer">
-                           <form action="#" method="post">
+                           <form action="#" method="get" >
                               <div class="input-group">
                                  <input type="text" name="message"
-                                    placeholder="Type Message ..." class="form-control">
+                                    placeholder="Type Message ..." class="form-control" onkeypress="if(event.keyCode=='13'){event.preventDefault(); searchEvt();}">
                                  <span class="input-group-append">
                                     <button type="button" class="btn btn-primary" id="sendChat">Send</button>
                                  </span>
@@ -188,119 +147,149 @@
                      <!--/.direct-chat -->
                      
                      <script type="text/javascript">
+                     var send_eno = ${login.eno};
                      var sender_name = "${login.ename}";
-                     
-                     
+                   	 
                      $(function(){
                     	 
                     	 $.getJSON({
-                    		 url:"/chatRoomList",                    		 
+                    		 url:"/chatRoomList",
+                    		 cache: false,
                     		 success:function(data){
-                    			 console.log("data 값은 >> " + data[0]);
                     			 
                    				 str = "";
                    				 
                     			 $.each(data,function(idx,ele){
-                    				 console.log(ele);
                     				 
-                    				 if(sender_name == ele.sender_name){
+                    					 console.log(ele.member);
                     					 
-										 str = "<li><a onclick='chat(" + ele.chatroom_num + ")'>";
+                    				 if(send_eno == ele.send_eno){
+                    					 
+										 str = "<li><a onclick='chat(" + ele.chatroom_num + "," + ele.receive_eno + ")'>";
 	                    				 
 	                    				 str += "<div class='contacts-list-info'>";
 	                    				 str += "<span class='contacts-list-name'>" + ele.receiver_name;
-	                    				 str += "<small class='contacts-list-date float-right'>1/4/2015</small>";
-	                    				 str += "</span><span class='contacts-list-msg'>Never mind I found...</span>";
+	                    				 str += "<small class='contacts-list-date float-right'>" + timeChange(ele.send_date) + "</small>";
+	                    				 str += "</span><span class='contacts-list-msg'>" + ele.chat_msg + "</span>";
 	                    				 str += "</div></a></li>"
-                    				 }else if(sender_name != ele.receiver_name){
+	                    				 
+                    				 }else if(send_eno == ele.receive_eno){
                     					 
-	                    				 str = "<li><a onclick='chat(" + ele.chatroom_num + ")'>";
+	                    				 str = "<li><a onclick='chat(" + ele.chatroom_num + "," + ele.send_eno + ")'>";
 	                    				 
 	                    				 str += "<div class='contacts-list-info'>";
 	                    				 str += "<span class='contacts-list-name'>" + ele.sender_name;
-	                    				 str += "<small class='contacts-list-date float-right'>1/4/2015</small>";
-	                    				 str += "</span><span class='contacts-list-msg'>Never mind I found...</span>";
+	                    				 str += "<small class='contacts-list-date float-right'>" + timeChange(ele.send_date) + "</small>";
+	                    				 str += "</span><span class='contacts-list-msg'>" + ele.chat_msg + "</span>";
 	                    				 str += "</div></a></li>"
-                    					 
+                    				 }else{
+                    					 str += "채팅방 목록이 없습니다.";
                     				 }
-                    				 console.log(str);
                     			 $(".contacts-list").append(str);
-                    			 })  // each 종료
-                    			 console.log(str);
+                    			 });  // each 종료
                     		 } // success 종료
                     	 }) // getJSON 종료
                     	 
                     	 
                      })
                      
-                     function chat(e){
+                     function chat(num,eno){
                     	 
                     	 $(".direct-chat-msg").remove();
                     	 
                     	 $.getJSON({
-                    		url:"/chatRoom/" + e,
+                    		url:"/chatRoom/" + num,
                     		type:"get",
-                    		async:false,
+                    		cache: false,
                     	 	success:function(data){
                     	 		
                     	 		str = "";
+                    	 		str2 ="";
                     	 		
                     	 		$.each(data,function(idx,ele){
-                    	 		
-	                    	 		if(ele.sender_name != sender_name){
+                    	 			
+	                    	 		if(ele.name != sender_name){
 	                    	 			
 	                    	 			str += "<div class='direct-chat-msg'>";
 										str += "<div class='direct-chat-infos clearfix'>";
-										str += "<span class='direct-chat-name float-left'>" + ele.sender_name + "</span>";
+										str += "<span class='direct-chat-name float-left'>" + ele.name + "</span>";
 										str += "<span class='direct-chat-timestamp float-right'>";
-										str += ele.send_date + "</span></div>";
+										str += timeChange(ele.send_date) + "</span></div>";
 										str += "<div class='direct-chat-text' id='receiveMsg'>" + ele.chat_msg + "</div></div>";
 										
-	                    	 		}else if(ele.sender_name == sender_name){
+		                    	 		str2 = ele.name;
+		                    	 		
+	                    	 		}else if(ele.name == sender_name){
 	                    	 			
 	                    	 			str += "<div class='direct-chat-msg right'>";
 										str += "<div class='direct-chat-infos clearfix'>";
-										str += "<span class='direct-chat-name float-right'>" + ele.sender_name + "</span>";
+										str += "<span class='direct-chat-name float-right'>" + ele.name + "</span>";
 										str += "<span class='direct-chat-timestamp float-left'>";
-										str += ele.send_date + "</span></div>";
+										str += timeChange(ele.send_date) + "</span></div>";
 										str += "<div class='direct-chat-text' id='sendMsg'>" + ele.chat_msg + "</div></div>";
 										
 	                    	 		}
                     	 		})
-	                    	 		$(".direct-chat-messages").append(str);
+                    	 		
+                    	 		$("input[name='chatroom_num']").val(num);
+                    	 		$("input[name='receiver_name']").val(str2);
+                    	 		$("input[name='receive_eno']").val(eno);
+                    	 		
+	                    	 	$(".direct-chat-messages").append(str);
+ 	                    		$(".direct-chat-messages").scrollTop($(".direct-chat-messages")[0].scrollHeight);
                     	 		
                     	 	} // success 종료
                     	 }) //getJSON 종료
+                    	 //스크롤 하단으로 맞춰주기
                     	 $("#chatList").click();
+                     }// chat종료
+                     
+                     // 밀리 세컨드를 연/월/일 시간/분 으로 변환
+                     function timeChange(time){
+                    	 
+                    	 var time = new Date(time);
+                    	 
+                    	 var year = time.getFullYear();
+                    	 var month = time.getMonth()+1;
+                    	 var day= time.getDate();
+                    	 
+                    	 var hour = time.getHours();
+                    	 var min = time.getMinutes();
+                    	 
+                    	 var now = year + "/" + month + "/" + day + "  " + hour + ":" + min;
+                    	 return now;
+                 
                      }
                      
-                     
-                     $("#sendChat").click(function(){
-                    	 
-                    	 $.ajax({
-                    		 url:'/sendMsg',
-                    		 type:'post',
-                    		 success:function(data){
-                    			 console.log(data);
-                    		 },
-                    		 error:function(err){
-                    			 console.log(err);
-                    		 }
-                    	 })
-                    	 
-                    	if(socket){
+                   	 function searchEvt(){
+                    	
+                        var msg = $("input[name='message']").val();
+                   		var num = $("input[name='chatroom_num']").val();
+                      	var receiver_name = $("input[name='receiver_name']").val();
+                      	var receive_eno = $("input[name='receive_eno']").val(); 
+                        
+                      	console.log(receiver_name);
+                      	console.log(receive_eno);
+                      	
+						if(socket){
                     		
-                    		chatMsg = $("input[name='message']").val();
-                    		chatMsg += ","+"${login.id}";
+                    		var chatMsg = "chat,"+ msg;
+                    		
+                    		chatMsg += "," + sender_name + "," + receive_eno + "," + num + "," + send_eno;
                     		socket.send(chatMsg);
                     		$("input[name='message']").val("");
                     		console.log(chatMsg);
+                    		
                     	} 
+                    	 
+                      	
+                     }
+                     $("#sendChat").click(function(){
+                    	 
+	                     searchEvt();
+                    	 
                      })
-                     
                      </script>
-                     
-                    <%--  <%@include file="../chat/chatMain.jsp" %> --%>
                      
 					<!-- Calendar -->
                      <div class="card bg-gradient-success">
@@ -354,6 +343,7 @@ $(function() {
          url:"/calendar/rest_list/" + ${login.eno},
          type:"get",
          async:false,
+         cache: false,
          success:function(data) {
         	 
             var count = 0;
@@ -413,7 +403,6 @@ $(function() {
                str2 += "<span class='handle'><i class='fas fa-ellipsis-v'></i><i class='fas fa-ellipsis-v'></i>";
                str2 += "<div class='icheck-primary d-inline ml-2'>  ";
                
-               console.log(element.cal_check + " " + typeof(element.cal_check));
                if(element.cal_check == '1') {
                   str2 += "<input type='checkbox' value='' name='todo " + element.cno + "' id='todoCheck"+ element.cno + "' checked>";
                } else {
@@ -455,6 +444,7 @@ $(function() {
             url:"/calendar/rest_check/" + cno + "/1",
             type:"POST",
             async:false,
+            cache: false,
             success:function(data) {
             }
          })

@@ -41,7 +41,7 @@
 <script type="text/javascript">
 var socket = null;
 
-var userid = "${login.id}";
+var userName = "${login.ename}";
 
 $(document).ready(function(){
 	
@@ -76,20 +76,53 @@ function connectWs(){
 			
 			sessionStorage.setItem("boardMessage",e.data);
 			showBoardMessageAlert();
-		}else{
-			console.log("채팅 기능 구현 연습");
+		}else if(data.search("chat") > -1){
+			
+			console.log("채팅 기능 구현");
 			
 			var arr = data.split(",");
-			var id = arr[0];
-			var msg = arr[1];
-			console.log(id + "값은?");
-			console.log(msg + "은 무엇일까???");
-			if(id == userid){
-				$("#sendMsg").append(msg +"<br/>");
-			}else if(id != userid){
-				$("#receiveMsg").append(msg + "<br/>");
+			
+			var cmd = arr[0];
+			var chat_msg = arr[1];
+			var sender_name = arr[2];
+			var receiver_name = arr[3];
+			var chatroom_num = arr[4];
+			
+			console.log("cmd 값은 : " + cmd);
+			console.log("수신 받은 메세지 : " +chat_msg);
+			console.log("메세지 보낸자 이름 : " + sender_name);
+			console.log("메세지 받는자 이름 : " + receiver_name);
+			console.log("채팅방 번호 : " + chatroom_num);
+			
+			chat_new_msg = "";
+			
+			var date = new Date();
+            var hr = date.getHours();//시간
+            var min = date.getMinutes();//분
+			
+            var now = hr + " : " + min;
+            
+			if(sender_name == userName){
+				
+				chat_new_msg += "<div class='direct-chat-msg right'>";
+				chat_new_msg += "<div class='direct-chat-infos clearfix'>";
+				chat_new_msg += "<span class='direct-chat-name float-right'>" + sender_name + "</span>";
+				chat_new_msg += "<span class='direct-chat-timestamp float-left'>" + now + "</span></div>"
+				chat_new_msg += "<div class='direct-chat-text'>" + chat_msg + "</div></div>";
+				
+				
+			}else if(sender_name != userName){
+				
+				chat_new_msg += "<div class='direct-chat-msg'>";
+				chat_new_msg += "<div class='direct-chat-infos clearfix'>";
+				chat_new_msg += "<span class='direct-chat-name float-left'>" + sender_name + "</span>";
+				chat_new_msg += "<span class='direct-chat-timestamp float-right'>" + now + "</span></div>"
+				chat_new_msg += "<div class='direct-chat-text'>" + chat_msg + "</div></div>";
+				
 			}
-			$("#chatArea").append(e.data + "<br/>");
+				$(".direct-chat-messages").append(chat_new_msg);
+            	$(".direct-chat-messages").scrollTop($(".direct-chat-messages")[0].scrollHeight);
+				
 		}
 		
 	};

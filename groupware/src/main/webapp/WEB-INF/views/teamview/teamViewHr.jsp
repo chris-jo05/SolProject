@@ -63,7 +63,7 @@
 	               
 	                <div class="card-footer">
 	                  <div class="text-right">
-	                     <a href="/insertChatRoom?receiver_name=${vo.ename}" class="btn btn-sm bg-teal">
+	                     <a href="/insertChatRoom?receiver_name=${vo.ename}&receive_eno=${vo.eno}" class="btn btn-sm bg-teal">
 	                      <i class="fas fa-comments"></i>
 	                    </a>
 	                    <a href="/paystub/paystubInsertForm?dname=${vo.dname}&ename=${vo.ename}" class="btn btn-sm btn-warning" style="color : white;">
