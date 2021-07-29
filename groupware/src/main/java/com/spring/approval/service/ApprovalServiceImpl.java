@@ -9,6 +9,8 @@ import com.spring.approval.domain.ApprovalAttachVO;
 import com.spring.approval.domain.ApprovalVO;
 import com.spring.approval.mapper.ApprovalAttachMapper;
 import com.spring.approval.mapper.ApprovalMapper;
+import com.spring.teamView.domain.TeamMemberVo;
+import com.spring.teamView.domain.TeamNameVo;
 
 @Service
 public class ApprovalServiceImpl implements ApprovalService {

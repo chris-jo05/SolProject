@@ -41,5 +41,18 @@ public class TeamServiceImpl implements TeamService {
 		return mapper.totalTeamCount(dno);
 	}
 
+	@Override
+	public List<TeamNameVo> appLineDept() {
+		return mapper.appLineDept();
+	}
 
+	@Override
+	public List<TeamMemberVo> appLineMember(int dno) {
+		return mapper.appLineMember(dno);
+	}
+
+	@Override
+	public List<TeamMemberVo> appSelectedMember(int eno) {
+		return mapper.appSelectedMember(eno);
+	}
 }

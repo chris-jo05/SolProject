@@ -16,4 +16,9 @@ public interface TeamMapper {
 	
 	public List<TeamMemberVo> showTeamList(@Param("cri")TeamCriteria cri ,@Param("dno") int dno);	// dno를 받아 팀원들의 정보를 받는다
 	public int totalTeamCount(int dno);
+	
+	
+	public List<TeamNameVo> appLineDept();
+	public List<TeamMemberVo> appLineMember(int dno);
+	public List<TeamMemberVo> appSelectedMember(int eno);
 }

@@ -11,17 +11,17 @@
 			where rn > ((#{pageNum}-1)*#{amount})
 		]]>
 	</select>
-	
+
 	<!-- 총 부서의 수 구하기 -->
 	<select id="totalTeam" resultType="int">
 		select count(*) from dept
 	</select>
-	
+
 	<!-- 부서 추가하기 -->
 	<insert id="newTeam">
 		insert into dept(dno,dname,dphone) values(dept_seq.nextval,#{dname},#{dphone})
 	</insert>
-	
+
 	<!-- 해당 부서번호에 따른 전체 사원 보여주기 -->
 	<select id="showTeamList" resultType="com.spring.teamView.domain.TeamMemberVo">
 		<![CDATA[
@@ -32,9 +32,34 @@
 			where rn > ((#{cri.pageNum}-1)*#{cri.amount})
 		]]>
 	</select>
-	
+
 	<!-- 각부서별 인원 총 수 구하기 -->
 	<select id="totalTeamCount" resultType="int">
 		select count(*) from emp where dno=#{dno}
+	</select>
+
+	<!-- 전자결재 -->
+	<!-- 결재선 부서 보여주기 -->
+	<select id="appLineDept" resultType="com.spring.teamView.domain.TeamNameVo">
+		select * 
+		from dept
+		order by dname
+	</select>
+
+	<!-- 결재선 부서인원 보여주기 -->
+	<select id="appLineMember" resultType="com.spring.teamView.domain.TeamMemberVo">
+		select emp.*, dept.dname
+		from emp, dept
+		where emp.dno = dept.dno
+		and emp.dno = #{dno}
+		order by emp.eno desc
+	</select>
+
+	<!-- 선택된 부서인원 보여주기 -->
+	<select id="appSelectedMember" resultType="com.spring.teamView.domain.TeamMemberVo">
+		select emp.*, dept.dname
+		from emp, dept
+		where emp.dno = dept.dno
+		and emp.eno = #{eno}
 	</select>
 </mapper>
