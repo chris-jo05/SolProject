@@ -18,7 +18,7 @@
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item">
-							<a href="#">Home</a>
+							<a href="/main/home">Home</a>
 						</li>
 						<li class="breadcrumb-item active">전자 결재</li>
 					</ol>

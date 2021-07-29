@@ -53,6 +53,11 @@ public class ApprovalController {
 		model.addAttribute("appRead", appRead);
 	}
 
+	@GetMapping("/appLine")
+	public void line() {
+		log.info("결제선으로 이동");
+	}
+	
 	@GetMapping("/appWriteDraft")
 	public void drift() {
 		log.info("기안서로 이동");

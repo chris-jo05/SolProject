@@ -5,6 +5,6 @@ import java.util.List;
 import com.spring.approval.domain.ApprovalAttachVO;
 
 public interface ApprovalAttachMapper {
-	public int AppAttachInsert(ApprovalAttachVO attach);
-	public List<ApprovalAttachVO> AppAttachRead(String docNo);
+	public List<ApprovalAttachVO> appAttachList(String docNo);
+	public int appAttachInsert(ApprovalAttachVO appAttach);
 }

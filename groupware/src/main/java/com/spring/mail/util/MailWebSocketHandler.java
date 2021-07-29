@@ -76,7 +76,7 @@ public class MailWebSocketHandler extends TextWebSocketHandler {
 				log.info(mailReceiveSession + " >>>>>>>>>>>>   값은 무엇이지?");
 				
 				if("mail".equals(cmd) &&  mailReceiveSession != null) {
-					TextMessage tmpMsg = new TextMessage("<a href='/mailbox/mailMain' class=\"dropdown-item\"> \r\n"
+					TextMessage tmpMsg = new TextMessage("<a href='/mailbox/mailMain' class=\"dropdown-item\" name='mail'> \r\n"
 							+ "								<i class=\"fas fa-envelope mr-2\"></i> 새 메일이 도착했습니다.");
 					log.info(tmpMsg + "의 메세지를 보낼 수 있는지");
 					mailReceiveSession.sendMessage(tmpMsg);
@@ -89,10 +89,21 @@ public class MailWebSocketHandler extends TextWebSocketHandler {
 				for(WebSocketSession sess : sessions){
 					log.info(sess + "sess가 되나 안되나");
 					 
-			        sess.sendMessage(new TextMessage("<a href='/board/boardMain' class='dropdown-item'>\r\n"
+			        sess.sendMessage(new TextMessage("<a href='/board/boardMain' class='dropdown-item' name='board'>\r\n"
 			            + "							<i class='fas fa-file mr-2'></i>새로운 공지사항" ));
 			     } // for문 종료
-			} // else if문 종료
+			}else if(strs != null && strs.length == 2) {
+				String chat = strs[0];
+				log.info("작성 내용 : " + chat);
+				
+				String id = strs[1];
+				log.info("보낸 사람 아이디 : " + id);
+				for(WebSocketSession ses : sessions) {
+					log.info("ses란 무엇인가?????  " + ses);
+					ses.sendMessage(new TextMessage(id + "," + chat));
+				}
+			}
+			// else if문 종료
 		}
 		
 	}

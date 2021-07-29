@@ -16,8 +16,8 @@ public class PaystubServiceImpl implements PaystubService {
 	public PaystubMapper mapper;
 	
 	@Override
-	public List<PaystubListVO> list(int eno) {
-		return mapper.list(eno);
+	public List<PaystubListVO> list(int eno, int pay_year) {
+		return mapper.list(eno, pay_year);
 	}
 	
 	@Override
