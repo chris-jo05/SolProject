@@ -201,7 +201,7 @@ function showMessageAlert(){
 							</a>
 						</li>
 
-					 	<!-- <li class="nav-item">
+					  <li class="nav-item">
 							<a href="/teamview/teamViewMain" class="nav-link">
 								<i class="nav-icon fas fa-th"></i>
 								<p>조직도</p>
@@ -213,7 +213,7 @@ function showMessageAlert(){
 								<i class="nav-icon fas fa-file"></i>
 								<p>전자 결재</p>
 							</a>
-						</li> -->
+						</li> 
 
 						<li class="nav-item">
 							<c:if test= "${login.dno == 10}">
@@ -237,11 +237,9 @@ function showMessageAlert(){
 						</li>
 
 						<!-- 메일함 -->
-<<<<<<< HEAD
-						<!-- <li class="nav-item">
-=======
+
 						 <li class="nav-item">
->>>>>>> branch 'master' of https://github.com/chris-jo05/SolProject.git
+
 							<a href="/mailbox/mailMain" class="nav-link">
 								<i class="nav-icon far fa-envelope"></i>
 								<p>메일함</p>
@@ -305,6 +303,7 @@ function showMessageAlert(){
 		<script src="/resources/dist/js/adminlte.js"></script>
 		<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 		<script src="/resources/dist/js/pages/dashboard.js"></script>
+
 <script>
 let checkForm = $("#checkForm");
 
