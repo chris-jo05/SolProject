@@ -56,7 +56,7 @@ function handleGeoSucces(position) {
 
 //6. 현재 좌표 가져오기 거절 시 처리 함수
 function handleGeoError() {
-    console.log("Can't access geo location");
+    alert("gps 요청을 허용해주세요!");
 }
 
 //4.좌표 요청 함수
