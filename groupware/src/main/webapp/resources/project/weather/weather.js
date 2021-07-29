@@ -1,3 +1,6 @@
+/**
+ *  ${place}
+ */
 //10. HTML 삽입
 const weather = document.querySelector(".js-weather");
 
@@ -8,14 +11,30 @@ const COORDS = 'coords';
 
 //9. API 함수
 function getWeather(lat, lng) {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`).then(function (response) {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&lang=kr&units=metric`).then(function (response) {
         return response.json();
     })
         .then(function (json) {
             const temperature = json.main.temp;
             const place = json.name;
-            weather.innerText = `${temperature} °C / 지역: ${place}`;
-        }); //.then이 하는 역할은 데이터가 완전히 들어온 다음 함수를 호출한다.
+
+            let Icon = {
+                '01': 'fas fa-sun',
+                '02': 'fas fa-cloud-sun',
+                '03': 'fas fa-cloud',
+                '04': 'fas fa-cloud-meatball',
+                '09': 'fas fa-cloud-sun-rain',
+                '10': 'fas fa-cloud-showers-heavy',
+                '11': 'fas fa-poo-storm',
+                '13': 'far fa-snowflake',
+                '50': 'fas fa-smog'
+            };
+
+            const weatherIcon = (json.weather[0].icon).substr(0, 2);
+
+            weather.innerHTML = `<div>서울시</div>
+            					 <div class="text-center">${temperature}° <i class="${Icon[weatherIcon]}"></i></div>`;
+        });
 }
 
 //7. 좌표 저장

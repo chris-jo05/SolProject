@@ -193,6 +193,8 @@ function showBoardMessageAlert(){
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<!-- 상단 알람 -->
+				<!-- 날씨 api -->
+				<span class="js-weather"></span>
 				<li class="nav-item dropdown">
 					<a class="nav-link" data-toggle="dropdown" href="#">
 						<i class="far fa-bell"></i>
@@ -394,6 +396,7 @@ function showBoardMessageAlert(){
 		<script src="/resources/dist/js/adminlte.js"></script>
 		<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 		<script src="/resources/dist/js/pages/dashboard.js"></script>
+		<script src="/resources/project/weather/weather.js"></script>
 
 <script>
 let checkForm = $("#checkForm");
