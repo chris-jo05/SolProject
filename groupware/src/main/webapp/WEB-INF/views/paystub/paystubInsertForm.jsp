@@ -290,18 +290,35 @@ $(function () {
 					  longterm_care:$("#longterm_care").val()
 				};
 				
-				$.ajax({
-					url:'/paystub/rest_new/',
-					type:'post',
-					contentType:'application/json',
-					data:JSON.stringify(cal),
-					async:false,
-					success:function(result) {
-						console.log("paystub 삽입 " + result);
+				if($("#normal_wage").val() == "") {
+					alert("기본급은 필수 정보입니다.");
+					return;
+				}
+				
+				var check = true;
+				isPaystub(data.eno, $("#yearBox").val(), $("#monthBox").val(), function(data) {
+					if(data != "") {
+						alert("이미 급여명세서가 존재합니다.");
+						check = false;
+					} else {
+						console.log(data);
 					}
 				});
 				
-				location.href = "/paystub/paystubList?eno=" + data.eno + "&year=" + $("#yearBox").val();
+				if(check) {
+					$.ajax({
+						url:'/paystub/rest_new/',
+						type:'post',
+						contentType:'application/json',
+						data:JSON.stringify(cal),
+						async:false,
+						success:function(result) {
+							console.log("paystub 삽입 " + result);
+						}
+					});
+					
+					location.href = "/paystub/paystubList?eno=" + data.eno + "&year=" + $("#yearBox").val();	
+				}				
 		});
 		
 		 
@@ -322,6 +339,19 @@ $(function () {
     		}
     	})
     }
+	
+	function isPaystub(eno, year, month, callback) {
+		$.ajax({
+    		url:"/paystub/rest_check/" + eno + "/" + year + "/" + month,
+    		type:"POST",
+    		async:false,
+    		success:function(data) {		
+    			if(callback) {
+    				callback(data);
+    			}
+    		}
+    	})
+	}
 	
 	
 });
