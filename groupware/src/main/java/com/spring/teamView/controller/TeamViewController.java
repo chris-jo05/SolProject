@@ -56,14 +56,15 @@ public class TeamViewController {
 		
 	}
   
-  // 결재선 부서 가져오기
-  @ResponseBody
-  @GetMapping("/appLineDept")
-  public List<TeamNameVo> appLineDept() {
-	List<TeamNameVo> appLineDept = service.appLineDept();
-	log.info("부서명 가져오기 " + appLineDept);
-	
-<<<<<<< HEAD
+	  // 결재선 부서 가져오기
+	  @ResponseBody
+	  @GetMapping("/appLineDept")
+	  public List<TeamNameVo> appLineDept() {
+		List<TeamNameVo> appLineDept = service.appLineDept();
+		log.info("부서명 가져오기 " + appLineDept);
+		
+		return appLineDept;
+	  }
 	@GetMapping("/teamViewHr")
 	public void hrTeam(TeamCriteria cri, int dno,Model model) {
 		log.info("부서별 페이지로 이동합니다" + cri + dno);
@@ -78,21 +79,6 @@ public class TeamViewController {
 		model.addAttribute("pageVo", new TeamPageVo(cri, total));
 	}
 	
-	@GetMapping("/member_profile")
-	public void memberProfile(int eno, Model model) {
-		MemberVo vo = service.get(eno);
-		
-		model.addAttribute("member", vo);
-	}
-	
-	
-	
-	
-	
-}
-=======
-	return appLineDept;
-  }
   
   // 결재선 부서인원 가져오기
   @ResponseBody
@@ -114,4 +100,4 @@ public class TeamViewController {
   	return appSelectedMember;
   }
 }
->>>>>>> refs/heads/jinu
+
