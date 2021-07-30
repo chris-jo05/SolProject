@@ -14,5 +14,8 @@ public interface TeamService {
 	public List<TeamMemberVo> showTeamList(TeamCriteria cri, int dno);
 	public int totalTeamCount(int dno);
 	
-	public MemberVo get(int eno);
+	// 결재선
+	public List<TeamNameVo> appLineDept();
+	public List<TeamMemberVo> appLineMember(int dno);
+	public List<TeamMemberVo> appSelectedMember(int eno);
 }

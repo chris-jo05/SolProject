@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp"%>
 
-<script>
-	function appLine () {
-		window.open ("appLine", "결재선", "width=800, height=700");
+<script type="text/javascript">
+	var openWin;
+	
+	function openChild () {
+		// window.name = "부모창 이름"; 
+		window.name = "appWrite";
+		// window.open("open할 window", "자식창 이름", "팝업창 옵션");
+		openWin = window.open ("appLine", "appLine", "width=800, height=750, resizable = no, scrollbars = no");
 	}
 </script>
 
@@ -17,6 +22,10 @@
 .col-form-label {
 	width: 105px;
 	padding: 7.5px;
+}
+
+.form-control:disabled, .form-control[readonly] {
+	background-color: #fff;
 }
 </style>
 
@@ -60,7 +69,8 @@
 						<div class="card card-primary card-outline">
 							<div class="card-header">
 								<div class="card-title">
-									<h3 class="card-title" style="font-weight: bold;">기안서</h3> <input type="hidden" name="docClass" value="기안서" />
+									<h3 class="card-title" style="font-weight: bold;">기안서</h3>
+									<input type="hidden" name="docClass" value="기안서" />
 								</div>
 							</div>
 
@@ -96,7 +106,8 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">기안부서</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled> <input type="hidden" name="dno" value="${login.dno}" />
+													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled>
+													<input type="hidden" name="dno" value="${login.dno}" />
 												</div>
 											</div>
 										</div>
@@ -105,14 +116,15 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">기안자</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled> <input type="hidden" name="eno" value="${login.eno}" />
+													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled>
+													<input type="hidden" name="eno" value="${login.eno}" />
 												</div>
 											</div>
 										</div>
 									</div>
 
 									<div class="col-md-4">
-										<table class="table table-bordered" style="height: 92.5%; cursor: pointer;" onClick="appLine()">
+										<table class="table table-bordered" style="height: 92.5%; cursor: pointer;" onClick="openChild()">
 											<tbody>
 												<tr style="height: 0">
 													<td class="text-center align-middle" rowspan="2" style="width: 10%; font-weight: bold;">
@@ -156,7 +168,7 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">수신 및 참조</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="부서선택">
+													<input type="text" class="form-control" id="colFormLabel" placeholder="부서선택" disabled>
 												</div>
 											</div>
 										</div>

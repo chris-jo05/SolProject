@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.spring.approval.domain.ApprovalAttachVO;
 import com.spring.approval.domain.ApprovalVO;
+import com.spring.teamView.domain.TeamMemberVo;
+import com.spring.teamView.domain.TeamNameVo;
 
 public interface ApprovalMapper {
 	public List<ApprovalVO> appList(int eno);
