@@ -40,15 +40,15 @@
               	<thead>
               	<tr>
               		<th>지급합계</th>
-              		<th>공제합계</th>
               		<th>실수령액</th>
+              		<th>공제합계</th>
               	</tr>
               	</thead>
               	<tbody>
               	<tr>
              	 <td>&#8361; ${paystubVO.totalWages}</td>
-             	 <td>&#8361; ${paystubVO.totalTaxs}</td>
              	 <td>&#8361; ${paystubVO.real_amount}</td>
+             	 <td>&#8361; ${paystubVO.totalTaxs}</td>
           		</tr>
               	</tbody>
               </table>

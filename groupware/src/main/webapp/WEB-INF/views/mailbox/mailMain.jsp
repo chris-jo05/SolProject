@@ -166,18 +166,24 @@
 	$(".delete-mail").click(function(e){
 		e.preventDefault();
 		
-		var str="";
+		if($("input[name='forDelete']:checked").val() != null){
+			
+			var str="";
+			
+		    $('input[name="forDelete"]:checked').each(function (idx) {
+	   		    
+		    	str+="<input type='hidden' name='mNoList["+idx+"].m_no' value='"+$(this).val()+"'>";
+	   		});	  
+			
+			
+		    operForm.append(str);
+			operForm.attr('action','/mailbox/removeMailList');
+			
+			operForm.submit();
+		}else{
+			alert("체크된 메일이 존재하지 않습니다.");
+		}
 		
-	    $('input[name="forDelete"]:checked').each(function (idx) {
-   		    
-	    	str+="<input type='hidden' name='mNoList["+idx+"].m_no' value='"+$(this).val()+"'>";
-   		});	  
-		
-		
-	    operForm.append(str);
-		operForm.attr('action','/mailbox/removeMailList');
-		
-		operForm.submit();
 	})
 	
     //체크 박스 전체 체크 및 전체 체크 해제
