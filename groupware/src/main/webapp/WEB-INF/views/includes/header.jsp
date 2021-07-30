@@ -209,13 +209,6 @@ function showBoardMessageAlert(){
 						<div id="socketAlertBoard"></div>
 						
 						<div class="dropdown-divider"></div>
-						<a href="/board/boardMain" class="dropdown-item">
-							<i class="fas fa-file mr-2"></i>
-							새로운 공지사항
-							<span class="float-right text-muted text-sm">2 days</span>
-						</a>
-						
-						<div class="dropdown-divider"></div>
 						<a href="#" class="dropdown-item dropdown-footer"> 모든 알림 보기</a>
 					</div>
 				</li>
@@ -347,7 +340,7 @@ function showBoardMessageAlert(){
 						
 						
 
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a href="../resources/pages/calendar.html" class="nav-link">
 								<i class="nav-icon far fa-calendar-alt"></i>
 								<p>

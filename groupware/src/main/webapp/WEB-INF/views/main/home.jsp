@@ -290,15 +290,15 @@
                     	 
                      })
                      </script>
-                     
-					<!-- Calendar -->
+                     <!-- 
+					Calendar
                      <div class="card bg-gradient-success">
                         <div class="card-header border-0">
 
                            <h3 class="card-title">
                               <i class="far fa-calendar-alt"></i> 일정
                            </h3>
-                           <!-- tools card -->
+                           tools card
                            <div class="card-tools">
                               <button type="button" class="btn btn-success btn-sm"
                                  data-card-widget="collapse">
@@ -309,15 +309,12 @@
                                  <i class="fas fa-times"></i>
                               </button>
                            </div>
-                           <!-- /. tools -->
                         </div>
-                        <!-- /.card-header -->
                         <div class="card-body pt-0">
-                           <!-- 날씨 api 넣기 -->
                         </div>
-                        <!-- /.card-body -->
                      </div>
-                     <!-- /.card -->
+                     /.card
+                      -->
                   </section>
                   <!-- right col -->
                </div>
