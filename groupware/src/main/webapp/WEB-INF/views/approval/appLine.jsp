@@ -49,138 +49,133 @@
 </head>
 
 <body>
-	<form class="lineInsert" action="" method="post" role="form">
-		<div class="card">
-			<div class="card-header">
-				<h3 class="card-title">결재선 지정</h3>
-			</div>
+	<div class="card">
+		<div class="card-header">
+			<h3 class="card-title">결재선 지정</h3>
+		</div>
 
-			<div class="card-body">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">조직도</h3>
-							</div>
-							<div class="card-body" style="height: 500px;">
-								<div class="form-group">
-									<div id="jstree"></div>
-								</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">조직도</h3>
+						</div>
+						<div class="card-body" style="height: 500px;">
+							<div class="form-group">
+								<div id="jstree"></div>
 							</div>
 						</div>
 					</div>
+				</div>
 
-					<div class="col">
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">결제라인선택</h3>
+				<div class="col">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">결제라인선택</h3>
+						</div>
+
+						<div class="card-body" style="height: 500px;">
+							<div class="form-group">
+								<input type="button" id="btn1" class="btn btn-secondary btn-sm" value="결재"> <input type="button" id="btn2" class="btn btn-secondary btn-sm" value="합의"> <input type="button" id="btn3" class="btn btn-secondary btn-sm" value="참조"> <input type="button" id="btn4" class="btn btn-secondary btn-sm" value="시행">
 							</div>
 
-							<div class="card-body" style="height: 500px;">
-								<div class="form-group">
-									<input type="button" id="btn1" class="btn btn-secondary btn-sm" value="결재">
-									<input type="button" id="btn2" class="btn btn-secondary btn-sm" value="합의">
-									<input type="button" id="btn3" class="btn btn-secondary btn-sm" value="참조">
-									<input type="button" id="btn4" class="btn btn-secondary btn-sm" value="시행">
-								</div>
+							<div class="form-group" style="height: 150px; overflow: auto">
+								<table class="table table-sm">
+									<thead>
+										<tr>
+											<td style="width: 10%; text-align: center;">
+												<input class="allCheck1" type="checkbox">
+											</td>
+											<td style="text-align: center; font-weight: bold; width: 30%;">부서</td>
+											<td style="text-align: center; font-weight: bold; width: 30%;">이름</td>
+											<td style="text-align: center; font-weight: bold; width: 30%;">직책</td>
+										</tr>
+									</thead>
 
-								<div class="form-group" style="height: 150px; overflow: auto">
-									<table class="table table-sm">
-										<thead>
-											<tr>
-												<td style="width: 10%; text-align: center;">
-													<input class="allCheck1" type="checkbox">
-												</td>
-												<td style="text-align: center; font-weight: bold; width: 30%;">부서</td>
-												<td style="text-align: center; font-weight: bold; width: 30%;">이름</td>
-												<td style="text-align: center; font-weight: bold; width: 30%;">직책</td>
-											</tr>
-										</thead>
+									<tbody id="membersList"></tbody>
+								</table>
+							</div>
 
-										<tbody id="membersList"></tbody>
-									</table>
-								</div>
-
-								<div class="form-group" id="summitForm">
-									<nav>
+							<div class="form-group" id="summitForm">
+								<nav>
+									<div class="form-group">
+										<div class="nav nav-tabs" id="nav-tab" role="tablist">
+											<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">결재</a>
+											<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">수신참조</a>
+											<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">시행자</a>
+										</div>
+									</div>
+								</nav>
+								<div class="tab-content" id="nav-tabContent">
+									<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 										<div class="form-group">
-											<div class="nav nav-tabs" id="nav-tab" role="tablist">
-												<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">결재</a>
-												<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">수신참조</a>
-												<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">시행자</a>
-											</div>
-										</div>
-									</nav>
-									<div class="tab-content" id="nav-tabContent">
-										<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-											<div class="form-group">
-												<input type="button" id="delete1" class="btn btn-secondary btn-sm" value="삭제">
-											</div>
-
-											<div class="form-group" style="height: 150px; overflow: auto">
-												<table id="selectedList" class="table table-sm">
-													<thead>
-														<tr>
-															<td style="width: 10%; text-align: center;">
-																<input class="allCheck2" type="checkbox">
-															</td>
-															<td style="text-align: center; font-weight: bold; width: 10%;">No</td>
-															<td style="text-align: center; font-weight: bold; width: 15%;">구분</td>
-															<td style="text-align: center; font-weight: bold; width: 25%;">부서</td>
-															<td style="text-align: center; font-weight: bold; width: 25%;">이름</td>
-															<td style="text-align: center; font-weight: bold; width: 25%;">직책</td>
-														</tr>
-													</thead>
-
-													<tbody id="selectedList1" class="insert1"></tbody>
-												</table>
-											</div>
+											<input type="button" id="delete1" class="btn btn-secondary btn-sm" value="삭제">
 										</div>
 
-										<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-											<div class="form-group">
-												<input type="button" id="delete2" class="btn btn-secondary btn-sm" value="삭제">
-											</div>
+										<div class="form-group" style="height: 150px; overflow: auto">
+											<table id="selectedList" class="table table-sm">
+												<thead>
+													<tr>
+														<td style="width: 10%; text-align: center;">
+															<input class="allCheck2" type="checkbox">
+														</td>
+														<td style="text-align: center; font-weight: bold; width: 10%;">No</td>
+														<td style="text-align: center; font-weight: bold; width: 15%;">구분</td>
+														<td style="text-align: center; font-weight: bold; width: 25%;">부서</td>
+														<td style="text-align: center; font-weight: bold; width: 25%;">이름</td>
+														<td style="text-align: center; font-weight: bold; width: 25%;">직책</td>
+													</tr>
+												</thead>
 
-											<div class="form-group" style="overflow: auto">
-												<table id="selectedList" class="table table-sm">
-													<thead>
-														<tr>
-															<td style="text-align: center; width: 10%;">
-																<input class="allCheck2" type="checkbox" />
-															</td>
-															<td style="text-align: center; font-weight: bold; width: 30%;">부서</td>
-															<td style="text-align: center; font-weight: bold; width: 30%;">이름</td>
-															<td style="text-align: center; font-weight: bold; width: 30%;">직책</td>
-														</tr>
-													</thead>
+												<tbody id="selectedList1" class="insert1"></tbody>
+											</table>
+										</div>
+									</div>
 
-													<tbody id="selectedList2" class="insert2"></tbody>
-												</table>
-											</div>
+									<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+										<div class="form-group">
+											<input type="button" id="delete2" class="btn btn-secondary btn-sm" value="삭제">
 										</div>
 
-										<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-											<div class="form-group">
-												<input type="button" id="delete3" class="btn btn-secondary btn-sm" value="삭제">
-											</div>
+										<div class="form-group" style="overflow: auto">
+											<table id="selectedList" class="table table-sm">
+												<thead>
+													<tr>
+														<td style="text-align: center; width: 10%;">
+															<input class="allCheck2" type="checkbox" />
+														</td>
+														<td style="text-align: center; font-weight: bold; width: 30%;">부서</td>
+														<td style="text-align: center; font-weight: bold; width: 30%;">이름</td>
+														<td style="text-align: center; font-weight: bold; width: 30%;">직책</td>
+													</tr>
+												</thead>
 
-											<div class="form-group" style="overflow: auto">
-												<table id="selectedList" class="table table-sm">
-													<thead>
-														<tr>
-															<td style="text-align: center; width: 10%;">
-																<input class="allCheck2" type="checkbox" />
-															</td>
-															<td style="text-align: center; font-weight: bold; width: 30%;">부서</td>
-															<td style="text-align: center; font-weight: bold; width: 30%;">이름</td>
-															<td style="text-align: center; font-weight: bold; width: 30%;">직책</td>
-														</tr>
-													</thead>
+												<tbody id="selectedList2" class="insert2"></tbody>
+											</table>
+										</div>
+									</div>
 
-													<tbody id="selectedList3" class="insert3"></tbody>
-												</table>
-											</div>
+									<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+										<div class="form-group">
+											<input type="button" id="delete3" class="btn btn-secondary btn-sm" value="삭제">
+										</div>
+
+										<div class="form-group" style="overflow: auto">
+											<table id="selectedList" class="table table-sm">
+												<thead>
+													<tr>
+														<td style="text-align: center; width: 10%;">
+															<input class="allCheck2" type="checkbox" />
+														</td>
+														<td style="text-align: center; font-weight: bold; width: 30%;">부서</td>
+														<td style="text-align: center; font-weight: bold; width: 30%;">이름</td>
+														<td style="text-align: center; font-weight: bold; width: 30%;">직책</td>
+													</tr>
+												</thead>
+
+												<tbody id="selectedList3" class="insert3"></tbody>
+											</table>
 										</div>
 									</div>
 								</div>
@@ -189,15 +184,16 @@
 					</div>
 				</div>
 			</div>
+		</div>
 
-			<div class="card-footer">
-				<div class="form-group" style="text-align: center;">
-					<button id="submit" class="btn btn-primary btn-sm" onclick="setParentText()" style="margin-right: 10px;">적용</button>
-					<button type="reset" id="reset" class="btn btn-secondary btn-sm" onclick="window.close()">취소</button>
-				</div>
+		<div class="card-footer">
+			<div class="form-group" style="text-align: center;">
+				<button id="setWrite" class="btn btn-primary btn-sm">적용</button>
+				&nbsp;
+				<button class="btn btn-secondary btn-sm" onclick="window.close()">취소</button>
 			</div>
 		</div>
-	</form>
+	</div>
 	<!-- /.card-body -->
 
 	<!-- jQuery -->
@@ -256,6 +252,11 @@
 		
 		$('#delete3').click(function() {
 		    $('#selectedList3 input:checkbox[name="check2"]:checked').parent().parent().remove();
+		});
+		
+		$('#setWrite').click(".sendValue", function() {
+			console.log
+			$("#position", opener.document).val(position);
 		});
 	</script>
 
@@ -495,7 +496,7 @@
 					innerHtml += '	<td style="text-align: center;">' + tdArr[i].category + '</td>';
 					innerHtml += '	<td style="text-align: center;">' + tdArr[i].dname + '</td>';
 					innerHtml += '	<td style="text-align: center;">' + tdArr[i].ename + '</td>';
-					innerHtml += '	<td style="text-align: center;">' + tdArr[i].position + '</td>';
+					innerHtml += '	<td id="position" style="text-align: center;">' + tdArr[i].position + '</td>';
 					innerHtml += '	<td style="display: none;">' + tdArr[i].eno + '</td>';
 					innerHtml += '	<td style="display: none;">' + tdArr[i].cNo + '</td>';
 					innerHtml += '</tr>';
@@ -524,5 +525,7 @@
 			}
 		});
 	</script>
+
+
 </body>
 </html>

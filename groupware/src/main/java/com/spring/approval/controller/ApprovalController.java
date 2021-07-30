@@ -61,20 +61,6 @@ public class ApprovalController {
 		log.info("결재선으로 이동");
 	}
 	
-	@PostMapping("/appLineInsert")
-	public String ineInsert(ApprovalVO appLine, RedirectAttributes rttr) {
-		log.info("결재선, 수신참조, 시행자 적용" + appLine);
-		
-		int result = service.appLine(appLine);
-		
-		if (result > 0) {
-			rttr.addFlashAttribute("result", appLine.getLineNo());
-			return "redirect: appMain";
-		} else {
-			return "redirect: appLine";
-		}
-	}
-	
 	@GetMapping("/appWriteDraft")
 	public void drift() {
 		log.info("기안서로 이동");
