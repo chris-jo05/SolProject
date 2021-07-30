@@ -61,7 +61,6 @@ public class ApprovalController {
 		log.info("결재선으로 이동");
 	}
 	
-	
 	@GetMapping("/appWriteDraft")
 	public void drift() {
 		log.info("기안서로 이동");
