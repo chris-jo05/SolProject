@@ -12,12 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.approval.domain.ApprovalAttachVO;
 import com.spring.approval.domain.ApprovalVO;
 import com.spring.approval.service.ApprovalService;
 import com.spring.member.domain.MemberVo;
+import com.spring.teamView.domain.TeamMemberVo;
+import com.spring.teamView.domain.TeamNameVo;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -54,8 +57,8 @@ public class ApprovalController {
 	}
 
 	@GetMapping("/appLine")
-	public void line() {
-		log.info("결제선으로 이동");
+	public void line(Model model) {
+		log.info("결재선으로 이동");
 	}
 	
 	@GetMapping("/appWriteDraft")
@@ -223,4 +226,5 @@ public class ApprovalController {
 
 		return new ResponseEntity<List<ApprovalAttachVO>>(service.appAttachList(docNo), HttpStatus.OK);
 	}
+	
 }

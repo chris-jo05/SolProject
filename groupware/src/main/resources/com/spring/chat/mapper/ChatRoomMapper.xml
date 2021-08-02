@@ -3,12 +3,19 @@
 <mapper namespace="com.spring.chat.mapper.ChatRoomMapper">
 
 	<insert id="insertChatRoom">
-		insert into chatRoom(chatroom_num,sender_name,receiver_name)
-		values(chat_room_SEQ.nextval,#{sender_name},#{receiver_name})
+		insert into chatRoom(chatroom_num,sender_name,send_eno,receiver_name,receive_eno)
+		values(chat_room_SEQ.nextval,#{sender_name},#{send_eno},#{receiver_name},#{receive_eno})
 	</insert>
 	
 	<select id="chatRoomList" resultType="com.spring.chat.domain.ChatRoomVo">
-		select * from chatroom
+		select * from 
+			chatroom r full outer join
+				(select max(send_date), chatroom_num,chat_Msg from 
+					(select first_value(chat_msg) over(partition by chatroom_num order by send_date desc) as chat_msg,
+					chatroom_num,send_date from chatusermsg) 
+				group by chatroom_num,chat_msg) m
+		on r.chatroom_num= m.chatroom_num 
+		where send_eno=#{sende_eno} or receive_eno=#{send_eno}
 	</select>
 
 </mapper>

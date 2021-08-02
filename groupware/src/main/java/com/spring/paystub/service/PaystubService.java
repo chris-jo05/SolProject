@@ -9,4 +9,5 @@ public interface PaystubService {
 	public List<PaystubListVO> list(int eno, int pay_year);
 	public boolean insert(PaystubVO vo);
 	public PaystubVO get(int pay_year, int pay_month, int eno);
+	public String check(int pay_year, int pay_month, int eno);
 }

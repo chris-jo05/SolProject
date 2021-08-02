@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp"%>
 
-<script>
-	function appLine () {
-		window.open ("appLine", "결재선", "width=800, height=700");
+<script type="text/javascript">
+	var openWin;
+	
+	function openChild () {
+		// window.name = "부모창 이름"; 
+		window.name = "appWrite";
+		// window.open("open할 window", "자식창 이름", "팝업창 옵션");
+		openWin = window.open ("appLine", "appLine", "width=800, height=750, resizable = no, scrollbars = no");
 	}
 </script>
 
@@ -17,6 +22,10 @@
 .col-form-label {
 	width: 105px;
 	padding: 7.5px;
+}
+
+.form-control:disabled, .form-control[readonly] {
+	background-color: #fff;
 }
 </style>
 
@@ -112,13 +121,13 @@
 									</div>
 
 									<div class="col-md-4">
-										<table class="table table-bordered" style="height: 92.5%; cursor: pointer;" onClick="appLine()">
+										<table class="table table-bordered" style="height: 92.5%; cursor: pointer;" onClick="openChild()">
 											<tbody>
 												<tr style="height: 0">
 													<td class="text-center align-middle" rowspan="2" style="width: 10%; font-weight: bold;">
 														결<br>제
 													</td>
-													<td style="width: 22.5%; height: 10%;"></td>
+													<td id="position" style="width: 22.5%; height: 10%;"></td>
 													<td style="width: 22.5%;"></td>
 													<td style="width: 22.5%;"></td>
 													<td style="width: 22.5%;"></td>
@@ -156,7 +165,7 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">수신 및 참조</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="부서선택">
+													<input type="text" class="form-control" id="colFormLabel" placeholder="부서선택" disabled>
 												</div>
 											</div>
 										</div>

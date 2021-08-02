@@ -41,7 +41,7 @@
 <script type="text/javascript">
 var socket = null;
 
-var userid = "${login.id}";
+var userName = "${login.ename}";
 
 $(document).ready(function(){
 	
@@ -76,20 +76,53 @@ function connectWs(){
 			
 			sessionStorage.setItem("boardMessage",e.data);
 			showBoardMessageAlert();
-		}else{
-			console.log("채팅 기능 구현 연습");
+		}else if(data.search("chat") > -1){
+			
+			console.log("채팅 기능 구현");
 			
 			var arr = data.split(",");
-			var id = arr[0];
-			var msg = arr[1];
-			console.log(id + "값은?");
-			console.log(msg + "은 무엇일까???");
-			if(id == userid){
-				$("#sendMsg").append(msg +"<br/>");
-			}else if(id != userid){
-				$("#receiveMsg").append(msg + "<br/>");
+			
+			var cmd = arr[0];
+			var chat_msg = arr[1];
+			var sender_name = arr[2];
+			var receiver_name = arr[3];
+			var chatroom_num = arr[4];
+			
+			console.log("cmd 값은 : " + cmd);
+			console.log("수신 받은 메세지 : " +chat_msg);
+			console.log("메세지 보낸자 이름 : " + sender_name);
+			console.log("메세지 받는자 이름 : " + receiver_name);
+			console.log("채팅방 번호 : " + chatroom_num);
+			
+			chat_new_msg = "";
+			
+			var date = new Date();
+            var hr = date.getHours();//시간
+            var min = date.getMinutes();//분
+			
+            var now = hr + " : " + min;
+            
+			if(sender_name == userName){
+				
+				chat_new_msg += "<div class='direct-chat-msg right'>";
+				chat_new_msg += "<div class='direct-chat-infos clearfix'>";
+				chat_new_msg += "<span class='direct-chat-name float-right'>" + sender_name + "</span>";
+				chat_new_msg += "<span class='direct-chat-timestamp float-left'>" + now + "</span></div>"
+				chat_new_msg += "<div class='direct-chat-text'>" + chat_msg + "</div></div>";
+				
+				
+			}else if(sender_name != userName){
+				
+				chat_new_msg += "<div class='direct-chat-msg'>";
+				chat_new_msg += "<div class='direct-chat-infos clearfix'>";
+				chat_new_msg += "<span class='direct-chat-name float-left'>" + sender_name + "</span>";
+				chat_new_msg += "<span class='direct-chat-timestamp float-right'>" + now + "</span></div>"
+				chat_new_msg += "<div class='direct-chat-text'>" + chat_msg + "</div></div>";
+				
 			}
-			$("#chatArea").append(e.data + "<br/>");
+				$(".direct-chat-messages").append(chat_new_msg);
+            	$(".direct-chat-messages").scrollTop($(".direct-chat-messages")[0].scrollHeight);
+				
 		}
 		
 	};
@@ -160,6 +193,8 @@ function showBoardMessageAlert(){
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<!-- 상단 알람 -->
+				<!-- 날씨 api -->
+				<span class="js-weather"></span>
 				<li class="nav-item dropdown">
 					<a class="nav-link" data-toggle="dropdown" href="#">
 						<i class="far fa-bell"></i>
@@ -172,13 +207,6 @@ function showBoardMessageAlert(){
 						
 						<div class="dropdown-divider"></div>
 						<div id="socketAlertBoard"></div>
-						
-						<div class="dropdown-divider"></div>
-						<a href="/board/boardMain" class="dropdown-item">
-							<i class="fas fa-file mr-2"></i>
-							새로운 공지사항
-							<span class="float-right text-muted text-sm">2 days</span>
-						</a>
 						
 						<div class="dropdown-divider"></div>
 						<a href="#" class="dropdown-item dropdown-footer"> 모든 알림 보기</a>
@@ -250,19 +278,19 @@ function showBoardMessageAlert(){
 							</a>
 						</li>
 
-						<li class="nav-item">
+					  <li class="nav-item">
 							<a href="/teamview/teamViewMain" class="nav-link">
 								<i class="nav-icon fas fa-th"></i>
 								<p>조직도</p>
 							</a>
-						</li>
+						</li> 
 						
 						<li class="nav-item">
 							<a href="/approval/appMain" class="nav-link">
 								<i class="nav-icon fas fa-file"></i>
 								<p>전자 결재</p>
 							</a>
-						</li>
+						</li> 
 
 						<li class="nav-item">
 							<c:if test= "${login.dno == 10}">
@@ -294,7 +322,9 @@ function showBoardMessageAlert(){
 							</li>
 						</c:if>
 						<!-- 메일함 -->
+
 						 <li class="nav-item">
+
 							<a href="/mailbox/mailMain" class="nav-link">
 								<i class="nav-icon far fa-envelope"></i>
 								<p>메일함</p>
@@ -317,7 +347,7 @@ function showBoardMessageAlert(){
 						
 						
 
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a href="../resources/pages/calendar.html" class="nav-link">
 								<i class="nav-icon far fa-calendar-alt"></i>
 								<p>
@@ -325,7 +355,7 @@ function showBoardMessageAlert(){
 									<span class="badge badge-info right">2</span>
 								</p>
 							</a>
-						</li>
+						</li> -->
 					</ul>
 				</nav>
 
@@ -366,6 +396,8 @@ function showBoardMessageAlert(){
 		<script src="/resources/dist/js/adminlte.js"></script>
 		<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 		<script src="/resources/dist/js/pages/dashboard.js"></script>
+		<script src="/resources/project/weather/weather.js"></script>
+
 <script>
 let checkForm = $("#checkForm");
 

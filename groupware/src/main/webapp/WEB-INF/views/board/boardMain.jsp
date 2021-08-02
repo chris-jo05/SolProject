@@ -34,7 +34,9 @@
 					
 						<div class="card-header">
 							<div class="btn-gorup">
+							<c:if test="${login.dno == 10}">
 								<button type="button" class="btn btn-primary" onclick="location.href='/board/boardWriter'">공지 작성</button>
+							</c:if>
 								
 								<form action="" id="searchForm" class="float-right">
 									<div class="input-group input-group-sm">
@@ -51,8 +53,6 @@
 										</div>
 										<!-- /btn-group -->
 										<input type="text" name="keyword" value="${pageVO.cri.keyword}"  />
-										<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" />
-										<input type="hidden" name="amount" value="${pageVO.cri.amount}" />
 										<button type="button" class="btn btn-default keyword">
 											<i class="fas fa-search"></i>
 										</button>

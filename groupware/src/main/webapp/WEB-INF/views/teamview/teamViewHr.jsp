@@ -27,19 +27,11 @@
     <section class="content">
       <!-- Default box -->
       <div class="card card-solid">
-      
-      <div class="btn float-right">
-        <button type="submit" class="btn-lg btn-success" onclick="location.href='/hrteam/hrNewDeptMember?dname=${member[0].dname}'" id="insertMember" style="float: right">사원 추가</button>
-        </div>
-      	<c:if test="${login.dno!=10}">
-        <script>
-        $("#insertMember").hide();
-        </script>
-        </c:if>
+        
         <div class="card-body pb-0">
           <div class="row">
+          
           <!-- 각 사원 정보 -->
-           
             <c:forEach var="vo" items="${member}">
 	            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
 	              <div class="card bg-light d-flex flex-fill">
@@ -53,7 +45,7 @@
 	                      <p class="text-muted text-sm">직급 : ${vo.position}</p>
 	                      <ul class="ml-4 mb-0 fa-ul text-muted">
 	                        <li class="small"><span class="fa-li"><i class="nav-icon far fa-envelope"></i></span>
-	                         이메일 : <a href="/mailbox/mailWrite?m_id=${vo.id}">${vo.id}@solcompany.com</a>
+	                         이메일 : <a href="/mailbox/mailWrite?id=${vo.id}">${vo.id}@solcompany.com</a>
 	                         </li>
 	                        <br />
 	                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> 휴대폰 : ${vo.mobile}</li>
@@ -63,7 +55,7 @@
 	               
 	                <div class="card-footer">
 	                  <div class="text-right">
-	                     <a href="/insertChatRoom?receiver_name=${vo.ename}" class="btn btn-sm bg-teal">
+	                     <a href="/insertChatRoom?receiver_name=${vo.ename}&receive_eno=${vo.eno}" class="btn btn-sm bg-teal">
 	                      <i class="fas fa-comments"></i>
 	                    </a>
 	                    <a href="/paystub/paystubInsertForm?dname=${vo.dname}&ename=${vo.ename}" class="btn btn-sm btn-warning" style="color : white;">
@@ -86,6 +78,10 @@
         <!-- 페이지 나누기 부분 -->
         <div class="card-footer">
           <nav aria-label="Contacts Page Navigation">
+          <!-- 인사팀에 대한 권한 부여 -->
+        <c:if test="${login.dno == 10}">
+	        <button type="submit" class="btn-sm btn-success float-left" onclick="location.href='/hrteam/hrNewDeptMember?dname=${member[0].dname}'" id="insertMember">사원 추가</button>
+        </c:if>
             <ul class="pagination justify-content-center m-0">
             	<c:if test="${pageVo.prev}">
 	            	<button type="button" class="btn btn-default btn-sm">

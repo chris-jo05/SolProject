@@ -13,10 +13,10 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChatMemberVo {
+public class ChatUserMsgrVo {
 	private int chatroom_num;
-    private String sender_name;
-    private String receiver_name;
+    private String name;
+    private int eno;
     private Date send_date;
     private String chat_msg;
     private boolean read_val; 

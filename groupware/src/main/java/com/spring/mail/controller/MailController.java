@@ -62,14 +62,17 @@ public class MailController {
 	
 	
 	@GetMapping("/mailWrite")
-	public void writeGetId(@RequestParam(value="m_id",required = false)String m_id, Model model) {
-		log.info("메일 쓰기 페이지로 이동합니다." + m_id);
-		model.addAttribute("m_id", m_id);
+	public void writeGetId(String id, Model model) {
+		log.info("메일 쓰기 페이지로 이동합니다." + id);
+		model.addAttribute("id", id);
 	}
 	
 	@PostMapping("/mailWrite")
 	public String writeMail(MailBoardVo write, RedirectAttributes rttr) {
 		log.info("메일을 보냅니다" + write);
+		
+		System.out.println(write);
+		System.out.println(write.getM_id());
 		
 		// 첨부파일 확인하기
 		if(write.getAttachList() != null) {

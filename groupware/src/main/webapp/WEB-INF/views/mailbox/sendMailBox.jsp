@@ -65,7 +65,7 @@
                     	    <label for="check${list.m_no}"></label>
                  	     </div>
                	     	</td>
-              	      	<td class="mailbox-name">${list.m_id} (${list.m_writer})</td>
+              	      	<td class="mailbox-name">${list.e_id}</td>
               	    	<td class="mailbox-subject"><a href="/mailbox/readSendMail?m_no=${list.m_no}"> ${list.m_title}</a></td>
                	     	<td class="mailbox-date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.m_sendDate}"/></td>
 	                  </tr>
@@ -154,17 +154,23 @@
 	$(".delete-mail").click(function(e){
 		e.preventDefault();
 			
-		var str="";
+		if($('input[name="forDelete"]:checked').val() != null){
 			
-	    $('input[name="forDelete"]:checked').each(function (idx) {
-	    	str+="<input type='hidden' name='mNoList["+idx+"].m_no' value='"+$(this).val()+"'>";
-   		});	  
-		
+			var str="";
+				
+		    $('input[name="forDelete"]:checked').each(function (idx) {
+		    	str+="<input type='hidden' name='mNoList["+idx+"].m_no' value='"+$(this).val()+"'>";
+	   		});	  
 			
-	    operForm.append(str);
-		operForm.attr('action','/mailbox/removeMailList');
-		
-		operForm.submit();
+				
+		    operForm.append(str);
+			operForm.attr('action','/mailbox/removeMailList');
+			
+			operForm.submit();
+			
+		}else{
+			alert("체크된 메일이 없습니다!!!!!");
+		}
 	})
 	
     //체크 박스 전체 체크 및 전체 체크 해제

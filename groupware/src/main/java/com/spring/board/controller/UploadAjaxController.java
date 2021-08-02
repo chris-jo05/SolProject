@@ -39,7 +39,7 @@ public class UploadAjaxController {
    public ResponseEntity<List<AttachFileDTO>> uploadFormPost(MultipartFile[] attachment) {
       log.info("���� ���ε� ��û");
       String uploadFileName =null;
-      String uploadFolder="d:\\upload";
+      String uploadFolder="c:\\Solcompany";
       
       String uploadFolderPath = getFolder();
       File uploadPath = new File(uploadFolder,uploadFolderPath);
@@ -95,7 +95,7 @@ public class UploadAjaxController {
    public ResponseEntity<byte[]> getFile(String fileName){
       log.info("����� ��û"+fileName);
       
-      File file = new File("d:\\upload\\"+fileName);
+      File file = new File("c:\\Solcompany\\"+fileName);
       
       ResponseEntity<byte[]> entity=null;
       
@@ -113,7 +113,7 @@ public class UploadAjaxController {
    public ResponseEntity<Resource> downloadFile(String fileName){
       log.info("download file "+fileName);
       
-      Resource resource = new FileSystemResource("d:\\upload\\"+fileName);
+      Resource resource = new FileSystemResource("c:\\Solcompany\\"+fileName);
       
       
       HttpHeaders headers = new HttpHeaders();
@@ -137,7 +137,7 @@ public class UploadAjaxController {
    public ResponseEntity<String> deleteFile(String fileName, String type){
 	   log.info("���ϻ���"+fileName+"type : "+type);
 	   try {
-		   File file = new File("d:\\upload\\"+URLDecoder.decode(fileName,"utf-8"));
+		   File file = new File("c:\\Solcompany\\"+URLDecoder.decode(fileName,"utf-8"));
 		   
 		   file.delete();
 		   

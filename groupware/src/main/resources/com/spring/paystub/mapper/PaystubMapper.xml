@@ -18,4 +18,8 @@
 		insert into paystub(eno, pay_year, pay_month, normal_wage, bonus_wage, position_wage, overtime_wage, holiday_wage, benefits, etc_wage, income_tax, resident_tax, national_pension, health_insurance, emp_Insurance, longterm_care)
 		values(#{eno}, #{pay_year}, #{pay_month}, #{normal_wage}, #{bonus_wage}, #{position_wage}, #{overtime_wage}, #{holiday_wage}, #{benefits}, #{etc_wage}, #{income_tax}, #{resident_tax}, #{national_pension}, #{health_insurance}, #{emp_Insurance}, #{longterm_care})
 	</insert>
+	
+	<select id="check" resultType="java.lang.String">
+		select normal_wage from paystub where eno = #{eno} and pay_year = #{pay_year} and pay_month = #{pay_month}
+	</select>
 </mapper>

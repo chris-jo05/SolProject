@@ -43,11 +43,10 @@
               <!-- /.card-header -->
               <div class="card-body">
               <form action="" method="post">
-              <input type="hidden" value="${m_id}" />
 	              <c:choose>
-	              	<c:when test="${m_id ne null}">
+	              	<c:when test="${id ne null}">
 		                <div class="form-group">
-		                  <input class="form-control" placeholder="${m_id}" name="e_id" readonly="readonly">
+		                  <input class="form-control" value="${id}" name="e_id" readonly="readonly">
 		                </div>
 	              	</c:when>
 		              <c:otherwise>
@@ -106,13 +105,14 @@
 <script>
 
 $(".btn-primary").click(function(){
-	let e_id = $("input[name='e_id']").val();
-	let m_id = '${login.id}';
+	
+	let receive_id = $("input[name='e_id']").val();
+	let m_id = "${login.id}";
 	let url = '/mailbox/mailMain';
 	
 	console.log("소켓이 연결되었습니다 " + socket);
 	
-	let socketMsg = "mail,"+m_id + "," + e_id + "," + url;
+	let socketMsg = "mail,"+m_id + "," + receive_id + "," + url;
 	console.log("소켓에 전송할 메세지 : " + socketMsg);
 	if(socket){
 		socket.send(socketMsg);
