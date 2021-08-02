@@ -16,7 +16,7 @@
   	<Logger name="com.spring.member.controller" level="info"/>
   	<Logger name="com.spring.paystub.controller" level="info"/>
   	<Logger name="com.spring.teamView.controller" level="info"/>
-  	
+  	<Logger name="com.spring.anonymous.controller" level="info" />
   	<!-- mapper 로그 -->
   	<Logger name="com.spring.approval.mapper" level="debug"/>
   	<Logger name="com.spring.attendance.mapper" level="debug"/>
@@ -25,7 +25,7 @@
   	<Logger name="com.spring.mail.mapper" level="debug"/>
   	<Logger name="com.spring.member.mapper" level="debug"/>
   	<Logger name="com.spring.paystub.mapper" level="debug"/>
-  	
+  	<Logger name="com.spring.anonymous.mapper" level="debug" />
 
   	<Logger name="com.spring.mail.util" level="info"/>
   	<Logger name="com.spring.board.util" level="info"/>

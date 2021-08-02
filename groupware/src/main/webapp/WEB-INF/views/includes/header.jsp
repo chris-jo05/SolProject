@@ -308,6 +308,13 @@ function showBoardMessageAlert(){
 							</a>
 						</li>
 						
+						<li class="nav-item">
+							<a href="/anonymous/anonymousMain" class="nav-link">
+								<i class="nav-icon fas fa-bullhorn"></i>
+								<p>사원 소리함</p>
+							</a>
+							</li>
+						
 						
 
 						<li class="nav-item">
