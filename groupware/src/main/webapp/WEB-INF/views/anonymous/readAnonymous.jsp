@@ -166,7 +166,7 @@ $("#list").click(function(){
     operForm.submit();
 })
 $("#next").click(function(){
-	var input = $("input[id='ano']");
+	var input = $("input[name='ano']");
 	
 	if(next == 0){
 		operForm.attr('method','get');
@@ -180,7 +180,7 @@ $("#next").click(function(){
 })
 
 $("#pre").click(function(){
-	var input = $("input[id='ano']");
+	var input = $("input[name='ano']");
 	
 	if(prev == 0){
 		operForm.attr('method','get');
