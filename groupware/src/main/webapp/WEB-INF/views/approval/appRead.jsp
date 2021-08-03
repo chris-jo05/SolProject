@@ -44,9 +44,7 @@ textarea.form-control {
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item">
-							<a href="/main/home">Home</a>
-						</li>
+						<li class="breadcrumb-item"><a href="/main/home">Home</a></li>
 						<li class="breadcrumb-item active">전자 결재</li>
 					</ol>
 				</div>
@@ -161,7 +159,7 @@ textarea.form-control {
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group" id="kind">
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">근태구분</label>
 											<div class="col">
@@ -170,7 +168,7 @@ textarea.form-control {
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group" id="date">
 										<div class="row">
 											<label for="colFormLabel" class="col-form-label">기간</label>
 											<div class="col">
@@ -257,7 +255,10 @@ textarea.form-control {
 <!-- Page specific script -->
 <script>
 	$ (function () {
-		// input value값 없을 시 form-group display:none;
+		if (('#docKind') == "") {
+			$ ("#kind").hide ();
+			$ ("#date").hide ();
+		}
 	})
 </script>
 

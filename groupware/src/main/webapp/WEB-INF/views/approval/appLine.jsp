@@ -8,11 +8,11 @@
 <title>Sol Company</title>
 
 <style>
-[class^=insert1] tr {
+[class^=selectedList1] tr {
 	counter-increment: num;
 }
 
-[class^=insert1] tr>td:nth-child(2):before {
+[class^=selectedList1] tr>td:nth-child(2):before {
 	content: counter(num) " ";
 }
 </style>
@@ -78,7 +78,10 @@
 
 						<div class="card-body" style="height: 500px;">
 							<div class="form-group">
-								<input type="button" id="btn1" class="btn btn-secondary btn-sm" value="결재"> <input type="button" id="btn2" class="btn btn-secondary btn-sm" value="합의"> <input type="button" id="btn3" class="btn btn-secondary btn-sm" value="참조"> <input type="button" id="btn4" class="btn btn-secondary btn-sm" value="시행">
+								<input type="button" id="btn1" class="btn btn-secondary btn-sm" value="결재">
+								<input type="button" id="btn2" class="btn btn-secondary btn-sm" value="합의">
+								<input type="button" id="btn3" class="btn btn-secondary btn-sm" value="참조">
+								<input type="button" id="btn4" class="btn btn-secondary btn-sm" value="시행">
 							</div>
 
 							<div class="form-group" style="height: 150px; overflow: auto">
@@ -115,7 +118,7 @@
 										</div>
 
 										<div class="form-group" style="height: 150px; overflow: auto">
-											<table id="selectedList" class="table table-sm">
+											<table class="table table-sm">
 												<thead>
 													<tr>
 														<td style="width: 10%; text-align: center;">
@@ -129,7 +132,7 @@
 													</tr>
 												</thead>
 
-												<tbody id="selectedList1" class="insert1"></tbody>
+												<tbody id="selectedList1" class="selectedList1"></tbody>
 											</table>
 										</div>
 									</div>
@@ -140,7 +143,7 @@
 										</div>
 
 										<div class="form-group" style="overflow: auto">
-											<table id="selectedList" class="table table-sm">
+											<table class="table table-sm">
 												<thead>
 													<tr>
 														<td style="text-align: center; width: 10%;">
@@ -152,7 +155,7 @@
 													</tr>
 												</thead>
 
-												<tbody id="selectedList2" class="insert2"></tbody>
+												<tbody id="selectedList2" class="selectedList2"></tbody>
 											</table>
 										</div>
 									</div>
@@ -163,7 +166,7 @@
 										</div>
 
 										<div class="form-group" style="overflow: auto">
-											<table id="selectedList" class="table table-sm">
+											<table class="table table-sm">
 												<thead>
 													<tr>
 														<td style="text-align: center; width: 10%;">
@@ -175,7 +178,7 @@
 													</tr>
 												</thead>
 
-												<tbody id="selectedList3" class="insert3"></tbody>
+												<tbody id="selectedList3" class="selectedList3"></tbody>
 											</table>
 										</div>
 									</div>
@@ -191,7 +194,7 @@
 			<div class="form-group" style="text-align: center;">
 				<button id="setWrite" class="btn btn-primary btn-sm">적용</button>
 				&nbsp;
-				<button class="btn btn-secondary btn-sm" onclick="window.close()">취소</button>
+				<button class="btn btn-secondary btn-sm" onclick="window.close()">닫기</button>
 			</div>
 		</div>
 	</div>
@@ -255,9 +258,105 @@
 		    $('#selectedList3 input:checkbox[name="check2"]:checked').parent().parent().remove();
 		});
 		
-		$('#setWrite').click(".sendValue", function() {
-			console.log
-			$("#position", opener.document).val(position);
+		// write page 전송
+		$('#setWrite').click(function() {
+			// 결재 및 합의
+			var rowData1 = new Array ();
+			var tdArr1 = new Array ();
+			var checkbox1 = $ ('#selectedList1  input:checkbox[name="check2"]')
+			
+			// 수신참조
+			var rowData2 = new Array ();
+			var tdArr2 = new Array ();
+			var checkbox2 = $ ('#selectedList2  input:checkbox[name="check2"]')
+			
+			// 시행자
+			var rowData3 = new Array ();
+			var tdArr3 = new Array ();
+			var checkbox3 = $ ('#selectedList3  input:checkbox[name="check2"]')
+		    
+			// 결제 및 합의
+		    checkbox1.each (function (i) {
+		    	var tr = checkbox1.parent ().parent ().eq (i);
+				var td = tr.children ();;
+			    console.log (tr)
+			    console.log (td)
+			    
+				// tr의 모든 값을 배열에 담는다.
+				rowData1.push (tr.text ());
+				
+				// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
+				var turn = td.eq (1).text ();
+				var category = td.eq (2).text ();
+				var dname = td.eq (3).text ();
+				var ename = td.eq (4).text ();
+				var position = td.eq (5).text ();
+				var eno = td.eq (6).text ();
+				var cNo = td.eq (7).text ();
+				
+				var arr = {turn, category, dname, ename, position, eno, cNo};
+				console.log(arr);
+				
+				// 가져온 값을 배열에 담는다.
+				tdArr1.push (arr);
+		    });
+		    
+			// 수신참조
+		    checkbox2.each (function (i) {
+		    	var tr = checkbox2.parent ().parent ().eq (i);
+				var td = tr.children ();;
+			    console.log (tr)
+			    console.log (td)
+			    
+				// tr의 모든 값을 배열에 담는다.
+				rowData2.push (tr.text ());
+				
+				// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
+				var dname = td.eq (1).text ();
+				var ename = td.eq (2).text ();
+				var position = td.eq (3).text ();
+				var eno = td.eq (4).text ();
+				var cNo = td.eq (5).text ();
+				
+				var arr = {dname, ename, position, eno, cNo};
+				console.log(arr);
+				
+				// 가져온 값을 배열에 담는다.
+				tdArr2.push (arr);
+		    });
+		    
+			// 시행자
+		    checkbox3.each (function (i) {
+		    	var tr = checkbox3.parent ().parent ().eq (i);
+				var td = tr.children ();
+			    console.log (tr)
+			    console.log (td)
+			    
+				// tr의 모든 값을 배열에 담는다.
+				rowData3.push (tr.text ());
+				
+				// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
+				var dname = td.eq (1).text ();
+				var ename = td.eq (2).text ();
+				var position = td.eq (3).text ();
+				var eno = td.eq (4).text ();
+				var cNo = td.eq (5).text ();
+				
+				var arr = {dname, ename, position, eno, cNo};
+				console.log(arr);
+				
+				// 가져온 값을 배열에 담는다.
+				tdArr3.push (arr);
+		    });
+			console.log(tdArr1);
+			console.log(tdArr2);
+			console.log(tdArr3);
+			
+			window.opener.appLine1(tdArr1);
+			window.opener.appLine2(tdArr2);
+			window.opener.appLine3(tdArr3);
+
+			
 		});
 	</script>
 
@@ -310,6 +409,8 @@
 					// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
 					var tr = checkbox.parent ().parent ().eq (i);
 					var td = tr.children ();
+					console.log(tr);
+					console.log(td);
 					
 					// 체크된 row의 모든 값을 배열에 담는다.
 					rowData.push (tr.text ());
@@ -443,6 +544,8 @@
 				$ ("#selectedList3").append (innerHtml);
 			});
 			
+
+			
 			// 조직도 생성
 			function createJSTree (jsonData) {
 				var jstree_data = [];
@@ -471,10 +574,10 @@
 				for (var i = 0; i < appLineMember.length; i++) {
 					
 					innerHtml += '<tr>';
-					innerHtml += '	<td style="display:none;">' + appLineMember [i].eno + '</td>';
 					innerHtml += '	<td style="text-align: center;">';
-					innerHtml += '		<input name="check1" class="check1" type="checkbox" data-id='+ appLineMember [i].eno +' value='+ appLineMember [i].eno +'>';
+					innerHtml += '		<input name="check1" class="check1" type="checkbox">';
 					innerHtml += '	</td>';
+					innerHtml += '	<td style="display:none;">' + appLineMember [i].eno + '</td>';
 					innerHtml += '	<td style="text-align: center;">' + appLineMember [i].dname + '</td>';
 					innerHtml += '	<td style="text-align: center;">' + appLineMember [i].ename + '</td>';
 					innerHtml += '	<td style="text-align: center;">' + appLineMember [i].position + '</td>';
@@ -491,13 +594,13 @@
 					
 					innerHtml += '<tr>';
 					innerHtml += '	<td style="text-align: center;">';
-					innerHtml += '		<input name="check2" class="check2" type="checkbox" data-id='+ tdArr[i].eno +' value='+ tdArr[i].eno +'>';
+					innerHtml += '		<input name="check2" class="check2" type="checkbox">';
 					innerHtml += '	</td>';
 					innerHtml += '	<td style="text-align: center;"></td>';
 					innerHtml += '	<td style="text-align: center;">' + tdArr[i].category + '</td>';
 					innerHtml += '	<td style="text-align: center;">' + tdArr[i].dname + '</td>';
 					innerHtml += '	<td style="text-align: center;">' + tdArr[i].ename + '</td>';
-					innerHtml += '	<td id="position" style="text-align: center;">' + tdArr[i].position + '</td>';
+					innerHtml += '	<td style="text-align: center;">' + tdArr[i].position + '</td>';
 					innerHtml += '	<td style="display: none;">' + tdArr[i].eno + '</td>';
 					innerHtml += '	<td style="display: none;">' + tdArr[i].cNo + '</td>';
 					innerHtml += '</tr>';
@@ -513,7 +616,7 @@
 					
 					innerHtml += '<tr>';
 					innerHtml += '	<td style="text-align: center;">';
-					innerHtml += '		<input name="check2" class="check2" type="checkbox" data-id='+ tdArr[i].eno +' value='+ tdArr[i].eno +'>';
+					innerHtml += '		<input name="check2" class="check2" type="checkbox">';
 					innerHtml += '	</td>';
 					innerHtml += '	<td style="text-align: center;">' + tdArr[i].dname + '</td>';
 					innerHtml += '	<td style="text-align: center;">' + tdArr[i].ename + '</td>';
@@ -526,8 +629,6 @@
 			}
 		});
 	</script>
-
-
 </body>
 =======
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
