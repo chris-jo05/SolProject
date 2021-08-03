@@ -21,4 +21,6 @@ public interface TeamMapper {
 	public List<TeamNameVo> appLineDept();
 	public List<TeamMemberVo> appLineMember(int dno);
 	public List<TeamMemberVo> appSelectedMember(int eno);
+	
+	public MemberVo member(int eno);
 }

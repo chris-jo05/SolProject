@@ -61,6 +61,12 @@
 		from emp, dept
 		where emp.dno = dept.dno
 		and emp.eno = #{eno}
->>>>>>> refs/heads/jinu
+	</select>
+	
+	<!-- 각 사원 프로필 보여주기 -->
+	<select id="member" resultType="com.spring.member.domain.MemberVo">
+		select e.*, d.dname
+		from emp e, dept d
+		where e.dno = d.dno and eno = #{eno}
 	</select>
 </mapper>

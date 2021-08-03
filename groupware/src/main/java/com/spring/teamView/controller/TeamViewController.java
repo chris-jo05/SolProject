@@ -100,6 +100,12 @@ public class TeamViewController {
 	  	
 	  	return appSelectedMember;
 	}
-	  
+	
+	@GetMapping("/member_profile")
+	public void member_profile(int eno, Model model) {
+		MemberVo vo = service.member(eno);
+		
+		model.addAttribute("member", vo);
+	}
 }
 
