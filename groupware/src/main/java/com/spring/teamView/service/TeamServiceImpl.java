@@ -55,4 +55,9 @@ public class TeamServiceImpl implements TeamService {
 	public List<TeamMemberVo> appSelectedMember(int eno) {
 		return mapper.appSelectedMember(eno);
 	}
+	
+	@Override
+	public MemberVo member(int eno) {
+		return mapper.member(eno);
+	}
 }

@@ -18,4 +18,7 @@ public interface TeamService {
 	public List<TeamNameVo> appLineDept();
 	public List<TeamMemberVo> appLineMember(int dno);
 	public List<TeamMemberVo> appSelectedMember(int eno);
+	
+	// 부서 사원 프로필
+	public MemberVo member(int eno);
 }

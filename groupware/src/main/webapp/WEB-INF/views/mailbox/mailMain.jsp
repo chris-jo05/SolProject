@@ -181,7 +181,7 @@
 			
 			operForm.submit();
 		}else{
-			alert("체크된 메일이 존재하지 않습니다.");
+			alert("체크 된 박스가 없습니다.");
 		}
 		
 	})

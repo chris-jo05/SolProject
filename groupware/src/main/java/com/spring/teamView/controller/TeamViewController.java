@@ -56,36 +56,56 @@ public class TeamViewController {
 		
 	}
   
-	  // 결재선 부서 가져오기
-	  @ResponseBody
-	  @GetMapping("/appLineDept")
-	  public List<TeamNameVo> appLineDept() {
+	@GetMapping("/teamViewHr")
+	public void hrTeam(TeamCriteria cri, int dno,Model model) {
+		log.info("부서별 페이지로 이동합니다" + cri + dno);
+		
+		List<TeamMemberVo> member = service.showTeamList(cri, dno);
+		log.info("각 사원들의 정보를 불러옵니다." + member);
+		
+		int total = service.totalTeamCount(dno);
+		log.info(total + "명의 사원을 불러옵니다.");
+		
+		model.addAttribute("member", member);
+		model.addAttribute("pageVo", new TeamPageVo(cri, total));
+	}
+	
+	// 결재선 부서 가져오기
+	@ResponseBody
+	@GetMapping("/appLineDept")
+	public List<TeamNameVo> appLineDept() {
 		List<TeamNameVo> appLineDept = service.appLineDept();
 		log.info("부서명 가져오기 " + appLineDept);
 		
 		return appLineDept;
-	  }
+	}
   
 	
-	  // 결재선 부서인원 가져오기
-	  @ResponseBody
-	  @GetMapping("/appLineMember")
-	  public List<TeamMemberVo> appLineMember(int dno) {
-	  	List<TeamMemberVo> appLineMember = service.appLineMember(dno);
+	// 결재선 부서인원 가져오기
+	@ResponseBody
+	@GetMapping("/appLineMember")
+	public List<TeamMemberVo> appLineMember(int dno) {
+	 	List<TeamMemberVo> appLineMember = service.appLineMember(dno);
 	  	log.info("부서인원 가져오기 " + appLineMember);
 	  	
 	  	return appLineMember;
-	  }
+	}
 	  
-	  // 선택된 부서인원 가져오기
-	  @ResponseBody
-	  @GetMapping("/appSelectedMember")
-	  public List<TeamMemberVo> appSelectedMember(int eno) {
+	// 선택된 부서인원 가져오기
+	@ResponseBody
+	@GetMapping("/appSelectedMember")
+	public List<TeamMemberVo> appSelectedMember(int eno) {
 	  	List<TeamMemberVo> appSelectedMember = service.appSelectedMember(eno);
 	  	log.info("부서인원 가져오기 " + appSelectedMember);
 	  	
 	  	return appSelectedMember;
-	  }
-	  
+	}
+	
+	@GetMapping("/member_profile")
+	public void member_profile(int eno, Model model) {
+		MemberVo vo = service.member(eno);
+		
+		model.addAttribute("member", vo);
+	}
 }
 
