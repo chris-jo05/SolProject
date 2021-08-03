@@ -8,12 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.anonymous.domain.AnonymousVO;
+import com.spring.anonymous.domain.Criteria;
+import com.spring.anonymous.domain.PageVO;
 import com.spring.anonymous.service.AnonymousService;
 
 import lombok.extern.log4j.Log4j2;
@@ -28,11 +31,22 @@ public class AnonymousController {
 
 	
 	@GetMapping("/anonymousMain")
-	public void main(Model model) {
+	public void main(Model model, Criteria cri) {
 		log.info("익명게시판 페이지 이동쓰");
-		
-	List<AnonymousVO> list = service.list();
-	model.addAttribute("list", list);
+	
+	if(cri.getKeyword() == null) {
+		List<AnonymousVO> list = service.list(cri);
+		int total = service.total(cri);
+		model.addAttribute("list", list);
+		model.addAttribute("pageVO", new PageVO(cri, total));
+	} else {
+		List<AnonymousVO> list = service.list(cri);
+		int total = service.totalAsr(cri);
+		log.info("토탈 : " + total);
+		model.addAttribute("list", list);
+		model.addAttribute("pageVO", new PageVO(cri,total));
+	
+		}
 	}
 	
 	@GetMapping("/newAnonymous")
@@ -52,8 +66,8 @@ public class AnonymousController {
 	}
 	
 	@GetMapping("/readAnonymous")
-	public void read(int ano, Model model) {
-		log.info(ano+"번 글 읽어오기");
+	public void read(int ano, @ModelAttribute("cri") Criteria cri, Model model) {
+		log.info(ano+"번 글 읽어오기"+"cri:"+cri);
 		
 		AnonymousVO vo = service.read(ano);
 		

@@ -62,21 +62,18 @@
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer bg-white">
-
+					
 								<div class="text-center">
 									<div class="btn-group ">
-										<button type="button" id="pre" class="btn btn-default btn-sm"
-											data-container="body">
+										<button type="button" id="pre" class="btn btn-default btn-sm" data-container="body">
 											<i class="fas fa-reply">이전 글</i>
 										</button>
 
-										<button type="button" class="btn btn-default btn-sm" id="list"
-											data-container="body">
+										<button type="button" class="btn btn-default btn-sm" id="list" data-container="body">
 											<i class="fas fa-list">목 록</i>
 										</button>
 
-										<button type="button" id="next" class="btn btn-default btn-sm"
-											data-container="body">
+										<button type="button" id="next" class="btn btn-default btn-sm" data-container="body">
 											<i class="fas fa-share">다음 글</i>
 										</button>
 									</div>
@@ -137,10 +134,10 @@
 										</div>
 									</div>
 								</div>
-
+								</div>
 							</div>
 							<!-- /.card -->
-						
+						 
 					</form>
 				</div>
 				<!-- /.col -->
@@ -150,16 +147,57 @@
 	</section>
 </div>
 	<form action="" method="get" id="operForm">
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+   	<input type="hidden" name="amount" value="${cri.amount}" />
 	<input type="hidden" name="ano" value="${vo.ano}" />
 	</form>
 <!-- /.container-fluid -->
 <script>
+var ano = ${vo.ano};
+let prev = ${vo.a_prev};
+let next = ${vo.a_next};
 let modal = $(".modal");
+
+var operForm=$("#operForm");
+
+$("#list").click(function(){
+    operForm.find("input[name='ano']").remove();
+    operForm.attr('action','/anonymous/anonymousMain');
+    operForm.submit();
+})
+$("#next").click(function(){
+	var input = $("input[id='ano']");
+	
+	if(next == 0){
+		operForm.attr('method','get');
+		alert("다음페이지가 존재하지 않습니다.");
+	}else if(next != 0){
+		input.attr('value',next)
+		operForm.attr('method','get');
+		operForm.attr('action','/anonymous/readAnonymous?ano='+ next);
+	}
+	operForm.submit();	
+})
+
+$("#pre").click(function(){
+	var input = $("input[id='ano']");
+	
+	if(prev == 0){
+		operForm.attr('method','get');
+		alert("이전페이지가 존재하지 않습니다.");
+	}else if(prev != 0){
+		console.log(prev);
+		input.attr('value',prev)
+		operForm.attr('method','get');
+		operForm.attr('action','/anonymous/readAnonymous?ano='+prev);
+	}
+	operForm.submit();	
+})
+
 
 var modalPassword = modal.find("input[name=apassword]");
 var modalPassword2 = modal.find("input[name=apassword2]");
-var ano = ${vo.ano}
-var operForm=$("#operForm");
+
 
 $("#modifyBtn").click(function() {
 	console.log(ano);
@@ -202,7 +240,7 @@ $("#removeBtn").click(function() {
 			alert("비밀번호가 다릅니다.");
 		}
 	})
-})
+});
 
 function checkpw(ano, callback) {
 	$.ajax({
@@ -215,7 +253,11 @@ function checkpw(ano, callback) {
 			callback(data);
 		}
 	})
-}
+};
+
+
+
+
 
 
 </script>

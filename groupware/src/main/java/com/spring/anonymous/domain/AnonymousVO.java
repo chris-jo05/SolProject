@@ -21,4 +21,7 @@ public class AnonymousVO {
 	private Date adate;
 	private Date aupdatedate;
 	private String apassword;
+	
+	private int a_prev;
+	private int a_next;
 }

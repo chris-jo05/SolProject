@@ -2,9 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.anonymous.mapper.AnonymousMapper">
 
-	<select id="list" resultType="com.spring.anonymous.domain.AnonymousVO">
-		select * from anonymous
-	</select> 
+		<select id="list" resultType="com.spring.anonymous.domain.AnonymousVO">
+	<![CDATA[
+		select * from
+			(select rownum rn, ano,atitle,awriter,acontents,adate,aupdatedate from 
+			(select ano,atitle,awriter,acontents,adate,aupdatedate from anonymous order by ano desc)
+			where
+		]]>  
+        <include refid="criteria"></include>
+        <![CDATA[		     
+		 rownum<=(#{pageNum}*#{amount}))
+         where rn>((#{pageNum}-1)*#{amount})
+			
+		]]>
+	</select>
+	
+	<select id="totalAn" resultType="int">
+		select count(*) from anonymous where
+		ano>0
+	</select>
+	
+	<select id="totalAsr" resultType="int">
+	 select count(*) from anonymous where 
+      <include refid="criteria"></include>
+      ano>0
+
+   </select>
+	
+		<sql id="criteria">
+		<trim prefix="(" suffix=") AND"  prefixOverrides="OR" >
+			<foreach collection="typeArr" item='type'>
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='T'.toString()">
+							atitle like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='C'.toString()">
+							acontents like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='W'.toString()">
+							awriter like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
 
 
 	<insert id="insert">
@@ -16,8 +59,14 @@
 	</insert>
 	
 	<select id="read" resultType="com.spring.anonymous.domain.AnonymousVO">
-	select * from anonymous where ano=#{ano}
+		select * from 
+		(select ano, atitle, awriter, acontents, adate, 
+		LAG(ano) OVER(ORDER BY ano desc) AS a_prev, 
+		LEAD(ano) OVER(ORDER BY ano desc) AS a_next 
+		from anonymous) 
+		where ano=#{ano}
 	</select>
+	
 	
 	<select id="checkpw" resultType="java.lang.String">
 	select apassword from anonymous where ano=#{ano}

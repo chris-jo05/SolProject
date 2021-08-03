@@ -31,9 +31,32 @@
 					<div class="card">
 					
 						<div class="card-header">
-							<div class="btn-group">
+							<div class="btn-gorup">
 								<button type="button" class="btn btn-primary" onclick="location.href='/anonymous/newAnonymous'">익명 글작성</button>
+							
+									<form action="" id="searchForm" class="float-right">
+									<div class="input-group input-group-sm">
+										<div class="input-group-prepend">
+											<select name="type" id="" class="btn btn-default">
+												<!-- 옵션으로 타입을 정한다. -->
+												<option value="">검색어를 선택하세요</option>
+												<option value="T" <c:out value="${pageVO.cri.type=='T'?'selected':''}"/>>제목</option>
+												<option value="C" <c:out value="${pageVO.cri.type=='C'?'selected':''}"/>>내용</option>
+												<option value="W" <c:out value="${pageVO.cri.type=='W'?'selected':''}"/>>작성자</option>
+												<option value="TC" <c:out value="${pageVO.cri.type=='TC'?'selected':''}"/>>제목 or 내용</option>
+												<option value="TCW" <c:out value="${pageVO.cri.type=='TCW'?'selected':''}"/>>제목 or 내용 or 작성자</option>
+											</select>
+										</div>
+										<!-- /btn-group -->
+										<input type="text" name="keyword" value="${pageVO.cri.keyword}"  />
+										<button type="button" class="btn btn-default keyword">
+											<i class="fas fa-search"></i>
+										</button>
+									</div>
+								</form>
+							
 							</div> <!-- btn-group -->
+						</div> <!-- card-header -->
 	<div class="card-body table-responsive p-0">
 							<table class="table table-hover text-nowrap">
 								<thead>
@@ -43,7 +66,6 @@
 										<th>작성자</th>
 										<th>등록날짜</th>
 										<th>수정날짜</th>
-										<th>조회수</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -60,7 +82,6 @@
 								</tbody>
 							</table>
 								</div> <!-- card-body table -->
-						</div> <!-- card-header -->
 					</div> <!-- card -->
 				</div> <!-- col-12 -->
 			</div>  <!-- row -->
@@ -108,6 +129,54 @@
 		actionForm.append("<input type='hidden' name='ano' value='"+$(this).attr('href')+"'>");
 		actionForm.attr('action','readAnonymous');
 		actionForm.submit();		
+	})
+	
+	$(".paginate_button a").click(function(e){
+		e.preventDefault();  //a 속성 중지
+		
+		//actionForm의 안의 pageNum의 값을 사용자가 선택한 번호로 변경
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		
+		//actionForm 보내기
+		actionForm.submit();
+	})
+	
+	
+	$("#amount").change(function(){
+		//사용자가 선택한 게시물 수 가져오기
+		let amount = $(this).val();
+		
+		//actionForm의 안의 amount의 값을 사용자가 선택한 번호로 변경
+		actionForm.find("input[name='amount']").val(amount);
+		
+		//actionForm 보내기
+		actionForm.submit();
+	})
+	
+	$(".keyword").click(function(){
+		//검색 폼 가져오기
+		var searchForm = $("#searchForm");
+		
+		//type 가져오기
+		var type = $("select[name='type']").val();
+		
+		//keyword 가져오기
+		var keyword = $("input[name='keyword']").val();
+		
+		if(type===''){
+			alert("검색 기준을 확인하세요");
+			$("select[name='type']").focus();
+			return false;
+		}else if(keyword===''){
+			alert("검색어를 입력해주세요");
+			$("input[name='keyword']").focus();
+			return false;
+		}
+		
+		//검색 처음에는 1page 보여주기
+		searchForm.find("input[name='pageNum']").val("1");
+		
+		searchForm.submit();
 	})
 	</script>
 <%@include file="../includes/footer.jsp"%>

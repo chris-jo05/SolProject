@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.anonymous.domain.AnonymousVO;
+import com.spring.anonymous.domain.Criteria;
 import com.spring.anonymous.mapper.AnonymousMapper;
 
 @Service
@@ -16,8 +17,8 @@ public class AnonymousServiceImpl implements AnonymousService {
 	
 	
 	@Override
-	public List<AnonymousVO> list() {
-		return mapper.list();
+	public List<AnonymousVO> list(Criteria cri) {
+		return mapper.list(cri);
 	}
 	
 	@Override
@@ -43,5 +44,15 @@ public class AnonymousServiceImpl implements AnonymousService {
 	@Override
 	public boolean update(AnonymousVO vo) {
 		return mapper.update(vo)>0?true:false;
+	}
+	
+	@Override
+	public int total(Criteria cri) {
+		return mapper.totalAn(cri);
+	}
+	
+	@Override
+	public int totalAsr(Criteria cri) {
+		return mapper.totalAsr(cri);
 	}
 }
