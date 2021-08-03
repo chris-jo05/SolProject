@@ -6,6 +6,8 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,22 +46,21 @@ public class HomeController {
 		return "login";
 	}
 	
-	@PostMapping("/login")
-	public String login(MemberVo vo,HttpSession session,RedirectAttributes rttr) {
-		log.info("로그인 시도 " + vo);
-		
-		MemberVo login = service.login(vo);
-		
-		if(login == null) {
-				rttr.addFlashAttribute("error", "아이디와 비밀번호를 확인해 주세요");
-				return "redirect:/";
-			
-		}else {
-			session.setAttribute("login", login);
-			return "redirect: /main/home";
-		}
-		
-	}
+	 @PostMapping("/login") 
+	 public String login(MemberVo vo,HttpSession session,RedirectAttributes rttr) {
+		 
+		 log.info("로그인 시도 " + vo);
+	 
+		 MemberVo login = service.login(vo);
+		 
+		 if(login == null) { 
+			 rttr.addFlashAttribute("error", "아이디와 비밀번호를 확인해 주세요");
+			 return "redirect:/";
+		 }else {
+		 session.setAttribute("login", login); return "redirect: /main/home";
+		 }
+	 }
+	 
 	
 	@GetMapping("/logout")
 	public String out(HttpSession session) {

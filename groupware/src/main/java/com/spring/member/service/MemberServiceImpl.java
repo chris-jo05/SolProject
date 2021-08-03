@@ -65,4 +65,5 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVo dupId(String id) {
 		return mapper.dupId(id);
 	}
+
 }
