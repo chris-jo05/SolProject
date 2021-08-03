@@ -77,7 +77,10 @@
 
 						<div class="card-body" style="height: 500px;">
 							<div class="form-group">
-								<input type="button" id="btn1" class="btn btn-secondary btn-sm" value="결재"> <input type="button" id="btn2" class="btn btn-secondary btn-sm" value="합의"> <input type="button" id="btn3" class="btn btn-secondary btn-sm" value="참조"> <input type="button" id="btn4" class="btn btn-secondary btn-sm" value="시행">
+								<input type="button" id="btn1" class="btn btn-secondary btn-sm" value="결재">
+								<input type="button" id="btn2" class="btn btn-secondary btn-sm" value="합의">
+								<input type="button" id="btn3" class="btn btn-secondary btn-sm" value="참조">
+								<input type="button" id="btn4" class="btn btn-secondary btn-sm" value="시행">
 							</div>
 
 							<div class="form-group" style="height: 150px; overflow: auto">
