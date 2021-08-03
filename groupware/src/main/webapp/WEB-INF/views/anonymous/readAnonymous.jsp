@@ -81,7 +81,7 @@
 							</div>
 							<!-- /.card-footer -->
 							<!-- 리스트부분 -->
-
+							
 							<div class="card-footer">
 								<button type="button" class="btn btn-primary"
 									data-target="#modal-sm" data-toggle="modal">수정 하기</button>
@@ -100,9 +100,9 @@
 												<input type="password" name="apassword" id="" value="" />
 											</div>
 											<div class="modal-footer justify-content-between">
+												<button type="button" class="btn btn-primary" id="modifyBtn">Confirm</button>
 												<button type="button" class="btn btn-default"
 													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary" id="modifyBtn">Confirm</button>
 
 											</div>
 										</div>
@@ -126,19 +126,89 @@
 												<input type="password" name="apassword2" id="" value="" />
 											</div>
 											<div class="modal-footer justify-content-between">
+												<button type="button" class="btn btn-primary" id="removeBtn">Confirm</button>
 												<button type="button" class="btn btn-default"
 													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary" id="removeBtn">Confirm</button>
 
 											</div>
 										</div>
 									</div>
 								</div>
-								</div>
+							</div>
 							</div>
 							<!-- /.card -->
-						 
 					</form>
+
+					
+					<div class="card card-primary">
+			          <div class="card-header">
+			          <button type="button" class="btn btn-primary col-12"
+									data-target="#modal" data-toggle="modal">댓글 작성을 희망하신다면 클릭해 주세요</button>
+			            <div class="modal fade" id="modal" tabindex="-1">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" style="color: black;">댓글 작성</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">x</span>
+												</button>
+											</div>
+											<form action="">
+											<div class="modal-body">
+								               <div class="form-group">
+								                     <label for="exampleInputBorderWidth2" style="color: black;">제 목</label>
+								                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="atitle" placeholder="제목을 입력해주세요.">
+								                   </div>
+								                 <div class="form-group">
+								                     <label for="exampleInputBorderWidth2" style="color: black;">작성자</label>
+								                     <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="awriter"  placeholder="닉네임을 입력해주세요.">
+								                   </div>
+								                   
+								                     <div class="form-group">
+								                     <label for="exampleInputBorderWidth2" style="color: black;">비밀번호</label>
+								                     <input type="password" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" name="apassword"  placeholder="비밀번호를 입력해주세요.">
+								                   </div>
+								                
+								                       
+								               <div class="form-group">
+								                  <label style="color: black;">내용</label>
+								                  <textarea class="b-content form-control" rows="5" name="acontents"></textarea>
+								            </div>
+								           </div>
+											</form>
+								           
+											<div class="modal-footer justify-content-between">
+												<button type="button" class="btn btn-primary" id="modifyBtn">작성하기</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal">작성 취소</button>
+
+											</div>
+										</div>
+									</div>
+								</div>
+          </div>
+          <div class="card-body">
+
+								<!-- Post -->
+			                    <div class="post card-tools">
+			                      <div class="user-block">
+			                        <span class="username">
+			                          <h6 style="color: rgba(0, 81, 255, 0.808); font-weight: bolder;">작성자 비공개 이름</h6>
+			                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+			                        </span>
+			                        <span class="description">작성 시간</span>
+			                      </div>
+			                      <!-- /.user-block -->
+			                      <p>
+			                        내용
+			                      
+			                      </p>
+			                    </div>
+			                    <!-- /.post -->
+			                    
+          </div>
+        </div>
+					
 				</div>
 				<!-- /.col -->
 			</div>
