@@ -101,7 +101,7 @@
 
 						<!-- /.col -->
 						<div class="col-4">
-							<button type="submit" class="btn btn-primary btn-block">로그인</button>
+							<button type="submit" class="btn btn-primary btn-block swalDefaultSuccess">로그인</button>
 						</div>
 					</div>
 				</form>
@@ -133,7 +133,6 @@
 		</div>
 	</div>
 	<!-- /.login-box -->
-
 <script>
 $(function(){
 	let error = '${error}';
