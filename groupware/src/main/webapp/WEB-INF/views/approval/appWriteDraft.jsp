@@ -81,8 +81,7 @@
 						<div class="card card-primary card-outline">
 							<div class="card-header">
 								<div class="card-title">
-									<h3 class="card-title" style="font-weight: bold;">기안서</h3>
-									<input type="hidden" name="docClass" value="기안서" />
+									<h3 class="card-title" style="font-weight: bold;">기안서</h3> <input type="hidden" name="docClass" value="기안서" />
 								</div>
 							</div>
 
@@ -118,8 +117,7 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">기안부서</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled>
-													<input type="hidden" name="dno" value="${login.dno}" />
+													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled> <input type="hidden" name="dno" value="${login.dno}" />
 												</div>
 											</div>
 										</div>
@@ -128,8 +126,7 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">기안자</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled>
-													<input type="hidden" name="eno" value="${login.eno}" />
+													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled> <input type="hidden" name="eno" value="${login.eno}" />
 												</div>
 											</div>
 										</div>
@@ -166,18 +163,10 @@
 												</tr>
 
 												<tr style="">
-													<td>
-														<input style="font-weight: bold; font-size: 16pt; text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="" id="" type="text" disabled />
-													</td>
-													<td>
-														<input style="font-weight: bold; font-size: 16pt; text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="" id="" type="text" disabled />
-													</td>
-													<td>
-														<input style="font-weight: bold; font-size: 16pt; text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="" id="" type="text" disabled />
-													</td>
-													<td>
-														<input style="font-weight: bold; font-size: 16pt; text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="" id="" type="text" disabled />
-													</td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
 												</tr>
 
 												<tr>
@@ -214,18 +203,10 @@
 												</tr>
 
 												<tr style="">
-													<td>
-														<input style="font-weight: bold; font-size: 16pt; text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="ename" id="ename" type="text" disabled />
-													</td>
-													<td>
-														<input style="font-weight: bold; font-size: 16pt; text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="ename" id="ename" type="text" disabled />
-													</td>
-													<td>
-														<input style="font-weight: bold; font-size: 16pt; text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="ename" id="ename" type="text" disabled />
-													</td>
-													<td>
-														<input style="font-weight: bold; font-size: 16pt; text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="ename" id="ename" type="text" disabled />
-													</td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
 												</tr>
 
 												<tr>
