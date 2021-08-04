@@ -6,12 +6,20 @@ import org.apache.ibatis.annotations.Param;
 
 import com.spring.approval.domain.ApprovalAttachVO;
 import com.spring.approval.domain.ApprovalVO;
-import com.spring.teamView.domain.TeamMemberVo;
-import com.spring.teamView.domain.TeamNameVo;
 
 public interface ApprovalMapper {
 	public List<ApprovalVO> appList(int eno);
+	public List<ApprovalVO> appListRec(int eno);
+	public List<ApprovalVO> appListImp(int eno);
+	public List<ApprovalVO> appListRet(int eno);
+	public List<ApprovalVO> appListRef(int eno);
+	
 	public ApprovalVO appRead(@Param("docNo") String docNo, @Param("eno") int eno);
+	public ApprovalVO appReadRec(@Param("docNo") String docNo, @Param("eno") int eno);
+	public ApprovalVO appReadImp(@Param("docNo") String docNo, @Param("eno") int eno);
+	public ApprovalVO appReadRet(@Param("docNo") String docNo, @Param("eno") int eno);
+	public ApprovalVO appReadRef(@Param("docNo") String docNo, @Param("eno") int eno);
+	
 	public int appWrite1(ApprovalVO appWrite1);
 	public int appWrite2(ApprovalVO appWrite2);
 	

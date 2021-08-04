@@ -9,8 +9,6 @@ import com.spring.approval.domain.ApprovalAttachVO;
 import com.spring.approval.domain.ApprovalVO;
 import com.spring.approval.mapper.ApprovalAttachMapper;
 import com.spring.approval.mapper.ApprovalMapper;
-import com.spring.teamView.domain.TeamMemberVo;
-import com.spring.teamView.domain.TeamNameVo;
 
 @Service
 public class ApprovalServiceImpl implements ApprovalService {
@@ -27,18 +25,48 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 	@Override
+	public List<ApprovalVO> appListRec(int eno) {
+		return appMapper.appListRec(eno);
+	}
+
+	@Override
+	public List<ApprovalVO> appListImp(int eno) {
+		return appMapper.appListImp(eno);
+	}
+
+	@Override
+	public List<ApprovalVO> appListRet(int eno) {
+		return appMapper.appListRet(eno);
+	}
+
+	@Override
+	public List<ApprovalVO> appListRef(int eno) {
+		return appMapper.appListRef(eno);
+	}
+
+	@Override
 	public ApprovalVO appRead(String docNo, int eno) {
 		return appMapper.appRead(docNo, eno);
 	}
 
 	@Override
-	public List<ApprovalAttachVO> appAttachList(String docNo) {
-		return appAttachMapper.appAttachList(docNo);
+	public ApprovalVO appReadRec(String docNo, int eno) {
+		return appMapper.appReadRec(docNo, eno);
 	}
 
 	@Override
-	public int getCntUnRead(String docNo) {
-		return appMapper.getCntUnRead(docNo);
+	public ApprovalVO appReadImp(String docNo, int eno) {
+		return appMapper.appReadImp(docNo, eno);
+	}
+
+	@Override
+	public ApprovalVO appReadRet(String docNo, int eno) {
+		return appMapper.appReadRet(docNo, eno);
+	}
+
+	@Override
+	public ApprovalVO appReadRef(String docNo, int eno) {
+		return appMapper.appReadRef(docNo, eno);
 	}
 
 	@Override
@@ -77,5 +105,15 @@ public class ApprovalServiceImpl implements ApprovalService {
 			appAttachMapper.appAttachInsert(attach);
 		});
 		return result;
+	}
+
+	@Override
+	public List<ApprovalAttachVO> appAttachList(String docNo) {
+		return appAttachMapper.appAttachList(docNo);
+	}
+
+	@Override
+	public int getCntUnRead(String docNo) {
+		return appMapper.getCntUnRead(docNo);
 	}
 }

@@ -78,11 +78,18 @@
 					&nbsp;&nbsp;상신함
 				</a>
 			</li>
-
+			
 			<li class="nav-item">
 				<a href="/approval/appBoxReceive" class="nav-link">
 					<i class="far fa-file"></i>
 					&nbsp;&nbsp;수신함
+				</a>
+			</li>
+			
+			<li class="nav-item">
+				<a href="/approval/appBoxImplementation" class="nav-link">
+					<i class="far fa-file"></i>
+					&nbsp;&nbsp;시행함
 				</a>
 			</li>
 
@@ -96,7 +103,7 @@
 			<li class="nav-item">
 				<a href="/approval/appBoxReference" class="nav-link">
 					<i class="far fa-file"></i>
-					&nbsp;&nbsp;수신참조함
+					&nbsp;&nbsp;참조함
 				</a>
 			</li>
 		</ul>
