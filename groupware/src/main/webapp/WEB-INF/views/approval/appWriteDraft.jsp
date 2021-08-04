@@ -10,6 +10,18 @@
 		// window.open("open할 window", "자식창 이름", "팝업창 옵션");
 		openWin = window.open ("appLine", "appLine", "width=800, height=750, resizable = no, scrollbars = no");
 	}
+
+	function appLine1 (tdArr1) {
+		console.log (tdArr1);
+	}
+
+	function appLine2 (tdArr2) {
+		console.log (tdArr2);
+	}
+
+	function appLine3 (tdArr3) {
+		console.log (tdArr3);
+	}
 </script>
 
 <style>
@@ -118,43 +130,98 @@
 												</div>
 											</div>
 										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<label for="colFormLabel" class="col-form-label">수신 및 참조</label>
+												<div class="col">
+													<input type="text" class="form-control" id="colFormLabel" placeholder="선택" disabled>
+												</div>
+											</div>
+										</div>
 									</div>
 
 									<div class="col-md-4">
-										<table class="table table-bordered" style="height: 92.5%; cursor: pointer;" onClick="openChild()">
+										<table class="table table-bordered" style="height: 257px; cursor: pointer;" onClick="openChild()">
 											<tbody>
-												<tr style="height: 0">
-													<td class="text-center align-middle" rowspan="2" style="width: 10%; font-weight: bold;">
+												<tr>
+													<td class="text-center align-middle" rowspan="3" style="width: 10%; font-weight: bold;">
 														결<br>제
 													</td>
-													<td id="position" style="width: 22.5%; height: 10%;"></td>
-													<td style="width: 22.5%;"></td>
-													<td style="width: 22.5%;"></td>
-													<td style="width: 22.5%;"></td>
+													<td style="width: 22.5%; height: 5%;">
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+													</td>
+													<td style="width: 22.5%;">
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+													</td>
+													<td style="width: 22.5%;">
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+													</td>
+													<td style="width: 22.5%;">
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+													</td>
 												</tr>
 
-												<tr style="height: 40%; font-weight: bold; font-size: 16pt;">
+												<tr style="">
 													<td></td>
 													<td></td>
 													<td></td>
 													<td></td>
 												</tr>
 
-												<tr style="height: 0">
-													<td class="text-center align-middle" rowspan="2" style="width: 10%; font-weight: bold;">
+												<tr>
+													<td style="height: 5%;">
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="ename" type="text" disabled />
+													</td>
+													<td>
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="ename" type="text" disabled />
+													</td>
+													<td>
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="ename" type="text" disabled />
+													</td>
+													<td>
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="ename" type="text" disabled />
+													</td>
+												</tr>
+
+												<tr>
+													<td class="text-center align-middle" rowspan="3" style="height: 50%; width: 10%; font-weight: bold;">
 														합<br>의
 													</td>
-													<td style="width: 22.5%; height: 10%;"></td>
-													<td style="width: 22.5%;"></td>
-													<td style="width: 22.5%;"></td>
-													<td style="width: 22.5%;"></td>
+													<td style="width: 22.5%; height: 5%;">
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+													</td>
+													<td style="width: 22.5%;">
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+													</td>
+													<td style="width: 22.5%;">
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+													</td>
+													<td style="width: 22.5%;">
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+													</td>
 												</tr>
 
-												<tr style="height: 40%; font-weight: bold;">
+												<tr style="">
 													<td></td>
 													<td></td>
 													<td></td>
 													<td></td>
+												</tr>
+
+												<tr>
+													<td style="height: 5%;">
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+													</td>
+													<td>
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+													</td>
+													<td>
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+													</td>
+													<td>
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+													</td>
 												</tr>
 											</tbody>
 										</table>
@@ -163,9 +230,9 @@
 									<div class="col">
 										<div class="form-group">
 											<div class="row">
-												<label for="colFormLabel" class="col-form-label">수신 및 참조</label>
+												<label for="colFormLabel" class="col-form-label">시행자</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="부서선택" disabled>
+													<input type="text" class="form-control" id="colFormLabel" placeholder="선택" disabled>
 												</div>
 											</div>
 										</div>
@@ -174,7 +241,7 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">제목</label>
 												<div class="col">
-													<input name="docTitle" type="text" class="form-control" id="appSubtitle" placeholder="제목 입력">
+													<input name="docTitle" type="text" class="form-control" id="appSubtitle" placeholder="제목입력">
 												</div>
 											</div>
 										</div>

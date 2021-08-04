@@ -344,8 +344,6 @@ function showBoardMessageAlert(){
 								<p>사원 소리함</p>
 							</a>
 							</li>
-						
-						
 
 						<li class="nav-item">
 							<a href="../resources/pages/calendar.html" class="nav-link">

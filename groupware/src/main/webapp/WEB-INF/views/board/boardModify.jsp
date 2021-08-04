@@ -94,9 +94,7 @@
               <div class="mailbox-controls with-border text-center">
                 <div class="btn-group">
                  
-                  <button type="button" class="btn btn-default btn-sm" data-container="body" id="list">
-                    <i class="fas fa-list">목 록</a></i>
-                     </button>
+               
                   
                 </div>
               </div>

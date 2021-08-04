@@ -111,9 +111,8 @@
     </section>
       </div><!-- /.container-fluid -->
 <%-- 페이지 나누기를 위해 필요한 값 --%>
-<form action="list" method="get" id="operForm">
-<%--     <input type="hidden" name="type" value="${cri.type}" />
-   <input type="hidden" name="keyword" value="${cri.keyword}" /> --%>
+<form action="" method="get" id="operForm">
+
    <input type="hidden" name="pageNum" value="${cri.pageNum}" />
    <input type="hidden" name="amount" value="${cri.amount}" />
    <input type="hidden" id="bno" name="bno" value="${vo.bno}"/>
