@@ -75,7 +75,7 @@ public class AnonymousController {
 	}
 	
 	@GetMapping("/modifyAnonymous")
-	public void modifyGet(int ano, Model model) {
+	public void modifyGet(int ano, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info(ano+"modify 폼 요청");
 		
 		AnonymousVO vo = service.read(ano);

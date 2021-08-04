@@ -58,13 +58,7 @@
                 </div>
                 
                 
-               <div class="mailbox-controls with-border text-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm" data-container="body" id="list">
-                    <i class="fas fa-list">목 록</i>
-                     </button>
-                </div>
-           		</div>
+            
             
             <!-- /.card-footer -->
             
@@ -86,13 +80,11 @@
  
     <!-- /.content -->
   </div>
-    <form action="modifyAnonymous" method="get" id="operForm">
-<%--<input type="hidden" name="type" value="${cri.type}" />
-   <input type="hidden" name="keyword" value="${cri.keyword}" />--%>
-   <input type="hidden" name="pageNum" value="${cri.pageNum}" />
-   <input type="hidden" name="amount" value="${cri.amount}" />
-	<input type="hidden" name="ano"  value="${vo.ano}"/>
-</form> 
+	<form action="" method="get" id="operForm">
+		<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+		<input type="hidden" name="amount" value="${cri.amount}" />
+		<input type="hidden" name="ano" value="${vo.ano}" />
+	</form>
   <script>
   let ano = ${vo.ano};
   var operForm = $("#operForm");

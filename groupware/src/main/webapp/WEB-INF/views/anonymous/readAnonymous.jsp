@@ -17,7 +17,7 @@
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="/main/home">Home</a></li>
-						<li class="breadcrumb-item active">${vo.atitle}의외침</li>
+						<li class="breadcrumb-item active">${vo.awriter} 의외침</li>
 					</ol>
 				</div>
 			</div>
