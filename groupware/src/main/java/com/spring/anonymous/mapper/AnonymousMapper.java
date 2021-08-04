@@ -2,6 +2,8 @@ package com.spring.anonymous.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.anonymous.domain.AnonymousVO;
 import com.spring.anonymous.domain.Criteria;
 

@@ -55,7 +55,7 @@
               <div class="card-footer">
                 <div class="float-right">
                    <button type="submit" class="btn btn-primary"> 등록하기</button>
-                   <button type="reset" class="btn btn-danger"> 취소하기</button>
+                   <button type="button" class="btn btn-danger" onclick="history.back()"> 취소하기</button>
                 </div>
               </div>
               <!-- /.card-footer -->
@@ -71,5 +71,5 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-   
+
 <%@include file="../includes/footer.jsp" %>
