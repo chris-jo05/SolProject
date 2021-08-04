@@ -121,4 +121,9 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public boolean applineInsert(String docNo, int eno, String category) {
 		return appMapper.applineInsert(docNo, eno, category) > 0 ? true : false;
 	}
+	
+	@Override
+	public int getEno(String ename) {
+		return appMapper.getEno(ename);
+	}
 }

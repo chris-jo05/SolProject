@@ -29,4 +29,5 @@ public interface ApprovalService {
 	
 	// 결재선
 	public boolean applineInsert(String docNo, int eno, String category);
+	public int getEno(String ename);
 }

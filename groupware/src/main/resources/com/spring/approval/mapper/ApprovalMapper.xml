@@ -96,6 +96,9 @@
 	<insert id="appWrite1">
 		insert into doc(docNo, docClass, docDate, dno, eno, docTitle, docContent)
 		values(docNO('now'), #{docClass}, #{docDate}, #{dno}, #{eno}, #{docTitle}, #{docContent})
+		<selectKey keyProperty="doc_seq" order="AFTER" resultType="int">
+			select DOC_SEQ.currval from dual
+		</selectKey>
 	</insert>
 
 	<!-- 결제문서 작성(근태구분 및 기간 O) -->
@@ -106,6 +109,10 @@
 	
 	<insert id="applineInsert">
 		insert into doc_lineapp(docNo, eno, doc_lineAppDate, doc_lineCategory)
-		values(#{docNO}, #{eno}, sysdate, #{category})
+		values(#{docNo}, #{eno}, sysdate, #{category})
 	</insert>
+	
+	<select id="getEno" resultType="int">
+		select eno from emp where ename = #{ename}
+	</select>
 </mapper>

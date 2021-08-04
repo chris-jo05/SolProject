@@ -1,5 +1,6 @@
 package com.spring.approval.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -68,14 +69,73 @@ public class ApprovalController {
 
 	@PostMapping("/appWriteDraft")
 	public String writeDraft(ApprovalVO appWrite1, RedirectAttributes rttr) {
+		
+		int eno = service.getEno(appWrite1.getSign_ename1());
+		
 		log.info("기안서 상신" + appWrite1);
-
+		log.info("결재 직급 1 : " + appWrite1.getSign_position1() + ", 결재 사원명 1 : " + appWrite1.getSign_ename1() + ", 결재 사원번호 : " + eno);
+		log.info("결재 직급 2 : " + appWrite1.getSign_position2() + ", 결재 사원명 2 : " + appWrite1.getSign_ename2());
+		log.info("결재 직급 3 : " + appWrite1.getSign_position3() + ", 결재 사원명 3 : " + appWrite1.getSign_ename3());
+		log.info("결재 직급 4 : " + appWrite1.getSign_position4() + ", 결재 사원명 4 : " + appWrite1.getSign_ename4());
+		
+		log.info("합의 직급 1 : " + appWrite1.getCon_position1() + ", 합의 사원명 1 : " + appWrite1.getCon_ename1());
+		log.info("합의 직급 2 : " + appWrite1.getCon_position2() + ", 합의 사원명 2 : " + appWrite1.getCon_ename2());
+		log.info("합의 직급 3 : " + appWrite1.getCon_position3() + ", 합의 사원명 3 : " + appWrite1.getCon_ename3());
+		log.info("합의 직급 4 : " + appWrite1.getCon_position4() + ", 합의 사원명 4 : " + appWrite1.getCon_ename4());
+		
 		// 첨부파일 확인
 		if (appWrite1.getAppAttachList() != null) {
 			appWrite1.getAppAttachList().forEach(attach -> log.info("" + attach));
 		}
 
 		int result = service.appWrite1(appWrite1);
+		
+		Calendar cal = Calendar.getInstance();
+		int month = (cal.get(Calendar.MONTH) + 1);
+		String now = cal.get(Calendar.YEAR) + "" + ((month > 9) ? "" : "0") + month + "-" + appWrite1.getDoc_seq();
+		log.info("문서 시퀀스 : " + appWrite1.getDoc_seq() + ", 문서번호 : " + now);
+		
+		if(!appWrite1.getSign_position1().equals("")) {
+			eno = service.getEno(appWrite1.getSign_ename1());
+			
+			service.applineInsert(now, eno, "결재");
+		}
+		if(!appWrite1.getSign_position2().equals("")) {
+			eno = service.getEno(appWrite1.getSign_ename2());
+			
+			service.applineInsert(now, eno, "결재");
+		}
+		if(!appWrite1.getSign_position3().equals("")) {
+			eno = service.getEno(appWrite1.getSign_ename3());
+			
+			service.applineInsert(now, eno, "결재");
+		}
+		if(!appWrite1.getSign_position4().equals("")) {
+			eno = service.getEno(appWrite1.getSign_ename4());
+			
+			service.applineInsert(now, eno, "결재");
+		}
+		
+		if(!appWrite1.getCon_position1().equals("")) {
+			eno = service.getEno(appWrite1.getCon_ename1());
+			
+			service.applineInsert(now, eno, "합의");
+		}
+		if(!appWrite1.getCon_position2().equals("")) {
+			eno = service.getEno(appWrite1.getCon_ename2());
+			
+			service.applineInsert(now, eno, "합의");
+		}
+		if(!appWrite1.getCon_position3().equals("")) {
+			eno = service.getEno(appWrite1.getCon_ename3());
+			
+			service.applineInsert(now, eno, "합의");
+		}
+		if(!appWrite1.getCon_position4().equals("")) {
+			eno = service.getEno(appWrite1.getCon_ename4());
+			
+			service.applineInsert(now, eno, "합의");
+		}
 		
 		if (result > 0) {
 			rttr.addFlashAttribute("result", appWrite1.getDocNo());

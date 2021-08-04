@@ -31,4 +31,28 @@ public class ApprovalVO {
 	
 	//첨부 파일 리스트
 	private List<ApprovalAttachVO> appAttachList;
+	
+	// 결재선 정보
+	private String sign_position1;
+	private String sign_position2;
+	private String sign_position3;
+	private String sign_position4;
+	
+	private String sign_ename1;
+	private String sign_ename2;
+	private String sign_ename3;
+	private String sign_ename4;
+	
+	private String con_position1;
+	private String con_position2;
+	private String con_position3;
+	private String con_position4;
+	
+	private String con_ename1;
+	private String con_ename2;
+	private String con_ename3;
+	private String con_ename4;
+	
+	private int doc_seq;
+	
 }

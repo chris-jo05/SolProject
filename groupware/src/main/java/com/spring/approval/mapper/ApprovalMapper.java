@@ -29,4 +29,5 @@ public interface ApprovalMapper {
 	
 	// 결재선
 	public int applineInsert(@Param("docNo") String docNo, @Param("eno") int eno, @Param("category") String category);
+	public int getEno(String ename);
 }
