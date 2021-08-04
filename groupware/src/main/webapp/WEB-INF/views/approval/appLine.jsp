@@ -351,7 +351,63 @@
 			window.opener.appLine1(tdArr1);
 			window.opener.appLine2(tdArr2);
 			window.opener.appLine3(tdArr3);
-
+			
+			
+			var sign_position = "sign_position";
+			var sign_ename = "sign_ename";
+			
+			var con_position = "con_position";
+			var con_ename = "con_ename";
+			
+			var sign_cnt = 1;
+			var con_cnt = 1;
+			
+			// 결재선 초기화
+			for(var i = 1; i <= 4; i++) {
+				window.opener.document.getElementById(sign_position + i).value = "";
+				window.opener.document.getElementById(sign_ename + i).value = "";
+				
+				window.opener.document.getElementById(con_position + 1).value = "";
+				window.opener.document.getElementById(con_ename + 1).value = "";
+			}
+			
+			for(var i = 0; i < tdArr1.length; i++) {		
+				if(tdArr1[i].category == "결재") {
+					var position_id = sign_position + sign_cnt;
+					var ename_id = sign_ename + sign_cnt;
+					
+					window.opener.document.getElementById(position_id).value = tdArr1[i].position;
+					window.opener.document.getElementById(ename_id).value = tdArr1[i].ename;
+					
+					sign_cnt++;
+				} else {
+					var position_id = con_position + con_cnt;
+					var ename_id = con_ename + con_cnt;
+					
+					window.opener.document.getElementById(position_id).value = tdArr1[i].position;
+					window.opener.document.getElementById(ename_id).value = tdArr1[i].ename;
+					
+					con_cnt++;
+				}
+			}
+			
+			var refs = "";
+			for(var i = 0; i < tdArr2.length; i++) {
+				var ref = tdArr2[i].ename + "(" + tdArr2[i].dname + ") ";
+				
+				refs += ref;
+			}
+			window.opener.document.getElementById("refs").value = refs;
+			
+			var workers = "";
+			for(var i = 0; i < tdArr3.length; i++) {
+				var worker = tdArr3[i].ename + "(" + tdArr3[i].dname + ") ";
+				
+				workers += worker;
+			}
+			window.opener.document.getElementById("workers").value = workers;
+			
+			window.close();
 			
 		});
 	</script>

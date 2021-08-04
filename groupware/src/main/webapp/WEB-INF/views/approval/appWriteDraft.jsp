@@ -88,7 +88,7 @@
 							<div class="card-body">
 								<div class="col" style="float: right; padding: 0px;">
 									<div class="form-group" style="float: right;">
-										<button type="submit" class="btn btn-primary btn-sm" style="margin-right: 10px;">상신</button>
+										<button type="submit" class="btn btn-primary btn-sm" id="submit" style="margin-right: 10px;">상신</button>
 										<button type="reset" class="btn btn-secondary btn-sm" style="" onclick="location.href='appMain'">취소</button>
 									</div>
 								</div>
@@ -135,7 +135,7 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">수신 및 참조</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="선택" disabled>
+													<input type="text" class="form-control" id="refs" placeholder="선택" disabled>
 												</div>
 											</div>
 										</div>
@@ -149,16 +149,16 @@
 														결<br>제
 													</td>
 													<td style="width: 22.5%; height: 5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="sign_position1" type="text" disabled />
 													</td>
 													<td style="width: 22.5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="sign_position2" type="text" disabled />
 													</td>
 													<td style="width: 22.5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="sign_position3" type="text" disabled />
 													</td>
 													<td style="width: 22.5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="sign_position4" type="text" disabled />
 													</td>
 												</tr>
 
@@ -171,16 +171,16 @@
 
 												<tr>
 													<td style="height: 5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="ename" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="sign_ename1" type="text" disabled />
 													</td>
 													<td>
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="ename" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="sign_ename2" type="text" disabled />
 													</td>
 													<td>
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="ename" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="sign_ename3" type="text" disabled />
 													</td>
 													<td>
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="ename" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="sign_ename4" type="text" disabled />
 													</td>
 												</tr>
 
@@ -189,16 +189,16 @@
 														합<br>의
 													</td>
 													<td style="width: 22.5%; height: 5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="con_position1" type="text" disabled />
 													</td>
 													<td style="width: 22.5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="con_position2" type="text" disabled />
 													</td>
 													<td style="width: 22.5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="con_position3" type="text" disabled />
 													</td>
 													<td style="width: 22.5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="con_position4" type="text" disabled />
 													</td>
 												</tr>
 
@@ -211,16 +211,16 @@
 
 												<tr>
 													<td style="height: 5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="con_ename1" type="text" disabled />
 													</td>
 													<td>
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="con_ename2" type="text" disabled />
 													</td>
 													<td>
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="con_ename3" type="text" disabled />
 													</td>
 													<td>
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="position" type="text" disabled />
+														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="con_ename4" type="text" disabled />
 													</td>
 												</tr>
 											</tbody>
@@ -232,7 +232,7 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">시행자</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="선택" disabled>
+													<input type="text" class="form-control" id="workers" placeholder="선택" disabled>
 												</div>
 											</div>
 										</div>
@@ -311,6 +311,11 @@
 		
 		// Initialize Select2 Elements
 		$ ('.select2').select2 ()
+		
+		// 
+		$("#submit").click(function() {
+			console.log("상신 클릭됨");
+		})
 	})
 
 	// file Input
