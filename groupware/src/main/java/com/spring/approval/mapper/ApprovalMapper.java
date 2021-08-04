@@ -26,4 +26,7 @@ public interface ApprovalMapper {
 	// 파일 첨부
 	public List<ApprovalAttachVO> appAttachList(String docNo);
 	public int getCntUnRead(String docNo);
+	
+	// 결재선
+	public int applineInsert(@Param("docNo") String docNo, @Param("eno") int eno, @Param("category") String category);
 }

@@ -77,7 +77,7 @@
 				</div>
 
 				<div class="col-md-9">
-					<form action="" method="post" role="form">
+					<form action="" method="post" id="submitForm" role="form">
 						<div class="card card-primary card-outline">
 							<div class="card-header">
 								<div class="card-title">
@@ -300,6 +300,8 @@
 
 <!-- Page specific script -->
 <script>
+	let submitForm = $("#submitForm");	
+	
 	$ (function () {
 		// Summernote
 		$ ('#summernote').summernote ()
@@ -313,8 +315,16 @@
 		$ ('.select2').select2 ()
 		
 		// 
-		$("#submit").click(function() {
+		$("#submit").click(function(e) {
+			//e.preventDefault();
 			console.log("상신 클릭됨");
+			
+			let a = "확인";
+			
+			submitForm.attr("action","/approval/appWriteDraft");
+			submitForm.submit();
+			
+			console.log(a);
 		})
 	})
 

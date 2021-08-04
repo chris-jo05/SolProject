@@ -103,4 +103,9 @@
 		insert into doc(docNo, docClass, docDate, dno, eno, docTitle, docContent, docStartDate, docEndDate, docKind)
 		values(docNO('now'), #{docClass}, #{docDate}, #{dno}, #{eno}, #{docTitle}, #{docContent}, #{docStartDate}, #{docEndDate}, #{docKind})
 	</insert>
+	
+	<insert id="applineInsert">
+		insert into doc_lineapp(docNo, eno, doc_lineAppDate, doc_lineCategory)
+		values(#{docNO}, #{eno}, sysdate, #{category})
+	</insert>
 </mapper>

@@ -116,4 +116,9 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public int getCntUnRead(String docNo) {
 		return appMapper.getCntUnRead(docNo);
 	}
+	
+	@Override
+	public boolean applineInsert(String docNo, int eno, String category) {
+		return appMapper.applineInsert(docNo, eno, category) > 0 ? true : false;
+	}
 }

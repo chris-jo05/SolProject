@@ -76,7 +76,7 @@ public class ApprovalController {
 		}
 
 		int result = service.appWrite1(appWrite1);
-
+		
 		if (result > 0) {
 			rttr.addFlashAttribute("result", appWrite1.getDocNo());
 			return "redirect: appMain";
