@@ -11,8 +11,80 @@
 		and doc.eno = #{eno}
 	</select>
 
-	<!-- 결제문서 불러오기-->
+	<!-- 수신함 List -->
+	<select id="appListRec" resultType="com.spring.approval.domain.ApprovalVO">
+		select doc.*, dept.dname, emp.ename
+		from doc, dept, emp
+		where doc.dno = dept.dno
+		and doc.eno = emp.eno
+		and doc.eno = #{eno}
+	</select>
+
+	<!-- 시행함 List -->
+	<select id="appListImp" resultType="com.spring.approval.domain.ApprovalVO">
+		select doc.*, dept.dname, emp.ename
+		from doc, dept, emp
+		where doc.dno = dept.dno
+		and doc.eno = emp.eno
+		and doc.eno = #{eno}
+	</select>
+
+	<!-- 반려함 List -->
+	<select id="appListRet" resultType="com.spring.approval.domain.ApprovalVO">
+		select doc.*, dept.dname, emp.ename
+		from doc, dept, emp
+		where doc.dno = dept.dno
+		and doc.eno = emp.eno
+		and doc.eno = #{eno}
+	</select>
+
+	<!-- 참조함 List -->
+	<select id="appListRef" resultType="com.spring.approval.domain.ApprovalVO">
+		select doc.*, dept.dname, emp.ename
+		from doc, dept, emp
+		where doc.dno = dept.dno
+		and doc.eno = emp.eno
+		and doc.eno = #{eno}
+	</select>
+
+	<!-- 상신문서 불러오기 -->
 	<select id="appRead" resultType="com.spring.approval.domain.ApprovalVO">
+		select doc.*, dept.dname, emp.ename
+		from doc, dept, emp
+		where doc.dno = dept.dno
+		and doc.eno = emp.eno
+		and docNo = #{docNo}
+	</select>
+
+	<!-- 수신문서 불러오기 -->
+	<select id="appReadRec" resultType="com.spring.approval.domain.ApprovalVO">
+		select doc.*, dept.dname, emp.ename
+		from doc, dept, emp
+		where doc.dno = dept.dno
+		and doc.eno = emp.eno
+		and docNo = #{docNo}
+	</select>
+
+	<!-- 시행문서 불러오기 -->
+	<select id="appReadImp" resultType="com.spring.approval.domain.ApprovalVO">
+		select doc.*, dept.dname, emp.ename
+		from doc, dept, emp
+		where doc.dno = dept.dno
+		and doc.eno = emp.eno
+		and docNo = #{docNo}
+	</select>
+
+	<!-- 반려문서 불러오기 -->
+	<select id="appReadRet" resultType="com.spring.approval.domain.ApprovalVO">
+		select doc.*, dept.dname, emp.ename
+		from doc, dept, emp
+		where doc.dno = dept.dno
+		and doc.eno = emp.eno
+		and docNo = #{docNo}
+	</select>
+
+	<!-- 참조문서 불러오기 -->
+	<select id="appReadRef" resultType="com.spring.approval.domain.ApprovalVO">
 		select doc.*, dept.dname, emp.ename
 		from doc, dept, emp
 		where doc.dno = dept.dno

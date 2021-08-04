@@ -60,7 +60,7 @@ public class ApprovalController {
 	public void line(Model model) {
 		log.info("결재선으로 이동");
 	}
-	
+
 	@GetMapping("/appWriteDraft")
 	public void drift() {
 		log.info("기안서로 이동");
@@ -209,6 +209,11 @@ public class ApprovalController {
 	public void boxreceive() {
 		log.info("수신함으로 이동");
 	}
+	
+	@GetMapping("/appBoxImplementation")
+	public void boxrequest() {
+		log.info("시행함 이동");
+	}
 
 	@GetMapping("/appBoxReturn")
 	public void boxreturn() {
@@ -217,7 +222,7 @@ public class ApprovalController {
 
 	@GetMapping("/appBoxReference")
 	public void boxreference() {
-		log.info("수신참조함으로 이동");
+		log.info("참조함으로 이동");
 	}
 
 	@GetMapping("/appAttachList")
@@ -226,5 +231,5 @@ public class ApprovalController {
 
 		return new ResponseEntity<List<ApprovalAttachVO>>(service.appAttachList(docNo), HttpStatus.OK);
 	}
-	
+
 }
