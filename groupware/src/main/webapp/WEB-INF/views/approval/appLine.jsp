@@ -280,7 +280,7 @@
 			    
 				// tr의 모든 값을 배열에 담는다.
 				rowData1.push (tr.text ());
-				
+
 				// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
 				var turn = td.eq (1).text ();
 				var category = td.eq (2).text ();
@@ -344,9 +344,9 @@
 				// 가져온 값을 배열에 담는다.
 				tdArr3.push (arr);
 		    });
-			console.log(tdArr1);
-			console.log(tdArr2);
-			console.log(tdArr3);
+			console.log(tdArr1); // 결재 + 합의
+			console.log(tdArr2); // 수신참조
+			console.log(tdArr3); // 시행자
 			
 			window.opener.appLine1(tdArr1);
 			window.opener.appLine2(tdArr2);
