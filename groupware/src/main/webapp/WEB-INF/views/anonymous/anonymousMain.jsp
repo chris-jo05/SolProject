@@ -43,8 +43,8 @@
 												<option value="T" <c:out value="${pageVO.cri.type=='T'?'selected':''}"/>>제목</option>
 												<option value="C" <c:out value="${pageVO.cri.type=='C'?'selected':''}"/>>내용</option>
 												<option value="W" <c:out value="${pageVO.cri.type=='W'?'selected':''}"/>>작성자</option>
-												<option value="TC" <c:out value="${pageVO.cri.type=='TC'?'selected':''}"/>>제목 or 내용</option>
-												<option value="TCW" <c:out value="${pageVO.cri.type=='TCW'?'selected':''}"/>>제목 or 내용 or 작성자</option>
+												<option value="TC" <c:out value="${pageVO.cri.type=='TC'?'selected':''}"/>>제목 + 내용</option>
+												<option value="TCW" <c:out value="${pageVO.cri.type=='TCW'?'selected':''}"/>>제목 + 내용 + 작성자</option>
 											</select>
 										</div>
 										<!-- /btn-group -->

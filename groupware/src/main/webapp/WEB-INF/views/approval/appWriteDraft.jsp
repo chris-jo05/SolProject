@@ -59,7 +59,9 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="/main/home">Home</a></li>
+						<li class="breadcrumb-item">
+							<a href="/main/home">Home</a>
+						</li>
 						<li class="breadcrumb-item active">전자 결재</li>
 					</ol>
 				</div>
@@ -81,7 +83,8 @@
 						<div class="card card-primary card-outline">
 							<div class="card-header">
 								<div class="card-title">
-									<h3 class="card-title" style="font-weight: bold;">기안서</h3> <input type="hidden" name="docClass" value="기안서" />
+									<h3 class="card-title" style="font-weight: bold;">기안서</h3>
+									<input type="hidden" name="docClass" value="기안서" />
 								</div>
 							</div>
 
@@ -117,7 +120,8 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">기안부서</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled> <input type="hidden" name="dno" value="${login.dno}" />
+													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.dname}" disabled>
+													<input type="hidden" name="dno" value="${login.dno}" />
 												</div>
 											</div>
 										</div>
@@ -126,7 +130,8 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">기안자</label>
 												<div class="col">
-													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled> <input type="hidden" name="eno" value="${login.eno}" />
+													<input type="text" class="form-control" id="colFormLabel" placeholder="${login.ename}" disabled>
+													<input type="hidden" name="eno" value="${login.eno}" />
 												</div>
 											</div>
 										</div>
@@ -146,7 +151,9 @@
 											<tbody>
 												<tr>
 													<td class="text-center align-middle" rowspan="3" style="width: 10%; font-weight: bold;">
-														결<br>제
+														결
+														<br>
+														제
 													</td>
 													<td style="width: 22.5%; height: 5%;">
 														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="sign_position1" type="text" disabled />
@@ -186,7 +193,9 @@
 
 												<tr>
 													<td class="text-center align-middle" rowspan="3" style="height: 50%; width: 10%; font-weight: bold;">
-														합<br>의
+														합
+														<br>
+														의
 													</td>
 													<td style="width: 22.5%; height: 5%;">
 														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" class="position" id="con_position1" type="text" disabled />
@@ -313,19 +322,7 @@
 		
 		// Initialize Select2 Elements
 		$ ('.select2').select2 ()
-		
-		// 
-		$("#submit").click(function(e) {
-			//e.preventDefault();
-			console.log("상신 클릭됨");
-			
-			let a = "확인";
-			
-			submitForm.attr("action","/approval/appWriteDraft");
-			submitForm.submit();
-			
-			console.log(a);
-		})
+
 	})
 
 	// file Input

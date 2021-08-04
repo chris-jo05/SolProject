@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.anonymous.mapper.AnonymousReplyMapper">
+
+	<insert id="insert">
+		insert into anonymous_reply(reno,ano,rwriter,rcontents,rpassword)
+		values(anonymous_reply_seq.nextval,#{ano},#{rwriter},#{rcontents},#{rpassword})
+	</insert>
+
+	<select id="replylist" parameterType="int" resultType="com.spring.anonymous.domain.AnonymousReplyVO">
+		select * from anonymous_reply where ano=#{ano} order by reno desc
+	</select>
+	
+	<delete id="delete">
+		delete from anonymous_reply where reno=#{reno}
+	</delete>	
+	
+	<select id="replyCheckPw" parameterType="int" resultType="String">
+		select rpassword from anonymous_reply where reno=#{reno}
+	</select>
+	
+	
+</mapper>

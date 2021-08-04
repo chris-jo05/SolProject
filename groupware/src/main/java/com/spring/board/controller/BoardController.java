@@ -83,7 +83,7 @@ public class BoardController {
 		}
 	}
 
-	@GetMapping({ "/boardRead", "/boardModify" })
+	@GetMapping("/boardRead")
 	public void read(int bno, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info(bno + "번의 공지사항을 읽습니다" + "cri:" + cri);
 		BoardVO vo = service.read(bno);

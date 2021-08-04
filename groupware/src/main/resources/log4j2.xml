@@ -29,6 +29,7 @@
   	<Logger name="com.spring.teamView.mapper" level="debug"/>
   	<Logger name="com.spring.chat.mapper" level="debug"/>
 
+
   	<Logger name="com.spring.mail.util" level="info"/>
   	<Logger name="com.spring.board.util" level="info"/>
   	
