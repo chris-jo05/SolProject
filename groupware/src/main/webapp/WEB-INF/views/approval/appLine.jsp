@@ -77,10 +77,7 @@
 
 						<div class="card-body" style="height: 500px;">
 							<div class="form-group">
-								<input type="button" id="btn1" class="btn btn-secondary btn-sm" value="결재">
-								<input type="button" id="btn2" class="btn btn-secondary btn-sm" value="합의">
-								<input type="button" id="btn3" class="btn btn-secondary btn-sm" value="참조">
-								<input type="button" id="btn4" class="btn btn-secondary btn-sm" value="시행">
+								<input type="button" id="btn1" class="btn btn-secondary btn-sm" value="결재"> <input type="button" id="btn2" class="btn btn-secondary btn-sm" value="합의"> <input type="button" id="btn3" class="btn btn-secondary btn-sm" value="참조"> <input type="button" id="btn4" class="btn btn-secondary btn-sm" value="시행">
 							</div>
 
 							<div class="form-group" style="height: 150px; overflow: auto">
@@ -277,7 +274,7 @@
 			// 결제 및 합의
 		    checkbox1.each (function (i) {
 		    	var tr = checkbox1.parent ().parent ().eq (i);
-				var td = tr.children ();;
+				var td = tr.children ();
 			    console.log (tr)
 			    console.log (td)
 			    
@@ -408,6 +405,7 @@
 					// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
 					var tr = checkbox.parent ().parent ().eq (i);
 					var td = tr.children ();
+					var turn = tr.index();
 					console.log(tr);
 					console.log(td);
 					
@@ -420,7 +418,7 @@
 					var ename = td.eq (3).text () ;
 					var position = td.eq (4).text ();
 					
-					var arr = {category, cNo, dname, ename, eno, position};
+					var arr = {category, cNo, dname, ename, eno, position, turn};
 					
 					console.log(arr);
 					
@@ -602,6 +600,7 @@
 					innerHtml += '	<td style="text-align: center;">' + tdArr[i].position + '</td>';
 					innerHtml += '	<td style="display: none;">' + tdArr[i].eno + '</td>';
 					innerHtml += '	<td style="display: none;">' + tdArr[i].cNo + '</td>';
+					innerHtml += '	<td style="display: none;">' + tdArr[i].turn + '</td>';
 					innerHtml += '</tr>';
 				}
 				return innerHtml;
