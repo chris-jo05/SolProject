@@ -42,13 +42,6 @@ public class BoardController {
 	public void main(Model model, Criteria cri) {
 		log.info("공지사항 페이지로 이동합니다.");
 
-		/*
-		 * List<BoardVO> list = service.list(cri); int total = service.total(cri);
-		 * 
-		 * model.addAttribute("list", list); // 페이지 나누기 model.addAttribute("pageVO", new
-		 * PageVO(cri, total));
-		 */
-
 		
 		  if(cri.getKeyword() == null) { 
 		  List<BoardVO> list = service.list(cri); 
@@ -93,7 +86,15 @@ public class BoardController {
 		model.addAttribute("vo", vo); // /board/read or /board/modify
 		
 	}
-
+	
+	@GetMapping("/boardModify")
+	public void updateGet(int bno, @ModelAttribute("cri") Criteria cri, Model model) {
+		log.info("공지사항 수정 페이지로 이동합니다.");
+		BoardVO vo = service.read(bno);
+		model.addAttribute("vo", vo); // /board/read or /board/modify
+		
+	}  
+	
 	@PostMapping("/boardModify")
 	public String update(BoardVO vo, Criteria cri, RedirectAttributes rttr, HttpSession session) {
 		log.info("수정작업 요청");
