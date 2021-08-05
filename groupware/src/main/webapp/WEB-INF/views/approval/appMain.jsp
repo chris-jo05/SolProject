@@ -19,9 +19,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item">
-							<a href="/main/home">Home</a>
-						</li>
+						<li class="breadcrumb-item"><a href="/main/home">Home</a></li>
 						<li class="breadcrumb-item active">전자 결재</li>
 					</ol>
 				</div>
@@ -108,12 +106,21 @@
 <script>
 	$ (function () {
 		$ ("#example1").DataTable ({
-			"responsive" : true, "lengthChange" : false, "autoWidth" : false, "buttons" : [
+			"responsive" : true,
+			"lengthChange" : false,
+			"autoWidth" : false,
+			"buttons" : [
 					"copy", "csv", "excel", "pdf", "print", "colvis"
 			]
 		}).buttons ().container ().appendTo ('#example1_wrapper .col-md-6:eq(0)');
 		$ ('#example2').DataTable ({
-			"paging" : true, "lengthChange" : false, "searching" : false, "ordering" : true, "info" : true, "autoWidth" : false, "responsive" : true,
+			"paging" : true,
+			"lengthChange" : false,
+			"searching" : false,
+			"ordering" : true,
+			"info" : true,
+			"autoWidth" : false,
+			"responsive" : true,
 		});
 	});
 </script>
