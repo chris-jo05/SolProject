@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.approval.domain.ApprovalAttachVO;
 import com.spring.approval.domain.ApprovalVO;
+import com.spring.approval.domain.DoclineVO;
 import com.spring.approval.service.ApprovalService;
 import com.spring.member.domain.MemberVo;
 import com.spring.teamView.domain.TeamMemberVo;
@@ -53,8 +54,12 @@ public class ApprovalController {
 		log.info(member.getEno());
 		ApprovalVO appRead = service.appRead(docNo, member.getEno());
 		log.info(appRead.getEno());
-
+		
+		List<DoclineVO> dls = service.getDoclines(docNo);
+		log.info(dls);
+		
 		model.addAttribute("appRead", appRead);
+		model.addAttribute("dls", dls);
 	}
 
 	@GetMapping("/appLine")

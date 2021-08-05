@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.approval.domain.ApprovalAttachVO;
 import com.spring.approval.domain.ApprovalVO;
+import com.spring.approval.domain.DoclineVO;
 import com.spring.approval.mapper.ApprovalAttachMapper;
 import com.spring.approval.mapper.ApprovalMapper;
 
@@ -125,5 +126,10 @@ public class ApprovalServiceImpl implements ApprovalService {
 	@Override
 	public int getEno(String ename) {
 		return appMapper.getEno(ename);
+	}
+	
+	@Override
+	public List<DoclineVO> getDoclines(String docNo) {
+		return appMapper.getDoclines(docNo);
 	}
 }

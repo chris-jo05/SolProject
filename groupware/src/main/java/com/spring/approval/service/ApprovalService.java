@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.spring.approval.domain.ApprovalAttachVO;
 import com.spring.approval.domain.ApprovalVO;
+import com.spring.approval.domain.DoclineVO;
 
 public interface ApprovalService {
 	public List<ApprovalVO> appList(int eno);
@@ -30,4 +31,5 @@ public interface ApprovalService {
 	// 결재선
 	public boolean applineInsert(String docNo, int eno, String category);
 	public int getEno(String ename);
+	public List<DoclineVO> getDoclines(String docNo);
 }

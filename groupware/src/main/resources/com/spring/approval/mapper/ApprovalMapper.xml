@@ -49,11 +49,10 @@
 
 	<!-- 상신문서 불러오기 -->
 	<select id="appRead" resultType="com.spring.approval.domain.ApprovalVO">
-		select doc.*, dept.dname, emp.ename, docline.*
-		from doc, dept, emp, docline
+		select doc.*, dept.dname, emp.ename
+		from doc, dept, emp
 		where doc.dno = dept.dno
 		and doc.eno = emp.eno
-		and doc.docNo = docline.docNo
 		and docNo = #{docNo}
 	</select>
 
@@ -117,7 +116,10 @@
 	<select id="getEno" resultType="int">
 		select eno from emp where ename = #{ename}
 	</select>
-		
+	
+	<select id="getDoclines" resultType="com.spring.approval.domain.DoclineVO">
+		select dl.*, e.ename, e.position from docline dl, emp e where dl.eno = e.eno and dl.docNo = #{docNo}
+	</select>
 	<!-- 결재선 작성 -->
 	
 </mapper>
