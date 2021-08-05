@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../includes/header.jsp"%>
+
 
 <!-- DataTables -->
 <link rel="stylesheet" href="../resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -17,9 +20,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item">
-							<a href="/main/home">Home</a>
-						</li>
+						<li class="breadcrumb-item"><a href="/main/home">Home</a></li>
 						<li class="breadcrumb-item active">전자 결재</li>
 					</ol>
 				</div>
@@ -40,7 +41,7 @@
 			<div class="col-md-9">
 				<div class="card card-primary card-outline">
 					<div class="card-header">
-						<h3 class="card-title">수신함</h3>
+						<h3 class="card-title">참조함</h3>
 					</div>
 					<!-- /.card-header -->
 
@@ -59,15 +60,21 @@
 							</thead>
 
 							<tbody>
-								<tr>
-									<td>2021-07-001</td>
-									<td>기안서</td>
-									<td>신규 개발 요청 기안서</td>
-									<td>2021/07/03 09:48</td>
-									<td>영업 1팀</td>
-									<td>최익현</td>
-									<td>결제완료</td>
-								</tr>
+								<c:forEach var="appList" items="${appList}">
+									<tr>
+										<td>${appList.docNo}</td>
+										<td>${appList.docClass}</td>
+										<td>
+											<a href="/approval/appRead?docNo=${appList.docNo}" class="move">${appList.docTitle}</a>
+										</td>
+										<td>
+											<fmt:formatDate pattern="yyyy-MM-dd kk:ss" value="${appList.docDate}" />
+										</td>
+										<td>${appList.dname}</td>
+										<td>${appList.ename}</td>
+										<td></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -100,12 +107,21 @@
 <script>
 	$ (function () {
 		$ ("#example1").DataTable ({
-			"responsive" : true, "lengthChange" : false, "autoWidth" : false, "buttons" : [
+			"responsive" : true,
+			"lengthChange" : false,
+			"autoWidth" : false,
+			"buttons" : [
 					"copy", "csv", "excel", "pdf", "print", "colvis"
 			]
 		}).buttons ().container ().appendTo ('#example1_wrapper .col-md-6:eq(0)');
 		$ ('#example2').DataTable ({
-			"paging" : true, "lengthChange" : false, "searching" : false, "ordering" : true, "info" : true, "autoWidth" : false, "responsive" : true,
+			"paging" : true,
+			"lengthChange" : false,
+			"searching" : false,
+			"ordering" : true,
+			"info" : true,
+			"autoWidth" : false,
+			"responsive" : true,
 		});
 	});
 </script>

@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../includes/header.jsp"%>
 
 <!-- DataTables -->
@@ -17,9 +19,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item">
-							<a href="/main/home">Home</a>
-						</li>
+						<li class="breadcrumb-item"><a href="/main/home">Home</a></li>
 						<li class="breadcrumb-item active">전자 결재</li>
 					</ol>
 				</div>
@@ -59,15 +59,21 @@
 							</thead>
 
 							<tbody>
-								<tr>
-									<td>2021-07-001</td>
-									<td>기안서</td>
-									<td>신규 구매 기안서</td>
-									<td>2021/07/03 09:48</td>
-									<td>개발 1팀</td>
-									<td>김판호</td>
-									<td>상신</td>
-								</tr>
+								<c:forEach var="appList" items="${appList}">
+									<tr>
+										<td>${appList.docNo}</td>
+										<td>${appList.docClass}</td>
+										<td>
+											<a href="/approval/appRead?docNo=${appList.docNo}" class="move">${appList.docTitle}</a>
+										</td>
+										<td>
+											<fmt:formatDate pattern="yyyy-MM-dd kk:ss" value="${appList.docDate}" />
+										</td>
+										<td>${appList.dname}</td>
+										<td>${appList.ename}</td>
+										<td></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -98,14 +104,16 @@
 
 <!-- Page specific script -->
 <script>
-	$(function() {
-		$("#example1").DataTable({
+	$ (function () {
+		$ ("#example1").DataTable ({
 			"responsive" : true,
 			"lengthChange" : false,
 			"autoWidth" : false,
-			"buttons" : [ "copy", "csv", "excel", "pdf", "print", "colvis" ]
-		}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-		$('#example2').DataTable({
+			"buttons" : [
+					"copy", "csv", "excel", "pdf", "print", "colvis"
+			]
+		}).buttons ().container ().appendTo ('#example1_wrapper .col-md-6:eq(0)');
+		$ ('#example2').DataTable ({
 			"paging" : true,
 			"lengthChange" : false,
 			"searching" : false,

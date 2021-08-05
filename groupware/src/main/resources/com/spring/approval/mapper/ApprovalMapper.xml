@@ -13,11 +13,11 @@
 
 	<!-- 수신함 List -->
 	<select id="appListRec" resultType="com.spring.approval.domain.ApprovalVO">
-		select doc.*, dept.dname, emp.ename
-		from doc, dept, emp
+		select doc.*, dept.dname, emp.ename, docline.*
+		from doc, dept, emp, docline
 		where doc.dno = dept.dno
 		and doc.eno = emp.eno
-		and doc.eno = #{eno}
+		and docline.eno = #{eno}
 	</select>
 
 	<!-- 시행함 List -->
@@ -49,10 +49,11 @@
 
 	<!-- 상신문서 불러오기 -->
 	<select id="appRead" resultType="com.spring.approval.domain.ApprovalVO">
-		select doc.*, dept.dname, emp.ename
-		from doc, dept, emp
+		select doc.*, dept.dname, emp.ename, docline.*
+		from doc, dept, emp, docline
 		where doc.dno = dept.dno
 		and doc.eno = emp.eno
+		and doc.docNo = docline.docNo
 		and docNo = #{docNo}
 	</select>
 
@@ -92,7 +93,7 @@
 		and docNo = #{docNo}
 	</select>
 
-	<!-- 결제문서 작성(근태구분 및 기간 X) -->
+	<!-- 결재문서 작성(근태구분 및 기간 X) -->
 	<insert id="appWrite1">
 		insert into doc(docNo, docClass, docDate, dno, eno, docTitle, docContent)
 		values(docNO('now'), #{docClass}, #{docDate}, #{dno}, #{eno}, #{docTitle}, #{docContent})
@@ -101,18 +102,22 @@
 		</selectKey>
 	</insert>
 
-	<!-- 결제문서 작성(근태구분 및 기간 O) -->
+	<!-- 결재문서 작성(근태구분 및 기간 O) -->
 	<insert id="appWrite2">
 		insert into doc(docNo, docClass, docDate, dno, eno, docTitle, docContent, docStartDate, docEndDate, docKind)
 		values(docNO('now'), #{docClass}, #{docDate}, #{dno}, #{eno}, #{docTitle}, #{docContent}, #{docStartDate}, #{docEndDate}, #{docKind})
 	</insert>
 	
+	<!-- 결재선 작성 -->
 	<insert id="applineInsert">
-		insert into doc_lineapp(docNo, eno, doc_lineAppDate, doc_lineCategory)
+		insert into docline(docNo, eno, doc_lineAppDate, doc_lineCategory)
 		values(#{docNo}, #{eno}, sysdate, #{category})
 	</insert>
-	
+
 	<select id="getEno" resultType="int">
 		select eno from emp where ename = #{ename}
 	</select>
+		
+	<!-- 결재선 작성 -->
+	
 </mapper>
