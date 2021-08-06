@@ -41,7 +41,7 @@
                 <h3 class="card-title">사원 추가 하기</h3>
               </div>
               <!-- /.card-header -->
-              <form id="insert" action="" method="post" >
+              <form id="insert" action="/hrteam/hrNewMember" method="post" >
 	              <div class="card-body">
 	                <h4>사원 정보</h4>
 	                <br/>
