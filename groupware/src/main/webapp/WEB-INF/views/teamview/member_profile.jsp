@@ -4,12 +4,12 @@
 
 	<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- <!-- Content Header (Page header)
+    <!-- <!-- Content Header (Page header)-->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>근태 관리</h1>
+            <h1>${member.ename}님의 프 로 필</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -18,9 +18,10 @@
             </ol>
           </div>
         </div>
-      </div>/.container-fluid
-    </section> -->
+      </div>
+    </section>
 	
+	<br />
 		<!-- Profile Image -->
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
@@ -56,13 +57,19 @@
                 </ul>
               </div>
               <!-- /.card-body -->
+              
+              <div class="card-footer">
+              	<div class="text-center">
+	                <button type="button" class="btn btn-default btn-sm" id="list" data-container="body" onclick="location.href='/teamview/teamViewHr?dno=${member.dno}'">
+		            	<i class="fas fa-list">목 록</i>
+		            </button>
+              	</div>
+              </div>
             </div>
             <!-- /.card -->
           </div>  
 
 <script>
-$(function() {
-	
-})
+
 </script>
 <%@include file="../includes/footer.jsp" %>
