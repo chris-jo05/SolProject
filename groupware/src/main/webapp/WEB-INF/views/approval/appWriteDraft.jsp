@@ -183,8 +183,9 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">수신 및 참조</label>
 												<div class="col">
-													<input type="text" class="form-control" name="docRef" id="docRef" placeholder="선택" value="${tdArr2[i].eno}" disabled>
-													<input name="docRefEno" type="hidden" class="form-control" id="docRefEno" value="${tdArr2[i].eno}" disabled>
+													<input type="text" class="form-control" id="docRef" placeholder="선택" value="" disabled>
+													<input name="docRef" type="hidden" class="form-control" id="docRefHidden" value="">
+													<input name="docRefEno" type="hidden" class="form-control" id="docRefEno" value="">
 												</div>
 											</div>
 										</div>
@@ -285,8 +286,9 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">시행자</label>
 												<div class="col">
-													<input type="text" class="form-control" name="docImp" id="docImp" placeholder="선택" value="${tdArr3[i].eno}" disabled>
-													<input name="docImpEno" type="hidden" class="form-control" id="docImpEno" value="${tdArr3[i].eno}" disabled>
+													<input type="text" class="form-control" placeholder="선택" id="docImp"  value="" disabled>
+													<input name="docImp" type="hidden" class="form-control" id="docImpHidden" value="">
+													<input name="docImpEno" type="hidden" class="form-control" id="docImpEno" value="">
 												</div>
 											</div>
 										</div>

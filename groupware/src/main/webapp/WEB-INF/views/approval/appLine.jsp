@@ -404,6 +404,7 @@
 				docRefEno += refEno;
 			}
 			window.opener.document.getElementById("docRef").value = docRef;
+			window.opener.document.getElementById("docRefHidden").value = docRef;
 			window.opener.document.getElementById("docRefEno").value = docRefEno;
 			
 			var docImp = "";
@@ -416,6 +417,7 @@
 				docImpEno += impEno;
 			}
 			window.opener.document.getElementById("docImp").value = docImp;
+			window.opener.document.getElementById("docImpHidden").value = docImp;
 			window.opener.document.getElementById("docImpEno").value = docImpEno;
 			
 			console.log(docRefEno);
