@@ -2,8 +2,11 @@ package com.spring.approval.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.approval.domain.ApprovalAttachVO;
 import com.spring.approval.domain.ApprovalVO;
+import com.spring.approval.domain.DoclineVO;
 
 public interface ApprovalService {
 	public List<ApprovalVO> appList(int eno);
@@ -24,4 +27,9 @@ public interface ApprovalService {
 	// 파일 첨부
 	public List<ApprovalAttachVO> appAttachList(String docNo);
 	public int getCntUnRead(String docNo);
+	
+	// 결재선
+	public boolean applineInsert(String docNo, int eno, String category);
+	public int getEno(String ename);
+	public List<DoclineVO> getDoclines(String docNo);
 }

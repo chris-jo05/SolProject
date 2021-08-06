@@ -120,16 +120,16 @@
 														제
 													</td>
 													<td style="width: 22.5%; height: 5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="sign_position1" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 													<td style="width: 22.5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="sign_position2" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 													<td style="width: 22.5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="sign_position3" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 													<td style="width: 22.5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="sign_position4" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 												</tr>
 
@@ -142,16 +142,16 @@
 
 												<tr>
 													<td style="height: 5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="sign_ename1" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 													<td>
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="sign_ename2" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 													<td>
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="sign_ename3" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 													<td>
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="sign_ename4" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 												</tr>
 
@@ -162,16 +162,16 @@
 														의
 													</td>
 													<td style="width: 22.5%; height: 5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="con_position1" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 													<td style="width: 22.5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="con_position2" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 													<td style="width: 22.5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="con_position3" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 													<td style="width: 22.5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="con_position4" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 												</tr>
 
@@ -184,16 +184,16 @@
 
 												<tr>
 													<td style="height: 5%;">
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="con_ename1" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 													<td>
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="con_ename2" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 													<td>
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="con_ename3" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 													<td>
-														<input style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
+														<input id="con_ename4" style="text-align: center; width: 80px; background-color: #fff; border: 0 solid black;" type="text" value="" disabled />
 													</td>
 												</tr>
 											</tbody>
@@ -302,7 +302,126 @@
 
 <!-- Page specific script -->
 <script>
+$(function() {
+	console.log("why");
 	
+	var data = {
+	        <c:forEach items="${dls}" var="dl" varStatus="status">
+	            a${status.count}:"${dl.doc_linecategory}/${dl.ename}/${dl.position}",
+	        </c:forEach>
+	};
+	
+	var s_num = 1;
+	var c_num = 1;
+	
+	console.log(data.a1);
+	if(data.a1 != undefined) {
+		var spl = data.a1.split("/");
+		if(spl[0] == "결재") {
+			signInsert(spl, s_num);
+			s_num++;
+		} else {
+			conInsert(spl, c_num);
+			c_num++;
+		}
+	}
+	
+	
+	console.log(data.a2);
+	if(data.a2 != undefined) {
+		var spl = data.a2.split("/");
+		if(spl[0] == "결재") {
+			signInsert(spl, s_num);
+			s_num++;
+		} else {
+			conInsert(spl, c_num);
+			c_num++;
+		}
+	}
+	console.log(data.a3);
+	if(data.a3 != undefined) {
+		var spl = data.a3.split("/");
+		if(spl[0] == "결재") {
+			signInsert(spl, s_num);
+			s_num++;
+		} else {
+			conInsert(spl, c_num);
+			c_num++;
+		}
+	}
+	console.log(data.a4);
+	if(data.a4 != undefined) {
+		var spl = data.a4.split("/");
+		if(spl[0] == "결재") {
+			signInsert(spl, s_num);
+			s_num++;
+		} else {
+			conInsert(spl, c_num);
+			c_num++;
+		}
+	}
+	console.log(data.a5);
+	if(data.a5 != undefined) {
+		var spl = data.a5.split("/");
+		if(spl[0] == "결재") {
+			signInsert(spl, s_num);
+			s_num++;
+		} else {
+			conInsert(spl, c_num);
+			c_num++;
+		}
+	}
+	console.log(data.a6);
+	if(data.a6 != undefined) {
+		var spl = data.a6.split("/");
+		if(spl[0] == "결재") {
+			signInsert(spl, s_num);
+			s_num++;
+		} else {
+			conInsert(spl, c_num);
+			c_num++;
+		}
+	}
+	console.log(data.a7);
+	if(data.a7 != undefined) {
+		var spl = data.a7.split("/");
+		if(spl[0] == "결재") {
+			signInsert(spl, s_num);
+			s_num++;
+		} else {
+			conInsert(spl, c_num);
+			c_num++;
+		}
+	}
+	
+	console.log(data.a8);
+	if(data.a8 != undefined) {
+		var spl = data.a8.split("/");
+		if(spl[0] == "결재") {
+			signInsert(spl, s_num);
+			s_num++;
+		} else {
+			conInsert(spl, c_num);
+			c_num++;
+		}
+	}
+	
+	function signInsert(spl, s_num) {
+		var s_position = "#sign_position" + s_num;
+		var s_ename = "#sign_ename" + s_num;
+		
+		$(s_position).val(spl[2]);
+		$(s_ename).val(spl[1]);
+	}
+	
+	function conInsert(spl, c_num) {
+		var c_position = "#con_position" + c_num;
+		var c_ename = "#con_ename" + c_num;
+		
+		$(c_position).val(spl[2]);
+		$(c_ename).val(spl[1]);	
+	}
+})
 </script>
 
 <%@include file="../includes/footer.jsp"%>

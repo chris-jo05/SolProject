@@ -11,12 +11,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>조 직 도</h1>
+            <h1>부서별 사원 보기</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/main/home">Home</a></li>
-              <li class="breadcrumb-item active">조 직 도</li>
+              <li class="breadcrumb-item"><a href="/teamview/teamViewMain">조 직 도</a></li>
+              <li class="breadcrumb-item active">사원 보기</li>
             </ol>
           </div>
         </div>

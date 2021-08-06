@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.spring.approval.domain.ApprovalAttachVO;
 import com.spring.approval.domain.ApprovalVO;
+import com.spring.approval.domain.DoclineVO;
 
 public interface ApprovalMapper {
 	public List<ApprovalVO> appList(int eno);
@@ -26,4 +27,9 @@ public interface ApprovalMapper {
 	// 파일 첨부
 	public List<ApprovalAttachVO> appAttachList(String docNo);
 	public int getCntUnRead(String docNo);
+	
+	// 결재선
+	public int applineInsert(@Param("docNo") String docNo, @Param("eno") int eno, @Param("category") String category);
+	public int getEno(String ename);
+	public List<DoclineVO> getDoclines(String docNo);
 }

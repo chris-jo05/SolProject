@@ -30,7 +30,7 @@
         <div class="row">
           <!-- /.col -->
         <div class="col-md-9">
-          <form action="" id="form">
+          <form action=""  id="form">
           
           <div class="card card-primary card-outline">
              <div class="card-header">
@@ -55,8 +55,6 @@
 
             <div class="card-body p-0 text-center" style="height:'20px'">
             <p></p>
-<!--               <textarea class="form-control" rows="3"  readonly="readonly" style="background-color:white">
-              </textarea>                            -->
               <div class="card-tools">
          	<p>
               &nbsp;&nbsp;${vo.b_contents}
@@ -110,9 +108,7 @@
       </div>      <!-- /.row -->
     </section>
       </div><!-- /.container-fluid -->
-<%-- 페이지 나누기를 위해 필요한 값 --%>
 <form action="" method="get" id="operForm">
-
    <input type="hidden" name="pageNum" value="${cri.pageNum}" />
    <input type="hidden" name="amount" value="${cri.amount}" />
    <input type="hidden" id="bno" name="bno" value="${vo.bno}"/>
@@ -138,9 +134,6 @@ $(".btn-primary").click(function(){
             } else {
                alert('권한이 없습니다.');
             }
-        },
-        error: function(){
-            alert("ajaxError");
         }
     });
 })
