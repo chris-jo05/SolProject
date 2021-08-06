@@ -22,48 +22,48 @@
 	function appLine3 (tdArr3) {
 		console.log (tdArr3);
 	}
-	
-	function applineConn(){
-	    
-	    var sign1 = $("#sign_position1").val();
-	    var sign2 = $("#sign_position2").val();
-	    var sign3 = $("#sign_position3").val();
-	    var sign4 = $("#sign_position4").val();
-	    $("#sign_sample1").val(sign1);
-	    $("#sign_sample2").val(sign2);
-	    $("#sign_sample3").val(sign3);
-	    $("#sign_sample4").val(sign4);
-	    
-	    var sign5 = $("#sign_ename1").val();
-	    var sign6 = $("#sign_ename2").val();
-	    var sign7 = $("#sign_ename3").val();
-	    var sign8 = $("#sign_ename4").val();
-	    $("#sign_sample5").val(sign5);
-	    $("#sign_sample6").val(sign6);
-	    $("#sign_sample7").val(sign7);
-	    $("#sign_sample8").val(sign8);
-	    
-	    var con1 = $("#con_position1").val();
-	    var con2 = $("#con_position2").val();
-	    var con3 = $("#con_position3").val();
-	    var con4 = $("#con_position4").val();
-	    $("#sign_sample9").val(con1);
-	    $("#sign_sample10").val(con2);
-	    $("#sign_sample11").val(con3);
-	    $("#sign_sample12").val(con4);
-	    
-	    var con5 = $("#con_ename1").val();
-	    var con6 = $("#con_ename2").val();
-	    var con7 = $("#con_ename3").val();
-	    var con8 = $("#con_ename4").val();
-	    $("#sign_sample13").val(con5);
-	    $("#sign_sample14").val(con6);
-	    $("#sign_sample15").val(con7);
-	    $("#sign_sample16").val(con8);
-	    
-	    var sign_sample = $("#sign_sample16").val();
-	    alert(sign_sample);
-	    return true;
+
+	function applineConn () {
+		
+		var sign1 = $ ("#sign_position1").val ();
+		var sign2 = $ ("#sign_position2").val ();
+		var sign3 = $ ("#sign_position3").val ();
+		var sign4 = $ ("#sign_position4").val ();
+		$ ("#sign_sample1").val (sign1);
+		$ ("#sign_sample2").val (sign2);
+		$ ("#sign_sample3").val (sign3);
+		$ ("#sign_sample4").val (sign4);
+		
+		var sign5 = $ ("#sign_ename1").val ();
+		var sign6 = $ ("#sign_ename2").val ();
+		var sign7 = $ ("#sign_ename3").val ();
+		var sign8 = $ ("#sign_ename4").val ();
+		$ ("#sign_sample5").val (sign5);
+		$ ("#sign_sample6").val (sign6);
+		$ ("#sign_sample7").val (sign7);
+		$ ("#sign_sample8").val (sign8);
+		
+		var con1 = $ ("#con_position1").val ();
+		var con2 = $ ("#con_position2").val ();
+		var con3 = $ ("#con_position3").val ();
+		var con4 = $ ("#con_position4").val ();
+		$ ("#sign_sample9").val (con1);
+		$ ("#sign_sample10").val (con2);
+		$ ("#sign_sample11").val (con3);
+		$ ("#sign_sample12").val (con4);
+		
+		var con5 = $ ("#con_ename1").val ();
+		var con6 = $ ("#con_ename2").val ();
+		var con7 = $ ("#con_ename3").val ();
+		var con8 = $ ("#con_ename4").val ();
+		$ ("#sign_sample13").val (con5);
+		$ ("#sign_sample14").val (con6);
+		$ ("#sign_sample15").val (con7);
+		$ ("#sign_sample16").val (con8);
+		
+		var sign_sample = $ ("#sign_sample16").val ();
+		alert (sign_sample);
+		return true;
 	}
 </script>
 
@@ -183,7 +183,8 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">수신 및 참조</label>
 												<div class="col">
-													<input type="text" class="form-control" id="refs" placeholder="선택" disabled>
+													<input type="text" class="form-control" name="docRef" id="docRef" placeholder="선택" value="${tdArr2[i].eno}" disabled>
+													<input name="docRefEno" type="hidden" class="form-control" id="docRefEno" value="${tdArr2[i].eno}" disabled>
 												</div>
 											</div>
 										</div>
@@ -284,7 +285,8 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">시행자</label>
 												<div class="col">
-													<input type="text" class="form-control" id="workers" placeholder="선택" disabled>
+													<input type="text" class="form-control" name="docImp" id="docImp" placeholder="선택" value="${tdArr3[i].eno}" disabled>
+													<input name="docImpEno" type="hidden" class="form-control" id="docImpEno" value="${tdArr3[i].eno}" disabled>
 												</div>
 											</div>
 										</div>
@@ -320,7 +322,7 @@
 												</div>
 											</div>
 										</div>
-										
+
 										<div class="form-group" style="display: none;">
 											<div class="row">
 												<div class="col">
@@ -328,17 +330,17 @@
 													<input name="sign_position2" type="hidden" class="form-control" id="sign_sample2" value="결재직급">
 													<input name="sign_position3" type="hidden" class="form-control" id="sign_sample3" value="결재직급">
 													<input name="sign_position4" type="hidden" class="form-control" id="sign_sample4" value="결재직급">
-													
+
 													<input name="sign_ename1" type="hidden" class="form-control" id="sign_sample5" value="결재이름">
 													<input name="sign_ename2" type="hidden" class="form-control" id="sign_sample6" value="결재이름">
 													<input name="sign_ename3" type="hidden" class="form-control" id="sign_sample7" value="결재이름">
 													<input name="sign_ename4" type="hidden" class="form-control" id="sign_sample8" value="결재이름">
-													
+
 													<input name="con_position1" type="hidden" class="form-control" id="sign_sample9" value="합의직급">
 													<input name="con_position2" type="hidden" class="form-control" id="sign_sample10" value="합의직급">
 													<input name="con_position3" type="hidden" class="form-control" id="sign_sample11" value="합의직급">
 													<input name="con_position4" type="hidden" class="form-control" id="sign_sample12" value="합의직급">
-													
+
 													<input name="con_ename1" type="hidden" class="form-control" id="sign_sample13" value="합의이름">
 													<input name="con_ename2" type="hidden" class="form-control" id="sign_sample14" value="합의이름">
 													<input name="con_ename3" type="hidden" class="form-control" id="sign_sample15" value="합의이름">
@@ -378,7 +380,7 @@
 
 <!-- Page specific script -->
 <script>
-	let submitForm = $("#submitForm");	
+	let submitForm = $ ("#submitForm");
 	
 	$ (function () {
 		// Summernote
@@ -391,8 +393,6 @@
 		
 		// Initialize Select2 Elements
 		$ ('.select2').select2 ()
-		
-		
 
 	})
 

@@ -25,6 +25,10 @@ public class ApprovalVO {
 	private String docKind; // 근태구분
 	private String docTitle; // 문서제목
 	private String docContent; // 문서내용
+	private String docRef; // 참조자
+	private String docRefEno; // 참조자 사원번호
+	private String docImp; // 시행자
+	private String docImpEno; // 시행자 사원번호
 	
 	private String dname; // 기안부서이름
 	private String ename; // 가인자이름

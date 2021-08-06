@@ -77,7 +77,10 @@
 
 						<div class="card-body" style="height: 500px;">
 							<div class="form-group">
-								<input type="button" id="btn1" class="btn btn-secondary btn-sm" value="결재"> <input type="button" id="btn2" class="btn btn-secondary btn-sm" value="합의"> <input type="button" id="btn3" class="btn btn-secondary btn-sm" value="참조"> <input type="button" id="btn4" class="btn btn-secondary btn-sm" value="시행">
+								<input type="button" id="btn1" class="btn btn-secondary btn-sm" value="결재">
+								<input type="button" id="btn2" class="btn btn-secondary btn-sm" value="합의">
+								<input type="button" id="btn3" class="btn btn-secondary btn-sm" value="참조">
+								<input type="button" id="btn4" class="btn btn-secondary btn-sm" value="시행">
 							</div>
 
 							<div class="form-group" style="height: 150px; overflow: auto">
@@ -391,23 +394,34 @@
 				}
 			}
 			
-			var refs = "";
+			var docRef = "";
+			var docRefEno = "";
 			for(var i = 0; i < tdArr2.length; i++) {
-				var ref = tdArr2[i].ename + "(" + tdArr2[i].dname + ") ";
+				var ref = "[" + tdArr2[i].dname + "] " + tdArr2[i].ename + " " + tdArr2[i].position;
+				var refEno = tdArr2[i].eno;
 				
-				refs += ref;
+				docRef += ref;
+				docRefEno += refEno;
 			}
-			window.opener.document.getElementById("refs").value = refs;
+			window.opener.document.getElementById("docRef").value = docRef;
+			window.opener.document.getElementById("docRefEno").value = docRefEno;
 			
-			var workers = "";
+			var docImp = "";
+			var docImpEno = "";
 			for(var i = 0; i < tdArr3.length; i++) {
-				var worker = tdArr3[i].ename + "(" + tdArr3[i].dname + ") ";
+				var imp = "[" + tdArr3[i].dname + "] " + tdArr3[i].ename + " " + tdArr3[i].position;
+				var impEno = tdArr3[i].eno;
 				
-				workers += worker;
+				docImp += imp;
+				docImpEno += impEno;
 			}
-			window.opener.document.getElementById("workers").value = workers;
+			window.opener.document.getElementById("docImp").value = docImp;
+			window.opener.document.getElementById("docImpEno").value = docImpEno;
 			
-			window.close();
+			console.log(docRefEno);
+			console.log(docImpEno);
+		
+			// window.close();
 			
 		});
 	</script>
