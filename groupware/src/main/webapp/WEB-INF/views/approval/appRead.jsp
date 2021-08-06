@@ -205,7 +205,7 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">근태구분</label>
 												<div class="col">
-													<input name="docKind" type="text" class="form-control" id="docKind" value="${appRead.docKind}" disabled>
+													<input name="docKind" id="docKind" type="text" class="form-control" id="docKind" value="${appRead.docKind}" disabled>
 												</div>
 											</div>
 										</div>
@@ -214,11 +214,11 @@
 											<div class="row">
 												<label for="colFormLabel" class="col-form-label">기간</label>
 												<div class="col">
-													<input name="docStartDate" type="text" class="form-control" id="docStartDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${appRead.docStartDate}" />" disabled>
+													<input name="docStartDate" id="docStartDate" type="text" class="form-control" id="docStartDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${appRead.docStartDate}" />" disabled>
 												</div>
 
 												<div class="col">
-													<input name="docEndDate" type="text" class="form-control" id="docEndDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${appRead.docEndDate}" />" disabled>
+													<input name="docEndDate" id="docEndDate" type="text" class="form-control" id="docEndDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${appRead.docEndDate}" />" disabled>
 												</div>
 											</div>
 										</div>
@@ -420,6 +420,11 @@ $(function() {
 		
 		$(c_position).val(spl[2]);
 		$(c_ename).val(spl[1]);	
+	}
+	
+	if($("#docKind").val() == "") {
+		$("#kind").hide();
+		$("#date").hide();
 	}
 })
 </script>
