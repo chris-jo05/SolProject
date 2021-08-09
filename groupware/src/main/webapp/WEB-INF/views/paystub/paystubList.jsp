@@ -92,7 +92,7 @@
   </div>
   <!-- /.content-wrapper -->
 <form action="" method="get" id="actionForm">
-		<input type="hidden" name="eno" value="${login.eno}" />
+		<input type="hidden" name="eno" value="${param.eno}" />
 		<input type="hidden" name="year" value="" />
 </form>
   
