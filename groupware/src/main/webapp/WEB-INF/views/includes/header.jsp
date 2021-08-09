@@ -271,12 +271,12 @@ function showBoardMessageAlert(){
 							</a>
 						</li>
 
-						<li class="nav-item">
+						<%-- <li class="nav-item">
 							<a href="/work/workTable?eno=${login.eno}" name="workTable" class="nav-link">
 								<i class="nav-icon far fa-plus-square"></i>
 								<p>근무 관리</p>
 							</a>
-						</li>
+						</li> --%>
 
 					  <li class="nav-item">
 							<a href="/teamview/teamViewMain" class="nav-link">
@@ -292,7 +292,7 @@ function showBoardMessageAlert(){
 							</a>
 						</li> 
 
-						<li class="nav-item">
+						<%-- <li class="nav-item">
 							<c:if test= "${login.dno == 10}">
 								<a href="/hrteam/hrMain" class="nav-link">
 									<i class="nav-icon fas fa-file"></i>
@@ -311,17 +311,16 @@ function showBoardMessageAlert(){
 									});
 								</script>
 							</c:if>
-						</li>
+						</li> --%>
 						
-						<c:if test="${login.dno eq 10}">
+						<%-- <c:if test="${login.dno eq 10}">
 							<li class="nav-item">
 								<a href="/paystub/paystubInsertForm" class="nav-link">
 									<i class="nav-icon fas fa-file"></i>
 									<p>급여명세서 발급</p>
 								</a>
 							</li>
-						</c:if>
-						<!-- 메일함 -->
+						</c:if> --%>
 
 						 <li class="nav-item">
 
@@ -330,6 +329,7 @@ function showBoardMessageAlert(){
 								<p>메일함</p>
 							</a>
 						</li>
+						<!-- 메일함 -->
 
 						<li class="nav-item">
 							<a href="/calendar/calendar" class="nav-link">
@@ -345,7 +345,7 @@ function showBoardMessageAlert(){
 							</a>
 							</li>
 
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a href="../resources/pages/calendar.html" class="nav-link">
 								<i class="nav-icon far fa-calendar-alt"></i>
 								<p>
@@ -353,7 +353,7 @@ function showBoardMessageAlert(){
 									<span class="badge badge-info right">2</span>
 								</p>
 							</a>
-						</li>
+						</li> -->
 					</ul>
 				</nav>
 

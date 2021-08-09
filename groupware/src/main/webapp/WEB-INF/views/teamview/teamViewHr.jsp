@@ -59,9 +59,11 @@
 	                     <a href="/insertChatRoom?receiver_name=${vo.ename}&receive_eno=${vo.eno}" class="btn btn-sm bg-teal">
 	                      <i class="fas fa-comments"></i>
 	                    </a>
+	                    <c:if test="${login.dno == 10}">
 	                    <a href="/paystub/paystubInsertForm?dname=${vo.dname}&ename=${vo.ename}" class="btn btn-sm btn-warning" style="color : white;">
 	                      급여 명세서
 	                    </a>
+	                    </c:if>
 	                    <a href="/teamview/member_profile?eno=${vo.eno}" class="btn btn-sm btn-primary">
 	                      <i class="fas fa-user"></i> View Profile
 	                    </a>

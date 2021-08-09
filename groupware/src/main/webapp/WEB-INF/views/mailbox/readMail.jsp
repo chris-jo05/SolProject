@@ -56,9 +56,9 @@
                   <button type="button" class="btn btn-default btn-sm" data-oper="prev" data-container="body" title="이전 메일">
                     <i class="fas fa-reply"></i>
                   </button>
-                  <button type="button" class="btn btn-default btn-sm" data-oper="delete" data-container="body" title="지우기">
+                  <!-- <button type="button" class="btn btn-default btn-sm" data-oper="delete" data-container="body" title="지우기">
                     <i class="far fa-trash-alt"></i>
-                  </button>
+                  </button> -->
                   <button type="button" class="btn btn-default btn-sm" data-oper="next" data-container="body" title="다음 메일">
                     <i class="fas fa-share"></i>
                   </button>
