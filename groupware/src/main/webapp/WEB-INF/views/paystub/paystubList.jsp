@@ -48,10 +48,10 @@
 							<c:forEach var="vo" items="${paystubList}">
 								<tr>
 									<c:if test="${vo.pay_month <= '9'}">
-										<td style="cursor:pointer;color:blue;" onClick="location.href='paystubForm?year=${vo.pay_year}&month=${vo.pay_month}&eno=${login.eno}'">${vo.pay_year}-0${vo.pay_month}</td>
+										<td style="cursor:pointer;color:blue;" onClick="location.href='paystubForm?year=${param.year}&month=${vo.pay_month}&eno=${param.eno}'">${vo.pay_year}-0${vo.pay_month}</td>
 									</c:if>
 									<c:if test="${vo.pay_month > '9'}">
-										<td style="cursor:pointer;color:blue;" onClick="location.href='paystubForm?year=${vo.pay_year}&month=${vo.pay_month}&eno=${login.eno}'">${vo.pay_year}-${vo.pay_month}</td>
+										<td style="cursor:pointer;color:blue;" onClick="location.href='paystubForm?year=${param.year}&month=${vo.pay_month}&eno=${param.eno}'">${vo.pay_year}-${vo.pay_month}</td>
 									</c:if>
 									
 									<td>${vo.dname}</td>
